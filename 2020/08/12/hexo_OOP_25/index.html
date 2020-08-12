@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="객체 지향 프로그래밍25. 상속이란클래스에서 상속의 의미 :새로운 클래스를 정의할 때 이미 구현된 클래스를 상속받아서속성이나 기능이 확장되는 클래스를 구현 함. 12class B extends A &amp;#123;&amp;#125;  상속하는 클래스 : 상위 클래스상속받는 클래스 : 하위 클래스    자바에서는 다중 상속이 불가능하다.      상속을 사용하는 경우 :">
+<meta property="og:type" content="article">
+<meta property="og:title" content="25. 상속이란">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_OOP_25/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="객체 지향 프로그래밍25. 상속이란클래스에서 상속의 의미 :새로운 클래스를 정의할 때 이미 구현된 클래스를 상속받아서속성이나 기능이 확장되는 클래스를 구현 함. 12class B extends A &amp;#123;&amp;#125;  상속하는 클래스 : 상위 클래스상속받는 클래스 : 하위 클래스    자바에서는 다중 상속이 불가능하다.      상속을 사용하는 경우 :">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:18:42.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:18:42.716Z">
+<meta property="article:author" content="Jeong In">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_25/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>25. 상속이란 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          25. 상속이란
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="25-상속이란"><a href="#25-상속이란" class="headerlink" title="25. 상속이란"></a>25. 상속이란</h4><p>클래스에서 상속의 의미 :<br>새로운 클래스를 정의할 때 이미 구현된 클래스를 상속받아서<br>속성이나 기능이 확장되는 클래스를 구현 함.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class B extends A &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>상속하는 클래스 : 상위 클래스<br>상속받는 클래스 : 하위 클래스   </p>
+<p>자바에서는 다중 상속이 불가능하다.     </p>
+<p>상속을 사용하는 경우 :<br>상위클래스는 더 일반적인 개념과 기능을 가짐<br>하위클래스는 더 구체적인 개념과 기능을 가짐    </p>
+<p>상위 클래스</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">package inheritance;</span><br><span class="line"></span><br><span class="line">public class Customer &#123;</span><br><span class="line"></span><br><span class="line">    protected int customerID; &#x2F;&#x2F; 하위 클래스들이 참조할수 있도록 private가 아닌 protected 사용</span><br><span class="line">    protected String customerName;</span><br><span class="line">    protected String customerGrade;</span><br><span class="line">    int bonusPoint;</span><br><span class="line">    double bonusRatio;</span><br><span class="line"></span><br><span class="line">    public Customer() &#123;</span><br><span class="line">        customerGrade&#x3D;&quot;SILVER&quot;;</span><br><span class="line">        bonusRatio&#x3D;0.01;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int calcPrice(int price) &#123;</span><br><span class="line">        bonusPoint +&#x3D; price*bonusRatio;</span><br><span class="line">        return price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String showCustomerInfo() &#123;</span><br><span class="line">        return customerName+&quot;님의 등금은 &quot;+customerGrade+&quot;이며, 적립된 포인트는 &quot;+bonusPoint+&quot;점 입니다.&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getCustomerID() &#123;</span><br><span class="line">        return customerID;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCustomerID(int customerID) &#123;</span><br><span class="line">        this.customerID &#x3D; customerID;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getCustomerName() &#123;</span><br><span class="line">        return customerName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCustomerName(String customerName) &#123;</span><br><span class="line">        this.customerName &#x3D; customerName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getCustomerGrade() &#123;</span><br><span class="line">        return customerGrade;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setCustomerGrade(String customerGrade) &#123;</span><br><span class="line">        this.customerGrade &#x3D; customerGrade;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>하위 클래스</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">package inheritance;</span><br><span class="line"></span><br><span class="line">public class VIPCustomer extends Customer&#123; &#x2F;&#x2F;상위 클래스(Customer) 지정</span><br><span class="line"></span><br><span class="line">    double salesRatio;</span><br><span class="line">    private int agentID;</span><br><span class="line"></span><br><span class="line">    public VIPCustomer() &#123;</span><br><span class="line">        customerGrade &#x3D; &quot;VIP&quot;; &#x2F;&#x2F;만약 상위 클래스에서 private인 경우 사용할 수 없음</span><br><span class="line">        bonusRatio &#x3D; 0.05;</span><br><span class="line">        salesRatio &#x3D; 0.1;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>사용</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package inheritance;</span><br><span class="line"></span><br><span class="line">public class CustomerTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Customer Lee &#x3D; new Customer();</span><br><span class="line">        Customer Kim &#x3D; new VIPCustomer();</span><br><span class="line"></span><br><span class="line">        Lee.setCustomerID(10010);</span><br><span class="line">        Lee.setCustomerName(&quot;이순신&quot;);</span><br><span class="line">        Lee.bonusPoint &#x3D; 1000;</span><br><span class="line"></span><br><span class="line">        Kim.setCustomerID(10020);    &#x2F;&#x2F;하위 클래스에서 상위 클래스의 기능 사용</span><br><span class="line">        Kim.setCustomerName(&quot;김유신&quot;);</span><br><span class="line">        Kim.bonusPoint &#x3D; 10000;</span><br><span class="line"></span><br><span class="line">        System.out.println(Lee.showCustomerInfo());</span><br><span class="line">        System.out.println(Kim.showCustomerInfo());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_OOP_27/" rel="prev" title="27. 상속에서 클래스 생성 과정과 형변환">
+      <i class="fa fa-chevron-left"></i> 27. 상속에서 클래스 생성 과정과 형변환
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_OOP_22/" rel="next" title="22. ArrayList 사용하기">
+      22. ArrayList 사용하기 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#객체-지향-프로그래밍"><span class="nav-number">1.</span> <span class="nav-text">객체 지향 프로그래밍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#25-상속이란"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">25. 상속이란</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

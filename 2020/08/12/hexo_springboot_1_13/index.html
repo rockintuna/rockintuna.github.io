@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기13. 가짜 객체의존성 주입이 너무 많이 된 경우,테스트 하고자 하는 대상 외의 것들에 대한 의존성이 너무 커져서 테스트가 어려워지고테스트를 진행하기 위해 의존하는 부분들을 모두 만들어줘야 한다.      이때 사용할만한 것이 Mock Object.Mock Object를 만들기 위해서 spring에서는 Mock">
+<meta property="og:type" content="article">
+<meta property="og:title" content="13. 가짜 객체">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_13/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기13. 가짜 객체의존성 주입이 너무 많이 된 경우,테스트 하고자 하는 대상 외의 것들에 대한 의존성이 너무 커져서 테스트가 어려워지고테스트를 진행하기 위해 의존하는 부분들을 모두 만들어줘야 한다.      이때 사용할만한 것이 Mock Object.Mock Object를 만들기 위해서 spring에서는 Mock">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:22:41.349Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_13/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>13. 가짜 객체 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          13. 가짜 객체
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="13-가짜-객체"><a href="#13-가짜-객체" class="headerlink" title="13. 가짜 객체"></a>13. 가짜 객체</h4><p>의존성 주입이 너무 많이 된 경우,<br>테스트 하고자 하는 대상 외의 것들에 대한 의존성이 너무 커져서 테스트가 어려워지고<br>테스트를 진행하기 위해 의존하는 부분들을 모두 만들어줘야 한다.     </p>
+<p>이때 사용할만한 것이 Mock Object.<br>Mock Object를 만들기 위해서 spring에서는 Mockito라는 framework 사용    </p>
+<p>Spring은 기본적으로 POJO(Plain Old Java Object),<br>전통적인 자바 오브젝트를 사용할 것을 권장하고 지원한다. (=&gt;Mockito)  </p>
+<p>Controller Test, MockBean</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@WebMvcTest(RestaurantController.class)</span><br><span class="line">public class RestaurantControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Test하려는 대상은 RestaurantController 이므로 그 외의 대상을 가짜로 배치하려고 함</span><br><span class="line">    @MockBean</span><br><span class="line">    private RestaurantService restaurantService;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void list() throws Exception &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;가짜 객체 생성, 가짜 처리 정의(willReturn)</span><br><span class="line">        &#x2F;&#x2F;실제 서비스, 저장소와는 무관하게 동작</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        restaurants.add(new Restaurant(1004L,&quot;No Bob zip&quot;,&quot;Seoul&quot;));</span><br><span class="line">        given(restaurantService.getRestaurants()).willReturn(restaurants);</span><br><span class="line"></span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&quot;))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;\&quot;id\&quot;:1004&quot;)</span><br><span class="line">                ))</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;\&quot;name\&quot;:\&quot;No Bob zip\&quot;&quot;)</span><br><span class="line">                ));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void detail() throws Exception &#123;</span><br><span class="line">        Restaurant restaurant1 &#x3D; new Restaurant(1004L,&quot;No Bob zip&quot;,&quot;Seoul&quot;);</span><br><span class="line">        restaurant1.addMenuItem(new MenuItem(&quot;Kimchi&quot;));</span><br><span class="line">        given(restaurantService.getRestaurant(1004L)).willReturn(restaurant1);</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant2 &#x3D; new Restaurant(2020L,&quot;Cyber Food&quot;,&quot;Seoul&quot;);</span><br><span class="line">        restaurant2.addMenuItem(new MenuItem(&quot;Kimchi&quot;));</span><br><span class="line">        given(restaurantService.getRestaurant(2020L)).willReturn(restaurant2);</span><br><span class="line"></span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&#x2F;1004&quot;))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;\&quot;id\&quot;:1004&quot;)</span><br><span class="line">                ))</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;\&quot;name\&quot;:\&quot;No Bob zip\&quot;&quot;)</span><br><span class="line">                ))</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;Kimchi&quot;)</span><br><span class="line">                ));</span><br><span class="line"></span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&#x2F;2020&quot;))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;\&quot;id\&quot;:2020&quot;)</span><br><span class="line">                ))</span><br><span class="line">                .andExpect(content().string(</span><br><span class="line">                        containsString(&quot;\&quot;name\&quot;:\&quot;Cyber Food\&quot;&quot;)</span><br><span class="line">                ));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Service Test, Mock, Mockito</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class RestaurantServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    private RestaurantService restaurantService;</span><br><span class="line"></span><br><span class="line">    @Mock &#x2F;&#x2F;저장소를 가짜로 주입</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line">    @Mock</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">    @Before &#x2F;&#x2F;모든 Test가 실행되기 전에 수행 됨</span><br><span class="line">    public void setUp() &#123;</span><br><span class="line">        MockitoAnnotations.initMocks(this); &#x2F;&#x2F;현재 Class의 Mock annotation이 붙어있는 곳에 객체 설정</span><br><span class="line"></span><br><span class="line">        mockRestaurantRepository();</span><br><span class="line">        mockMenuItemRepository();</span><br><span class="line"></span><br><span class="line">        restaurantService &#x3D; new RestaurantService(restaurantRepository,menuItemRepository);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void mockRestaurantRepository() &#123;</span><br><span class="line">        &#x2F;&#x2F;가짜 restaurant 생성</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        Restaurant restaurant &#x3D; new Restaurant(1004L,&quot;Bob zip&quot;,&quot;Seoul&quot;);</span><br><span class="line">        restaurants.add(restaurant);</span><br><span class="line"></span><br><span class="line">        given(restaurantRepository.findAll()).willReturn(restaurants);</span><br><span class="line"></span><br><span class="line">        given(restaurantRepository.findById(1004L)).willReturn(restaurant);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void mockMenuItemRepository() &#123;</span><br><span class="line">        &#x2F;&#x2F;가짜 Menu Item 생성   </span><br><span class="line">        List&lt;MenuItem&gt; menuItems &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">        MenuItem menuItem &#x3D; new MenuItem(&quot;Kimchi&quot;);</span><br><span class="line">        menuItems.add(menuItem);</span><br><span class="line"></span><br><span class="line">        given(menuItemRepository.findAllByRestaurantId(1004L)).willReturn(menuItems);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getRestaurants() &#123;</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantService.getRestaurants();</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurants.get(0);</span><br><span class="line">        assertThat(restaurant.getId(), is(1004L));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getRestaurant() &#123;</span><br><span class="line">        Restaurant restaurant &#x3D; restaurantService.getRestaurant(1004L);</span><br><span class="line"></span><br><span class="line">        assertThat(restaurant.getId(), is(1004L));</span><br><span class="line"></span><br><span class="line">        MenuItem menuItem &#x3D; restaurant.getMenuItems().get(0);</span><br><span class="line"></span><br><span class="line">        assertThat(menuItem.getName(), is(&quot;Kimchi&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring-boot/" rel="tag"># spring boot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_14/" rel="prev" title="14. 가게 추가">
+      <i class="fa fa-chevron-left"></i> 14. 가게 추가
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_11/" rel="next" title="11. 레이어 분리">
+      11. 레이어 분리 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#스프링-부트-프로젝트"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트 프로젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#레스토랑-예약-사이트-만들기"><span class="nav-number">1.0.1.</span> <span class="nav-text">레스토랑 예약 사이트 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#13-가짜-객체"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">13. 가짜 객체</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

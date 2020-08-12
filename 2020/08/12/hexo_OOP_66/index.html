@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="객체 지향 프로그래밍66. 자바 입출력 스트림 입출력 스트림 이란네트웍에서 자료의 흐름이 물과 같다는 의미에서 유래다양한 입출력 장치에 독립적으로 일관성 있는 입출력 방식 제공입출력이 구현되는 곳에서는 모두 I&#x2F;O 스트림을 사용:키보드, 파일, 디스크, 메모리 등    구분I&#x2F;O 대상 기준 : 입력 스트림, 출력 스트림자료의 종류 : 바이트 스트림, 문자">
+<meta property="og:type" content="article">
+<meta property="og:title" content="66. 자바 입출력 스트림">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_OOP_66/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="객체 지향 프로그래밍66. 자바 입출력 스트림 입출력 스트림 이란네트웍에서 자료의 흐름이 물과 같다는 의미에서 유래다양한 입출력 장치에 독립적으로 일관성 있는 입출력 방식 제공입출력이 구현되는 곳에서는 모두 I&#x2F;O 스트림을 사용:키보드, 파일, 디스크, 메모리 등    구분I&#x2F;O 대상 기준 : 입력 스트림, 출력 스트림자료의 종류 : 바이트 스트림, 문자">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:18:42.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:18:42.924Z">
+<meta property="article:author" content="Jeong In">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_66/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>66. 자바 입출력 스트림 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_66/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          66. 자바 입출력 스트림
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="66-자바-입출력-스트림"><a href="#66-자바-입출력-스트림" class="headerlink" title="66. 자바 입출력 스트림"></a>66. 자바 입출력 스트림</h4><ul>
+<li>입출력 스트림 이란<br>네트웍에서 자료의 흐름이 물과 같다는 의미에서 유래<br>다양한 입출력 장치에 독립적으로 일관성 있는 입출력 방식 제공<br>입출력이 구현되는 곳에서는 모두 I/O 스트림을 사용<br>:키보드, 파일, 디스크, 메모리 등  </li>
+</ul>
+<p>구분<br>I/O 대상 기준 : 입력 스트림, 출력 스트림<br>자료의 종류 : 바이트 스트림, 문자 스트림<br>스트림의 기능 : 기반 스트림, 보조 스트림    </p>
+<ul>
+<li><p>입력 or 출력 스트림<br>입력 스트림 : 대상으로 부터 자료를 읽어 들이는 스트림<br>ex) FileInputStream(바이트), FileReader(문자), BufferedInputStream(보조), BufferedReader, etc<br>출력 스트림 : 대상으로 자료를 출력하는 스트림<br>ex) FileOutputStream, FileWriter, BufferedOutputStream, BufferedWriter, etc   </p>
+</li>
+<li><p>바이트 or 문자 단위 스트림<br>바이트 단위 스트림 : 바이트 단위로 자료를 읽고 씀 (동영상, 음악 등)<br>ex) ~Stream<br>문자 단위 스트림 : 문자는 2byte이상씩 처리해야 함<br>ex) ~Reader, ~Writer</p>
+</li>
+<li><p>기반 or 보조 스트림<br>기반 스트림 : 대상에 직접 자료를 읽고 쓰는 기능의 스트림<br>ex) File~<br>보조 스트림 : 직접 읽고 쓰는 기능은 없고 추가적인 기능을 제공해 주는 스트림<br>기반 스트림이나 또 다른 보조 스트림을 생성자의 매개변수로 포함한다<br>ex) Buffered~, InputStreamReader, OutputStreamWriter</p>
+</li>
+<li><p>표준 입출력<br>System 클래스의 표준 입출력 멤버</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public Class System &#123;   </span><br><span class="line">    public static PrintStream out; &#x2F;&#x2F;표준 출력 스트림</span><br><span class="line">    public static InputStream in;  &#x2F;&#x2F;표준 입력 스트림</span><br><span class="line">    public static PrintStream err; &#x2F;&#x2F;표준 에러 스트림</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>System.in 사용하여 입력 받기<br>한 바이트 씩 읽어 들임<br>한글과 같은 여러 바이트로 된 문자를 읽기 위해서는<br>InPutStreamReader와 같은 보조 스트림을 사용해야 함    </p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package stream.inputstream;</span><br><span class="line"></span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.io.InputStreamReader;</span><br><span class="line"></span><br><span class="line">public class SystemInTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;입력&quot;);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            int i;</span><br><span class="line">            while ((i &#x3D; System.in.read()) !&#x3D; &#39;\n&#39;) &#123;</span><br><span class="line">                System.out.print((char)i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;입력 후 &#39;끝&#39; 이라고 쓰세요.&quot;);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            int i;</span><br><span class="line">            InputStreamReader isr &#x3D; new InputStreamReader(System.in); &#x2F;&#x2F;byte -&gt; 문자, 다른 스트림을 생성자의 매개변수로 받음</span><br><span class="line">            while ((i &#x3D; isr.read()) !&#x3D; &#39;끝&#39;) &#123; &#x2F;&#x2F;&#39;끝&#39;은 2byte 이기 때문에 보조 스트림 필요</span><br><span class="line">                System.out.print((char)i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Scanner 클래스<br>java.util 패키지에 있는 입력 클래스<br>문자뿐 아니라 정수, 실수 등 다양한 자료형을 읽을 수 있음<br>생성자가 다양하여 여러 소스로부터 자료를 읽을 수 있음  </li>
+</ul>
+<p>Scanner(File source) : 파일을 매개변수로 받아 Scanner 생성<br>Scanner(InputStream source) : 바이트 스트림을 매개변수로 받아 Scanner 생성<br>Scanner(String source) : String을 매개변수로 받아 Scanner 생성    </p>
+<ul>
+<li>Console 클래스<br>System.in 을 사용하지 않고 콘솔에서(cmd,terminal) 표준 입출력이 가능<br>readLine() : 문자열을 읽습니다.<br>readPassword() : 사용자에게 문자열을 보여주지 않고 읽습니다<br>reader() : Reader 클래스를 반환<br>writer() : PrintWriter 클래스를 반환  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package stream.inputstream;</span><br><span class="line"></span><br><span class="line">import java.io.Console;</span><br><span class="line"></span><br><span class="line">public class ConsoleTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Console console &#x3D; System.console();</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;이름&quot;);</span><br><span class="line">        String name &#x3D; console.readLine();</span><br><span class="line">        System.out.println(&quot;비밀 번호&quot;);</span><br><span class="line">        char[] password &#x3D; console.readPassword();</span><br><span class="line"></span><br><span class="line">        System.out.println(name);</span><br><span class="line">        System.out.println(password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_OOP_68/" rel="prev" title="68. 바이트 단위, 문자 단위 입출력 스트림">
+      <i class="fa fa-chevron-left"></i> 68. 바이트 단위, 문자 단위 입출력 스트림
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_OOP_65/" rel="next" title="65. 다양한 예외 처리">
+      65. 다양한 예외 처리 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#객체-지향-프로그래밍"><span class="nav-number">1.</span> <span class="nav-text">객체 지향 프로그래밍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#66-자바-입출력-스트림"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">66. 자바 입출력 스트림</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

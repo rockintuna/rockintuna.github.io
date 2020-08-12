@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기10. 의존성 주입 (DI)의존성 주입 (Dependency injection)    의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것ex1) A는 B에 의존 &#x3D;&gt; A가 B를 사용한다 &#x3D;&gt; B의 변화가 A에 영향을 끼친다 &#x3D;&gt; 효과적인 관리가 필요하다ex2) Restaura">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10. 의존성 주입 (DI)">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_10/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기10. 의존성 주입 (DI)의존성 주입 (Dependency injection)    의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것ex1) A는 B에 의존 &#x3D;&gt; A가 B를 사용한다 &#x3D;&gt; B의 변화가 A에 영향을 끼친다 &#x3D;&gt; 효과적인 관리가 필요하다ex2) Restaura">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:22:41.327Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_10/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>10. 의존성 주입 (DI) | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          10. 의존성 주입 (DI)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="10-의존성-주입-DI"><a href="#10-의존성-주입-DI" class="headerlink" title="10. 의존성 주입 (DI)"></a>10. 의존성 주입 (DI)</h4><p>의존성 주입 (Dependency injection)   </p>
+<p>의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것<br>ex1) A는 B에 의존 =&gt; A가 B를 사용한다 =&gt; B의 변화가 A에 영향을 끼친다 =&gt; 효과적인 관리가 필요하다<br>ex2) RestaurantController는 RestaurantRepository에 의존한다.  </p>
+<p>레스토랑 컨트롤러에서 저장소 객체를 생성하고 멤버변수로 사용했었는데,<br>이런 작업을 다른 곳에서 할수 있다.<br>=&gt; Spring IOC Container</p>
+<p>DI는 이런 객체간의 의존 관계를 Spring이 직접 관리해주도록 하는 것<br>DI를 위해 두가지 어노테이션을 지원한다.<br>@Component<br>@Autowired  </p>
+<p>Demo<br>Repository  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Spring이 직접 관리하도록</span><br><span class="line">public class RestaurantRepository &#123;</span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Controller  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@RestController </span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository repository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">주의해야 할 것은 WebMvcTest에서 제대로 사용되지 못하기 때문에</span><br><span class="line">직접 의존성 주입을 해야할 필요가 있다   </span><br><span class="line"></span><br><span class="line">Controller Test</span><br></pre></td></tr></table></figure>
+<p>@RunWith(SpringRunner.class)<br>@WebMvcTest(RestaurantController.class)<br>public class RestaurantControllerTest {</p>
+<pre><code>@Autowired
+private MockMvc mvc;
+
+@SpyBean //WebMvcTest에서는 제대로된 저장소를 사용할수 없기때문에 직접 의존성 주입
+private RestaurantRepository restaurantRepository;</code></pre><p>~<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">의존성 주입을 통해 얻을 수 있는 이점은 </span><br><span class="line">객체 간의 의존성을 좀더 유연하게 해준다.     </span><br><span class="line">예를 들어 저장소를 interface로 만들어 의존성 주입을 하면</span><br><span class="line">여러 구현체를 만들수 있고 얼마든지 다른 형태로 변경할 수 있다.</span><br><span class="line">(Controller가 직접적으로 저장소에 의존하고 있던 것을 분리할 수 있다.)     </span><br><span class="line"></span><br><span class="line">저장소</span><br></pre></td></tr></table></figure>
+<p>package kr.co.fastcampus.eatgo.domain;</p>
+<p>import java.util.List;</p>
+<p>public interface RestaurantRepository {<br>    List<Restaurant> findAll();</p>
+<pre><code>Restaurant findById(Long id);</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">구현체</span><br></pre></td></tr></table></figure>
+<p>package kr.co.fastcampus.eatgo.domain;</p>
+<p>import org.springframework.stereotype.Component;</p>
+<p>import java.util.ArrayList;<br>import java.util.List;</p>
+<p>@Component //Spring이 직접 관리하도록<br>public class RestaurantRepositoryImpl implements RestaurantRepository {</p>
+<p>~<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Controller</span><br></pre></td></tr></table></figure>
+<p>@RestController<br>public class RestaurantController {</p>
+<pre><code>@Autowired 
+private RestaurantRepository repository; //구현체가 아닌 인터페이스를 사용할 수 있다  </code></pre><p>~<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">주의해야 할 것은 SpyBean에서 실질적인 구현이 없는것은 사용할 수 없으므로</span><br><span class="line">어떤 구현을 사용할 것인지 입력해주어야 한다.</span><br></pre></td></tr></table></figure>
+<p>@RunWith(SpringRunner.class)<br>@WebMvcTest(RestaurantController.class)<br>public class RestaurantControllerTest {</p>
+<pre><code>@Autowired
+private MockMvc mvc;
+
+@SpyBean(RestaurantRepositoryImpl.class) //어떤 구현체를 사용할 것인지 입력해줘야 한다     
+private RestaurantRepository restaurantRepository;</code></pre><pre><code></code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring-boot/" rel="tag"># spring boot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_11/" rel="prev" title="11. 레이어 분리">
+      <i class="fa fa-chevron-left"></i> 11. 레이어 분리
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_07/" rel="next" title="07. 가게 목록, 가게 상세">
+      07. 가게 목록, 가게 상세 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#스프링-부트-프로젝트"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트 프로젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#레스토랑-예약-사이트-만들기"><span class="nav-number">1.0.1.</span> <span class="nav-text">레스토랑 예약 사이트 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#10-의존성-주입-DI"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">10. 의존성 주입 (DI)</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

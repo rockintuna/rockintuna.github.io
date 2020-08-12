@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기21. Validation, 에러 처리Validation : 유효성 검사사용자들이 입력한 데이터가 올바른지 검증하는 작업이다.   @Valid @NotNull@NotEmpty@Size(max&#x3D;10) 올바르지 않을 시 Error(http status 400)를 리턴하도록 Controller의 기능에 @Valid">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21. Validation, 에러 처리">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_21/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기21. Validation, 에러 처리Validation : 유효성 검사사용자들이 입력한 데이터가 올바른지 검증하는 작업이다.   @Valid @NotNull@NotEmpty@Size(max&#x3D;10) 올바르지 않을 시 Error(http status 400)를 리턴하도록 Controller의 기능에 @Valid">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:22:41.415Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_21/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>21. Validation, 에러 처리 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          21. Validation, 에러 처리
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="21-Validation-에러-처리"><a href="#21-Validation-에러-처리" class="headerlink" title="21. Validation, 에러 처리"></a>21. Validation, 에러 처리</h4><p>Validation : 유효성 검사<br>사용자들이 입력한 데이터가 올바른지 검증하는 작업이다.  </p>
+<p>@Valid</p>
+<p>@NotNull<br>@NotEmpty<br>@Size(max=10)</p>
+<p>올바르지 않을 시 Error(http status 400)를 리턴하도록</p>
+<p>Controller의 기능에 @Valid 추가   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt; create(@Valid @RequestBody Restaurant resource) &#x2F;&#x2F;Valid: 검증할 것이라 정의</span><br><span class="line">        throws URISyntaxException &#123;</span><br><span class="line"></span><br><span class="line">            Restaurant restaurant &#x3D; Restaurant.builder()</span><br><span class="line">            .name(resource.getName())</span><br><span class="line">            .address(resource.getAddress())</span><br><span class="line">            .build();</span><br><span class="line">    restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">    URI location &#x3D; new URI(&quot;&#x2F;restaurants&#x2F;&quot;+restaurant.getId());</span><br><span class="line">    return ResponseEntity.created(location).body(&quot;&#123;&#125;&quot;); &#x2F;&#x2F;빈 내용</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@PatchMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">public String update(@PathVariable(&quot;id&quot;) Long id,</span><br><span class="line">                     @Valid @RequestBody Restaurant resource) &#123;</span><br><span class="line"></span><br><span class="line">    restaurantService.updateRestaurant(id, resource.getName(), resource.getAddress());</span><br><span class="line">    return &quot;&#123;&#125;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Model에서 속성 특징 변경</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@NotEmpty &#x2F;&#x2F;비어있으면 안된다고 정의</span><br><span class="line">private String name;</span><br><span class="line">@NotEmpty</span><br><span class="line">private String address;</span><br></pre></td></tr></table></figure>
+
+<p>Controller Test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void createWithInvalidData() throws Exception &#123;</span><br><span class="line">    mvc.perform(post(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">            .contentType(MediaType.APPLICATION_JSON)</span><br><span class="line">            .content(&quot;&#123;\&quot;name\&quot;:\&quot;\&quot;,\&quot;address\&quot;:\&quot;\&quot;&#125;&quot;))</span><br><span class="line">            .andExpect(status().isBadRequest());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void updateWithInvalidData() throws Exception &#123;</span><br><span class="line">    mvc.perform(patch(&quot;&#x2F;restaurants&#x2F;1&quot;)</span><br><span class="line">            .contentType(MediaType.APPLICATION_JSON)</span><br><span class="line">            .content(&quot;&#123;\&quot;name\&quot;:\&quot;\&quot;,\&quot;address\&quot;:\&quot;\&quot;&#125;&quot;))</span><br><span class="line">            .andExpect(status().isBadRequest());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Not Found에 대한 처리 =&gt; Exception (http status 404)<br>ex) 없는 URL</p>
+<p>@ControllerAdvice : 예외를 받아 처리할 클래스  </p>
+<p>Demo<br>존재하지 않는 id의 가게를 조회했을 때 http status 404를 response하려면</p>
+<p>id:404(없는 id)의 디테일을 Get했을때 not found를 받고싶다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    @Test</span><br><span class="line">    public void detailWithNotExist() throws Exception &#123;</span><br><span class="line">        given(restaurantService.getRestaurant(404L))</span><br><span class="line">                .willThrow(new RestaurantNotFoundException(404L)); &#x2F;&#x2F;서비스는 사용자 예외를 던질건데  </span><br><span class="line"></span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&#x2F;404&quot;))</span><br><span class="line">                .andExpect(status().isNotFound()) &#x2F;&#x2F;status 404인지 확인하고싶다.</span><br><span class="line">                .andExpect(content().string(&quot;&#123;&#125;&quot;)); &#x2F;&#x2F;빈 body도 받는지 확인하고싶다.  </span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">사용자 예외 클래스 생성</span><br></pre></td></tr></table></figure>
+<p>public class RestaurantNotFoundException extends RuntimeException {</p>
+<pre><code>public RestaurantNotFoundException(long id) {
+    super(&quot;Could not find restaurant &quot;+id); //RuntimeException의 매개변수 massage(String)
+}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Controller에서 try&#x2F;catch로 예외처리 해줄수도 있겠지만  </span><br><span class="line">예외처리를 맡아줄 ControllerAdvice를 생성해준다.</span><br></pre></td></tr></table></figure>
+<p>@ControllerAdvice //예외를 처리할 클래스<br>public class RestaurantErrorAdvice {</p>
+<pre><code>@ResponseBody
+@ResponseStatus(HttpStatus.NOT_FOUND) //response 404 할것임
+@ExceptionHandler(RestaurantNotFoundException.class) //어떤 예외에 대한 정의
+public String handleNotFound() {
+    return &quot;{}&quot;; //예외 처리하고 비어있는 body를 보낼것이다.
+}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Service에서도 test 진행</span><br></pre></td></tr></table></figure>
+<pre><code>@Test(expected = RestaurantNotFoundException.class) //사용자 예외가 발생할까?  
+public void getRestaurantWithNotExisted() {
+
+    Restaurant restaurant = restaurantService.getRestaurant(404L);
+}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">orElseThrow()로 예외 처리</span><br></pre></td></tr></table></figure>
+<pre><code>public Restaurant getRestaurant(Long id) {
+
+    Restaurant restaurant =  restaurantRepository.findById(id)
+            .orElseThrow(() -&gt; new RestaurantNotFoundException(id)); //사용자 예외 처리
+    List&lt;MenuItem&gt; menuItems = menuItemRepository.findAllByRestaurantId(id);
+    restaurant.setMenuItems(menuItems);
+
+    return restaurant;
+}</code></pre><pre><code></code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring-boot/" rel="tag"># spring boot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_23/" rel="prev" title="23. 메뉴 관리">
+      <i class="fa fa-chevron-left"></i> 23. 메뉴 관리
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_19/" rel="next" title="19. Lombok">
+      19. Lombok <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#스프링-부트-프로젝트"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트 프로젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#레스토랑-예약-사이트-만들기"><span class="nav-number">1.0.1.</span> <span class="nav-text">레스토랑 예약 사이트 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#21-Validation-에러-처리"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">21. Validation, 에러 처리</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

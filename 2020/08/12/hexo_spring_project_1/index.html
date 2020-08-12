@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="스프링 프로젝트스프링 프레임워크 실습 및 프로젝트01. 스프링 학습 전 필요지식 maven    build를 담당하는 maven &amp; gradlemvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.다운받은 jar파일들은 User Home 디렉토리의 .m2&#x2F;repository에 보관된다.설정 파일maven : pom.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="01. 스프링 학습 전 필요지식">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_spring_project_1/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 프로젝트스프링 프레임워크 실습 및 프로젝트01. 스프링 학습 전 필요지식 maven    build를 담당하는 maven &amp; gradlemvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.다운받은 jar파일들은 User Home 디렉토리의 .m2&#x2F;repository에 보관된다.설정 파일maven : pom.">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:28:08.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:28:08.017Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="spring">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_spring_project_1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>01. 스프링 학습 전 필요지식 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_spring_project_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          01. 스프링 학습 전 필요지식
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:28:08" itemprop="dateCreated datePublished" datetime="2020-08-12T21:28:08+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="01-스프링-학습-전-필요지식"><a href="#01-스프링-학습-전-필요지식" class="headerlink" title="01. 스프링 학습 전 필요지식"></a>01. 스프링 학습 전 필요지식</h4><ul>
+<li>maven  </li>
+</ul>
+<p>build를 담당하는 maven &amp; gradle<br>mvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.<br>다운받은 jar파일들은 User Home 디렉토리의 .m2/repository에 보관된다.<br>설정 파일<br>maven : pom.xml<br>gradle : build.gradle<br>컴파일하면 target으로 실행가능하도록 생성됨  </p>
+<ul>
+<li>logback (slf4j) </li>
+</ul>
+<p>level이 내려갈수록 log 범위가 작아짐<br>logging을 담당하는 logback<br>.trace<br>.debug<br>.info<br>.warn<br>.error  </p>
+<p>logback에 대한 설정은 src/main/resources에 logback.xml(spring-boot에서는 logback-spring.xml)을 생성하여 할 수 있다.<br>ex) logback.xml</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;appender name&#x3D;&quot;STDOUT&quot; class&#x3D;&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;%-5level %logger&#123;36&#125; - %msg%n&lt;&#x2F;pattern&gt;</span><br><span class="line">        &lt;&#x2F;encoder&gt;</span><br><span class="line">    &lt;&#x2F;appender&gt;</span><br><span class="line"></span><br><span class="line">    &lt;root level&#x3D;&quot;trace&quot;&gt;</span><br><span class="line">        &lt;appender-ref ref&#x3D;&quot;STDOUT&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;root&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DB(h2)  </li>
+</ul>
+<p>설치</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install h2</span><br></pre></td></tr></table></figure>
+<p>실행 (브라우저에서 h2-console로 연결된다)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h2</span><br></pre></td></tr></table></figure>
+
+<p>JDBC API는 java.sql과 javax.sql이 있는데 각각 JAVA SE와 EE에 호환된다.  </p>
+<p>연결, 테이블생성, 조회</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static Logger logger &#x3D; LoggerFactory.getLogger(Main.class);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        logger.info(&quot;Hello World&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;Connection, Statement, ResultSet은 java.sql에 있는 구현체이다.</span><br><span class="line">        Connection connection &#x3D; null;</span><br><span class="line">        Statement statement &#x3D; null;</span><br><span class="line">        try &#123;</span><br><span class="line">            Class.forName(&quot;org.h2.Driver&quot;);</span><br><span class="line">            String url &#x3D; &quot;jdbc:h2:mem:test;MODE&#x3D;MySQL;&quot;;</span><br><span class="line">            connection &#x3D; DriverManager.getConnection(url, &quot;sa&quot;, &quot;&quot;);</span><br><span class="line">            statement &#x3D; connection.createStatement();</span><br><span class="line"></span><br><span class="line">            connection.setAutoCommit(false);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;테이블 생성</span><br><span class="line">            statement.execute(&quot;create table member(&quot; +</span><br><span class="line">                    &quot;id int auto_increment, &quot; +</span><br><span class="line">                    &quot;username varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;password varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;primary key(id))&quot;);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;데이터 insert</span><br><span class="line">            statement.executeUpdate(&quot;insert into member(username, password)&quot; +</span><br><span class="line">                    &quot;values(&#39;jilee&#39;,&#39;1234&#39;)&quot;);</span><br><span class="line"></span><br><span class="line">            ResultSet resultSet &#x3D; statement.executeQuery(&quot;select * from member&quot;);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F;select 결과는 ResultSet에 저장되며</span><br><span class="line">            &#x2F;&#x2F;ResultSet.next()는 커서를 레코드 단위로 리턴한 뒤 마지막에는 false를 리턴한다. </span><br><span class="line">            while (resultSet.next()) &#123;</span><br><span class="line">                int id &#x3D; resultSet.getInt(&quot;id&quot;);</span><br><span class="line">                String username &#x3D; resultSet.getString(&quot;username&quot;);</span><br><span class="line">                String password &#x3D; resultSet.getString(&quot;password&quot;);</span><br><span class="line"></span><br><span class="line">                logger.info(id + username + password);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.commit();</span><br><span class="line"></span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;사용한 자원 정리 단계</span><br><span class="line">        &#125; finally &#123; </span><br><span class="line">            try &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125; catch (SQLException throwables) &#123;</span><br><span class="line">                throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125; catch (SQLException throwables) &#123;</span><br><span class="line">                    throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>리팩토링 후<br>var 사용 / try with resource 사용 / Member 모델 사용</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static Logger logger &#x3D; LoggerFactory.getLogger(Main.class);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">        logger.info(&quot;Hello World&quot;);</span><br><span class="line"></span><br><span class="line">        Class.forName(&quot;org.h2.Driver&quot;);</span><br><span class="line">        var url &#x3D; &quot;jdbc:h2:mem:test;MODE&#x3D;MySQL;&quot;;</span><br><span class="line"></span><br><span class="line">        try(var connection &#x3D; DriverManager.getConnection(url, &quot;sa&quot;, &quot;&quot;);</span><br><span class="line">            var statement &#x3D; connection.createStatement();)</span><br><span class="line">        &#123;</span><br><span class="line">            connection.setAutoCommit(false);</span><br><span class="line">            statement.execute(&quot;create table member(&quot; +</span><br><span class="line">                    &quot;id int auto_increment, &quot; +</span><br><span class="line">                    &quot;username varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;password varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;primary key(id))&quot;);</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                statement.executeUpdate(&quot;insert into member(username, password)&quot; +</span><br><span class="line">                        &quot;values(&#39;jilee&#39;,&#39;1234&#39;)&quot;);</span><br><span class="line">                connection.commit();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            var resultSet &#x3D; statement.executeQuery(&quot;select * from member&quot;);</span><br><span class="line">            while (resultSet.next()) &#123;</span><br><span class="line">                var member &#x3D; new Member(resultSet);</span><br><span class="line">                logger.info(member.toString());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Lombok  </li>
+</ul>
+<p>코드의 가독성을 위하여 사용한다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Getter</span><br><span class="line">@Setter</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@RequiredArgsConstructor</span><br><span class="line">public class Member &#123;</span><br><span class="line"></span><br><span class="line">    private int id;</span><br><span class="line">    @NonNull private String userName;</span><br><span class="line">    @NonNull private String password;</span><br><span class="line"></span><br><span class="line">    public Member(ResultSet resultSet) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            this.id &#x3D; resultSet.getInt(&quot;id&quot;);</span><br><span class="line">            this.userName &#x3D; resultSet.getString(&quot;username&quot;);</span><br><span class="line">            this.password &#x3D; resultSet.getString(&quot;password&quot;);</span><br><span class="line">        &#125; catch (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>servlet  </li>
+</ul>
+<p>EE 버전의 스팩을 구현한 servlet 서버로는 tomcat / jeus / oracle weblogic 등이 있다.  </p>
+<p>EE 사용을 위한 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.0.1&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>WAR 설정 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;com.mycompany.app&lt;&#x2F;groupId&gt;</span><br><span class="line">&lt;artifactId&gt;my-app&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;version&gt;1.0-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">&lt;packaging&gt;war&lt;&#x2F;packaging&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_spring_project_2/" rel="prev" title="02. IoC (Inversion of Control)">
+      <i class="fa fa-chevron-left"></i> 02. IoC (Inversion of Control)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#스프링-프로젝트"><span class="nav-number">1.</span> <span class="nav-text">스프링 프로젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#스프링-프레임워크-실습-및-프로젝트"><span class="nav-number">1.0.1.</span> <span class="nav-text">스프링 프레임워크 실습 및 프로젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#01-스프링-학습-전-필요지식"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">01. 스프링 학습 전 필요지식</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

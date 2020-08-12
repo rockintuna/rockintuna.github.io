@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="객체 지향 프로그래밍60. 스트림자료의 대상과 관계없이 동일한 연산을 수행할 수 있는 기능(자료의 추상화)배열, 컬렉션에 동일한 연산이 수행되어 일관성 있는 처리 가능한번 생성하고 사용한 스트림은 재사용할 수 없음스트림 연산은 기존 자료를 변경하지 않음중간 연산과 최종 연산으로 구분 됨최종 연산이 수행되어야 모든 연산이 적용되는 지연 연산    중간 연산f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="60. 스트림">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_OOP_60/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="객체 지향 프로그래밍60. 스트림자료의 대상과 관계없이 동일한 연산을 수행할 수 있는 기능(자료의 추상화)배열, 컬렉션에 동일한 연산이 수행되어 일관성 있는 처리 가능한번 생성하고 사용한 스트림은 재사용할 수 없음스트림 연산은 기존 자료를 변경하지 않음중간 연산과 최종 연산으로 구분 됨최종 연산이 수행되어야 모든 연산이 적용되는 지연 연산    중간 연산f">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-08-12T12:18:42.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:18:42.893Z">
+<meta property="article:author" content="Jeong In">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_60/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>60. 스트림 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_60/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          60. 스트림
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="60-스트림"><a href="#60-스트림" class="headerlink" title="60. 스트림"></a>60. 스트림</h4><p>자료의 대상과 관계없이 동일한 연산을 수행할 수 있는 기능(자료의 추상화)<br>배열, 컬렉션에 동일한 연산이 수행되어 일관성 있는 처리 가능<br>한번 생성하고 사용한 스트림은 재사용할 수 없음<br>스트림 연산은 기존 자료를 변경하지 않음<br>중간 연산과 최종 연산으로 구분 됨<br>최종 연산이 수행되어야 모든 연산이 적용되는 지연 연산  </p>
+<ul>
+<li><p>중간 연산<br>filter(), map()<br>조건에 맞는 요소를 추출하거나 요소를 변환 함<br>문자열의 길이가 5이상인 요소만 출력하기  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sList.stream().filter(s-&gt;s.length()&gt;&#x3D;5).forEach(s-&gt;System.out.println(s));</span><br></pre></td></tr></table></figure>
+<p>고객 클래스에서 고객 이름만 가져오기    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">customerList.stream().map(c-&gt;c.getName()).forEach(s-&gt;System.out.println(s));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>최종 연산<br>스트림의 자료를 소모하면서 연산을 수행<br>최종 연산 후에 스트림은 더이상 다른 연산을 적용할 수 없음<br>forEach() : 요소를 하나씩 꺼내 옴<br>count() : 요소의 개수<br>sum() : 요소의 합<br>등 여러 가지 최종 연산이 있음   </p>
+</li>
+</ul>
+<p>배열 스트림</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class IntArrayTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] arr &#x3D; &#123;1,2,3,4,5&#125;;</span><br><span class="line"></span><br><span class="line">        int sum &#x3D; Arrays.stream(arr).sum();</span><br><span class="line">        int count &#x3D; (int)Arrays.stream(arr).count(); &#x2F;&#x2F;썼으니 재생성, long이므로 형변환</span><br><span class="line"></span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        System.out.println(count);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>콜렉션 스트림</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line">public class ArrayListStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; sList &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        sList.add(&quot;Tomas&quot;);</span><br><span class="line">        sList.add(&quot;Edward&quot;);</span><br><span class="line">        sList.add(&quot;Jack&quot;);</span><br><span class="line"></span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; sList.stream(); &#x2F;&#x2F;stream 객체 생성</span><br><span class="line">        stream.forEach(s -&gt; System.out.print(s + &quot; &quot;));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().sorted().forEach(s -&gt; System.out.print(s + &quot; &quot;)); &#x2F;&#x2F;sorted 중간 연산 추가</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().map(s -&gt; s.length()).forEach(n -&gt; System.out.print(n + &quot; &quot;)); &#x2F;&#x2F;map(변환) 중간 연산 추가</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">    </span><br><span class="line">* reduce() 연산   </span><br><span class="line">정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용    </span><br><span class="line">최종 연산으로 스트림의 요소를 소모하며 연산 수행     </span><br><span class="line"></span><br><span class="line">배열의 모든 요소의 합을 구하는 reduce() 연산</span><br></pre></td></tr></table></figure>
+<p>Arrays.stream(arr).reduce(0,(a,b)-&gt;a+b));</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>package stream;</p>
+<p>import java.util.Arrays;<br>import java.util.function.BinaryOperator;</p>
+<p>class CompareString implements BinaryOperator<String> {</p>
+<pre><code>@Override
+public String apply(String s1, String s2) {
+    if(s1.getBytes().length &gt;= s2.getBytes().length) {
+        return s1;
+    } else {
+        return s2;
+    }
+}</code></pre><p>}<br>public class ReduceTest {<br>    public static void main(String[] args) {</p>
+<pre><code>    String[] greetings = {&quot;안녕하세요&quot;,&quot;hello&quot;,&quot;Good Morning&quot;,&quot;반갑습니다&quot;};
+
+    System.out.println(Arrays.stream(greetings).reduce(&quot;&quot;,(s1,s2) -&gt; {
+        if(s1.getBytes().length &gt;= s2.getBytes().length) {
+            return s1;
+        } else {
+            return s2;
+        }
+    }));
+    //람다식 대신 BinaryOperator가 구현된 클래스를 사용
+    System.out.println(Arrays.stream(greetings).reduce(new CompareString()).get());
+}</code></pre><p>}</p>
+<pre><code></code></pre>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_OOP_63/" rel="prev" title="63. 예외와 예외 처리">
+      <i class="fa fa-chevron-left"></i> 63. 예외와 예외 처리
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_OOP_58/" rel="next" title="58. 람다식">
+      58. 람다식 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#객체-지향-프로그래밍"><span class="nav-number">1.</span> <span class="nav-text">객체 지향 프로그래밍</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#60-스트림"><span class="nav-number">1.0.0.1.</span> <span class="nav-text">60. 스트림</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

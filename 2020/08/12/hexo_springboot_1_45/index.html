@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기45. 회원가입BCrypt를 이용한 Hash 암호화를 사용하기 위해제공되는 Spring Security 프로젝트 사용HttpSecurity 부분을 직접 설정할 예정이다   회원가입 변수EmailNamePassword (2회 인증은 보통 front에서)    eatgo-customer-apiGradle - Spr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="45. 회원가입">
+<meta property="og:url" content="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기45. 회원가입BCrypt를 이용한 Hash 암호화를 사용하기 위해제공되는 Spring Security 프로젝트 사용HttpSecurity 부분을 직접 설정할 예정이다   회원가입 변수EmailNamePassword (2회 인증은 보통 front에서)    eatgo-customer-apiGradle - Spr">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/encode.png">
+<meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
+<meta property="article:modified_time" content="2020-08-12T12:22:41.484Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="spring boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/encode.png">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>45. 회원가입 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          45. 회원가입
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="45-회원가입"><a href="#45-회원가입" class="headerlink" title="45. 회원가입"></a>45. 회원가입</h4><p>BCrypt를 이용한 Hash 암호화를 사용하기 위해<br>제공되는 Spring Security 프로젝트 사용<br>HttpSecurity 부분을 직접 설정할 예정이다  </p>
+<p>회원가입 변수<br>Email<br>Name<br>Password (2회 인증은 보통 front에서)  </p>
+<ul>
+<li><p>eatgo-customer-api<br>Gradle - Spring security 의존성 추가<br>build.gradle</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation project(&#39;:eatgo-common&#39;)</span><br><span class="line"></span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-web&#39;</span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-security&#39;</span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-data-jpa&#39;</span><br><span class="line">    implementation &#39;com.h2database:h2&#39;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">Spring security를 의존성으로 추가하면 기본적으로 http:&#x2F;&#x2F;localhost:8080&#x2F;login 페이지가 제공된다.      </span><br><span class="line">![login page](login.png)</span><br><span class="line"></span><br><span class="line">그러나 따로 API 서버를 사용하기 때문에 위와같은 페이지가 불필요하다.  </span><br><span class="line"></span><br><span class="line">WebSecurityConfig Class를 상속받는 Config Class를 SpringBootApplication Class와 같은 위치에 생성하고 </span><br><span class="line">configure 메서드를 Overriding하여 설정 변경</span><br></pre></td></tr></table></figure>
+<p>@Configuration<br>@EnableWebSecurity<br>public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {</p>
+<p> @Override<br> protected void configure(HttpSecurity http) throws Exception {</p>
+<pre><code>http
+        .formLogin().disable() //login page 사용안함  
+        //Connection 관련된 부분인데 
+        //disable하지 않으면 h2-console을 사용할 수 없어서 일단 설정
+        .cors().disable() 
+        .csrf().disable()
+        .headers().frameOptions().disable();</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    </span><br><span class="line">Service에서 회원가입하는 기능인 registerUser()를 생성하는데</span><br><span class="line">중복 이메일에 대한 예외클래스를 생성하고 사용하며</span><br><span class="line">BCryptPasswordEncoder 클래스를 통해 password를 암호화한다.</span><br></pre></td></tr></table></figure>
+<p> public User registerUser(String email, String name, String password) {</p>
+<pre><code>Optional&lt;User&gt; existed = userRepository.findByEmail(email);
+if (existed.isPresent()) { //email로 찾은 User가 존재한다면 if문 수행
+    throw new EmailExistedException(email);
+}
+
+PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+String encodedPassword = passwordEncoder.encode(password); //암호화 
+User user = User.builder()
+        .email(email)
+        .name(name)
+        .level(1L)
+        .password(encodedPassword)
+        .build();
+
+return userRepository.save(user);</code></pre><p> }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Service Test</span><br></pre></td></tr></table></figure>
+<p> //회원가입 테스트<br> @Test<br> public void registerUser() {</p>
+<pre><code>String email = &quot;rockintuna@naver.com&quot;;
+String name = &quot;이정인&quot;;
+String password = &quot;test&quot;;
+User mockUser = User.builder().name(name).email(email).password(password).build();
+given(userRepository.save(any())).willReturn(mockUser);
+
+User user = userService.registerUser(email, name, password);
+
+assertThat(user.getName(), is(&quot;이정인&quot;));
+
+verify(userRepository).save(any());</code></pre><p> }</p>
+<p> //email 중복 테스트<br> @Test(expected = EmailExistedException.class)<br> public void registerUserWithExistEmail() {</p>
+<pre><code>String email = &quot;rockintuna@naver.com&quot;;
+String name = &quot;이정인&quot;;
+String password = &quot;test&quot;;
+User mockUser = User.builder().name(name).email(email).password(password).build();
+
+given(userRepository.findByEmail(email)).willReturn(Optional.of(mockUser));
+
+userService.registerUser(email, name, password);
+
+verify(userRepository,never()).save(any());</code></pre><p> }</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">사용자 예외 클래스</span><br></pre></td></tr></table></figure>
+<p>public class EmailExistedException extends RuntimeException{</p>
+<p> EmailExistedException(String email) {</p>
+<pre><code>super(&quot;Email is already registered: &quot;+email);</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">계정 생성</span><br><span class="line">&#96;&#96;&#96;shell script</span><br><span class="line">$ http POST localhost:8080&#x2F;users email&#x3D;test@example.com name&#x3D;Tester password&#x3D;test</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>DB에는 암호화된 암호가 저장된다.<br><img src="encode.png" alt="password encoding"></p>
+<p>한번더 같은 메일로 생성하면 생성한 예외 발생</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> http POST localhost:8080/users email=<span class="built_in">test</span>@example.com name=Tester password=<span class="built_in">test</span></span></span><br><span class="line">HTTP/1.1 500 </span><br><span class="line">Cache-Control: no-cache, no-store, max-age=0, must-revalidate</span><br><span class="line">Connection: close</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Date: Fri, 19 Jun 2020 09:39:13 GMT</span><br><span class="line">Expires: 0</span><br><span class="line">Pragma: no-cache</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line">X-Content-Type-Options: nosniff</span><br><span class="line">X-XSS-Protection: 1; mode=block</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    "error": "Internal Server Error",</span><br><span class="line">    "message": "Email is already registered: test@example.com",</span><br><span class="line">    "path": "/users",</span><br><span class="line">    "status": 500,</span><br><span class="line">    "timestamp": "2020-06-19T09:39:13.802+0000",</span><br><span class="line">    "trace": </span><br><span class="line">~~~</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/spring-boot/" rel="tag"># spring boot</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_48/" rel="prev" title="48. 인증">
+      <i class="fa fa-chevron-left"></i> 48. 인증
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/08/12/hexo_springboot_1_41/" rel="next" title="41. 사용자 관리">
+      41. 사용자 관리 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#스프링-부트-프로젝트"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트 프로젝트</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#레스토랑-예약-사이트-만들기"><span class="nav-number">1.0.1.</span> <span class="nav-text">레스토랑 예약 사이트 만들기</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#45-회원가입"><span class="nav-number">1.0.1.1.</span> <span class="nav-text">45. 회원가입</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
