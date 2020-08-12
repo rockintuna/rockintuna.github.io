@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -523,7 +523,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_07/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -537,7 +537,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_springboot_1_07/" class="post-title-link" itemprop="url">07. 가게 목록, 가게 상세</a>
+            <a href="/2020/08/12/hexo_springboot_1_10/" class="post-title-link" itemprop="url">10. 의존성 주입 (DI)</a>
         </h2>
 
         <div class="post-meta">
@@ -574,11 +574,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="07-가게-목록-가게-상세"><a href="#07-가게-목록-가게-상세" class="headerlink" title="07. 가게 목록, 가게 상세"></a>07. 가게 목록, 가게 상세</h4><p>가게 목록 Demo<br>Controller  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package kr.co.fastcampus.eatgo.interfaces;</span><br><span class="line"></span><br><span class="line">import kr.co.fastcampus.eatgo.domain.Restaurant;</span><br><span class="line">import org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@RestController &#x2F;&#x2F;Rest API 를 사용하는 컨트롤러 임을 명시</span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">    public List&lt;Restaurant&gt; list() &#123;</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; new Restaurant(1004l, &quot;Bob zip&quot;,&quot;Seoul&quot;);</span><br><span class="line">        restaurants.add(restaurant);</span><br><span class="line">        &#x2F;&#x2F;웹에서 출력은 아래와 같다    </span><br><span class="line">        &#x2F;&#x2F;[&#123;&quot;name&quot;:&quot;Bob zip&quot;,&quot;address&quot;:&quot;Seoul&quot;,&quot;id&quot;:1004,&quot;information&quot;:&quot;Bob zip in Seoul&quot;&#125;]</span><br><span class="line">        return restaurants;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="10-의존성-주입-DI"><a href="#10-의존성-주입-DI" class="headerlink" title="10. 의존성 주입 (DI)"></a>10. 의존성 주입 (DI)</h4><p>의존성 주입 (Dependency injection)   </p>
+<p>의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것<br>ex1) A는 B에 의존 =&gt; A가 B를 사용한다 =&gt; B의 변화가 A에 영향을 끼친다 =&gt; 효과적인 관리가 필요하다<br>ex2) RestaurantController는 RestaurantRepository에 의존한다.  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_07/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_10/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
