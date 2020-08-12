@@ -215,46 +215,14 @@
 <p>webpack-dev-server 실행</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start</span><br></pre></td></tr></table></figure>
 <p>실제로는 아래와 같은 프로세스가 실행되어 있다   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | grep webpack</span><br><span class="line">                                          </span><br><span class="line">501 43162 43161   0 11:28PM ttys000    0:03.58 node &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;eatgo-web&#x2F;node_modules&#x2F;.bin&#x2F;webpack-dev-server --port 3000</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">index.html</span><br><span class="line">webpack-dev-server가 index.js를 main.js로 바꿔준다.</span><br></pre></td></tr></table></figure>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <title>EatGo</title>
-</head>
-<body>
-    <div id="app"></div>
-    <script src="./main.js"></script>
-</body>
-</html>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">index.js</span><br><span class="line">app을 가져와서 내용 고치기    </span><br><span class="line">모든 가게의 id, 이름, 주소 출력</span><br></pre></td></tr></table></figure>
-(async () => {
-    const url = 'http://localhost:8080/restaurants';
-    const response = await fetch(url);
-    const restaurants = await response.json();
-
-<pre><code>const element = document.getElementById(&apos;app&apos;);
-element.innerHTML = `
-    ${restaurants.map(restaurant =&gt; `
-    &lt;p&gt;
-        ${restaurant.id}
-        ${restaurant.name}
-        ${restaurant.address}
-    &lt;/p&gt;
-    `).join(&apos;&apos;)}
-`;</code></pre><p>})();</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">별도의 웹서버에서 CORS에 따라 서로 보안을 위해 접근할 수 없기때문에 </span><br><span class="line">Spring에서 CrossOrigin annotation 처리</span><br></pre></td></tr></table></figure>
-<p>@CrossOrigin<br>@RestController<br>public class RestaurantController {</p>
-<pre><code>@Autowired
-private RestaurantService restaurantService;
-
-@GetMapping(&quot;/restaurants&quot;)
-public List&lt;Restaurant&gt; list() {
-
-    List&lt;Restaurant&gt; restaurants = restaurantService.getRestaurants(); //API들의 중복제거를 위해 가게 저장소 사용
-    return restaurants;
-}</code></pre><pre><code></code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_17/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -333,14 +301,14 @@ public List&lt;Restaurant&gt; list() {
 
 <p>Service Test</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void updateRestaurant() &#123;</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D; new Restaurant(1L, &quot;BobZip&quot;, &quot;Seoul&quot;);</span><br><span class="line">    given(restaurantRepository.findById(1L)).willReturn(java.util.Optional.of(restaurant));</span><br><span class="line"></span><br><span class="line">    restaurantService.updateRestaurant(1L,&quot;GukBobZip&quot;,&quot;Busan&quot;);</span><br><span class="line"></span><br><span class="line">    assertThat(restaurant.getName(), is(&quot;GukBobZip&quot;));</span><br><span class="line">    assertThat(restaurant.getAddress(), is(&quot;Busan&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Service 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Transactional &#x2F;&#x2F;트랜젝션 범위에서 처리되고 범위에서 처리가 벗어났을때 내용이 적용됨</span><br><span class="line">public Restaurant updateRestaurant(Long id, String name, String address) &#123;</span><br><span class="line">    Restaurant restaurant &#x3D; restaurantRepository.findById(id).orElse(null);</span><br><span class="line"></span><br><span class="line">    restaurant.setInformation(name,address);</span><br><span class="line">    return restaurant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>테스트</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ http PATCH localhost:8080&#x2F;restaurants&#x2F;1 name&#x3D;BeRyong address&#x3D;Seoul</span><br><span class="line">HTTP&#x2F;1.1 200 </span><br><span class="line">~</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_18/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -418,6 +386,14 @@ public List&lt;Restaurant&gt; list() {
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void creation() &#123;</span><br><span class="line">    Restaurant restaurant &#x3D; Restaurant.builder() &#x2F;&#x2F;@Builder 패턴을 사용, 가독이 좋고 순서가 없다는 장점이 있다.  </span><br><span class="line">            .id(1004L)</span><br><span class="line">            .name(&quot;Bob zip&quot;)</span><br><span class="line">            .address(&quot;Seoul&quot;)</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">    assertThat(restaurant.getId(), is(1004L));</span><br><span class="line">    assertThat(restaurant.getName(), is(&quot;Bob zip&quot;));</span><br><span class="line">    assertThat(restaurant.getAddress(), is(&quot;Seoul&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_19/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -495,43 +471,14 @@ public List&lt;Restaurant&gt; list() {
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt; create(@Valid @RequestBody Restaurant resource) &#x2F;&#x2F;Valid: 검증할 것이라 정의</span><br><span class="line">        throws URISyntaxException &#123;</span><br><span class="line"></span><br><span class="line">            Restaurant restaurant &#x3D; Restaurant.builder()</span><br><span class="line">            .name(resource.getName())</span><br><span class="line">            .address(resource.getAddress())</span><br><span class="line">            .build();</span><br><span class="line">    restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">    URI location &#x3D; new URI(&quot;&#x2F;restaurants&#x2F;&quot;+restaurant.getId());</span><br><span class="line">    return ResponseEntity.created(location).body(&quot;&#123;&#125;&quot;); &#x2F;&#x2F;빈 내용</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@PatchMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">public String update(@PathVariable(&quot;id&quot;) Long id,</span><br><span class="line">                     @Valid @RequestBody Restaurant resource) &#123;</span><br><span class="line"></span><br><span class="line">    restaurantService.updateRestaurant(id, resource.getName(), resource.getAddress());</span><br><span class="line">    return &quot;&#123;&#125;&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Model에서 속성 특징 변경</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@NotEmpty &#x2F;&#x2F;비어있으면 안된다고 정의</span><br><span class="line">private String name;</span><br><span class="line">@NotEmpty</span><br><span class="line">private String address;</span><br></pre></td></tr></table></figure>
-
-<p>Controller Test</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void createWithInvalidData() throws Exception &#123;</span><br><span class="line">    mvc.perform(post(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">            .contentType(MediaType.APPLICATION_JSON)</span><br><span class="line">            .content(&quot;&#123;\&quot;name\&quot;:\&quot;\&quot;,\&quot;address\&quot;:\&quot;\&quot;&#125;&quot;))</span><br><span class="line">            .andExpect(status().isBadRequest());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void updateWithInvalidData() throws Exception &#123;</span><br><span class="line">    mvc.perform(patch(&quot;&#x2F;restaurants&#x2F;1&quot;)</span><br><span class="line">            .contentType(MediaType.APPLICATION_JSON)</span><br><span class="line">            .content(&quot;&#123;\&quot;name\&quot;:\&quot;\&quot;,\&quot;address\&quot;:\&quot;\&quot;&#125;&quot;))</span><br><span class="line">            .andExpect(status().isBadRequest());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Not Found에 대한 처리 =&gt; Exception (http status 404)<br>ex) 없는 URL</p>
-<p>@ControllerAdvice : 예외를 받아 처리할 클래스  </p>
-<p>Demo<br>존재하지 않는 id의 가게를 조회했을 때 http status 404를 response하려면</p>
-<p>id:404(없는 id)의 디테일을 Get했을때 not found를 받고싶다.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    @Test</span><br><span class="line">    public void detailWithNotExist() throws Exception &#123;</span><br><span class="line">        given(restaurantService.getRestaurant(404L))</span><br><span class="line">                .willThrow(new RestaurantNotFoundException(404L)); &#x2F;&#x2F;서비스는 사용자 예외를 던질건데  </span><br><span class="line"></span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&#x2F;404&quot;))</span><br><span class="line">                .andExpect(status().isNotFound()) &#x2F;&#x2F;status 404인지 확인하고싶다.</span><br><span class="line">                .andExpect(content().string(&quot;&#123;&#125;&quot;)); &#x2F;&#x2F;빈 body도 받는지 확인하고싶다.  </span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">사용자 예외 클래스 생성</span><br></pre></td></tr></table></figure>
-<p>public class RestaurantNotFoundException extends RuntimeException {</p>
-<pre><code>public RestaurantNotFoundException(long id) {
-    super(&quot;Could not find restaurant &quot;+id); //RuntimeException의 매개변수 massage(String)
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Controller에서 try&#x2F;catch로 예외처리 해줄수도 있겠지만  </span><br><span class="line">예외처리를 맡아줄 ControllerAdvice를 생성해준다.</span><br></pre></td></tr></table></figure>
-<p>@ControllerAdvice //예외를 처리할 클래스<br>public class RestaurantErrorAdvice {</p>
-<pre><code>@ResponseBody
-@ResponseStatus(HttpStatus.NOT_FOUND) //response 404 할것임
-@ExceptionHandler(RestaurantNotFoundException.class) //어떤 예외에 대한 정의
-public String handleNotFound() {
-    return &quot;{}&quot;; //예외 처리하고 비어있는 body를 보낼것이다.
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Service에서도 test 진행</span><br></pre></td></tr></table></figure>
-<pre><code>@Test(expected = RestaurantNotFoundException.class) //사용자 예외가 발생할까?  
-public void getRestaurantWithNotExisted() {
-
-    Restaurant restaurant = restaurantService.getRestaurant(404L);
-}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">orElseThrow()로 예외 처리</span><br></pre></td></tr></table></figure>
-<pre><code>public Restaurant getRestaurant(Long id) {
-
-    Restaurant restaurant =  restaurantRepository.findById(id)
-            .orElseThrow(() -&gt; new RestaurantNotFoundException(id)); //사용자 예외 처리
-    List&lt;MenuItem&gt; menuItems = menuItemRepository.findAllByRestaurantId(id);
-    restaurant.setMenuItems(menuItems);
-
-    return restaurant;
-}</code></pre><pre><code></code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_21/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -609,21 +556,14 @@ public void getRestaurantWithNotExisted() {
 
 <p>Controller에 PatchMapping 추가</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@PatchMapping(&quot;&#x2F;restaurants&#x2F;&#123;restaurantId&#125;&#x2F;menuitems&quot;)</span><br><span class="line">public void bulkUpdate(</span><br><span class="line">        @PathVariable(&quot;restaurantId&quot;) Long restaurantId,</span><br><span class="line">        @RequestBody List&lt;MenuItem&gt; menuItems &#x2F;&#x2F;MenuItem List를 사용자로부터 입력받는다. </span><br><span class="line">) &#123;</span><br><span class="line">    menuItemServices.bulkUpdate(restaurantId, menuItems);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p>Service 테스트</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">@Mock</span><br><span class="line">private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">@Before</span><br><span class="line">public void setUp() &#123;</span><br><span class="line">    MockitoAnnotations.initMocks(this);</span><br><span class="line">    menuItemServices &#x3D; new MenuItemService(menuItemRepository);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void bulkUpdate() &#123;</span><br><span class="line">    </span><br><span class="line">    List&lt;MenuItem&gt; menuItems &#x3D; new ArrayList&lt;MenuItem&gt;();</span><br><span class="line">    </span><br><span class="line">    menuItems.add(MenuItem.builder().name(&quot;Kimchi&quot;).build()); &#x2F;&#x2F;add</span><br><span class="line">    menuItems.add(MenuItem.builder().id(12L).name(&quot;Gukbob&quot;).build()); &#x2F;&#x2F;add</span><br><span class="line">    menuItems.add(MenuItem.builder().id(1004L).destroy(true).build()); &#x2F;&#x2F;delete</span><br><span class="line">    menuItems.add(MenuItem.builder().id(12L).name(&quot;Guk Bob&quot;).build()); &#x2F;&#x2F;update</span><br><span class="line"></span><br><span class="line">    menuItemServices.bulkUpdate(1L,menuItems);</span><br><span class="line"></span><br><span class="line">    verify(menuItemRepository, times(3)).save(any()); &#x2F;&#x2F;save 함수가 3회 호출되나?</span><br><span class="line">    verify(menuItemRepository, times(1)).deleteById(1004L); &#x2F;&#x2F;deleteById 함수가 1회 호출되나?</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Restaurant Model의 menuItem이 안보이게 수정 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Transient</span><br><span class="line">@JsonInclude(JsonInclude.Include.NON_NULL) &#x2F;&#x2F;Null이 아닐때만 json에 넣어줘라</span><br><span class="line">private List&lt;MenuItem&gt; menuItems;</span><br></pre></td></tr></table></figure>
-
-<p>MenuItem Model에 destory라는 속성 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Transient</span><br><span class="line">@JsonInclude(JsonInclude.Include.NON_DEFAULT) &#x2F;&#x2F;json에 포함 X</span><br><span class="line">private boolean destroy;</span><br></pre></td></tr></table></figure>
-
-<p>Service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class MenuItemService &#123;</span><br><span class="line"></span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public MenuItemService(MenuItemRepository menuItemRepository) &#123;</span><br><span class="line">        this.menuItemRepository&#x3D;menuItemRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    public void bulkUpdate(Long restaurantId, List&lt;MenuItem&gt; menuItems) &#123;</span><br><span class="line"></span><br><span class="line">        for(MenuItem menuItem : menuItems) &#123;</span><br><span class="line">            update(restaurantId, menuItem);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void update(Long restaurantId, MenuItem menuItem) &#123;</span><br><span class="line">        if (menuItem.isDestroy()) &#123;</span><br><span class="line">            menuItemRepository.deleteById(menuItem.getId());</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line">        menuItem.setRestaurantId(restaurantId);</span><br><span class="line">        menuItemRepository.save(menuItem);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_23/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -702,14 +642,14 @@ public void getRestaurantWithNotExisted() {
 
 <p>Service Test</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class ReviewServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    private ReviewService reviewService;</span><br><span class="line"></span><br><span class="line">    @Mock</span><br><span class="line">    private ReviewRepository reviewRepository;</span><br><span class="line"></span><br><span class="line">    @Before</span><br><span class="line">    public void setUp() &#123;</span><br><span class="line">        MockitoAnnotations.initMocks(this);</span><br><span class="line"></span><br><span class="line">        reviewService &#x3D; new ReviewService(reviewRepository);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void addReview() &#123;</span><br><span class="line">        Review review &#x3D; Review.builder().name(&quot;jilee&quot;).score(3).description(&quot;Mat-it-da&quot;).build(); &#x2F;&#x2F;Review 객체 생성</span><br><span class="line">        reviewService.addReview(review,1004L); &#x2F;&#x2F;기능 실행할때</span><br><span class="line"></span><br><span class="line">        verify(reviewRepository).save(any()); &#x2F;&#x2F;save가 호출되니?</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Service</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class ReviewService &#123;</span><br><span class="line"></span><br><span class="line">    private ReviewRepository reviewRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public ReviewService(ReviewRepository reviewRepository) &#123;</span><br><span class="line">        this.reviewRepository &#x3D; reviewRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Review addReview(Review review,Long restaurantId) &#123;</span><br><span class="line">        review.setRestaurantId(restaurantId);</span><br><span class="line">        return reviewRepository.save(review);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Review Repository</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public interface ReviewRepository extends CrudRepository&lt;Review, Long&gt; &#123;</span><br><span class="line"></span><br><span class="line">    Review save(Review review);</span><br><span class="line"></span><br><span class="line">    List&lt;Review&gt; findAllByRestaurantId(Long restaurantId);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_26/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -787,12 +727,14 @@ public void getRestaurantWithNotExisted() {
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rootProject.name &#x3D; &#39;eatgo&#39;</span><br><span class="line"></span><br><span class="line">include &#39;eatgo-common&#39;</span><br><span class="line">include &#39;eatgo-admin-api&#39;</span><br><span class="line">include &#39;eatgo-customer-api&#39;</span><br></pre></td></tr></table></figure>
 
 <p>eatgo-common의 build.gradle 수정<br>참고 : <a href="https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/html/#packaging-executable-and-normal" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/html/#packaging-executable-and-normal</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">jar &#123; </span><br><span class="line">    enabled &#x3D; true &#x2F;&#x2F;default가 false이기때문에, false면 import에서 문제 발생  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bootJar &#123;</span><br><span class="line">    enabled &#x3D; false &#x2F;&#x2F;true면 gradle assamble&#x2F;build 에서 문제발생 </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>eatgo-admin-api, eatgo-customer-api의 build.gradle 수정<br>eatgo-common 의존성 추가  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">	implementation project(&#39;:eatgo-common&#39;)</span><br><span class="line"></span><br><span class="line">    ~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_29/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -868,6 +810,14 @@ public void getRestaurantWithNotExisted() {
 
 <p>여러개의 설정을 나누려면 ‘—‘<br>SPRING_PROFILES_ACTIVE=test 일때, profiles: test의 설정이 적용된다.<br>ex) SPRING_PROFILES_ACTIVE=test ./gradlew test<br>intellij에서는 Test edit configuration에서 Environment value에 추가해주면 된다.</p>
 
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_34/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -949,17 +899,14 @@ public void getRestaurantWithNotExisted() {
 <p>H2 Console<br><a href="http://localhost:8080/h2-console" target="_blank" rel="noopener">http://localhost:8080/h2-console</a> 에서 h2DB를 관리할 수 있다.  </p>
 <p>eatgo-customer-api<br>Restaurant Controller 수정</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">public List&lt;Restaurant&gt; list(</span><br><span class="line">        @RequestParam(&quot;region&quot;) String region, &#x2F;&#x2F;region 파라미터 추가</span><br><span class="line">        @RequestParam(&quot;category&quot;) Long categoryId &#x2F;&#x2F;category 파라미터 추가 </span><br><span class="line">) &#123;</span><br><span class="line">    List&lt;Restaurant&gt; restaurants &#x3D; restaurantService.getRestaurants(region,categoryId);</span><br><span class="line">    return restaurants;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Restaurant Service의 getRestaurants 메서드 매개변수 추가 </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public List&lt;Restaurant&gt; getRestaurants(String region, long categoryId) &#123;</span><br><span class="line">    List&lt;Restaurant&gt; restaurants &#x3D;</span><br><span class="line">            restaurantRepository.findByAddressContainingAndCategoryId(region,categoryId);</span><br><span class="line">            &#x2F;&#x2F;입력받은 region을 포함하는 address &#x2F; 일치하는 categoryId </span><br><span class="line">    return restaurants;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Restaurant Repository JPA</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Restaurant&gt; findByAddressContainingAndCategoryId(</span><br><span class="line">        String region, long categoryId);</span><br></pre></td></tr></table></figure>
-
-<p>TEST</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http GET "localhost:8080/restaurants?region=서울&amp;category=1"</span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_35/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1038,9 +985,14 @@ public void getRestaurantWithNotExisted() {
 
 <p>Service  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">@Transactional &#x2F;&#x2F;DB에 Transaction처리를 위함이다</span><br><span class="line">               &#x2F;&#x2F;안해주면 update&#x2F;delete 안되었음</span><br><span class="line">public class UserService &#123;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line"></span><br><span class="line">    public User updateUser(Long id, String email, String name, Long level) &#123;</span><br><span class="line">        &#x2F;&#x2F;TODO 예외처리 추가 필요</span><br><span class="line">        User user &#x3D; userRepository.findById(id).orElse(null);</span><br><span class="line">        user.setEmail(email);</span><br><span class="line">        user.setName(name);</span><br><span class="line">        user.setLevel(level);</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User deactiveUser(Long id) &#123;</span><br><span class="line">        User user &#x3D; userRepository.findById(id).orElse(null);</span><br><span class="line">        user.deactivate();</span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>패스워드, 회원가입등은 추후 추가 예정   </p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_41/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
