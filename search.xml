@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>sample</title>
-    <url>/2020/08/12/sample/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>03. 설치 (IntelliJ 사용)</title>
     <url>/2020/08/12/hexo_1_Java_basic_03/</url>
     <content><![CDATA[<h1 id="Java-기초"><a href="#Java-기초" class="headerlink" title="Java 기초"></a>Java 기초</h1><h4 id="03-설치-IntelliJ-사용"><a href="#03-설치-IntelliJ-사용" class="headerlink" title="03. 설치 (IntelliJ 사용)"></a>03. 설치 (IntelliJ 사용)</h4><ul>
@@ -202,6 +197,35 @@ public class BinaryTest {
       </categories>
   </entry>
   <entry>
+    <title>10. 대입, 부호, 산술, 복합대입, 증감 연산자</title>
+    <url>/2020/08/12/hexo_1_Java_basic_10/</url>
+    <content><![CDATA[<h1 id="Java-기초"><a href="#Java-기초" class="headerlink" title="Java 기초"></a>Java 기초</h1><h4 id="10-대입-부호-산술-복합대입-증감-연산자"><a href="#10-대입-부호-산술-복합대입-증감-연산자" class="headerlink" title="10. 대입, 부호, 산술, 복합대입, 증감 연산자"></a>10. 대입, 부호, 산술, 복합대입, 증감 연산자</h4><p>항 : 연산에 사용되는 값<br>연산자 : 항을 이용하여 연산하는 기호</p>
+<ul>
+<li><p>대입 연산자<br>int age = 20;<br>우선순위 가장 낮음.</p>
+</li>
+<li><p>단항 연산자<br>부호 유지 또는 변경 (+,-)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx1 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1 &#x3D; -10;</span><br><span class="line">        int num2 &#x3D; 20;</span><br><span class="line"></span><br><span class="line">        System.out.println(+num1);</span><br><span class="line">        System.out.println(+num2);</span><br><span class="line">        System.out.println(-num1);</span><br><span class="line">        System.out.println(-num2);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>+ 부호 유지<br>- 부호 변경<br>실제 변수 값의 부호를 바꾸려면 대입 연산자와 같이 사용.    </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int num1 &#x3D; -10;     </span><br><span class="line">num1 &#x3D; -num1;</span><br></pre></td></tr></table></figure></li>
+<li><p>산술 연산자<br>사칙연산, %(나머지)    </p>
+</li>
+<li><p>복합 대입 연산자<br>대입 연산자 앞의 연산자의 결과를 l-value에 대입</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1&#x3D;10,num2&#x3D;10,num3&#x3D;10,num4&#x3D;10,num5 &#x3D; 10;</span><br><span class="line">        num1 +&#x3D; 2; &#x2F;&#x2F;r-value를 더한 뒤 대입</span><br><span class="line">        System.out.println(num1);</span><br><span class="line">        num2 -&#x3D; 2; &#x2F;&#x2F;r-value를 뺀 뒤 대입</span><br><span class="line">        System.out.println(num2);</span><br><span class="line">        num3 *&#x3D; 2; &#x2F;&#x2F;r-value를 곱한 뒤 대입</span><br><span class="line">        System.out.println(num3);</span><br><span class="line">        num4 &#x2F;&#x3D; 2; &#x2F;&#x2F;r-value로 나눈 몫을 대입</span><br><span class="line">        System.out.println(num4);</span><br><span class="line">        num5 %&#x3D; 2; &#x2F;&#x2F;r-value를 나눈 나머지 대입</span><br><span class="line">        System.out.println(num5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>증가 감소 연산자<br>변수의 값을 1 더하거나 뺄때 사용     </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">val &#x3D; ++num; num 1 증가 후 대입</span><br><span class="line">val &#x3D; num++; 대입 후 num 1 증가</span><br><span class="line">val &#x3D; --num;</span><br><span class="line">val &#x3D; num--;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx3 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int score &#x3D; 100;</span><br><span class="line"></span><br><span class="line">        System.out.println(++score); &#x2F;&#x2F;101</span><br><span class="line">        &#x2F;&#x2F;++score 는 score &#x3D; score+1 과 같은 의미이다.</span><br><span class="line">        System.out.println(score++); &#x2F;&#x2F;101</span><br><span class="line">        System.out.println(score); &#x2F;&#x2F;102</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>증감 연산자는 대입을 내포한다.   </p>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Java Basic</category>
+      </categories>
+  </entry>
+  <entry>
     <title>11. 관계, 논리, 조건 비트 연산자</title>
     <url>/2020/08/12/hexo_1_Java_basic_11/</url>
     <content><![CDATA[<h1 id="Java-기초"><a href="#Java-기초" class="headerlink" title="Java 기초"></a>Java 기초</h1><h4 id="11-관계-논리-조건-비트-연산자"><a href="#11-관계-논리-조건-비트-연산자" class="headerlink" title="11. 관계, 논리, 조건 비트 연산자"></a>11. 관계, 논리, 조건 비트 연산자</h4><ul>
@@ -241,35 +265,6 @@ public class OperatorEx4 {
 
     }
 }</code></pre>]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Java Basic</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>10. 대입, 부호, 산술, 복합대입, 증감 연산자</title>
-    <url>/2020/08/12/hexo_1_Java_basic_10/</url>
-    <content><![CDATA[<h1 id="Java-기초"><a href="#Java-기초" class="headerlink" title="Java 기초"></a>Java 기초</h1><h4 id="10-대입-부호-산술-복합대입-증감-연산자"><a href="#10-대입-부호-산술-복합대입-증감-연산자" class="headerlink" title="10. 대입, 부호, 산술, 복합대입, 증감 연산자"></a>10. 대입, 부호, 산술, 복합대입, 증감 연산자</h4><p>항 : 연산에 사용되는 값<br>연산자 : 항을 이용하여 연산하는 기호</p>
-<ul>
-<li><p>대입 연산자<br>int age = 20;<br>우선순위 가장 낮음.</p>
-</li>
-<li><p>단항 연산자<br>부호 유지 또는 변경 (+,-)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx1 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1 &#x3D; -10;</span><br><span class="line">        int num2 &#x3D; 20;</span><br><span class="line"></span><br><span class="line">        System.out.println(+num1);</span><br><span class="line">        System.out.println(+num2);</span><br><span class="line">        System.out.println(-num1);</span><br><span class="line">        System.out.println(-num2);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>+ 부호 유지<br>- 부호 변경<br>실제 변수 값의 부호를 바꾸려면 대입 연산자와 같이 사용.    </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int num1 &#x3D; -10;     </span><br><span class="line">num1 &#x3D; -num1;</span><br></pre></td></tr></table></figure></li>
-<li><p>산술 연산자<br>사칙연산, %(나머지)    </p>
-</li>
-<li><p>복합 대입 연산자<br>대입 연산자 앞의 연산자의 결과를 l-value에 대입</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1&#x3D;10,num2&#x3D;10,num3&#x3D;10,num4&#x3D;10,num5 &#x3D; 10;</span><br><span class="line">        num1 +&#x3D; 2; &#x2F;&#x2F;r-value를 더한 뒤 대입</span><br><span class="line">        System.out.println(num1);</span><br><span class="line">        num2 -&#x3D; 2; &#x2F;&#x2F;r-value를 뺀 뒤 대입</span><br><span class="line">        System.out.println(num2);</span><br><span class="line">        num3 *&#x3D; 2; &#x2F;&#x2F;r-value를 곱한 뒤 대입</span><br><span class="line">        System.out.println(num3);</span><br><span class="line">        num4 &#x2F;&#x3D; 2; &#x2F;&#x2F;r-value로 나눈 몫을 대입</span><br><span class="line">        System.out.println(num4);</span><br><span class="line">        num5 %&#x3D; 2; &#x2F;&#x2F;r-value를 나눈 나머지 대입</span><br><span class="line">        System.out.println(num5);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>증가 감소 연산자<br>변수의 값을 1 더하거나 뺄때 사용     </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">val &#x3D; ++num; num 1 증가 후 대입</span><br><span class="line">val &#x3D; num++; 대입 후 num 1 증가</span><br><span class="line">val &#x3D; --num;</span><br><span class="line">val &#x3D; num--;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx3 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int score &#x3D; 100;</span><br><span class="line"></span><br><span class="line">        System.out.println(++score); &#x2F;&#x2F;101</span><br><span class="line">        &#x2F;&#x2F;++score 는 score &#x3D; score+1 과 같은 의미이다.</span><br><span class="line">        System.out.println(score++); &#x2F;&#x2F;101</span><br><span class="line">        System.out.println(score); &#x2F;&#x2F;102</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>증감 연산자는 대입을 내포한다.   </p>
-]]></content>
       <categories>
         <category>Study</category>
         <category>Java Basic</category>
@@ -809,6 +804,50 @@ public class OperatorEx4 {
       </categories>
   </entry>
   <entry>
+    <title>33. 추상 클래스란?</title>
+    <url>/2020/08/12/hexo_OOP_33/</url>
+    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="33-추상-클래스란"><a href="#33-추상-클래스란" class="headerlink" title="33. 추상 클래스란?"></a>33. 추상 클래스란?</h4><ul>
+<li>추상 클래스<br>추상 메서드를 포함한 클래스<br>추상 메서드 : 구현코드 없이 선언부만 있는 메서드<br>abstract 예약어 사용<br>new(인스턴스화) 할 수 없음   </li>
+</ul>
+<p>추상 클래스는 상속의 상위 클래스로 사용된다.<br>추상 클래스의 추상 메서드는 하위 클래스가 구현해야 한다. </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public abstract class Computer &#123; &#x2F;&#x2F;추상 메서드가 있으면 클래스는 항상 추상 클래스이다.</span><br><span class="line"></span><br><span class="line">    public abstract void display(); &#x2F;&#x2F;이 메서드는 구현하지 않겠다는 의미드 (추상 메서드)</span><br><span class="line">    public abstract void typing();  &#x2F;&#x2F;추상 메서드들은 하위 클래스에서 구현된다.</span><br><span class="line"></span><br><span class="line">    public void turnOn() &#123;</span><br><span class="line">        System.out.println(&quot;전원을 켭니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void turnOff() &#123;</span><br><span class="line">        System.out.println(&quot;전원을 끕니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public class Desktop extends Computer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123; &#x2F;&#x2F;상위 클래스의 모든 추상 메서드들을 구현해주지 않으면 에러가 발생한다.</span><br><span class="line">                            &#x2F;&#x2F;만약 구현하지 않거나 부분만 구현해야 할 경우 abstract 클래스가 되어야 한다.</span><br><span class="line">        System.out.println(&quot;Desktop display&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void typing() &#123;</span><br><span class="line">        System.out.println(&quot;Desktop typing&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public abstract class Notebook extends Computer&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void typing() &#123;</span><br><span class="line">        System.out.println(&quot;Notebook typing&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public class MyNoteBook extends Notebook &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123;</span><br><span class="line">        System.out.println(&quot;MyNoteBook display&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public class ComputerTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;Computer computer &#x3D; new Computer(); &#x2F;&#x2F;추상 클래스이기 때문에 인스턴스화 불가능</span><br><span class="line">        Computer desktop &#x3D; new Desktop();</span><br><span class="line">        desktop.display();</span><br><span class="line">        desktop.turnOn();</span><br><span class="line"></span><br><span class="line">        Computer mynotebook &#x3D; new MyNoteBook(); &#x2F;&#x2F;NoteBook type이나 MyNoteBook type도 가능</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>JAVA OOP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>34. 추상 클래스 응용, 템플릿 메서드</title>
+    <url>/2020/08/12/hexo_OOP_34/</url>
+    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="34-추상-클래스-응용-템플릿-메서드"><a href="#34-추상-클래스-응용-템플릿-메서드" class="headerlink" title="34. 추상 클래스 응용: 템플릿 메서드"></a>34. 추상 클래스 응용: 템플릿 메서드</h4><p>템플릿 : 틀이나 견본<br>템플릿 메서드 : 추상 메서드나 구현된 메서드를 활용하여 전체의 흐름을 정의 해 놓은 메서드<br>            final로 선언하여 재정의할 수 없게함<br>템플릿 메서드 패턴 : 디자인 패턴의 일종<br>프레임 워크에서 많이 사용되는 설계 패턴<br>추상 클래스로 선언된 상의 클래스에서 추상 메서드를 이용하여 전체 구현의 흐름을 정의하고<br>구체적인 각 메서드 구현은 하위 클래스에 위임함<br>하위 클래스가 어떤 구현을 하든 템플릿 메서드에 정의된 시나리오 대로 수행됨   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public abstract class Car &#123;</span><br><span class="line"></span><br><span class="line">    public abstract void drive();</span><br><span class="line">    public abstract void stop();</span><br><span class="line"></span><br><span class="line">    public void startCar() &#123;</span><br><span class="line">        System.out.println(&quot;시동을 켭니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void turnOff() &#123;</span><br><span class="line">        System.out.println(&quot;시동을 끕니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void washCar() &#123;&#125;; &#x2F;&#x2F;훅메서드, 하위 클래스에서 재정의 용으로 생성</span><br><span class="line"></span><br><span class="line">    final public void run() &#123; &#x2F;&#x2F;템플릿 메서드, 재정의 할 수 없도록 final 키워드 사용</span><br><span class="line">                              &#x2F;&#x2F;시나리오가 정의되어있다.</span><br><span class="line">        startCar();</span><br><span class="line">        drive();</span><br><span class="line">        stop();</span><br><span class="line">        turnOff();</span><br><span class="line">        washCar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public class AICar extends Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void drive() &#123;</span><br><span class="line">        System.out.println(&quot;자율 주행합니다.&quot;);</span><br><span class="line">        System.out.println(&quot;자동차가 스스로 방향을 바꿉니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void stop() &#123;</span><br><span class="line">        System.out.println(&quot;스스로 멈춥니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void washCar() &#123; &#x2F;&#x2F;훅메서드 재정의</span><br><span class="line">        System.out.println(&quot;자동 세차 합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public class ManualCar extends Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void drive() &#123;</span><br><span class="line">        System.out.println(&quot;사람이 운전합니다.&quot;);</span><br><span class="line">        System.out.println(&quot;사람이 핸들을 조작합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void stop() &#123;</span><br><span class="line">        System.out.println(&quot;브레이크를 밟아서 정지합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public class CarTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Car aicar &#x3D; new AICar();</span><br><span class="line">        aicar.run();</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line"></span><br><span class="line">        Car manualcar &#x3D; new ManualCar();</span><br><span class="line">        manualcar.run();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>final 예약어<br>final 변수 : 변경될 수 없는 상수<br>final 메서드 : 하위 클래스에서 재정의 할 수 없음<br>final 클래스 : 더 이상 상속될 수 없음  </li>
+</ul>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>JAVA OOP</category>
+      </categories>
+  </entry>
+  <entry>
     <title>37. 인터페이스</title>
     <url>/2020/08/12/hexo_OOP_37/</url>
     <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="37-인터페이스"><a href="#37-인터페이스" class="headerlink" title="37. 인터페이스"></a>37. 인터페이스</h4><ul>
@@ -850,29 +889,6 @@ public class OperatorEx4 {
       </categories>
   </entry>
   <entry>
-    <title>33. 추상 클래스란?</title>
-    <url>/2020/08/12/hexo_OOP_33/</url>
-    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="33-추상-클래스란"><a href="#33-추상-클래스란" class="headerlink" title="33. 추상 클래스란?"></a>33. 추상 클래스란?</h4><ul>
-<li>추상 클래스<br>추상 메서드를 포함한 클래스<br>추상 메서드 : 구현코드 없이 선언부만 있는 메서드<br>abstract 예약어 사용<br>new(인스턴스화) 할 수 없음   </li>
-</ul>
-<p>추상 클래스는 상속의 상위 클래스로 사용된다.<br>추상 클래스의 추상 메서드는 하위 클래스가 구현해야 한다. </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public abstract class Computer &#123; &#x2F;&#x2F;추상 메서드가 있으면 클래스는 항상 추상 클래스이다.</span><br><span class="line"></span><br><span class="line">    public abstract void display(); &#x2F;&#x2F;이 메서드는 구현하지 않겠다는 의미드 (추상 메서드)</span><br><span class="line">    public abstract void typing();  &#x2F;&#x2F;추상 메서드들은 하위 클래스에서 구현된다.</span><br><span class="line"></span><br><span class="line">    public void turnOn() &#123;</span><br><span class="line">        System.out.println(&quot;전원을 켭니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void turnOff() &#123;</span><br><span class="line">        System.out.println(&quot;전원을 끕니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public class Desktop extends Computer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123; &#x2F;&#x2F;상위 클래스의 모든 추상 메서드들을 구현해주지 않으면 에러가 발생한다.</span><br><span class="line">                            &#x2F;&#x2F;만약 구현하지 않거나 부분만 구현해야 할 경우 abstract 클래스가 되어야 한다.</span><br><span class="line">        System.out.println(&quot;Desktop display&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void typing() &#123;</span><br><span class="line">        System.out.println(&quot;Desktop typing&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public abstract class Notebook extends Computer&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void typing() &#123;</span><br><span class="line">        System.out.println(&quot;Notebook typing&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public class MyNoteBook extends Notebook &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void display() &#123;</span><br><span class="line">        System.out.println(&quot;MyNoteBook display&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package abstractex;</span><br><span class="line"></span><br><span class="line">public class ComputerTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        &#x2F;&#x2F;Computer computer &#x3D; new Computer(); &#x2F;&#x2F;추상 클래스이기 때문에 인스턴스화 불가능</span><br><span class="line">        Computer desktop &#x3D; new Desktop();</span><br><span class="line">        desktop.display();</span><br><span class="line">        desktop.turnOn();</span><br><span class="line"></span><br><span class="line">        Computer mynotebook &#x3D; new MyNoteBook(); &#x2F;&#x2F;NoteBook type이나 MyNoteBook type도 가능</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>JAVA OOP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>40. 인터페이스의 요소들</title>
     <url>/2020/08/12/hexo_OOP_40/</url>
     <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="40-인터페이스의-요소들"><a href="#40-인터페이스의-요소들" class="headerlink" title="40. 인터페이스의 요소들"></a>40. 인터페이스의 요소들</h4><p>상수 : 선언된 모든 변수는 상수로 처리 됨<br>메서드 : 모든 메서드는 추상 메서드<br>java8<br>디폴트 메서드 : 기본 구현을 가지는 메서드, 클래스에서 재정의 가능<br>정적 메서드 : 인스턴스 생성과 상관없이 인터페이스 타입으로 호출하는 메서드<br>java9<br>private 메서드 : 인터페이스 내에서 사용하기 위한 메서드, 클래스에서 재정의 불가능  </p>
@@ -898,6 +914,37 @@ public class OperatorEx4 {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package bookshelf;</span><br><span class="line"></span><br><span class="line">public class BookShelfTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Queue bookQueue &#x3D; new BookShelf(); &#x2F;&#x2F;기능적인것을 우선한다면 보통 인터페이스 타입으로 선언</span><br><span class="line">        bookQueue.enQueue(&quot;태백산맥1&quot;);</span><br><span class="line">        bookQueue.enQueue(&quot;태백산맥2&quot;);</span><br><span class="line">        bookQueue.enQueue(&quot;태백산맥3&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(bookQueue.deQueue());</span><br><span class="line">        System.out.println(bookQueue.deQueue());</span><br><span class="line">        System.out.println(bookQueue.deQueue());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>JAVA OOP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>46. Class 클래스</title>
+    <url>/2020/08/12/hexo_OOP_46/</url>
+    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="46-Class-클래스"><a href="#46-Class-클래스" class="headerlink" title="46. Class 클래스"></a>46. Class 클래스</h4><ul>
+<li>Class 클래스<br>자바의 모든 클래스와 인터페이스는 컴파일 후 class 파일로 생성됨<br>class 파일에는 객체의 정보(멤버변수, 메서드, 생성자 등)가 포함되어 있음<br>Class 클래스는 컴파일된 class 파일에서 객체의 정보를 가져올 수 있음<br>동적 로딩에 많이 사용    </li>
+</ul>
+<p>Class 클래스 가져오기  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">String s &#x3D; new String();</span><br><span class="line">Class c &#x3D; s.getClass();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Class c &#x3D; String.Class;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Class c &#x3D; Class.forName(&quot;java.lang.String&quot;); &#x2F;&#x2F;동적 로딩 : 컴파일 타임이 아닌 런타임에서 로딩</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>reflection 프로그래밍<br>Class 클래스로부터 객체의 정보를 가져와 프로그래밍하는 방식<br>로컬에 객체가 없고 자료형을 알 수 없는 경우 유용한 프로그래밍<br>java.lang.reflect 패키지에 있는 클래스 활용    </li>
+</ul>
+<p>String 클래스 정보 확인</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Constructor;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class StringClassTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line"></span><br><span class="line">        Class c1 &#x3D; String.class;</span><br><span class="line"></span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        Class c2 &#x3D; str.getClass();</span><br><span class="line"></span><br><span class="line">        Class c3 &#x3D; Class.forName(&quot;java.lang.String&quot;);</span><br><span class="line"></span><br><span class="line">        Constructor[] cons &#x3D; c3.getConstructors();</span><br><span class="line">        for (Constructor con : cons) &#123; &#x2F;&#x2F;String 클래스의 모든 생성자 출력</span><br><span class="line">            System.out.println(con);</span><br><span class="line">        &#125; &#x2F;&#x2F;보통 로컬에 이 클래스가 없을 때 사용</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Method[] methods &#x3D; c3.getMethods();</span><br><span class="line">        for (Method method : methods) &#123; &#x2F;&#x2F;String 클래스의 모든 메서드 선언부 출력</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Class 클래스를 이용한 사용자 클래스 인스턴스 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">public class Person &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    public Person() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    public Person(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, int age) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">        this.age &#x3D; age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age &#x3D; age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Constructor;</span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line">public class ClassTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line"></span><br><span class="line">        Person person &#x3D; new Person(&quot;james&quot;);</span><br><span class="line">        System.out.println(person);</span><br><span class="line"></span><br><span class="line">        Class c1 &#x3D; Class.forName(&quot;classex.Person&quot;); &#x2F;&#x2F;동적 로딩</span><br><span class="line">        Person person1 &#x3D; (Person)c1.newInstance(); &#x2F;&#x2F;기본생성자 사용하여 인스턴스 생성, 리턴타입이 Object이므로 다운캐스팅</span><br><span class="line">        System.out.println(person1);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;기본생성자가 아닌 다른 생성자를 사용하여 인스턴스를 생성하려는 경우..</span><br><span class="line">        Class[] parameterTypes &#x3D; &#123;String.class&#125;; &#x2F;&#x2F;String을 사용하는 생성자를 사용할 것</span><br><span class="line">        Constructor cons &#x3D; c1.getConstructor(parameterTypes); &#x2F;&#x2F;생성자 매개변수 타입을 요소로 가지는 Class 타입 배열 필요</span><br><span class="line"></span><br><span class="line">        System.out.println(cons.toString()); &#x2F;&#x2F;선택된 생성자 출력</span><br><span class="line"></span><br><span class="line">        Object[] initargs &#x3D; &#123;&quot;김유신&quot;&#125;; &#x2F;&#x2F;생성자의 매개변수로 사용될 값들을 요소로 가지는 배열(여러개일 수 있으므로 배열 사용)</span><br><span class="line">        Person personKim &#x3D; (Person) cons.newInstance(initargs); &#x2F;&#x2F;매개변수 값을 요소로 가지는 Object 타입 배열 필요</span><br><span class="line">        System.out.println(personKim);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>forName() 메서드와 동적 로딩<br>Class 클래스 static 메서드<br>동적 로딩 : 컴파일시 데이터 타입이 모두 biding되어 자료형이 로딩되는 것이 아닌,<br>실행 중에 데이터 타입을 알고 biding 되는 방식<br>실행 시에 로딩되므로 경우에 따라 다른 클래스가 사용될 수 있어 유용함<br>컴파일 타임에 체크할 수 없으므로 해당 문자열에 대한 클래스가 없는 경우 예외 발생  </li>
+</ul>
 ]]></content>
       <categories>
         <category>Study</category>
@@ -963,37 +1010,6 @@ public class OperatorEx4 {
 
 <ul>
 <li>Wrapper 클래스<br>기본 자료형에 대한 클래스<br>Boolean, Integer, 등등    </li>
-</ul>
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>JAVA OOP</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>46. Class 클래스</title>
-    <url>/2020/08/12/hexo_OOP_46/</url>
-    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="46-Class-클래스"><a href="#46-Class-클래스" class="headerlink" title="46. Class 클래스"></a>46. Class 클래스</h4><ul>
-<li>Class 클래스<br>자바의 모든 클래스와 인터페이스는 컴파일 후 class 파일로 생성됨<br>class 파일에는 객체의 정보(멤버변수, 메서드, 생성자 등)가 포함되어 있음<br>Class 클래스는 컴파일된 class 파일에서 객체의 정보를 가져올 수 있음<br>동적 로딩에 많이 사용    </li>
-</ul>
-<p>Class 클래스 가져오기  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">String s &#x3D; new String();</span><br><span class="line">Class c &#x3D; s.getClass();</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Class c &#x3D; String.Class;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Class c &#x3D; Class.forName(&quot;java.lang.String&quot;); &#x2F;&#x2F;동적 로딩 : 컴파일 타임이 아닌 런타임에서 로딩</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>reflection 프로그래밍<br>Class 클래스로부터 객체의 정보를 가져와 프로그래밍하는 방식<br>로컬에 객체가 없고 자료형을 알 수 없는 경우 유용한 프로그래밍<br>java.lang.reflect 패키지에 있는 클래스 활용    </li>
-</ul>
-<p>String 클래스 정보 확인</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Constructor;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class StringClassTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line"></span><br><span class="line">        Class c1 &#x3D; String.class;</span><br><span class="line"></span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        Class c2 &#x3D; str.getClass();</span><br><span class="line"></span><br><span class="line">        Class c3 &#x3D; Class.forName(&quot;java.lang.String&quot;);</span><br><span class="line"></span><br><span class="line">        Constructor[] cons &#x3D; c3.getConstructors();</span><br><span class="line">        for (Constructor con : cons) &#123; &#x2F;&#x2F;String 클래스의 모든 생성자 출력</span><br><span class="line">            System.out.println(con);</span><br><span class="line">        &#125; &#x2F;&#x2F;보통 로컬에 이 클래스가 없을 때 사용</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Method[] methods &#x3D; c3.getMethods();</span><br><span class="line">        for (Method method : methods) &#123; &#x2F;&#x2F;String 클래스의 모든 메서드 선언부 출력</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Class 클래스를 이용한 사용자 클래스 인스턴스 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">public class Person &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private int age;</span><br><span class="line"></span><br><span class="line">    public Person() &#123;&#125;;</span><br><span class="line"></span><br><span class="line">    public Person(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Person(String name, int age) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">        this.age &#x3D; age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">        return age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">        this.age &#x3D; age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Constructor;</span><br><span class="line">import java.lang.reflect.InvocationTargetException;</span><br><span class="line"></span><br><span class="line">public class ClassTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException &#123;</span><br><span class="line"></span><br><span class="line">        Person person &#x3D; new Person(&quot;james&quot;);</span><br><span class="line">        System.out.println(person);</span><br><span class="line"></span><br><span class="line">        Class c1 &#x3D; Class.forName(&quot;classex.Person&quot;); &#x2F;&#x2F;동적 로딩</span><br><span class="line">        Person person1 &#x3D; (Person)c1.newInstance(); &#x2F;&#x2F;기본생성자 사용하여 인스턴스 생성, 리턴타입이 Object이므로 다운캐스팅</span><br><span class="line">        System.out.println(person1);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;기본생성자가 아닌 다른 생성자를 사용하여 인스턴스를 생성하려는 경우..</span><br><span class="line">        Class[] parameterTypes &#x3D; &#123;String.class&#125;; &#x2F;&#x2F;String을 사용하는 생성자를 사용할 것</span><br><span class="line">        Constructor cons &#x3D; c1.getConstructor(parameterTypes); &#x2F;&#x2F;생성자 매개변수 타입을 요소로 가지는 Class 타입 배열 필요</span><br><span class="line"></span><br><span class="line">        System.out.println(cons.toString()); &#x2F;&#x2F;선택된 생성자 출력</span><br><span class="line"></span><br><span class="line">        Object[] initargs &#x3D; &#123;&quot;김유신&quot;&#125;; &#x2F;&#x2F;생성자의 매개변수로 사용될 값들을 요소로 가지는 배열(여러개일 수 있으므로 배열 사용)</span><br><span class="line">        Person personKim &#x3D; (Person) cons.newInstance(initargs); &#x2F;&#x2F;매개변수 값을 요소로 가지는 Object 타입 배열 필요</span><br><span class="line">        System.out.println(personKim);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>forName() 메서드와 동적 로딩<br>Class 클래스 static 메서드<br>동적 로딩 : 컴파일시 데이터 타입이 모두 biding되어 자료형이 로딩되는 것이 아닌,<br>실행 중에 데이터 타입을 알고 biding 되는 방식<br>실행 시에 로딩되므로 경우에 따라 다른 클래스가 사용될 수 있어 유용함<br>컴파일 타임에 체크할 수 없으므로 해당 문자열에 대한 클래스가 없는 경우 예외 발생  </li>
 </ul>
 ]]></content>
       <categories>
@@ -1231,37 +1247,6 @@ public String apply(String s1, String s2) {
       </categories>
   </entry>
   <entry>
-    <title>65. 다양한 예외 처리</title>
-    <url>/2020/08/12/hexo_OOP_65/</url>
-    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="65-다양한-예외-처리"><a href="#65-다양한-예외-처리" class="headerlink" title="65. 다양한 예외 처리"></a>65. 다양한 예외 처리</h4><ul>
-<li>예외 처리 미루기<br>throws를 이용하여 예외처리 미루기<br>try{} 블록으로 예외처리 하지 않고, 메서드 선언부에 throws를 추가<br>예외가 발생한 메서드에서 예외처리를 하지 않고 메서드를 호출한 곳에서 예외처리함<br>main()에서 throws를 사용하면 가상 머신에서 처리 됨  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.String&quot;); &#x2F;&#x2F;loadClass에 대한 try~catch문 필요</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>다중 예외 처리<br>하나의 try{} 블록에서 여러 예외가 발생하는 경우<br>하나의 catch{} 블록에서 예외 처리 하거나<br>여러 catch{} 블록으로 나누어 처리할 수 있음<br>이때, 최상위 예외 클래스인 Exception 클래스는 가장 마지막 블록에 위치해야 함  </li>
-</ul>
-<p>하나의 catch{} 블록에서 처리     </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.string&quot;);</span><br><span class="line">        &#125; catch (FileNotFoundException | ClassNotFoundException e) &#123; &#x2F;&#x2F;두개의 예외를 같이 처리</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>여러 catch{}블록에서 처리 및 디폴트 Exception   </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.String&quot;);</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (Exception e) &#123; &#x2F;&#x2F;그 외 다른 예외 처리(디폴트 익셉션), 항상 마지막 catch&#123;&#125; 블록에서..</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>사용자 정의 예외<br>JDK에서 제공하는 예외 클래스 외에 사용자의 필요에 의해 예외 클래스를 정의하여 사용<br>기존 JDK클래스에서 상속받아 예외 클래스 생성  </li>
-</ul>
-<p>사용자 정의 예외 연습<br>(id가 null 이거나 8자이하 20자 이상인 경우 예외 처리)    </p>
-<p>예외 클래스 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class IDFormatException extends Exception &#123;</span><br><span class="line">    public IDFormatException(String message) &#123; &#x2F;&#x2F;생성자의 매개변수로 예외 상황 메세지 받음    </span><br><span class="line">    super(massage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>사용자 정의 예외 사용 </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">public class IDFormatTest &#123;</span><br><span class="line"></span><br><span class="line">    private String userID;</span><br><span class="line"></span><br><span class="line">    public String getUserID() &#123;</span><br><span class="line">        return userID;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserID(String userID) throws IDFormatException &#123; &#x2F;&#x2F;예외처리 미루기 </span><br><span class="line">        if (userID &#x3D;&#x3D; null) &#123;</span><br><span class="line">            throw new IDFormatException(&quot;아이디는 null일 수 없습니다.&quot;); &#x2F;&#x2F;throws는 미루기 throw는 발생</span><br><span class="line">        &#125; else if (userID.length() &lt;8 || userID.length() &gt; 20) &#123;</span><br><span class="line">            throw new IDFormatException(&quot;아이디는 8자 이상 20자 이하로 쓰세요.&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            this.userID &#x3D; userID;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        IDFormatTest idTest &#x3D; new IDFormatTest();</span><br><span class="line"></span><br><span class="line">        String myID &#x3D; &quot;tuna&quot;;</span><br><span class="line"></span><br><span class="line">        try &#123; &#x2F;&#x2F;사용하는 곳에서 예외 처리  </span><br><span class="line">            idTest.setUserID(myID);</span><br><span class="line">        &#125; catch (IDFormatException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        myID &#x3D; null;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            idTest.setUserID(myID);</span><br><span class="line">        &#125; catch (IDFormatException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>JAVA OOP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>66. 자바 입출력 스트림</title>
     <url>/2020/08/12/hexo_OOP_66/</url>
     <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="66-자바-입출력-스트림"><a href="#66-자바-입출력-스트림" class="headerlink" title="66. 자바 입출력 스트림"></a>66. 자바 입출력 스트림</h4><ul>
@@ -1291,6 +1276,37 @@ public String apply(String s1, String s2) {
 <li>Console 클래스<br>System.in 을 사용하지 않고 콘솔에서(cmd,terminal) 표준 입출력이 가능<br>readLine() : 문자열을 읽습니다.<br>readPassword() : 사용자에게 문자열을 보여주지 않고 읽습니다<br>reader() : Reader 클래스를 반환<br>writer() : PrintWriter 클래스를 반환  </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream.inputstream;</span><br><span class="line"></span><br><span class="line">import java.io.Console;</span><br><span class="line"></span><br><span class="line">public class ConsoleTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Console console &#x3D; System.console();</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;이름&quot;);</span><br><span class="line">        String name &#x3D; console.readLine();</span><br><span class="line">        System.out.println(&quot;비밀 번호&quot;);</span><br><span class="line">        char[] password &#x3D; console.readPassword();</span><br><span class="line"></span><br><span class="line">        System.out.println(name);</span><br><span class="line">        System.out.println(password);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>JAVA OOP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>65. 다양한 예외 처리</title>
+    <url>/2020/08/12/hexo_OOP_65/</url>
+    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="65-다양한-예외-처리"><a href="#65-다양한-예외-처리" class="headerlink" title="65. 다양한 예외 처리"></a>65. 다양한 예외 처리</h4><ul>
+<li>예외 처리 미루기<br>throws를 이용하여 예외처리 미루기<br>try{} 블록으로 예외처리 하지 않고, 메서드 선언부에 throws를 추가<br>예외가 발생한 메서드에서 예외처리를 하지 않고 메서드를 호출한 곳에서 예외처리함<br>main()에서 throws를 사용하면 가상 머신에서 처리 됨  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.String&quot;); &#x2F;&#x2F;loadClass에 대한 try~catch문 필요</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>다중 예외 처리<br>하나의 try{} 블록에서 여러 예외가 발생하는 경우<br>하나의 catch{} 블록에서 예외 처리 하거나<br>여러 catch{} 블록으로 나누어 처리할 수 있음<br>이때, 최상위 예외 클래스인 Exception 클래스는 가장 마지막 블록에 위치해야 함  </li>
+</ul>
+<p>하나의 catch{} 블록에서 처리     </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.string&quot;);</span><br><span class="line">        &#125; catch (FileNotFoundException | ClassNotFoundException e) &#123; &#x2F;&#x2F;두개의 예외를 같이 처리</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여러 catch{}블록에서 처리 및 디폴트 Exception   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.String&quot;);</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (Exception e) &#123; &#x2F;&#x2F;그 외 다른 예외 처리(디폴트 익셉션), 항상 마지막 catch&#123;&#125; 블록에서..</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>사용자 정의 예외<br>JDK에서 제공하는 예외 클래스 외에 사용자의 필요에 의해 예외 클래스를 정의하여 사용<br>기존 JDK클래스에서 상속받아 예외 클래스 생성  </li>
+</ul>
+<p>사용자 정의 예외 연습<br>(id가 null 이거나 8자이하 20자 이상인 경우 예외 처리)    </p>
+<p>예외 클래스 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class IDFormatException extends Exception &#123;</span><br><span class="line">    public IDFormatException(String message) &#123; &#x2F;&#x2F;생성자의 매개변수로 예외 상황 메세지 받음    </span><br><span class="line">    super(massage);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>사용자 정의 예외 사용 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">public class IDFormatTest &#123;</span><br><span class="line"></span><br><span class="line">    private String userID;</span><br><span class="line"></span><br><span class="line">    public String getUserID() &#123;</span><br><span class="line">        return userID;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserID(String userID) throws IDFormatException &#123; &#x2F;&#x2F;예외처리 미루기 </span><br><span class="line">        if (userID &#x3D;&#x3D; null) &#123;</span><br><span class="line">            throw new IDFormatException(&quot;아이디는 null일 수 없습니다.&quot;); &#x2F;&#x2F;throws는 미루기 throw는 발생</span><br><span class="line">        &#125; else if (userID.length() &lt;8 || userID.length() &gt; 20) &#123;</span><br><span class="line">            throw new IDFormatException(&quot;아이디는 8자 이상 20자 이하로 쓰세요.&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            this.userID &#x3D; userID;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        IDFormatTest idTest &#x3D; new IDFormatTest();</span><br><span class="line"></span><br><span class="line">        String myID &#x3D; &quot;tuna&quot;;</span><br><span class="line"></span><br><span class="line">        try &#123; &#x2F;&#x2F;사용하는 곳에서 예외 처리  </span><br><span class="line">            idTest.setUserID(myID);</span><br><span class="line">        &#125; catch (IDFormatException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        myID &#x3D; null;</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            idTest.setUserID(myID);</span><br><span class="line">        &#125; catch (IDFormatException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1342,19 +1358,6 @@ public String apply(String s1, String s2) {
       </categories>
   </entry>
   <entry>
-    <title>71. 직렬화</title>
-    <url>/2020/08/12/hexo_OOP_71/</url>
-    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="71-직렬화"><a href="#71-직렬화" class="headerlink" title="71. 직렬화"></a>71. 직렬화</h4><p>인스턴스의 상태를 그대로 저장하거나 네트웍으로 전송하고 이를 다시 복원하는 방식<br>ObjectInputStream, ObjectOutputStream 보조스트림 사용  </p>
-<p>Serializable 인터페이스<br>직렬화는 인스턴스의 내용이 외부로 유출되는 것이므로 프로그래머가 객체의 직렬화 가능 여부를 명시함<br>구현 코드가 없는 마크 인터페이스  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream.serialization;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; class Person implements Externalizable &#123; &#x2F;&#x2F;직렬화가능하며 구현해야할 기능이 있음  </span><br><span class="line">class Person implements Serializable &#123; &#x2F;&#x2F;직렬화가능하다는 마크 인터페이스 </span><br><span class="line">    String name;</span><br><span class="line">    transient String job; &#x2F;&#x2F;직렬화 제외 키워드</span><br><span class="line"></span><br><span class="line">    public Person(String name, String job) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">        this.job &#x3D; job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return name + &quot;,&quot; + job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class SerializationTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Person personLee &#x3D; new Person(&quot;이순신&quot;,&quot;엔지니어&quot;);</span><br><span class="line">        Person personKim &#x3D; new Person(&quot;김유신&quot;,&quot;선생님&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;객체 파일 생성</span><br><span class="line">        try (FileOutputStream fos &#x3D; new FileOutputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;serial.dat&quot;);</span><br><span class="line">             ObjectOutputStream oos &#x3D; new ObjectOutputStream(fos)) &#123;</span><br><span class="line">            oos.writeObject(personLee);</span><br><span class="line">            oos.writeObject(personKim);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;객체 파일 읽기</span><br><span class="line">        try (FileInputStream fis &#x3D; new FileInputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;serial.dat&quot;);</span><br><span class="line">        ObjectInputStream ois &#x3D; new ObjectInputStream(fis)) &#123;</span><br><span class="line">            Person p1 &#x3D; (Person) ois.readObject();</span><br><span class="line">            Person p2 &#x3D; (Person) ois.readObject();</span><br><span class="line"></span><br><span class="line">            System.out.println(p1);</span><br><span class="line">            System.out.println(p2);</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>JAVA OOP</category>
-      </categories>
-  </entry>
-  <entry>
     <title>70. 보조 스트림</title>
     <url>/2020/08/12/hexo_OOP_70/</url>
     <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="70-보조-스트림"><a href="#70-보조-스트림" class="headerlink" title="70. 보조 스트림"></a>70. 보조 스트림</h4><p>실제 읽고 쓰는 스트림이 아닌 보조적인 기능을 추가하는 스트림<br>데코레이터라고도 불린다<br>상위 클래스 FilterInputStream, FilterOutputStream<br>생성자의 매개변수로 다른 스트림을 가진다</p>
@@ -1367,6 +1370,19 @@ public String apply(String s1, String s2) {
 
 <p>DataInputStream/DataOutputStream : 자료가 저장된 상태 그대로 자료형을 유지하며 읽거나 쓰는 기능을 제공하는 스트림    </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream.decorator;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">public class DataStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        try(FileOutputStream fos &#x3D; new FileOutputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;data.txt&quot;);</span><br><span class="line">            DataOutputStream dos &#x3D; new DataOutputStream(fos);</span><br><span class="line">            FileInputStream fis &#x3D; new FileInputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;data.txt&quot;);</span><br><span class="line">            DataInputStream dis &#x3D; new DataInputStream(fis)) &#123;</span><br><span class="line"></span><br><span class="line">            dos.writeByte(100); &#x2F;&#x2F;한 바이트로 씀</span><br><span class="line">            dos.write(100); &#x2F;&#x2F;4 바이트로 씀</span><br><span class="line">            dos.writeChar(&#39;A&#39;);</span><br><span class="line">            dos.writeUTF(&quot;안녕하세요&quot;);</span><br><span class="line"></span><br><span class="line">            System.out.println(dis.readByte()); &#x2F;&#x2F;쓴 방식대로 읽어야 한다 </span><br><span class="line">            System.out.println(dis.read());</span><br><span class="line">            System.out.println(dis.readChar());</span><br><span class="line">            System.out.println(dis.readUTF());</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>JAVA OOP</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>71. 직렬화</title>
+    <url>/2020/08/12/hexo_OOP_71/</url>
+    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="71-직렬화"><a href="#71-직렬화" class="headerlink" title="71. 직렬화"></a>71. 직렬화</h4><p>인스턴스의 상태를 그대로 저장하거나 네트웍으로 전송하고 이를 다시 복원하는 방식<br>ObjectInputStream, ObjectOutputStream 보조스트림 사용  </p>
+<p>Serializable 인터페이스<br>직렬화는 인스턴스의 내용이 외부로 유출되는 것이므로 프로그래머가 객체의 직렬화 가능 여부를 명시함<br>구현 코드가 없는 마크 인터페이스  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream.serialization;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; class Person implements Externalizable &#123; &#x2F;&#x2F;직렬화가능하며 구현해야할 기능이 있음  </span><br><span class="line">class Person implements Serializable &#123; &#x2F;&#x2F;직렬화가능하다는 마크 인터페이스 </span><br><span class="line">    String name;</span><br><span class="line">    transient String job; &#x2F;&#x2F;직렬화 제외 키워드</span><br><span class="line"></span><br><span class="line">    public Person(String name, String job) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">        this.job &#x3D; job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return name + &quot;,&quot; + job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class SerializationTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Person personLee &#x3D; new Person(&quot;이순신&quot;,&quot;엔지니어&quot;);</span><br><span class="line">        Person personKim &#x3D; new Person(&quot;김유신&quot;,&quot;선생님&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;객체 파일 생성</span><br><span class="line">        try (FileOutputStream fos &#x3D; new FileOutputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;serial.dat&quot;);</span><br><span class="line">             ObjectOutputStream oos &#x3D; new ObjectOutputStream(fos)) &#123;</span><br><span class="line">            oos.writeObject(personLee);</span><br><span class="line">            oos.writeObject(personKim);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;객체 파일 읽기</span><br><span class="line">        try (FileInputStream fis &#x3D; new FileInputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;serial.dat&quot;);</span><br><span class="line">        ObjectInputStream ois &#x3D; new ObjectInputStream(fis)) &#123;</span><br><span class="line">            Person p1 &#x3D; (Person) ois.readObject();</span><br><span class="line">            Person p2 &#x3D; (Person) ois.readObject();</span><br><span class="line"></span><br><span class="line">            System.out.println(p1);</span><br><span class="line">            System.out.println(p2);</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -1443,6 +1459,61 @@ public String apply(String s1, String s2) {
       </categories>
   </entry>
   <entry>
+    <title>01. 스프링 학습 전 필요지식</title>
+    <url>/2020/08/12/hexo_spring_project_1/</url>
+    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="01-스프링-학습-전-필요지식"><a href="#01-스프링-학습-전-필요지식" class="headerlink" title="01. 스프링 학습 전 필요지식"></a>01. 스프링 학습 전 필요지식</h4><ul>
+<li>maven  </li>
+</ul>
+<p>build를 담당하는 maven &amp; gradle<br>mvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.<br>다운받은 jar파일들은 User Home 디렉토리의 .m2/repository에 보관된다.<br>설정 파일<br>maven : pom.xml<br>gradle : build.gradle<br>컴파일하면 target으로 실행가능하도록 생성됨  </p>
+<ul>
+<li>logback (slf4j) </li>
+</ul>
+<p>level이 내려갈수록 log 범위가 작아짐<br>logging을 담당하는 logback<br>.trace<br>.debug<br>.info<br>.warn<br>.error  </p>
+<p>logback에 대한 설정은 src/main/resources에 logback.xml(spring-boot에서는 logback-spring.xml)을 생성하여 할 수 있다.<br>ex) logback.xml</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;appender name&#x3D;&quot;STDOUT&quot; class&#x3D;&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;%-5level %logger&#123;36&#125; - %msg%n&lt;&#x2F;pattern&gt;</span><br><span class="line">        &lt;&#x2F;encoder&gt;</span><br><span class="line">    &lt;&#x2F;appender&gt;</span><br><span class="line"></span><br><span class="line">    &lt;root level&#x3D;&quot;trace&quot;&gt;</span><br><span class="line">        &lt;appender-ref ref&#x3D;&quot;STDOUT&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;root&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DB(h2)  </li>
+</ul>
+<p>설치</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install h2</span><br></pre></td></tr></table></figure>
+<p>실행 (브라우저에서 h2-console로 연결된다)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h2</span><br></pre></td></tr></table></figure>
+
+<p>JDBC API는 java.sql과 javax.sql이 있는데 각각 JAVA SE와 EE에 호환된다.  </p>
+<p>연결, 테이블생성, 조회</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static Logger logger &#x3D; LoggerFactory.getLogger(Main.class);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        logger.info(&quot;Hello World&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;Connection, Statement, ResultSet은 java.sql에 있는 구현체이다.</span><br><span class="line">        Connection connection &#x3D; null;</span><br><span class="line">        Statement statement &#x3D; null;</span><br><span class="line">        try &#123;</span><br><span class="line">            Class.forName(&quot;org.h2.Driver&quot;);</span><br><span class="line">            String url &#x3D; &quot;jdbc:h2:mem:test;MODE&#x3D;MySQL;&quot;;</span><br><span class="line">            connection &#x3D; DriverManager.getConnection(url, &quot;sa&quot;, &quot;&quot;);</span><br><span class="line">            statement &#x3D; connection.createStatement();</span><br><span class="line"></span><br><span class="line">            connection.setAutoCommit(false);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;테이블 생성</span><br><span class="line">            statement.execute(&quot;create table member(&quot; +</span><br><span class="line">                    &quot;id int auto_increment, &quot; +</span><br><span class="line">                    &quot;username varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;password varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;primary key(id))&quot;);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;데이터 insert</span><br><span class="line">            statement.executeUpdate(&quot;insert into member(username, password)&quot; +</span><br><span class="line">                    &quot;values(&#39;jilee&#39;,&#39;1234&#39;)&quot;);</span><br><span class="line"></span><br><span class="line">            ResultSet resultSet &#x3D; statement.executeQuery(&quot;select * from member&quot;);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F;select 결과는 ResultSet에 저장되며</span><br><span class="line">            &#x2F;&#x2F;ResultSet.next()는 커서를 레코드 단위로 리턴한 뒤 마지막에는 false를 리턴한다. </span><br><span class="line">            while (resultSet.next()) &#123;</span><br><span class="line">                int id &#x3D; resultSet.getInt(&quot;id&quot;);</span><br><span class="line">                String username &#x3D; resultSet.getString(&quot;username&quot;);</span><br><span class="line">                String password &#x3D; resultSet.getString(&quot;password&quot;);</span><br><span class="line"></span><br><span class="line">                logger.info(id + username + password);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.commit();</span><br><span class="line"></span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;사용한 자원 정리 단계</span><br><span class="line">        &#125; finally &#123; </span><br><span class="line">            try &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125; catch (SQLException throwables) &#123;</span><br><span class="line">                throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125; catch (SQLException throwables) &#123;</span><br><span class="line">                    throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>리팩토링 후<br>var 사용 / try with resource 사용 / Member 모델 사용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static Logger logger &#x3D; LoggerFactory.getLogger(Main.class);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">        logger.info(&quot;Hello World&quot;);</span><br><span class="line"></span><br><span class="line">        Class.forName(&quot;org.h2.Driver&quot;);</span><br><span class="line">        var url &#x3D; &quot;jdbc:h2:mem:test;MODE&#x3D;MySQL;&quot;;</span><br><span class="line"></span><br><span class="line">        try(var connection &#x3D; DriverManager.getConnection(url, &quot;sa&quot;, &quot;&quot;);</span><br><span class="line">            var statement &#x3D; connection.createStatement();)</span><br><span class="line">        &#123;</span><br><span class="line">            connection.setAutoCommit(false);</span><br><span class="line">            statement.execute(&quot;create table member(&quot; +</span><br><span class="line">                    &quot;id int auto_increment, &quot; +</span><br><span class="line">                    &quot;username varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;password varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;primary key(id))&quot;);</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                statement.executeUpdate(&quot;insert into member(username, password)&quot; +</span><br><span class="line">                        &quot;values(&#39;jilee&#39;,&#39;1234&#39;)&quot;);</span><br><span class="line">                connection.commit();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            var resultSet &#x3D; statement.executeQuery(&quot;select * from member&quot;);</span><br><span class="line">            while (resultSet.next()) &#123;</span><br><span class="line">                var member &#x3D; new Member(resultSet);</span><br><span class="line">                logger.info(member.toString());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Lombok  </li>
+</ul>
+<p>코드의 가독성을 위하여 사용한다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Getter</span><br><span class="line">@Setter</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@RequiredArgsConstructor</span><br><span class="line">public class Member &#123;</span><br><span class="line"></span><br><span class="line">    private int id;</span><br><span class="line">    @NonNull private String userName;</span><br><span class="line">    @NonNull private String password;</span><br><span class="line"></span><br><span class="line">    public Member(ResultSet resultSet) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            this.id &#x3D; resultSet.getInt(&quot;id&quot;);</span><br><span class="line">            this.userName &#x3D; resultSet.getString(&quot;username&quot;);</span><br><span class="line">            this.password &#x3D; resultSet.getString(&quot;password&quot;);</span><br><span class="line">        &#125; catch (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>servlet  </li>
+</ul>
+<p>EE 버전의 스팩을 구현한 servlet 서버로는 tomcat / jeus / oracle weblogic 등이 있다.  </p>
+<p>EE 사용을 위한 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.0.1&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>WAR 설정 추가</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;groupId&gt;com.mycompany.app&lt;&#x2F;groupId&gt;</span><br><span class="line">&lt;artifactId&gt;my-app&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;version&gt;1.0-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">&lt;packaging&gt;war&lt;&#x2F;packaging&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>77. Multi-thread 프로그래밍</title>
     <url>/2020/08/12/hexo_OOP_77/</url>
     <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="77-Multi-thread-프로그래밍"><a href="#77-Multi-thread-프로그래밍" class="headerlink" title="77. Multi-thread 프로그래밍"></a>77. Multi-thread 프로그래밍</h4><ul>
@@ -1475,25 +1546,170 @@ public String apply(String s1, String s2) {
       </categories>
   </entry>
   <entry>
-    <title>34. 추상 클래스 응용, 템플릿 메서드</title>
-    <url>/2020/08/12/hexo_OOP_34/</url>
-    <content><![CDATA[<h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="34-추상-클래스-응용-템플릿-메서드"><a href="#34-추상-클래스-응용-템플릿-메서드" class="headerlink" title="34. 추상 클래스 응용: 템플릿 메서드"></a>34. 추상 클래스 응용: 템플릿 메서드</h4><p>템플릿 : 틀이나 견본<br>템플릿 메서드 : 추상 메서드나 구현된 메서드를 활용하여 전체의 흐름을 정의 해 놓은 메서드<br>            final로 선언하여 재정의할 수 없게함<br>템플릿 메서드 패턴 : 디자인 패턴의 일종<br>프레임 워크에서 많이 사용되는 설계 패턴<br>추상 클래스로 선언된 상의 클래스에서 추상 메서드를 이용하여 전체 구현의 흐름을 정의하고<br>구체적인 각 메서드 구현은 하위 클래스에 위임함<br>하위 클래스가 어떤 구현을 하든 템플릿 메서드에 정의된 시나리오 대로 수행됨   </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public abstract class Car &#123;</span><br><span class="line"></span><br><span class="line">    public abstract void drive();</span><br><span class="line">    public abstract void stop();</span><br><span class="line"></span><br><span class="line">    public void startCar() &#123;</span><br><span class="line">        System.out.println(&quot;시동을 켭니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    public void turnOff() &#123;</span><br><span class="line">        System.out.println(&quot;시동을 끕니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void washCar() &#123;&#125;; &#x2F;&#x2F;훅메서드, 하위 클래스에서 재정의 용으로 생성</span><br><span class="line"></span><br><span class="line">    final public void run() &#123; &#x2F;&#x2F;템플릿 메서드, 재정의 할 수 없도록 final 키워드 사용</span><br><span class="line">                              &#x2F;&#x2F;시나리오가 정의되어있다.</span><br><span class="line">        startCar();</span><br><span class="line">        drive();</span><br><span class="line">        stop();</span><br><span class="line">        turnOff();</span><br><span class="line">        washCar();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public class AICar extends Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void drive() &#123;</span><br><span class="line">        System.out.println(&quot;자율 주행합니다.&quot;);</span><br><span class="line">        System.out.println(&quot;자동차가 스스로 방향을 바꿉니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void stop() &#123;</span><br><span class="line">        System.out.println(&quot;스스로 멈춥니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void washCar() &#123; &#x2F;&#x2F;훅메서드 재정의</span><br><span class="line">        System.out.println(&quot;자동 세차 합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public class ManualCar extends Car &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void drive() &#123;</span><br><span class="line">        System.out.println(&quot;사람이 운전합니다.&quot;);</span><br><span class="line">        System.out.println(&quot;사람이 핸들을 조작합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void stop() &#123;</span><br><span class="line">        System.out.println(&quot;브레이크를 밟아서 정지합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package template;</span><br><span class="line"></span><br><span class="line">public class CarTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Car aicar &#x3D; new AICar();</span><br><span class="line">        aicar.run();</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line"></span><br><span class="line">        Car manualcar &#x3D; new ManualCar();</span><br><span class="line">        manualcar.run();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    <title>02. IoC (Inversion of Control)</title>
+    <url>/2020/08/12/hexo_spring_project_2/</url>
+    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="02-IoC-Inversion-of-Control"><a href="#02-IoC-Inversion-of-Control" class="headerlink" title="02. IoC (Inversion of Control)"></a>02. IoC (Inversion of Control)</h4><p>Spring의 대표적인 특징 중 하나.</p>
+<p>어떤 객체가 사용하는 의존 객체를 직접 만들어서 사용하는게 아니라, 주입(DI)받아서 사용하는 것.  </p>
+<p>Spring IoC Container<br> : 애플리케이션 컴포넌트의 중앙 저장소.</p>
+<p>ApplicationContext<br> : IoC 컨테이너의 핵심적인 인터페이스.<br> IoC 컨테이너의 최상위 인터페이스인 BeanFactory를 상속받아 여러 기능이 추가됨.</p>
 <ul>
-<li>final 예약어<br>final 변수 : 변경될 수 없는 상수<br>final 메서드 : 하위 클래스에서 재정의 할 수 없음<br>final 클래스 : 더 이상 상속될 수 없음  </li>
+<li><p>메시지 소스 처리 (i18n)  </p>
+</li>
+<li><p>이벤트 발행</p>
+</li>
+<li><p>리소스 로딩  </p>
+<p>IoC 컨테이너에 객체를 생성하고 생성된 객체들(Bean)의 의존성을 관리해준다.<br>이해만 해둘뿐, 딱히 이 인터페이스에 대해 직접 보거나 사용할 일은 없는 듯.<br>ClassPathXmlApplicationContext : XML 설정 파일 사용<br>AnnotationConfigApplicationContext : 자바 설정 파일 사용 (@Configuration)</p>
+</li>
+</ul>
+<p>Bean<br> : Spring IoC 컨테이너가 관리하는 객체.<br>Class를 Bean으로 등록하려면 Component Scan을 사용하거나<br>또는 직접 XML이나 자바 설정 파일(@Configuration)에 등록해야 한다.  </p>
+<p>IoC 컨테이너에 등록되는 Bean들의 특징</p>
+<ul>
+<li>의존성 관리, 특히 테스트에서 가짜 객체(@Mock)를 활용한 단위테스트에 용이하다.</li>
+<li>스코프 : 기본적으로 싱글톤 스코프로 등록이된다. (or 프로토타입)<br>싱글톤 스코프로 등록되는 클래스는 애플리케이션이 구동되는 초기에 Bean으로 생성된다.  </li>
+<li>라이프사이클 인터페이스</li>
+</ul>
+<p>Component Scanning<br> : Annotation 처리 프로세서 역할을 하는 @ComponentScan에 의하여<br> 모든 @Component Annotation이 붙은 Class들을 Bean으로 등록한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">    @Repository</span><br><span class="line">    @Service</span><br><span class="line">    @Controller</span><br></pre></td></tr></table></figure>
+
+<p>참고로 @ComponentScan은 기본적으로 이 어노테이션이 붙은 클래스가 위치한 곳 부터 Component Scanning을 실시한다.<br>또는 특정 위치에서 부터 Scanning을 하도록 설정할수도 있고 Filter 옵션을 통해 어떤 클래스를 스캔할 지 또는 하지 않을 지 정할 수도 있다.   </p>
+<p>직접 등록하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class Config() &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public String test() &#123;</span><br><span class="line">        return &quot;test&quot;;</span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">    @Bean</span><br><span class="line">    public BookRepository bookRepository() &#123;</span><br><span class="line">        return new BookRepository();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public BookService bookService &#123;</span><br><span class="line">        return new BookService(bookRespsitory());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>function을 이용한 직접 등록</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    new SpringApplicationBuilder()</span><br><span class="line">        .sources(Demospring51Application.class)</span><br><span class="line">        .initializers((ApplicationContextInitializer&lt;GenericApplicationContext&gt;)</span><br><span class="line">            applicationContext -&gt; &#123;</span><br><span class="line">                applicationContext.registerBean(MyBean.class);</span><br><span class="line">            &#125;)</span><br><span class="line">        .run(args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이 방법은 리플랙션이나 프록시를 사용하지 않기 때문에 애플리케이션 구동 시 성능상의 이점이 있다지만..<br>ComponentScan을 대체하기에는 쓰기 불편해서 좋은 방법은 아닌 것 같다. </p>
+<p>Bean을 꺼내어 쓰는 방법<br> : @Autowired 또는 @Inject 또는 ApplicationContext.getBean()으로 직접 꺼내기<br>Bean으로 등록된 Class만 Bean을 꺼내어 쓸 수 있다.</p>
+<p>의존성 주입(Dependency Injection)<br> : @Autowired 또는 @Inject를 사용하는데,<br> 예외로 생성자가 오직 하나이면서 Bean을 파라미터로 받는다면 @Autowired를 생략하고도 DI를 자동으로 해준다.<br> @Autowired/@Inject를 붙인다면 생성자/필드/Setter에 붙이게 된다.</p>
+<p>###@Autowired에 대하여…<br>어노테이션을 setter에 달려있고 의존성의 Bean이 없을 때,<br>setter임에도 불구하고 생각과 달리 다른 경우와 마찬가지로 객체생성이 불가능할 수 있는데<br>Spring이 해당 의존성을 위해 Bean을 찾기 때문이다.<br>이를 피하기 위해서는 @Autowired(required = false)로 설정하여 의존성 주입이 안된 상태로 생성할 수 있다.<br>필드에 어노테이션을 다는 경우도 비슷함.  </p>
+<p>그리고 의존성 타입의 Bean이 여러가지 일 경우에 객체생성이 안될 수 있는데,<br>이때는 주입받으려는 Bean을 @Primary로 마킹하거나,</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Repository @Primary</span><br><span class="line">public class PrimaryBookRepository implements BookRepository &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>해당 타입의 모든 Bean을 주입 받거나</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">List&lt;BookRepository&gt; bookrepositories;</span><br></pre></td></tr></table></figure>
+<p>@Qualifier(“beanName”)으로 특정 Bean을 주입받는다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired @Qualifier(&quot;sampleBookRepository&quot;)</span><br><span class="line">BookRepository bookrepository;</span><br></pre></td></tr></table></figure>
+
+<p>BeanPostProcessor<br> : 빈 라이프 사이클 인터페이스이다.<br> 빈 인스턴스의 생성 전후에 부가적인 작업을 할 수 있다.<br> 특히, AutowiredAnnotationBeanPostProcessor의 postProcessorBeforeInitialization 메서드로 인해<br> 빈 인스턴스 생성 전에 @Autowired 어노테이션을 처리한다.</p>
+<p>BeanFactoryPostProcessor<br> : 다른 모든 Bean들을 만들기 이전에 수행된다.<br> 특히, BeanFactoryPostProcessor를 구현한 ConfigurationClassPostProcessor는 @ComponentScan 어노테이션을 처리한다.  </p>
+<p>###빈의 스코프에 대하여…<br>빈의 스코프는 기본적으로 싱글톤이고, 그 외에 프로토타입이 있다.<br>프로토타입</p>
+<ul>
+<li>Request</li>
+<li>Session</li>
+<li>WebSocket</li>
+<li>…  </li>
+</ul>
+<p>@Component @Scope(“prototype”)<br>위의 어노테이션처리된 Bean은 받아 올 때마다 새로운 인스턴스가 생성된다.  </p>
+<p>참고로 프로토타입 빈이 싱글톤 빈을 의존하는 것은 문제없지만,<br>싱글톤 빈이 의존하는 프로토타입 빈은 의도한 것처럼 새로운 인스턴스가 생성되지 않는다는 문제가 있다.<br>이 문제를 해결하는 방법으로</p>
+<ul>
+<li>Proxy mode<br>프로토타입 빈을 Proxy 빈으로 감싸서 다른 빈이 이 프로토타입 빈을 참조할 때 Proxy를 거쳐서 참조하도록<br>이때, Proxy 빈은 해당 프로토타입 빈을 상속하며, 참조하는 빈은 Proxy 빈을 참조한다. <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##for class</span><br><span class="line">@Component @Scope(value &#x3D; &quot;prototype&quot;, proxyMode &#x3D; ScopedProxyMode.TARGET_CLASS)</span><br><span class="line">##for interface</span><br><span class="line">@Component @Scope(value &#x3D; &quot;prototype&quot;, proxyMode &#x3D; ScopedProxyMode.INTERFACES)</span><br></pre></td></tr></table></figure></li>
+<li>Object-Provider<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectProvider&lt;Proto&gt; proto;</span><br></pre></td></tr></table></figure></li>
+<li>Provider</li>
+</ul>
+<p>###ApplicationContext의 기능 Environment…<br>EnvironmentCapable<br> : 프로파일과 프로퍼티를 다루는 인터페이스이다.  </p>
+<p>프로파일<br> : 빈들의 그룹, Environment가 활성화할 프로파일을 확인하고 설정한다.<br> 환경에따라 사용할 빈을 구분할 때 사용된다. (ex 프로덕션에서는 A 빈, 테스트환경에서는 B 빈을 사용)</p>
+<p>프로파일 정의하기</p>
+<ul>
+<li><p>클래스에 정의<br>test 프로파일로 애플리케이션을 실행할 때 사용될 Java Configuration</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration @Profile(&quot;test&quot;)</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">proc 프로파일이 아닌 애플리케이션을 실행할 때 사용될 Component</span><br></pre></td></tr></table></figure>
+<p>@Component @Profile(“!proc”)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- Bean 생성 메서드에 정의</span><br></pre></td></tr></table></figure>
+<p>@Bean @Profile(“test”)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Profile에는 표현식으로 !(not), &amp;(and), |(or) 가능.</span><br><span class="line"></span><br><span class="line">프로파일 지정하기</span><br><span class="line"> - JVM 시스템 프로퍼티 [-Dspring.profiles.avtive&#x3D;”test,A,B,...”]</span><br><span class="line">  &#x3D;&#x3D; intelliJ의 Run&#x2F;Debug Configuration의 Active profiles </span><br><span class="line"> </span><br><span class="line"> - @ActiveProfiles (테스트용)</span><br><span class="line"></span><br><span class="line">프로퍼티</span><br><span class="line"> : 다양한 방법으로 정의할 수 있는 설정 값, Environment가 프로퍼티 소스를 설정하고 프로퍼티 값을 가져온다.  </span><br><span class="line"> 프로퍼티는 우선순위가 있다.(계층형이다.)</span><br><span class="line"> 1.ServletConfig</span><br><span class="line"> 1.ServletContext</span><br><span class="line"> 1.JNDI (java:comp&#x2F;env&#x2F;)</span><br><span class="line"> 1.JVM 시스템 프로퍼티 (-Dkey&#x3D;&quot;value&quot;)</span><br><span class="line"> 1.JVM 시스템 환경 변수 (OS 환경 변수)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Environment를 통해 프로퍼티 추가하기</span><br></pre></td></tr></table></figure>
+<p>@PropertySource(“classpath:/app.properties”)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">app.properties 파일을 참조한다.</span><br><span class="line">참고로 스프링부트에서는 application.properties라는 기본 프로퍼티 소스를 지원한다.  </span><br><span class="line"></span><br><span class="line">###ApplicationContext의 기능 MessageSource...</span><br><span class="line">MessageSource</span><br><span class="line"> : i18n(국제화) 기능을 제공하는 인터페이스이다.  </span><br><span class="line"> </span><br><span class="line">MessageSource의 getMessage로 참조할 수 있다.</span><br><span class="line">Locale에 따라서 다른 메세지를 보여준다.</span><br></pre></td></tr></table></figure>
+<p> @Autowired<br> MessageSource messageSource;</p>
+<p> public void run() {</p>
+<pre><code>System.out.println(messageSource.getMessage(&quot;code1&quot;), Locale.KOREA);</code></pre><p> }</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line">스프링부트에서는 messages로 시작하는 소스들을 자동으로 참조한다.</span><br><span class="line">messages.properties</span><br><span class="line">messages_ko_KR.properties</span><br><span class="line"></span><br><span class="line">리로딩 기능이 있는 메시지 소스를 @Bean으로 직접 만들어서 참조</span><br></pre></td></tr></table></figure>
+<p> @Bean<br> public MessageSource messageSource() {</p>
+<pre><code>var messageSource = new ReloadableResourceBundleMessageSource();
+messageSource.setBasename(&quot;classpath:/messages&quot;);
+messageSource.setDefaultEncoding(&quot;UTF-8&quot;);
+return messageSource;</code></pre><p> }</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">###ApplicationContext의 기능 ApplicationEventPublisher...  </span><br><span class="line">ApplicationEventPublisher</span><br><span class="line"> : 이벤트 프로그래밍에 필요한 인터페이스. 옵저버 패턴의 구현체이다.  </span><br><span class="line"> </span><br><span class="line">spring 4.2 전에는  </span><br><span class="line">이벤트 만들기</span><br><span class="line">ApplicationEvent Class를 상속받아야 한다.</span><br></pre></td></tr></table></figure>
+<p>public class MyEvent extends ApplicationEvent {<br> public MyEvent(Object source) {</p>
+<pre><code>super(source);</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br><span class="line">ApplicationListener&lt;이벤트&gt; 인터페이스를 구현하고 빈으로 등록되어야 한다.</span><br></pre></td></tr></table></figure>
+<p>@Component<br>public class MyEventHandler implements ApplicationListener<MyEvent> {<br> @Override<br> public void onApplicationEvent(MyEvent event) {</p>
+<pre><code>System.out.println(&quot;이벤트 확인&quot;);</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">spring 4.2 부터는 이벤트나 이벤트 핸들러 생성에서 상속&#x2F;구현이 빠지고 어노테이션으로 처리한다.</span><br><span class="line">이벤트 만들기</span><br></pre></td></tr></table></figure>
+<p>public class MyEvent {<br> private Object source;</p>
+<p> public MyEvent(Object source) {</p>
+<pre><code>this.source = source;</code></pre><p> }</p>
+<p> public Object getSource() {</p>
+<pre><code>return source;</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br></pre></td></tr></table></figure>
+<p>@Component<br>public class MyEventHandler {</p>
+<p> @EventListener<br> public void handle(MyEvent event) {</p>
+<pre><code>System.out.println(&quot;이벤트 확인&quot;);</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 발생시키기</span><br></pre></td></tr></table></figure>
+<p> ApplicationEventPublisher.publishEvent(new MyEvent(this));</p>
+<pre><code></code></pre></li>
+</ul>
+<p>만약 이벤트 핸들러가 여러개라면, Spring은 기본적으로 이벤트를 여러 핸들러로 순차적으로 처리하게 된다.<br>이때, 순서를 정하고 싶다면 핸들러에 @Order 어노테이션을 사용한다.<br>또는 비동기적(여러 쓰레드)으로 처리하고 싶다면 @Async 사용한다. (Java Configuration File에서는 @EnableAsync 필요)  </p>
+<p>Spring에서 제공하는 기본 이벤트</p>
+<ul>
+<li>ContextRefreshedEvent</li>
+<li>ContextStartedEvent</li>
+<li>ContextStoppedEvent</li>
+<li>ContextClosedEvent</li>
+<li>RequestHandledEvent</li>
 </ul>
 ]]></content>
       <categories>
         <category>Study</category>
-        <category>JAVA OOP</category>
+        <category>Spring Framework</category>
       </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03. AOP (Aspect Oriented Programming)</title>
+    <url>/2020/08/12/hexo_spring_project_3/</url>
+    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="03-AOP-Aspect-Oriented-Programming"><a href="#03-AOP-Aspect-Oriented-Programming" class="headerlink" title="03. AOP (Aspect Oriented Programming)"></a>03. AOP (Aspect Oriented Programming)</h4><p>AOP의 핵심은 흩어진 코드(여러 곳에서 반복되는 코드)를 한 곳으로 모으는 것.</p>
+<p>대표적으로 @Transactional 어노테이션이 있는데,<br>트랜잭션 처리(트랜잭션 시작, 커밋/롤백)에 대한 동일한 부분을 어노테이션 하나로 처리한다.<br>참고로 JPA Repository의 모든 메서드에는 @Transactional이 생략되어 적용되어있다.  </p>
+<p>AOP 직접 활용하기<br>Annotation 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD) &#x2F;&#x2F; 이 어노테이션은 메서드에 붙일것.  </span><br><span class="line">@Retention(RetentionPolicy.RUNTIME) &#x2F;&#x2F; 코드의 유지기간  </span><br><span class="line">public interface LogExecutionTime &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>실제 Aspect 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Aspect는 Bean이어야 한다.</span><br><span class="line">@Aspect</span><br><span class="line">public class LogAspect &#123;</span><br><span class="line">	Logger logger &#x3D; LoggerFactory.getLogger(LogAspect.class);</span><br><span class="line"></span><br><span class="line">	@Around(&quot;@annotation(LogExecutionTime)&quot;)</span><br><span class="line">	public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable &#123;</span><br><span class="line">		StopWatch stopWatch &#x3D; new StopWatch();</span><br><span class="line">		stopWatch.start();</span><br><span class="line"></span><br><span class="line">		Object proceed &#x3D; joinPoint.proceed();</span><br><span class="line"></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		logger.info(stopWatch.prettyPrint());</span><br><span class="line"></span><br><span class="line">		return proceed;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Annotation 달기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@LogExecutionTime</span><br><span class="line">@GetMapping(&quot;&#x2F;owners&#x2F;find&quot;)</span><br><span class="line">public String initFindForm(Map&lt;String, Object&gt; model) &#123;</span><br><span class="line">	model.put(&quot;owner&quot;, new Owner());</span><br><span class="line">	return &quot;owners&#x2F;findOwners&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>결과적으로, AOP를 통하여 하나의 클래스(Aspect)로<br>Annotation이 달려있는 모든 메서드는 수행 시간이 계산된다.  </p>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>03. PSA (Portable Service Abstraction)</title>
+    <url>/2020/08/12/hexo_spring_project_4/</url>
+    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="03-PSA-Portable-Service-Abstraction"><a href="#03-PSA-Portable-Service-Abstraction" class="headerlink" title="03. PSA (Portable Service Abstraction)"></a>03. PSA (Portable Service Abstraction)</h4><p>이미 잘 만들어진 인터페이스를 사용하는 것.<br>확장성이 좋지 못한 코드 또는 기술에 특화되어 있는 코드에 사용하면 좋다.</p>
+<p>Spring Framework이 제공하는 API는 대부분이 추상화되어있다.  </p>
+<hr>
+<p>####추상화 예제</p>
+<ul>
+<li><p>스프링 트랜잭션<br>@Transactional 어노테이션의 Aspect는 PlatformTransactionManager 인터페이스를 사용하여 코딩되어 있는데,<br>그렇기 때문에 PlatformTransactionManager에 대한 구현체<br>(JpaTransactionManager, DatasourceTransactionManager, HibernateTransactionManager 등)가 바뀌더라도<br>@Transactional Aspect의 코드가 변경될 필요가 없다.  </p>
+</li>
+<li><p>스프링 캐시<br>@Cacheable / @CacheEvict 등 스프링 캐시 관련 어노테이션의 Aspect는<br>CacheManager 인터페이스를 사용하여 코딩되어있으며,<br>위와 동일하게 구현체가 바뀌더라도 Aspect 코드는 변경될 필요가 없다.</p>
+</li>
+<li><p>스프링 웹 MVC<br>@Controller / @RequestMapping 등 스프링 웹 MVC 관련 어노테이션은<br>의존성에 따라 Servlet을 사용할 수도 있고 Reactive를 사용할 수도 있다.<br>고로, 해당 어노테이션을 사용한 나의 코드는 변경하기 쉽거나 변경되지 않아도 된다.  </p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
   </entry>
   <entry>
     <title>01. What, How, Hello world</title>
@@ -2436,261 +2652,6 @@ public void getRestaurantWithNotExisted() {
       </tags>
   </entry>
   <entry>
-    <title>62. API 한번에 실행하기</title>
-    <url>/2020/08/12/hexo_springboot_1_62/</url>
-    <content><![CDATA[<h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="62-API-한번에-실행하기"><a href="#62-API-한번에-실행하기" class="headerlink" title="62. API 한번에 실행하기"></a>62. API 한번에 실행하기</h4><p>MySQL DB를 사용할것임<br>Container 기술을 활용하여 하나의 컴퓨터에서 가상화된 여러 개의 Container를 올려 여러 서버를 동시에 실행 (Docker)<br>Docker Compose를 활용  </p>
-<p>build.gradle 의존성 추가</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">~</span><br><span class="line">	implementation &#39;mysql:mysql-connector-java&#39;</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
-
-<p>application.yml datasource 추가</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  profiles: mysql</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql:&#x2F;&#x2F;$&#123;MYSQL_HOST&#125;:3306&#x2F;$&#123;MYSQL_DATABASE&#125;</span><br><span class="line">    username: $&#123;MYSQL_USER&#125;</span><br><span class="line">    password: $&#123;MYSQL_PASSWORD&#125;</span><br></pre></td></tr></table></figure>
-
-<p>docker-compose.yml 생성<br>각 서비스 등록  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">version: &#39;3&#39;</span><br><span class="line">services:</span><br><span class="line">  mysql:</span><br><span class="line">    image: mariadb:10.4.7</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;data&#x2F;mariadb:&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">    ports:</span><br><span class="line">      - 13306:3306</span><br><span class="line">    command: |</span><br><span class="line">      --character-set-server&#x3D;utf8mb4</span><br><span class="line">      --collation-server&#x3D;utf8mb4_unicode_ci</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: [&quot;CMD&quot;, &quot;mysqladmin&quot; ,&quot;ping&quot;, &quot;-h&quot;, &quot;localhost&quot;]</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  login-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-login-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8001:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  admin-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-admin-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8002:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  customer-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-customer-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8003:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  restaurant-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-restaurant-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8004:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  admin-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-admin-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8082:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8002</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  customer-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-customer-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8083:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8003</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  restaurant-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-restaurant-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8084:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8004</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br></pre></td></tr></table></figure>
-
-<p>DB 및 API 서비스 실행시 적용되는 환경설정 파일(.env)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MYSQL_ROOT_PASSWORD&#x3D;password</span><br><span class="line">MYSQL_USER&#x3D;root</span><br><span class="line">MYSQL_PASSWORD&#x3D;password</span><br><span class="line">MYSQL_DATABASE&#x3D;eatgo</span><br><span class="line">MYSQL_HOST&#x3D;mysql</span><br><span class="line"></span><br><span class="line">SPRING_PROFILES_ACTIVE&#x3D;mysql</span><br></pre></td></tr></table></figure>
-
-<p>각 API 서비스에서 jar파일을 실행할 run.sh</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">until java -jar libs&#x2F;*.jar</span><br><span class="line">do</span><br><span class="line">  printf &quot;******************************************************************&quot;</span><br><span class="line">  sleep 5</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
-
-<p>docker-compose를 통하여 묶어서 단계적으로 실행</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker-compose up</span></span><br></pre></td></tr></table></figure>
-
-<p>Docker Container list 확인</p>
-<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker-compose ps</span></span><br><span class="line">         Name                       Command                State     Ports</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">eatgo_admin-api_1        bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_admin-web_1        docker-entrypoint.sh bash  ...   Exit 0          </span><br><span class="line">eatgo_customer-api_1     bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_customer-web_1     docker-entrypoint.sh bash  ...   Exit 0          </span><br><span class="line">eatgo_login-api_1        bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_mysql_1            docker-entrypoint.sh --cha ...   Exit 0          </span><br><span class="line">eatgo_restaurant-api_1   bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_restaurant-web_1   docker-entrypoint.sh bash  ...   Exit 0</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Spring Boot Project</category>
-      </categories>
-      <tags>
-        <tag>spring boot</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>01. 스프링 학습 전 필요지식</title>
-    <url>/2020/08/12/hexo_spring_project_1/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="01-스프링-학습-전-필요지식"><a href="#01-스프링-학습-전-필요지식" class="headerlink" title="01. 스프링 학습 전 필요지식"></a>01. 스프링 학습 전 필요지식</h4><ul>
-<li>maven  </li>
-</ul>
-<p>build를 담당하는 maven &amp; gradle<br>mvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.<br>다운받은 jar파일들은 User Home 디렉토리의 .m2/repository에 보관된다.<br>설정 파일<br>maven : pom.xml<br>gradle : build.gradle<br>컴파일하면 target으로 실행가능하도록 생성됨  </p>
-<ul>
-<li>logback (slf4j) </li>
-</ul>
-<p>level이 내려갈수록 log 범위가 작아짐<br>logging을 담당하는 logback<br>.trace<br>.debug<br>.info<br>.warn<br>.error  </p>
-<p>logback에 대한 설정은 src/main/resources에 logback.xml(spring-boot에서는 logback-spring.xml)을 생성하여 할 수 있다.<br>ex) logback.xml</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;appender name&#x3D;&quot;STDOUT&quot; class&#x3D;&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;%-5level %logger&#123;36&#125; - %msg%n&lt;&#x2F;pattern&gt;</span><br><span class="line">        &lt;&#x2F;encoder&gt;</span><br><span class="line">    &lt;&#x2F;appender&gt;</span><br><span class="line"></span><br><span class="line">    &lt;root level&#x3D;&quot;trace&quot;&gt;</span><br><span class="line">        &lt;appender-ref ref&#x3D;&quot;STDOUT&quot; &#x2F;&gt;</span><br><span class="line">    &lt;&#x2F;root&gt;</span><br><span class="line">&lt;&#x2F;configuration&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>DB(h2)  </li>
-</ul>
-<p>설치</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">brew install h2</span><br></pre></td></tr></table></figure>
-<p>실행 (브라우저에서 h2-console로 연결된다)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">h2</span><br></pre></td></tr></table></figure>
-
-<p>JDBC API는 java.sql과 javax.sql이 있는데 각각 JAVA SE와 EE에 호환된다.  </p>
-<p>연결, 테이블생성, 조회</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static Logger logger &#x3D; LoggerFactory.getLogger(Main.class);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        logger.info(&quot;Hello World&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;Connection, Statement, ResultSet은 java.sql에 있는 구현체이다.</span><br><span class="line">        Connection connection &#x3D; null;</span><br><span class="line">        Statement statement &#x3D; null;</span><br><span class="line">        try &#123;</span><br><span class="line">            Class.forName(&quot;org.h2.Driver&quot;);</span><br><span class="line">            String url &#x3D; &quot;jdbc:h2:mem:test;MODE&#x3D;MySQL;&quot;;</span><br><span class="line">            connection &#x3D; DriverManager.getConnection(url, &quot;sa&quot;, &quot;&quot;);</span><br><span class="line">            statement &#x3D; connection.createStatement();</span><br><span class="line"></span><br><span class="line">            connection.setAutoCommit(false);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;테이블 생성</span><br><span class="line">            statement.execute(&quot;create table member(&quot; +</span><br><span class="line">                    &quot;id int auto_increment, &quot; +</span><br><span class="line">                    &quot;username varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;password varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;primary key(id))&quot;);</span><br><span class="line"></span><br><span class="line">            &#x2F;&#x2F;데이터 insert</span><br><span class="line">            statement.executeUpdate(&quot;insert into member(username, password)&quot; +</span><br><span class="line">                    &quot;values(&#39;jilee&#39;,&#39;1234&#39;)&quot;);</span><br><span class="line"></span><br><span class="line">            ResultSet resultSet &#x3D; statement.executeQuery(&quot;select * from member&quot;);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F;select 결과는 ResultSet에 저장되며</span><br><span class="line">            &#x2F;&#x2F;ResultSet.next()는 커서를 레코드 단위로 리턴한 뒤 마지막에는 false를 리턴한다. </span><br><span class="line">            while (resultSet.next()) &#123;</span><br><span class="line">                int id &#x3D; resultSet.getInt(&quot;id&quot;);</span><br><span class="line">                String username &#x3D; resultSet.getString(&quot;username&quot;);</span><br><span class="line">                String password &#x3D; resultSet.getString(&quot;password&quot;);</span><br><span class="line"></span><br><span class="line">                logger.info(id + username + password);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            connection.commit();</span><br><span class="line"></span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; catch (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;사용한 자원 정리 단계</span><br><span class="line">        &#125; finally &#123; </span><br><span class="line">            try &#123;</span><br><span class="line">                statement.close();</span><br><span class="line">            &#125; catch (SQLException throwables) &#123;</span><br><span class="line">                throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            try &#123;</span><br><span class="line">                connection.close();</span><br><span class="line">            &#125; catch (SQLException throwables) &#123;</span><br><span class="line">                    throwables.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>리팩토링 후<br>var 사용 / try with resource 사용 / Member 모델 사용</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class Main &#123;</span><br><span class="line">    private static Logger logger &#x3D; LoggerFactory.getLogger(Main.class);</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line">        logger.info(&quot;Hello World&quot;);</span><br><span class="line"></span><br><span class="line">        Class.forName(&quot;org.h2.Driver&quot;);</span><br><span class="line">        var url &#x3D; &quot;jdbc:h2:mem:test;MODE&#x3D;MySQL;&quot;;</span><br><span class="line"></span><br><span class="line">        try(var connection &#x3D; DriverManager.getConnection(url, &quot;sa&quot;, &quot;&quot;);</span><br><span class="line">            var statement &#x3D; connection.createStatement();)</span><br><span class="line">        &#123;</span><br><span class="line">            connection.setAutoCommit(false);</span><br><span class="line">            statement.execute(&quot;create table member(&quot; +</span><br><span class="line">                    &quot;id int auto_increment, &quot; +</span><br><span class="line">                    &quot;username varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;password varchar(255) not null, &quot; +</span><br><span class="line">                    &quot;primary key(id))&quot;);</span><br><span class="line"></span><br><span class="line">            try &#123;</span><br><span class="line">                statement.executeUpdate(&quot;insert into member(username, password)&quot; +</span><br><span class="line">                        &quot;values(&#39;jilee&#39;,&#39;1234&#39;)&quot;);</span><br><span class="line">                connection.commit();</span><br><span class="line">            &#125; catch (SQLException e) &#123;</span><br><span class="line">                connection.rollback();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            var resultSet &#x3D; statement.executeQuery(&quot;select * from member&quot;);</span><br><span class="line">            while (resultSet.next()) &#123;</span><br><span class="line">                var member &#x3D; new Member(resultSet);</span><br><span class="line">                logger.info(member.toString());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125; catch (SQLException e) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Lombok  </li>
-</ul>
-<p>코드의 가독성을 위하여 사용한다.  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Getter</span><br><span class="line">@Setter</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@RequiredArgsConstructor</span><br><span class="line">public class Member &#123;</span><br><span class="line"></span><br><span class="line">    private int id;</span><br><span class="line">    @NonNull private String userName;</span><br><span class="line">    @NonNull private String password;</span><br><span class="line"></span><br><span class="line">    public Member(ResultSet resultSet) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            this.id &#x3D; resultSet.getInt(&quot;id&quot;);</span><br><span class="line">            this.userName &#x3D; resultSet.getString(&quot;username&quot;);</span><br><span class="line">            this.password &#x3D; resultSet.getString(&quot;password&quot;);</span><br><span class="line">        &#125; catch (SQLException throwables) &#123;</span><br><span class="line">            throwables.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>servlet  </li>
-</ul>
-<p>EE 버전의 스팩을 구현한 servlet 서버로는 tomcat / jeus / oracle weblogic 등이 있다.  </p>
-<p>EE 사용을 위한 의존성 추가</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;javax.servlet-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;4.0.1&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
-
-<p>WAR 설정 추가</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;groupId&gt;com.mycompany.app&lt;&#x2F;groupId&gt;</span><br><span class="line">&lt;artifactId&gt;my-app&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;version&gt;1.0-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">&lt;packaging&gt;war&lt;&#x2F;packaging&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Spring Framework</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>02. IoC (Inversion of Control)</title>
-    <url>/2020/08/12/hexo_spring_project_2/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="02-IoC-Inversion-of-Control"><a href="#02-IoC-Inversion-of-Control" class="headerlink" title="02. IoC (Inversion of Control)"></a>02. IoC (Inversion of Control)</h4><p>Spring의 대표적인 특징 중 하나.</p>
-<p>어떤 객체가 사용하는 의존 객체를 직접 만들어서 사용하는게 아니라, 주입(DI)받아서 사용하는 것.  </p>
-<p>Spring IoC Container<br> : 애플리케이션 컴포넌트의 중앙 저장소.</p>
-<p>ApplicationContext<br> : IoC 컨테이너의 핵심적인 인터페이스.<br> IoC 컨테이너의 최상위 인터페이스인 BeanFactory를 상속받아 여러 기능이 추가됨.</p>
-<ul>
-<li><p>메시지 소스 처리 (i18n)  </p>
-</li>
-<li><p>이벤트 발행</p>
-</li>
-<li><p>리소스 로딩  </p>
-<p>IoC 컨테이너에 객체를 생성하고 생성된 객체들(Bean)의 의존성을 관리해준다.<br>이해만 해둘뿐, 딱히 이 인터페이스에 대해 직접 보거나 사용할 일은 없는 듯.<br>ClassPathXmlApplicationContext : XML 설정 파일 사용<br>AnnotationConfigApplicationContext : 자바 설정 파일 사용 (@Configuration)</p>
-</li>
-</ul>
-<p>Bean<br> : Spring IoC 컨테이너가 관리하는 객체.<br>Class를 Bean으로 등록하려면 Component Scan을 사용하거나<br>또는 직접 XML이나 자바 설정 파일(@Configuration)에 등록해야 한다.  </p>
-<p>IoC 컨테이너에 등록되는 Bean들의 특징</p>
-<ul>
-<li>의존성 관리, 특히 테스트에서 가짜 객체(@Mock)를 활용한 단위테스트에 용이하다.</li>
-<li>스코프 : 기본적으로 싱글톤 스코프로 등록이된다. (or 프로토타입)<br>싱글톤 스코프로 등록되는 클래스는 애플리케이션이 구동되는 초기에 Bean으로 생성된다.  </li>
-<li>라이프사이클 인터페이스</li>
-</ul>
-<p>Component Scanning<br> : Annotation 처리 프로세서 역할을 하는 @ComponentScan에 의하여<br> 모든 @Component Annotation이 붙은 Class들을 Bean으로 등록한다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">    @Repository</span><br><span class="line">    @Service</span><br><span class="line">    @Controller</span><br></pre></td></tr></table></figure>
-
-<p>참고로 @ComponentScan은 기본적으로 이 어노테이션이 붙은 클래스가 위치한 곳 부터 Component Scanning을 실시한다.<br>또는 특정 위치에서 부터 Scanning을 하도록 설정할수도 있고 Filter 옵션을 통해 어떤 클래스를 스캔할 지 또는 하지 않을 지 정할 수도 있다.   </p>
-<p>직접 등록하기</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class Config() &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public String test() &#123;</span><br><span class="line">        return &quot;test&quot;;</span><br><span class="line">    &#125;   </span><br><span class="line">    </span><br><span class="line">    @Bean</span><br><span class="line">    public BookRepository bookRepository() &#123;</span><br><span class="line">        return new BookRepository();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    public BookService bookService &#123;</span><br><span class="line">        return new BookService(bookRespsitory());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>function을 이용한 직접 등록</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    new SpringApplicationBuilder()</span><br><span class="line">        .sources(Demospring51Application.class)</span><br><span class="line">        .initializers((ApplicationContextInitializer&lt;GenericApplicationContext&gt;)</span><br><span class="line">            applicationContext -&gt; &#123;</span><br><span class="line">                applicationContext.registerBean(MyBean.class);</span><br><span class="line">            &#125;)</span><br><span class="line">        .run(args);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이 방법은 리플랙션이나 프록시를 사용하지 않기 때문에 애플리케이션 구동 시 성능상의 이점이 있다지만..<br>ComponentScan을 대체하기에는 쓰기 불편해서 좋은 방법은 아닌 것 같다. </p>
-<p>Bean을 꺼내어 쓰는 방법<br> : @Autowired 또는 @Inject 또는 ApplicationContext.getBean()으로 직접 꺼내기<br>Bean으로 등록된 Class만 Bean을 꺼내어 쓸 수 있다.</p>
-<p>의존성 주입(Dependency Injection)<br> : @Autowired 또는 @Inject를 사용하는데,<br> 예외로 생성자가 오직 하나이면서 Bean을 파라미터로 받는다면 @Autowired를 생략하고도 DI를 자동으로 해준다.<br> @Autowired/@Inject를 붙인다면 생성자/필드/Setter에 붙이게 된다.</p>
-<p>###@Autowired에 대하여…<br>어노테이션을 setter에 달려있고 의존성의 Bean이 없을 때,<br>setter임에도 불구하고 생각과 달리 다른 경우와 마찬가지로 객체생성이 불가능할 수 있는데<br>Spring이 해당 의존성을 위해 Bean을 찾기 때문이다.<br>이를 피하기 위해서는 @Autowired(required = false)로 설정하여 의존성 주입이 안된 상태로 생성할 수 있다.<br>필드에 어노테이션을 다는 경우도 비슷함.  </p>
-<p>그리고 의존성 타입의 Bean이 여러가지 일 경우에 객체생성이 안될 수 있는데,<br>이때는 주입받으려는 Bean을 @Primary로 마킹하거나,</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Repository @Primary</span><br><span class="line">public class PrimaryBookRepository implements BookRepository &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>해당 타입의 모든 Bean을 주입 받거나</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">List&lt;BookRepository&gt; bookrepositories;</span><br></pre></td></tr></table></figure>
-<p>@Qualifier(“beanName”)으로 특정 Bean을 주입받는다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired @Qualifier(&quot;sampleBookRepository&quot;)</span><br><span class="line">BookRepository bookrepository;</span><br></pre></td></tr></table></figure>
-
-<p>BeanPostProcessor<br> : 빈 라이프 사이클 인터페이스이다.<br> 빈 인스턴스의 생성 전후에 부가적인 작업을 할 수 있다.<br> 특히, AutowiredAnnotationBeanPostProcessor의 postProcessorBeforeInitialization 메서드로 인해<br> 빈 인스턴스 생성 전에 @Autowired 어노테이션을 처리한다.</p>
-<p>BeanFactoryPostProcessor<br> : 다른 모든 Bean들을 만들기 이전에 수행된다.<br> 특히, BeanFactoryPostProcessor를 구현한 ConfigurationClassPostProcessor는 @ComponentScan 어노테이션을 처리한다.  </p>
-<p>###빈의 스코프에 대하여…<br>빈의 스코프는 기본적으로 싱글톤이고, 그 외에 프로토타입이 있다.<br>프로토타입</p>
-<ul>
-<li>Request</li>
-<li>Session</li>
-<li>WebSocket</li>
-<li>…  </li>
-</ul>
-<p>@Component @Scope(“prototype”)<br>위의 어노테이션처리된 Bean은 받아 올 때마다 새로운 인스턴스가 생성된다.  </p>
-<p>참고로 프로토타입 빈이 싱글톤 빈을 의존하는 것은 문제없지만,<br>싱글톤 빈이 의존하는 프로토타입 빈은 의도한 것처럼 새로운 인스턴스가 생성되지 않는다는 문제가 있다.<br>이 문제를 해결하는 방법으로</p>
-<ul>
-<li>Proxy mode<br>프로토타입 빈을 Proxy 빈으로 감싸서 다른 빈이 이 프로토타입 빈을 참조할 때 Proxy를 거쳐서 참조하도록<br>이때, Proxy 빈은 해당 프로토타입 빈을 상속하며, 참조하는 빈은 Proxy 빈을 참조한다. <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">##for class</span><br><span class="line">@Component @Scope(value &#x3D; &quot;prototype&quot;, proxyMode &#x3D; ScopedProxyMode.TARGET_CLASS)</span><br><span class="line">##for interface</span><br><span class="line">@Component @Scope(value &#x3D; &quot;prototype&quot;, proxyMode &#x3D; ScopedProxyMode.INTERFACES)</span><br></pre></td></tr></table></figure></li>
-<li>Object-Provider<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectProvider&lt;Proto&gt; proto;</span><br></pre></td></tr></table></figure></li>
-<li>Provider</li>
-</ul>
-<p>###ApplicationContext의 기능 Environment…<br>EnvironmentCapable<br> : 프로파일과 프로퍼티를 다루는 인터페이스이다.  </p>
-<p>프로파일<br> : 빈들의 그룹, Environment가 활성화할 프로파일을 확인하고 설정한다.<br> 환경에따라 사용할 빈을 구분할 때 사용된다. (ex 프로덕션에서는 A 빈, 테스트환경에서는 B 빈을 사용)</p>
-<p>프로파일 정의하기</p>
-<ul>
-<li><p>클래스에 정의<br>test 프로파일로 애플리케이션을 실행할 때 사용될 Java Configuration</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration @Profile(&quot;test&quot;)</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">proc 프로파일이 아닌 애플리케이션을 실행할 때 사용될 Component</span><br></pre></td></tr></table></figure>
-<p>@Component @Profile(“!proc”)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- Bean 생성 메서드에 정의</span><br></pre></td></tr></table></figure>
-<p>@Bean @Profile(“test”)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Profile에는 표현식으로 !(not), &amp;(and), |(or) 가능.</span><br><span class="line"></span><br><span class="line">프로파일 지정하기</span><br><span class="line"> - JVM 시스템 프로퍼티 [-Dspring.profiles.avtive&#x3D;”test,A,B,...”]</span><br><span class="line">  &#x3D;&#x3D; intelliJ의 Run&#x2F;Debug Configuration의 Active profiles </span><br><span class="line"> </span><br><span class="line"> - @ActiveProfiles (테스트용)</span><br><span class="line"></span><br><span class="line">프로퍼티</span><br><span class="line"> : 다양한 방법으로 정의할 수 있는 설정 값, Environment가 프로퍼티 소스를 설정하고 프로퍼티 값을 가져온다.  </span><br><span class="line"> 프로퍼티는 우선순위가 있다.(계층형이다.)</span><br><span class="line"> 1.ServletConfig</span><br><span class="line"> 1.ServletContext</span><br><span class="line"> 1.JNDI (java:comp&#x2F;env&#x2F;)</span><br><span class="line"> 1.JVM 시스템 프로퍼티 (-Dkey&#x3D;&quot;value&quot;)</span><br><span class="line"> 1.JVM 시스템 환경 변수 (OS 환경 변수)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Environment를 통해 프로퍼티 추가하기</span><br></pre></td></tr></table></figure>
-<p>@PropertySource(“classpath:/app.properties”)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">app.properties 파일을 참조한다.</span><br><span class="line">참고로 스프링부트에서는 application.properties라는 기본 프로퍼티 소스를 지원한다.  </span><br><span class="line"></span><br><span class="line">###ApplicationContext의 기능 MessageSource...</span><br><span class="line">MessageSource</span><br><span class="line"> : i18n(국제화) 기능을 제공하는 인터페이스이다.  </span><br><span class="line"> </span><br><span class="line">MessageSource의 getMessage로 참조할 수 있다.</span><br><span class="line">Locale에 따라서 다른 메세지를 보여준다.</span><br></pre></td></tr></table></figure>
-<p> @Autowired<br> MessageSource messageSource;</p>
-<p> public void run() {</p>
-<pre><code>System.out.println(messageSource.getMessage(&quot;code1&quot;), Locale.KOREA);</code></pre><p> }</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line">스프링부트에서는 messages로 시작하는 소스들을 자동으로 참조한다.</span><br><span class="line">messages.properties</span><br><span class="line">messages_ko_KR.properties</span><br><span class="line"></span><br><span class="line">리로딩 기능이 있는 메시지 소스를 @Bean으로 직접 만들어서 참조</span><br></pre></td></tr></table></figure>
-<p> @Bean<br> public MessageSource messageSource() {</p>
-<pre><code>var messageSource = new ReloadableResourceBundleMessageSource();
-messageSource.setBasename(&quot;classpath:/messages&quot;);
-messageSource.setDefaultEncoding(&quot;UTF-8&quot;);
-return messageSource;</code></pre><p> }</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">###ApplicationContext의 기능 ApplicationEventPublisher...  </span><br><span class="line">ApplicationEventPublisher</span><br><span class="line"> : 이벤트 프로그래밍에 필요한 인터페이스. 옵저버 패턴의 구현체이다.  </span><br><span class="line"> </span><br><span class="line">spring 4.2 전에는  </span><br><span class="line">이벤트 만들기</span><br><span class="line">ApplicationEvent Class를 상속받아야 한다.</span><br></pre></td></tr></table></figure>
-<p>public class MyEvent extends ApplicationEvent {<br> public MyEvent(Object source) {</p>
-<pre><code>super(source);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br><span class="line">ApplicationListener&lt;이벤트&gt; 인터페이스를 구현하고 빈으로 등록되어야 한다.</span><br></pre></td></tr></table></figure>
-<p>@Component<br>public class MyEventHandler implements ApplicationListener<MyEvent> {<br> @Override<br> public void onApplicationEvent(MyEvent event) {</p>
-<pre><code>System.out.println(&quot;이벤트 확인&quot;);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">spring 4.2 부터는 이벤트나 이벤트 핸들러 생성에서 상속&#x2F;구현이 빠지고 어노테이션으로 처리한다.</span><br><span class="line">이벤트 만들기</span><br></pre></td></tr></table></figure>
-<p>public class MyEvent {<br> private Object source;</p>
-<p> public MyEvent(Object source) {</p>
-<pre><code>this.source = source;</code></pre><p> }</p>
-<p> public Object getSource() {</p>
-<pre><code>return source;</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br></pre></td></tr></table></figure>
-<p>@Component<br>public class MyEventHandler {</p>
-<p> @EventListener<br> public void handle(MyEvent event) {</p>
-<pre><code>System.out.println(&quot;이벤트 확인&quot;);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 발생시키기</span><br></pre></td></tr></table></figure>
-<p> ApplicationEventPublisher.publishEvent(new MyEvent(this));</p>
-<pre><code></code></pre></li>
-</ul>
-<p>만약 이벤트 핸들러가 여러개라면, Spring은 기본적으로 이벤트를 여러 핸들러로 순차적으로 처리하게 된다.<br>이때, 순서를 정하고 싶다면 핸들러에 @Order 어노테이션을 사용한다.<br>또는 비동기적(여러 쓰레드)으로 처리하고 싶다면 @Async 사용한다. (Java Configuration File에서는 @EnableAsync 필요)  </p>
-<p>Spring에서 제공하는 기본 이벤트</p>
-<ul>
-<li>ContextRefreshedEvent</li>
-<li>ContextStartedEvent</li>
-<li>ContextStoppedEvent</li>
-<li>ContextClosedEvent</li>
-<li>RequestHandledEvent</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Spring Framework</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>03. AOP (Aspect Oriented Programming)</title>
-    <url>/2020/08/12/hexo_spring_project_3/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="03-AOP-Aspect-Oriented-Programming"><a href="#03-AOP-Aspect-Oriented-Programming" class="headerlink" title="03. AOP (Aspect Oriented Programming)"></a>03. AOP (Aspect Oriented Programming)</h4><p>AOP의 핵심은 흩어진 코드(여러 곳에서 반복되는 코드)를 한 곳으로 모으는 것.</p>
-<p>대표적으로 @Transactional 어노테이션이 있는데,<br>트랜잭션 처리(트랜잭션 시작, 커밋/롤백)에 대한 동일한 부분을 어노테이션 하나로 처리한다.<br>참고로 JPA Repository의 모든 메서드에는 @Transactional이 생략되어 적용되어있다.  </p>
-<p>AOP 직접 활용하기<br>Annotation 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD) &#x2F;&#x2F; 이 어노테이션은 메서드에 붙일것.  </span><br><span class="line">@Retention(RetentionPolicy.RUNTIME) &#x2F;&#x2F; 코드의 유지기간  </span><br><span class="line">public interface LogExecutionTime &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>실제 Aspect 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Aspect는 Bean이어야 한다.</span><br><span class="line">@Aspect</span><br><span class="line">public class LogAspect &#123;</span><br><span class="line">	Logger logger &#x3D; LoggerFactory.getLogger(LogAspect.class);</span><br><span class="line"></span><br><span class="line">	@Around(&quot;@annotation(LogExecutionTime)&quot;)</span><br><span class="line">	public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable &#123;</span><br><span class="line">		StopWatch stopWatch &#x3D; new StopWatch();</span><br><span class="line">		stopWatch.start();</span><br><span class="line"></span><br><span class="line">		Object proceed &#x3D; joinPoint.proceed();</span><br><span class="line"></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		logger.info(stopWatch.prettyPrint());</span><br><span class="line"></span><br><span class="line">		return proceed;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Annotation 달기</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@LogExecutionTime</span><br><span class="line">@GetMapping(&quot;&#x2F;owners&#x2F;find&quot;)</span><br><span class="line">public String initFindForm(Map&lt;String, Object&gt; model) &#123;</span><br><span class="line">	model.put(&quot;owner&quot;, new Owner());</span><br><span class="line">	return &quot;owners&#x2F;findOwners&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>결과적으로, AOP를 통하여 하나의 클래스(Aspect)로<br>Annotation이 달려있는 모든 메서드는 수행 시간이 계산된다.  </p>
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Spring Framework</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>03. PSA (Portable Service Abstraction)</title>
-    <url>/2020/08/12/hexo_spring_project_4/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="03-PSA-Portable-Service-Abstraction"><a href="#03-PSA-Portable-Service-Abstraction" class="headerlink" title="03. PSA (Portable Service Abstraction)"></a>03. PSA (Portable Service Abstraction)</h4><p>이미 잘 만들어진 인터페이스를 사용하는 것.<br>확장성이 좋지 못한 코드 또는 기술에 특화되어 있는 코드에 사용하면 좋다.</p>
-<p>Spring Framework이 제공하는 API는 대부분이 추상화되어있다.  </p>
-<hr>
-<p>####추상화 예제</p>
-<ul>
-<li><p>스프링 트랜잭션<br>@Transactional 어노테이션의 Aspect는 PlatformTransactionManager 인터페이스를 사용하여 코딩되어 있는데,<br>그렇기 때문에 PlatformTransactionManager에 대한 구현체<br>(JpaTransactionManager, DatasourceTransactionManager, HibernateTransactionManager 등)가 바뀌더라도<br>@Transactional Aspect의 코드가 변경될 필요가 없다.  </p>
-</li>
-<li><p>스프링 캐시<br>@Cacheable / @CacheEvict 등 스프링 캐시 관련 어노테이션의 Aspect는<br>CacheManager 인터페이스를 사용하여 코딩되어있으며,<br>위와 동일하게 구현체가 바뀌더라도 Aspect 코드는 변경될 필요가 없다.</p>
-</li>
-<li><p>스프링 웹 MVC<br>@Controller / @RequestMapping 등 스프링 웹 MVC 관련 어노테이션은<br>의존성에 따라 Servlet을 사용할 수도 있고 Reactive를 사용할 수도 있다.<br>고로, 해당 어노테이션을 사용한 나의 코드는 변경하기 쉽거나 변경되지 않아도 된다.  </p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Spring Framework</category>
-      </categories>
-      <tags>
-        <tag>spring</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>05.HelloWorld</title>
     <url>/2020/08/12/hexo_springboot_2_05/</url>
     <content><![CDATA[<h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="05-HelloWorld"><a href="#05-HelloWorld" class="headerlink" title="05.HelloWorld"></a>05.HelloWorld</h4><ul>
@@ -2717,6 +2678,40 @@ return messageSource;</code></pre><p> }</p>
 
 <p>Create / Read Test</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@SpringBootTest</span><br><span class="line">class PersonRepositoryTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private PersonRepository personRepository;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    void crud() &#123;</span><br><span class="line">        Person person &#x3D; Person.builder()</span><br><span class="line">                .name(&quot;robin&quot;)</span><br><span class="line">                .age(10)</span><br><span class="line">                .build();</span><br><span class="line">        personRepository.save(person);</span><br><span class="line"></span><br><span class="line">        List&lt;Person&gt; people &#x3D; personRepository.findAll();</span><br><span class="line">        assertThat(people.size()).isEqualTo(1);</span><br><span class="line">        assertThat(people.get(0).getName()).isEqualTo(&quot;robin&quot;);</span><br><span class="line">        assertThat(people.get(0).getAge()).isEqualTo(10);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Boot Project</category>
+      </categories>
+      <tags>
+        <tag>spring boot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>62. API 한번에 실행하기</title>
+    <url>/2020/08/12/hexo_springboot_1_62/</url>
+    <content><![CDATA[<h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="62-API-한번에-실행하기"><a href="#62-API-한번에-실행하기" class="headerlink" title="62. API 한번에 실행하기"></a>62. API 한번에 실행하기</h4><p>MySQL DB를 사용할것임<br>Container 기술을 활용하여 하나의 컴퓨터에서 가상화된 여러 개의 Container를 올려 여러 서버를 동시에 실행 (Docker)<br>Docker Compose를 활용  </p>
+<p>build.gradle 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">~</span><br><span class="line">	implementation &#39;mysql:mysql-connector-java&#39;</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
+
+<p>application.yml datasource 추가</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  profiles: mysql</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql:&#x2F;&#x2F;$&#123;MYSQL_HOST&#125;:3306&#x2F;$&#123;MYSQL_DATABASE&#125;</span><br><span class="line">    username: $&#123;MYSQL_USER&#125;</span><br><span class="line">    password: $&#123;MYSQL_PASSWORD&#125;</span><br></pre></td></tr></table></figure>
+
+<p>docker-compose.yml 생성<br>각 서비스 등록  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">version: &#39;3&#39;</span><br><span class="line">services:</span><br><span class="line">  mysql:</span><br><span class="line">    image: mariadb:10.4.7</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;data&#x2F;mariadb:&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">    ports:</span><br><span class="line">      - 13306:3306</span><br><span class="line">    command: |</span><br><span class="line">      --character-set-server&#x3D;utf8mb4</span><br><span class="line">      --collation-server&#x3D;utf8mb4_unicode_ci</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: [&quot;CMD&quot;, &quot;mysqladmin&quot; ,&quot;ping&quot;, &quot;-h&quot;, &quot;localhost&quot;]</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  login-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-login-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8001:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  admin-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-admin-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8002:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  customer-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-customer-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8003:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  restaurant-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-restaurant-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8004:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  admin-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-admin-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8082:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8002</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  customer-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-customer-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8083:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8003</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  restaurant-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-restaurant-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8084:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8004</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br></pre></td></tr></table></figure>
+
+<p>DB 및 API 서비스 실행시 적용되는 환경설정 파일(.env)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">MYSQL_ROOT_PASSWORD&#x3D;password</span><br><span class="line">MYSQL_USER&#x3D;root</span><br><span class="line">MYSQL_PASSWORD&#x3D;password</span><br><span class="line">MYSQL_DATABASE&#x3D;eatgo</span><br><span class="line">MYSQL_HOST&#x3D;mysql</span><br><span class="line"></span><br><span class="line">SPRING_PROFILES_ACTIVE&#x3D;mysql</span><br></pre></td></tr></table></figure>
+
+<p>각 API 서비스에서 jar파일을 실행할 run.sh</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">until java -jar libs&#x2F;*.jar</span><br><span class="line">do</span><br><span class="line">  printf &quot;******************************************************************&quot;</span><br><span class="line">  sleep 5</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>docker-compose를 통하여 묶어서 단계적으로 실행</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker-compose up</span></span><br></pre></td></tr></table></figure>
+
+<p>Docker Container list 확인</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker-compose ps</span></span><br><span class="line">         Name                       Command                State     Ports</span><br><span class="line">--------------------------------------------------------------------------</span><br><span class="line">eatgo_admin-api_1        bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_admin-web_1        docker-entrypoint.sh bash  ...   Exit 0          </span><br><span class="line">eatgo_customer-api_1     bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_customer-web_1     docker-entrypoint.sh bash  ...   Exit 0          </span><br><span class="line">eatgo_login-api_1        bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_mysql_1            docker-entrypoint.sh --cha ...   Exit 0          </span><br><span class="line">eatgo_restaurant-api_1   bash -c cd /Users/ijeong-i ...   Exit 137        </span><br><span class="line">eatgo_restaurant-web_1   docker-entrypoint.sh bash  ...   Exit 0</span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
@@ -2829,27 +2824,6 @@ return messageSource;</code></pre><p> }</p>
       </tags>
   </entry>
   <entry>
-    <title>34. getAll() 추가 및 Paging</title>
-    <url>/2020/08/12/hexo_springboot_2_34/</url>
-    <content><![CDATA[<h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="34-getAll-추가-및-Paging"><a href="#34-getAll-추가-및-Paging" class="headerlink" title="34. getAll() 추가 및 Paging"></a>34. getAll() 추가 및 Paging</h4><p>Controller</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping()</span><br><span class="line">public Page&lt;Person&gt; getAll(@PageableDefault Pageable pageable) &#123;</span><br><span class="line">    return personService.getAll(pageable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Service</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public Page&lt;Person&gt; getAll(Pageable pageable) &#123;</span><br><span class="line">    return personRepository.findAll(pageable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Controller Test</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">void getAll() throws Exception &#123;</span><br><span class="line">    mockMvc.perform(</span><br><span class="line">            MockMvcRequestBuilders.get(&quot;&#x2F;api&#x2F;person&quot;)</span><br><span class="line">                &#x2F;&#x2F;default 대신 사용</span><br><span class="line">                .param(&quot;page&quot;,&quot;1&quot;) &#x2F;&#x2F;2번째 페이지</span><br><span class="line">                .param(&quot;size&quot;,&quot;2&quot;)) &#x2F;&#x2F;페이지 별 사이즈</span><br><span class="line">            .andExpect(status().isOk())</span><br><span class="line">            .andExpect(jsonPath(&quot;$.totalPages&quot;).value(3)) &#x2F;&#x2F;페이지 수</span><br><span class="line">            .andExpect(jsonPath(&quot;$.totalElements&quot;).value(6)) &#x2F;&#x2F;총 요소 수</span><br><span class="line">            .andExpect(jsonPath(&quot;$.numberOfElements&quot;).value(2)) &#x2F;&#x2F;페이지의 요소 수 </span><br><span class="line">            .andExpect(jsonPath(&quot;$.content.[0].name&quot;).value(&quot;dennis&quot;))</span><br><span class="line">            .andExpect(jsonPath(&quot;$.content.[1].name&quot;).value(&quot;sophia&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>Study</category>
-        <category>Spring Boot Project</category>
-      </categories>
-      <tags>
-        <tag>spring boot</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>30. Exception Handling</title>
     <url>/2020/08/12/hexo_springboot_2_30/</url>
     <content><![CDATA[<h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="30-Exception-Handling"><a href="#30-Exception-Handling" class="headerlink" title="30. Exception Handling"></a>30. Exception Handling</h4><p>Custom Exception 활용하기<br>프로젝트 내에서 의도적으로 발생시키는 예외는 별도의 Custom Exception으로 처리하는것이 좋다.  </p>
@@ -2872,5 +2846,31 @@ return messageSource;</code></pre><p> }</p>
       <tags>
         <tag>spring boot</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>34. getAll() 추가 및 Paging</title>
+    <url>/2020/08/12/hexo_springboot_2_34/</url>
+    <content><![CDATA[<h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="34-getAll-추가-및-Paging"><a href="#34-getAll-추가-및-Paging" class="headerlink" title="34. getAll() 추가 및 Paging"></a>34. getAll() 추가 및 Paging</h4><p>Controller</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping()</span><br><span class="line">public Page&lt;Person&gt; getAll(@PageableDefault Pageable pageable) &#123;</span><br><span class="line">    return personService.getAll(pageable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Service</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public Page&lt;Person&gt; getAll(Pageable pageable) &#123;</span><br><span class="line">    return personRepository.findAll(pageable);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Controller Test</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">void getAll() throws Exception &#123;</span><br><span class="line">    mockMvc.perform(</span><br><span class="line">            MockMvcRequestBuilders.get(&quot;&#x2F;api&#x2F;person&quot;)</span><br><span class="line">                &#x2F;&#x2F;default 대신 사용</span><br><span class="line">                .param(&quot;page&quot;,&quot;1&quot;) &#x2F;&#x2F;2번째 페이지</span><br><span class="line">                .param(&quot;size&quot;,&quot;2&quot;)) &#x2F;&#x2F;페이지 별 사이즈</span><br><span class="line">            .andExpect(status().isOk())</span><br><span class="line">            .andExpect(jsonPath(&quot;$.totalPages&quot;).value(3)) &#x2F;&#x2F;페이지 수</span><br><span class="line">            .andExpect(jsonPath(&quot;$.totalElements&quot;).value(6)) &#x2F;&#x2F;총 요소 수</span><br><span class="line">            .andExpect(jsonPath(&quot;$.numberOfElements&quot;).value(2)) &#x2F;&#x2F;페이지의 요소 수 </span><br><span class="line">            .andExpect(jsonPath(&quot;$.content.[0].name&quot;).value(&quot;dennis&quot;))</span><br><span class="line">            .andExpect(jsonPath(&quot;$.content.[1].name&quot;).value(&quot;sophia&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Boot Project</category>
+      </categories>
+      <tags>
+        <tag>spring boot</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>sample</title>
+    <url>/2020/08/12/sample/</url>
+    <content><![CDATA[]]></content>
   </entry>
 </search>

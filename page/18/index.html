@@ -259,91 +259,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_1_Java_basic_11/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_1_Java_basic_11/" class="post-title-link" itemprop="url">11. 관계, 논리, 조건 비트 연산자</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:14:17" itemprop="dateCreated datePublished" datetime="2020-08-12T21:14:17+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Java-Basic/" itemprop="url" rel="index"><span itemprop="name">Java Basic</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java-기초"><a href="#Java-기초" class="headerlink" title="Java 기초"></a>Java 기초</h1><h4 id="11-관계-논리-조건-비트-연산자"><a href="#11-관계-논리-조건-비트-연산자" class="headerlink" title="11. 관계, 논리, 조건 비트 연산자"></a>11. 관계, 논리, 조건 비트 연산자</h4><ul>
-<li><p>관계자 연산자<br>= 비교연산자<br>결과가 true/false로 반환 됨.<br>‘&gt;’, ‘&lt;’, ‘&gt;=’, ‘&lt;=’, ‘==’, ‘!=’</p>
-</li>
-<li><p>논리 연산자<br>결과가 true/false로 반환 됨.<br>&amp;&amp; 논리 곱, 두 항 모두 참이어야 true<br>|| 논리 합, 두 항 중 하나만 참이면 true<br>! 부정, 항의 논리 결과 변경 (true -&gt; false, false -&gt; true)    </p>
-</li>
-</ul>
-<p>단락 회로 평가<br>앞 항 결과만으로 논리 연산자 결과가 나온다면 뒷 항은 평가되지 않음.<br>-&gt; 프로그램에서 예상하지 못한 결과가 발생할 수 있으므로 유의</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx3 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1 &#x3D; 10;</span><br><span class="line">        int i &#x3D; 2;</span><br><span class="line"></span><br><span class="line">        boolean value &#x3D; ((num1+&#x3D;10)&lt;10)&amp;&amp;((i+&#x3D;2)&lt;10);</span><br><span class="line">        System.out.println(value); &#x2F;&#x2F;false</span><br><span class="line">        System.out.println(num1);  &#x2F;&#x2F;20</span><br><span class="line">        System.out.println(i);     &#x2F;&#x2F;2</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_1_Java_basic_11/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_1_Java_basic_10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -417,6 +332,91 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/08/12/hexo_1_Java_basic_10/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_1_Java_basic_11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_1_Java_basic_11/" class="post-title-link" itemprop="url">11. 관계, 논리, 조건 비트 연산자</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:14:17" itemprop="dateCreated datePublished" datetime="2020-08-12T21:14:17+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Java-Basic/" itemprop="url" rel="index"><span itemprop="name">Java Basic</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Java-기초"><a href="#Java-기초" class="headerlink" title="Java 기초"></a>Java 기초</h1><h4 id="11-관계-논리-조건-비트-연산자"><a href="#11-관계-논리-조건-비트-연산자" class="headerlink" title="11. 관계, 논리, 조건 비트 연산자"></a>11. 관계, 논리, 조건 비트 연산자</h4><ul>
+<li><p>관계자 연산자<br>= 비교연산자<br>결과가 true/false로 반환 됨.<br>‘&gt;’, ‘&lt;’, ‘&gt;=’, ‘&lt;=’, ‘==’, ‘!=’</p>
+</li>
+<li><p>논리 연산자<br>결과가 true/false로 반환 됨.<br>&amp;&amp; 논리 곱, 두 항 모두 참이어야 true<br>|| 논리 합, 두 항 중 하나만 참이면 true<br>! 부정, 항의 논리 결과 변경 (true -&gt; false, false -&gt; true)    </p>
+</li>
+</ul>
+<p>단락 회로 평가<br>앞 항 결과만으로 논리 연산자 결과가 나온다면 뒷 항은 평가되지 않음.<br>-&gt; 프로그램에서 예상하지 못한 결과가 발생할 수 있으므로 유의</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx3 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1 &#x3D; 10;</span><br><span class="line">        int i &#x3D; 2;</span><br><span class="line"></span><br><span class="line">        boolean value &#x3D; ((num1+&#x3D;10)&lt;10)&amp;&amp;((i+&#x3D;2)&lt;10);</span><br><span class="line">        System.out.println(value); &#x2F;&#x2F;false</span><br><span class="line">        System.out.println(num1);  &#x2F;&#x2F;20</span><br><span class="line">        System.out.println(i);     &#x2F;&#x2F;2</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_1_Java_basic_11/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>

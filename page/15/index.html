@@ -179,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_65/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_63/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -193,7 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_OOP_65/" class="post-title-link" itemprop="url">65. 다양한 예외 처리</a>
+            <a href="/2020/08/12/hexo_OOP_63/" class="post-title-link" itemprop="url">63. 예외와 예외 처리</a>
         </h2>
 
         <div class="post-meta">
@@ -230,17 +230,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="65-다양한-예외-처리"><a href="#65-다양한-예외-처리" class="headerlink" title="65. 다양한 예외 처리"></a>65. 다양한 예외 처리</h4><ul>
-<li>예외 처리 미루기<br>throws를 이용하여 예외처리 미루기<br>try{} 블록으로 예외처리 하지 않고, 메서드 선언부에 throws를 추가<br>예외가 발생한 메서드에서 예외처리를 하지 않고 메서드를 호출한 곳에서 예외처리함<br>main()에서 throws를 사용하면 가상 머신에서 처리 됨  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.String&quot;); &#x2F;&#x2F;loadClass에 대한 try~catch문 필요</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>다중 예외 처리<br>하나의 try{} 블록에서 여러 예외가 발생하는 경우<br>하나의 catch{} 블록에서 예외 처리 하거나<br>여러 catch{} 블록으로 나누어 처리할 수 있음<br>이때, 최상위 예외 클래스인 Exception 클래스는 가장 마지막 블록에 위치해야 함  </li>
-</ul>
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="63-예외와-예외-처리"><a href="#63-예외와-예외-처리" class="headerlink" title="63. 예외와 예외 처리"></a>63. 예외와 예외 처리</h4><p>컴파일 오류 : 프로그램 코드 작성 중 발생하는 문법적 오류<br>실행 오류 : 실행중인 프로그램이 의도치 않은 동작을 하거나(bug) 프로그램이 중단되는 오류(runtime error)<br>자바는 예외 처리를 통하여 프로그램의 비정상 종료를 막고 log를 남길 수 있음    </p>
+<p>시스템 오류(error) : 가상 머신에서 발생, 프로그래머가 처리할 수 없음<br>동적 메모리를 다 사용한 경우, stack over flow 등<br>예외(Exception) : 프로그램에서 제어할 수 있는 오류<br>읽으려는 파일이 없는 경우, 네트웍이나 소켓 연결 오류 등<br>자바 프로그램에서는 예외에 대한 처리를 수행 함</p>
+<p>Exception 클레스 : 모든 예외 클래스의 최상위 클래스<br>IOException, RuntimeException 등     </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_65/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_OOP_63/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -358,6 +353,91 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_65/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_65/" class="post-title-link" itemprop="url">65. 다양한 예외 처리</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="65-다양한-예외-처리"><a href="#65-다양한-예외-처리" class="headerlink" title="65. 다양한 예외 처리"></a>65. 다양한 예외 처리</h4><ul>
+<li>예외 처리 미루기<br>throws를 이용하여 예외처리 미루기<br>try{} 블록으로 예외처리 하지 않고, 메서드 선언부에 throws를 추가<br>예외가 발생한 메서드에서 예외처리를 하지 않고 메서드를 호출한 곳에서 예외처리함<br>main()에서 throws를 사용하면 가상 머신에서 처리 됨  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ThrowsException &#123;</span><br><span class="line"></span><br><span class="line">    public Class loadClass(String fileName, String className) throws FileNotFoundException, ClassNotFoundException &#123; &#x2F;&#x2F;throws로 미루기</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; new FileInputStream(fileName);</span><br><span class="line">        Class c &#x3D; Class.forName(className);</span><br><span class="line">        return c;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        ThrowsException test &#x3D; new ThrowsException();</span><br><span class="line">        try &#123;</span><br><span class="line">            test.loadClass(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;,&quot;java.lang.String&quot;); &#x2F;&#x2F;loadClass에 대한 try~catch문 필요</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>다중 예외 처리<br>하나의 try{} 블록에서 여러 예외가 발생하는 경우<br>하나의 catch{} 블록에서 예외 처리 하거나<br>여러 catch{} 블록으로 나누어 처리할 수 있음<br>이때, 최상위 예외 클래스인 Exception 클래스는 가장 마지막 블록에 위치해야 함  </li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_65/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_68/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -419,86 +499,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/08/12/hexo_OOP_68/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_71/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_71/" class="post-title-link" itemprop="url">71. 직렬화</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="71-직렬화"><a href="#71-직렬화" class="headerlink" title="71. 직렬화"></a>71. 직렬화</h4><p>인스턴스의 상태를 그대로 저장하거나 네트웍으로 전송하고 이를 다시 복원하는 방식<br>ObjectInputStream, ObjectOutputStream 보조스트림 사용  </p>
-<p>Serializable 인터페이스<br>직렬화는 인스턴스의 내용이 외부로 유출되는 것이므로 프로그래머가 객체의 직렬화 가능 여부를 명시함<br>구현 코드가 없는 마크 인터페이스  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">package stream.serialization;</span><br><span class="line"></span><br><span class="line">import java.io.*;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; class Person implements Externalizable &#123; &#x2F;&#x2F;직렬화가능하며 구현해야할 기능이 있음  </span><br><span class="line">class Person implements Serializable &#123; &#x2F;&#x2F;직렬화가능하다는 마크 인터페이스 </span><br><span class="line">    String name;</span><br><span class="line">    transient String job; &#x2F;&#x2F;직렬화 제외 키워드</span><br><span class="line"></span><br><span class="line">    public Person(String name, String job) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">        this.job &#x3D; job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return name + &quot;,&quot; + job;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class SerializationTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Person personLee &#x3D; new Person(&quot;이순신&quot;,&quot;엔지니어&quot;);</span><br><span class="line">        Person personKim &#x3D; new Person(&quot;김유신&quot;,&quot;선생님&quot;);</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;객체 파일 생성</span><br><span class="line">        try (FileOutputStream fos &#x3D; new FileOutputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;serial.dat&quot;);</span><br><span class="line">             ObjectOutputStream oos &#x3D; new ObjectOutputStream(fos)) &#123;</span><br><span class="line">            oos.writeObject(personLee);</span><br><span class="line">            oos.writeObject(personKim);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;객체 파일 읽기</span><br><span class="line">        try (FileInputStream fis &#x3D; new FileInputStream(&quot;IdeaProjects&#x2F;Chapter14&#x2F;serial.dat&quot;);</span><br><span class="line">        ObjectInputStream ois &#x3D; new ObjectInputStream(fis)) &#123;</span><br><span class="line">            Person p1 &#x3D; (Person) ois.readObject();</span><br><span class="line">            Person p2 &#x3D; (Person) ois.readObject();</span><br><span class="line"></span><br><span class="line">            System.out.println(p1);</span><br><span class="line">            System.out.println(p2);</span><br><span class="line"></span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_71/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
