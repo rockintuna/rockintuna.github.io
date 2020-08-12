@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -99,6 +99,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -128,20 +129,43 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -155,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_43/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,7 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_OOP_43/" class="post-title-link" itemprop="url">43. Object 클래스</a>
+            <a href="/2020/08/12/hexo_springboot_1_45/" class="post-title-link" itemprop="url">45. 회원가입</a>
         </h2>
 
         <div class="post-meta">
@@ -178,8 +202,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">작성일</span>
+              
 
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+              <time title="Post created: 2020-08-12 21:22:41 / Updated at: 21:55:07" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -191,7 +216,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
                 </span>
             </span>
 
@@ -206,31 +231,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="43-Object-클래스"><a href="#43-Object-클래스" class="headerlink" title="43. Object 클래스"></a>43. Object 클래스</h4><ul>
-<li>Object 클래스<br>모든 클래스의 최상위 클래스 (java.lang.Object)<br>(java.lang 패키지 위치 : /Library/Java/JavaVirtualMachines/jdk-11.0.7.jdk/Contents/Home/lib/src.zip<br>, java.lang 패키지는 컴파일러가 자동으로 import 해준다.)<br>모든 클래스는 Object 클래스에서 상속 받음<br>모든 클래스는 Object 클래스의 메서드를 사용할 수 있음<br>모든 클래스는 Object 클래스의 일부 메서드를 재정의하여 사용할 수 있음<br>(final로 정의된 메서드들은 재정의 할 수 없음)   </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package object;</span><br><span class="line"></span><br><span class="line">class Book&#123;</span><br><span class="line">    String title;</span><br><span class="line">    String author;</span><br><span class="line"></span><br><span class="line">    public Book(String title,String author) &#123;</span><br><span class="line">        this.title &#x3D; title;</span><br><span class="line">        this.author &#x3D; author;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;title&#x3D;&#39;&quot; + title + &#39;\&#39;&#39; + &quot;, author&#x3D;&#39;&quot; + author + &#39;\&#39;&#39;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class ToStringTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Book book &#x3D; new Book(&quot;토지&quot;,&quot;박경리&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(book); &#x2F;&#x2F;Object의 toString 메서드는 메모리 주소를 리턴한다</span><br><span class="line"></span><br><span class="line">        String str &#x3D; new String(&quot;토지&quot;); &#x2F;&#x2F;String 클래스는 Object로부터 toString 메서드가 재정의되어 있음</span><br><span class="line">        System.out.println(str); &#x2F;&#x2F;실제로는 str.toString()</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>toString() 메서드<br>원형 : </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getClass().getName()+&#39;@&#39;+Integer.toHexString(hashCode());</span><br></pre></td></tr></table></figure>
-<p>객체의 정보를 String으로 바꾸어 사용할 때 유용함<br>자바 클래스 중에는 이미 정의된 클래스가 많다<br>(String,Integer,Calendar,etc…)<br>그 외에 많은 클래서에서 재정의하여 사용한다    </p>
-</li>
-<li><p>equals() 메서드<br>두 객체의 동일함을 논리적으로 재정의 할 수 있음<br>물리적 동일함 : 같은 메모리 주소<br>논리적 동일함 : 같은 학번의 학생, 같은 주문 번호의 주문<br>논리적으로 동일함을 구현하기 위해 사용   </p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Student studentLee &#x3D; new Student(100,&quot;이상원&quot;);</span><br><span class="line">Student studentSang &#x3D; new Student(100,&quot;이상원&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>studentLee와 studentSang은 물리적으로 동일한 객체가 아니지만 논리적으로는 동일한 객체라고 할 수 있다.<br>논리적 동일함을 구현하기 위하여…    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public class EqualsTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String str1 &#x3D; new String(&quot;abc&quot;);</span><br><span class="line">        String str2 &#x3D; new String(&quot;abc&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(str1&#x3D;&#x3D;str2); &#x2F;&#x2F;false, 메모리 주소가 같은지 확인</span><br><span class="line">        System.out.println(str1.equals(str2)); &#x2F;&#x2F;String에 재정의된 equals()는 두 문자열이 같은지 확인</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>hashCode() 메서드<br>반환 값 : 인스턴스가 저장된 가상머신의 주소를 10진수로 반환<br>두 개의 서로 다른 메모리에 위치한 인스턴스가 동일하다는 것은?<br>논리적으로 동일 : equals()의 반환값이 true<br>&amp;&amp;<br>동일한 hashCode 값을 가짐 : hashCode()의 반환 값이 동일   </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">package object;</span><br><span class="line"></span><br><span class="line">class Student &#123;</span><br><span class="line">    int studentNum;</span><br><span class="line">    String studentName;</span><br><span class="line"></span><br><span class="line">    public Student(int studentNum, String studentName) &#123;</span><br><span class="line">        this.studentNum &#x3D; studentNum;</span><br><span class="line">        this.studentName &#x3D; studentName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean equals(Object object) &#123;</span><br><span class="line">        if (object instanceof Student) &#123;</span><br><span class="line">            Student student &#x3D; (Student)object;</span><br><span class="line">            if (this.studentNum&#x3D;&#x3D;student.studentNum) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return false;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int hashCode() &#123;</span><br><span class="line">        return studentNum; &#x2F;&#x2F;equals()에서 사용한 멤버변수를 활</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class EqualsTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Student Lee &#x3D; new Student(100,&quot;이순신&quot;);</span><br><span class="line">        Student Lee2 &#x3D; Lee;</span><br><span class="line">        Student Shin &#x3D; new Student(100,&quot;이순신&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(Lee&#x3D;&#x3D;Lee2); &#x2F;&#x2F;true</span><br><span class="line">        System.out.println(Lee&#x3D;&#x3D;Shin); &#x2F;&#x2F;false</span><br><span class="line">        System.out.println(Lee.equals(Shin)); &#x2F;&#x2F;true</span><br><span class="line"></span><br><span class="line">        System.out.println(Lee.hashCode());  &#x2F;&#x2F;100</span><br><span class="line">        System.out.println(Shin.hashCode()); &#x2F;&#x2F;100</span><br><span class="line"></span><br><span class="line">        Integer i1 &#x3D; new Integer(100);</span><br><span class="line">        Integer i2 &#x3D; new Integer(100);</span><br><span class="line"></span><br><span class="line">        System.out.println(i1.equals(i2)); &#x2F;&#x2F;true, Integer에서 equals()와 hashCode()가 재정의 되어있음</span><br><span class="line">        System.out.println(i1.hashCode());</span><br><span class="line">        System.out.println(i2.hashCode());</span><br><span class="line"></span><br><span class="line">        System.out.println(System.identityHashCode(i1)); &#x2F;&#x2F;실제 메모리 주소 값을 확인하려면</span><br><span class="line">        System.out.println(System.identityHashCode(i2));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="45-회원가입"><a href="#45-회원가입" class="headerlink" title="45. 회원가입"></a>45. 회원가입</h4><p>BCrypt를 이용한 Hash 암호화를 사용하기 위해<br>제공되는 Spring Security 프로젝트 사용<br>HttpSecurity 부분을 직접 설정할 예정이다  </p>
+<p>회원가입 변수<br>Email<br>Name<br>Password (2회 인증은 보통 front에서)  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_43/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_45/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -254,7 +259,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_48/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_48/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -268,7 +273,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_OOP_48/" class="post-title-link" itemprop="url">48. String, Wrapper 클래스</a>
+            <a href="/2020/08/12/hexo_springboot_1_48/" class="post-title-link" itemprop="url">48. 인증</a>
         </h2>
 
         <div class="post-meta">
@@ -278,7 +283,7 @@
               </span>
               <span class="post-meta-item-text">작성일</span>
 
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -290,7 +295,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
                 </span>
             </span>
 
@@ -305,25 +310,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="48-String-Wrapper-클래스"><a href="#48-String-Wrapper-클래스" class="headerlink" title="48. String, Wrapper 클래스"></a>48. String, Wrapper 클래스</h4><ul>
-<li>String    </li>
-</ul>
-<p>String 클래스 선언하기</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str1 &#x3D; new String(&quot;abc&quot;); &#x2F;&#x2F;인스턴스로 생성</span><br><span class="line">String str2 &#x3D; &quot;abc&quot;              &#x2F;&#x2F;상수풀에 있는 문자</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package string;</span><br><span class="line"></span><br><span class="line">public class StringTest &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String str1 &#x3D; new String(&quot;abc&quot;); &#x2F;&#x2F;힙메모리 영역</span><br><span class="line">        String str2 &#x3D; &quot;abc&quot;;                     &#x2F;&#x2F;상수 풀</span><br><span class="line">        String str3 &#x3D; &quot;abc&quot;;</span><br><span class="line"></span><br><span class="line">        System.out.println(str1 &#x3D;&#x3D; str2); &#x2F;&#x2F;false, 메모리 위치가 다르기 때문</span><br><span class="line">        System.out.println(str2 &#x3D;&#x3D; str3); &#x2F;&#x2F;true, 둘다 상수풀이기 때문</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>한번 선언되거나 생성된 문자열은 변경할 수 없다.<br>가변적으로 문자열을 사용하려면 StringBuilder 또는 StringBuffer를 사용한다.<br>StringBuilder는 단일 쓰레드 프로그래밍에서,<br>StringBuffer는 멀티 쓰레드 프로그래밍에서 사용된다.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package string;</span><br><span class="line"></span><br><span class="line">public class StringTest2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String java &#x3D; new String(&quot;java&quot;);</span><br><span class="line">        String android &#x3D; new String(&quot;android&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(System.identityHashCode(java));</span><br><span class="line">        java &#x3D; java.concat(android);</span><br><span class="line"></span><br><span class="line">        System.out.println(java);</span><br><span class="line">        System.out.println(System.identityHashCode(java)); &#x2F;&#x2F;메모리 주소가 변경됨,즉 새로운 메모리 영역 사용됨</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package string;</span><br><span class="line"></span><br><span class="line">public class StringBuilderTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String java &#x3D; new String(&quot;java&quot;);</span><br><span class="line">        String android &#x3D; new String(&quot;android&quot;);</span><br><span class="line"></span><br><span class="line">        StringBuilder buffer &#x3D; new StringBuilder(java);</span><br><span class="line">        System.out.println(System.identityHashCode(buffer));</span><br><span class="line">        buffer.append(&quot;android&quot;);</span><br><span class="line">        System.out.println(System.identityHashCode(buffer)); &#x2F;&#x2F;변경되어도 메모리 주소는 변하지 않음</span><br><span class="line"></span><br><span class="line">        java &#x3D; buffer.toString(); &#x2F;&#x2F;String 타입으로 형변환 </span><br><span class="line">        System.out.println(java);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Wrapper 클래스<br>기본 자료형에 대한 클래스<br>Boolean, Integer, 등등    </li>
-</ul>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="48-인증"><a href="#48-인증" class="headerlink" title="48. 인증"></a>48. 인증</h4><p>POST /session<br>session이라는 resource를 구현할것이다<br>session이 올바르게 만들어졌다는 정보를 유지하기위해 accessToken을 사용한다<br>DTO(Data Transfer Object)를 통해 데이터 교환<br>SessionResponseDto session 결과(accessToken 등) 교환<br>SessionRequestDto session을 만들기위한 request 데이터 교환</p>
+<p>SessionResponseDto</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_48/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_48/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -347,7 +338,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_46/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_52/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -361,7 +352,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_OOP_46/" class="post-title-link" itemprop="url">46. Class 클래스</a>
+            <a href="/2020/08/12/hexo_springboot_1_52/" class="post-title-link" itemprop="url">52. JWT</a>
         </h2>
 
         <div class="post-meta">
@@ -371,7 +362,7 @@
               </span>
               <span class="post-meta-item-text">작성일</span>
 
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -383,7 +374,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
                 </span>
             </span>
 
@@ -398,22 +389,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="46-Class-클래스"><a href="#46-Class-클래스" class="headerlink" title="46. Class 클래스"></a>46. Class 클래스</h4><ul>
-<li>Class 클래스<br>자바의 모든 클래스와 인터페이스는 컴파일 후 class 파일로 생성됨<br>class 파일에는 객체의 정보(멤버변수, 메서드, 생성자 등)가 포함되어 있음<br>Class 클래스는 컴파일된 class 파일에서 객체의 정보를 가져올 수 있음<br>동적 로딩에 많이 사용    </li>
-</ul>
-<p>Class 클래스 가져오기  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s &#x3D; new String();</span><br><span class="line">Class c &#x3D; s.getClass();</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c &#x3D; String.Class;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Class c &#x3D; Class.forName(&quot;java.lang.String&quot;); &#x2F;&#x2F;동적 로딩 : 컴파일 타임이 아닌 런타임에서 로딩</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>reflection 프로그래밍<br>Class 클래스로부터 객체의 정보를 가져와 프로그래밍하는 방식<br>로컬에 객체가 없고 자료형을 알 수 없는 경우 유용한 프로그래밍<br>java.lang.reflect 패키지에 있는 클래스 활용    </li>
-</ul>
-<p>String 클래스 정보 확인</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package classex;</span><br><span class="line"></span><br><span class="line">import java.lang.reflect.Constructor;</span><br><span class="line">import java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line">public class StringClassTest &#123;</span><br><span class="line">    public static void main(String[] args) throws ClassNotFoundException &#123;</span><br><span class="line"></span><br><span class="line">        Class c1 &#x3D; String.class;</span><br><span class="line"></span><br><span class="line">        String str &#x3D; new String();</span><br><span class="line">        Class c2 &#x3D; str.getClass();</span><br><span class="line"></span><br><span class="line">        Class c3 &#x3D; Class.forName(&quot;java.lang.String&quot;);</span><br><span class="line"></span><br><span class="line">        Constructor[] cons &#x3D; c3.getConstructors();</span><br><span class="line">        for (Constructor con : cons) &#123; &#x2F;&#x2F;String 클래스의 모든 생성자 출력</span><br><span class="line">            System.out.println(con);</span><br><span class="line">        &#125; &#x2F;&#x2F;보통 로컬에 이 클래스가 없을 때 사용</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        Method[] methods &#x3D; c3.getMethods();</span><br><span class="line">        for (Method method : methods) &#123; &#x2F;&#x2F;String 클래스의 모든 메서드 선언부 출력</span><br><span class="line">            System.out.println(method);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="52-JWT"><a href="#52-JWT" class="headerlink" title="52. JWT"></a>52. JWT</h4><p>JWT (Json Web Tokens)<br>Json 포맷을 이용해 웹에서 활용할 수 있는 Access Token을 다루는 표준  </p>
+<p>3 Parts<br>Header - Type, 알고리즘<br>Payload - 실제 데이터(Claims)<br>Signature - 위변조 서명  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_46/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_52/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -437,7 +417,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_49/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_54/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -451,7 +431,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_OOP_49/" class="post-title-link" itemprop="url">49. 제네릭 프로그래밍</a>
+            <a href="/2020/08/12/hexo_springboot_1_54/" class="post-title-link" itemprop="url">54. 인가(Authorization)</a>
         </h2>
 
         <div class="post-meta">
@@ -461,7 +441,7 @@
               </span>
               <span class="post-meta-item-text">작성일</span>
 
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -473,7 +453,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
                 </span>
             </span>
 
@@ -488,25 +468,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="49-제네릭-프로그래밍"><a href="#49-제네릭-프로그래밍" class="headerlink" title="49. 제네릭 프로그래밍"></a>49. 제네릭 프로그래밍</h4><ul>
-<li>제네릭 프로그래밍이란<br>변수의 선언이나 메서드의 매개변수를 하나의 참조 자료형이 아닌 여러 자료형으로 변환될 수 있도록 프로그래밍 하는 방식<br>실제 사용되는 참조 자료형으로의 변환은 컴파일러가 검증하므로 안정적인 프로그래밍 방식이다.  </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">package generic;</span><br><span class="line"></span><br><span class="line">public class GenericPrinter&lt;T extends Meterial&gt; &#123; &#x2F;&#x2F; T : 자료형 매개변</span><br><span class="line">                                                  &#x2F;&#x2F; 클래스가 생성될때 T에 타입을 대입</span><br><span class="line">                                                  &#x2F;&#x2F;Meterial을 상속받은 타입만 들어갈 수 있게 제한</span><br><span class="line"></span><br><span class="line">    private T meterial; &#x2F;&#x2F;재료는 플라스틱,파우더 등 여러가지일 수 있으므로</span><br><span class="line"></span><br><span class="line">    public T getMeterial() &#123; &#x2F;&#x2F;제네릭 타입을 사용하는 메서드 : 제네릭 메서드</span><br><span class="line">        return meterial;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setMeterial(T meterial) &#123;</span><br><span class="line">        this.meterial &#x3D; meterial;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return meterial.toString();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void printing() &#123;</span><br><span class="line">        meterial.doPrinting(); &#x2F;&#x2F;T가 Meterial 클래스로 제한되면서, Meterial 클래스에 정의된 메서드를 공유할 수 있다.</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">package generic;</span><br><span class="line"></span><br><span class="line">public abstract class Meterial &#123;</span><br><span class="line"></span><br><span class="line">    public abstract void doPrinting();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package generic;</span><br><span class="line"></span><br><span class="line">public class Plastic extends Meterial&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;재료는 플라스틱입니다.&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doPrinting() &#123;</span><br><span class="line">        System.out.println(&quot;플라스틱 프린팅합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package generic;</span><br><span class="line"></span><br><span class="line">public class Powder extends Meterial&#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String toString() &#123;</span><br><span class="line">        return &quot;재료는 파우더입니다&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void doPrinting() &#123;</span><br><span class="line">        System.out.println(&quot;파우더 프린팅합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package generic;</span><br><span class="line"></span><br><span class="line">public class GenericPrinterTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        GenericPrinter&lt;Powder&gt; powderPrinter &#x3D; new GenericPrinter&lt;&gt;();</span><br><span class="line">        Powder powder &#x3D; new Powder();</span><br><span class="line">        powderPrinter.setMeterial(powder);</span><br><span class="line">        System.out.println(powderPrinter.toString());</span><br><span class="line"></span><br><span class="line">        GenericPrinter&lt;Plastic&gt; plasticPrinter &#x3D; new GenericPrinter&lt;&gt;();</span><br><span class="line">        Plastic plastic &#x3D; new Plastic();</span><br><span class="line">        plasticPrinter.setMeterial(plastic);</span><br><span class="line">        System.out.println(plasticPrinter.toString());</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;GenericPrinter&lt;Water&gt; waterPrinter; &#x2F;&#x2F;Water는 Meterial 클래스를 상속받지 않았으므로 에러 발생</span><br><span class="line"></span><br><span class="line">        plasticPrinter.printing();</span><br><span class="line">        powderPrinter.printing();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>일반 클래스에서도 제네릭 메서드를 사용할 수 있다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public &lt;T,V&gt; double makeRectangle(Point&lt;T,V&gt; p1, Point&lt;T,V&gt; p2) &#123;</span><br><span class="line">...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="54-인가-Authorization"><a href="#54-인가-Authorization" class="headerlink" title="54. 인가(Authorization)"></a>54. 인가(Authorization)</h4><p>인증은 사용자를 증명하는 단계였다면,<br>인가는 발급된 access Token을 어떻게 다루고<br>어떤 서비스를 사용할 수 있는지 다루는 부분이다.  </p>
+<p>Http의 Header를 통해서 Access Token을 전달한다.<br>Header의 key와 value는 아래와 같은 쌍으로 전달할것이다.<br>Authorization : Bearer  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_49/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_54/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -530,7 +496,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_50/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_56/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -544,7 +510,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_OOP_50/" class="post-title-link" itemprop="url">50. 컬렉션 프레임워크</a>
+            <a href="/2020/08/12/hexo_springboot_1_56/" class="post-title-link" itemprop="url">56. 로그인 API 분리</a>
         </h2>
 
         <div class="post-meta">
@@ -554,7 +520,7 @@
               </span>
               <span class="post-meta-item-text">작성일</span>
 
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -566,7 +532,7 @@
                 </span>
                   , 
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
                 </span>
             </span>
 
@@ -581,478 +547,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="50-컬렉션-프레임워크"><a href="#50-컬렉션-프레임워크" class="headerlink" title="50. 컬렉션 프레임워크"></a>50. 컬렉션 프레임워크</h4><ul>
-<li>컬렉션 프레임워크란?<br>프로그램 구현에 필요한 자료구조와 알고리즘을 구현해 놓은 라이브러리<br>java.util 패키지에 구현되어 있음<br>개발에 소요되는 시간을 절약하고 최적화된 라이브러리를 사용할 수 있음<br>Collection 인터페이스와 Map 인터페이스로 구성됨    </li>
-</ul>
-<p>Collection : 하나의 객체 관리를 위해 선언된 인터페이스<br>+–List : 순서가 있는 자료관리, 중복 허용<br>+–Set : 순서가 정해져있지 않음, 중복을 허용하지 않음  </p>
-<p>Map : 쌍으로 이루어진 객체 관리를 위해 선언된 인터페이스<br>Map을 사용하는 객체는 key-value 쌍으로 되어있으며 이중 Key는 중복될 수 없다. </p>
-<ul>
-<li>List 인터페이스<br>Collection의 하위 인터페이스<br>객체를 순서에따라 저장하고 관리하는데 필요한 메서드가 선언된 인터페이스<br>배열의 기능을 구현하기 위한 메서드가 선언됨<br>ArrayList, Vector, LinkedList</li>
-</ul>
-<p>ArrayList와 Vector<br>객체 배열 클래스<br>일반적으로 ArrayList를 더 많이 사용<br>Vector는 멀티 쓰레드 프로그램에서 동기화를 제공<br>capacity와 size는 다른 의미   </p>
-<p>ArrayList와 LinkedList<br>둘다 자료의 순차적 구조를 구현한 클래스<br>ArrayList는 물리적 순서와 논리적 순서가 동일하다. (검색용)<br>LinkedList는 물리적으로는 순차적이지 않을 수 있다. (변경용)     </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package collection;</span><br><span class="line"></span><br><span class="line">import java.util.LinkedList;</span><br><span class="line"></span><br><span class="line">public class LinkedListTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        LinkedList&lt;String&gt; myList &#x3D; new LinkedList&lt;String&gt;();</span><br><span class="line"></span><br><span class="line">        myList.add(&quot;A&quot;);</span><br><span class="line">        myList.add(&quot;B&quot;);</span><br><span class="line">        myList.add(&quot;C&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(myList);</span><br><span class="line">        myList.add(1,&quot;D&quot;);</span><br><span class="line"></span><br><span class="line">        System.out.println(myList);</span><br><span class="line"></span><br><span class="line">        for(int i&#x3D;0;i&lt;myList.size();i++) &#123;</span><br><span class="line">            String s &#x3D; myList.get(i);  &#x2F;&#x2F;set 인터페이스에는 get메서드가 없다.</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>Stack<br>LIFO<br>이미 구현된 클래스가 제공되고 있음<br>ArrayList, LinkedList로 구현할 수 있음<br>관련 용어 : pop, push, top    </p>
-</li>
-<li><p>Queue<br>FIFO<br>ArrayList, LinkedList로 구현할 수 있음<br>관련용어 : front, rear, enqueue, dequeue    </p>
-</li>
-</ul>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="56-로그인-API-분리"><a href="#56-로그인-API-분리" class="headerlink" title="56. 로그인 API 분리"></a>56. 로그인 API 분리</h4><p>eatgo-login-api를 새로 만들어 로그인 처리를 할것이다.<br>이게 가능한 이유는 Stateless이기 때문인데<br>사용자의 로그인 등 활동에 대해서는 관리하지 않지만 JWT의 accessToken을 활용할 수 있다.  </p>
+<p>eatgo-login-api<br>UserService에서 인증 부분만 login API로 옮겼다.</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_50/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_55/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_55/" class="post-title-link" itemprop="url">55. Map 인터페이스</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="55-Map-인터페이스"><a href="#55-Map-인터페이스" class="headerlink" title="55. Map 인터페이스"></a>55. Map 인터페이스</h4><ul>
-<li>Map 인터페이스<br>쌍으로 이루어진 객체 관리를 위해 선언된 인터페이스<br>검색을 위한 자료구조<br>Map을 사용하는 객체는 key-value 쌍으로 되어있으며 Key는 중복될 수 없다.<br>Key를 이용하여 값을 저장하거나 검색, 삭제할 때 사용하면 편리하다.<br>내부적으로 hash 방식으로 구현되어 있다.    <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">index &#x3D; hash(key) &#x2F;&#x2F;index는 저장 위치</span><br></pre></td></tr></table></figure>
-key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), hashCode() 메서드를 재정의한다.  </li>
-</ul>
-<p>HashMap 클래스<br>Map 인터페이스를 구현한 클래스 중에서 가장 일반적으로 쓰인다.<br>pair 자료를 쉽고 빠르게 관리할 수 있다.<br>HashTable 클래스는 Vector 처럼 동기화를 제공한다.     </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">package collection.hashmap;</span><br><span class="line"></span><br><span class="line">import java.util.HashMap;</span><br><span class="line">import java.util.Iterator;</span><br><span class="line"></span><br><span class="line">public class MemberHashMap &#123;</span><br><span class="line"></span><br><span class="line">    private HashMap&lt;Integer,Member&gt; hashMap;</span><br><span class="line"></span><br><span class="line">    public MemberHashMap() &#123;</span><br><span class="line">        hashMap &#x3D; new HashMap&lt;Integer, Member&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void addMember(Member member) &#123;</span><br><span class="line">        hashMap.put(member.getMemberId(),member); &#x2F;&#x2F;add가 아닌 put임에 유의, key-value pair가 들어간다.</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean removeMember(int memberId) &#123; &#x2F;&#x2F;key 값을 통해 제거</span><br><span class="line">        if (hashMap.containsKey(memberId)) &#123; &#x2F;&#x2F;containsKey : 해당 key값의 요소가 있는지 체크</span><br><span class="line">            hashMap.remove(memberId); &#x2F;&#x2F;key값으로 제거</span><br><span class="line">            return true;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(&quot;회원 번호가 없습니다.&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showAllMember() &#123;</span><br><span class="line">        &#x2F;&#x2F;hashMap.keySet().iterator(); &#x2F;&#x2F;keySey() : 모든 key 객체를 set으로 반환</span><br><span class="line">        &#x2F;&#x2F;hashMap.values().iterator(); &#x2F;&#x2F;values() : 모든 value 객체를 Collection으로 반환</span><br><span class="line"></span><br><span class="line">        Iterator&lt;Integer&gt; ir &#x3D; hashMap.keySet().iterator();</span><br><span class="line">        while (ir.hasNext()) &#123;</span><br><span class="line">            int key &#x3D; ir.next();</span><br><span class="line">            Member member &#x3D; hashMap.get(key); &#x2F;&#x2F;get(key) 해당 key의 value 반환</span><br><span class="line">            System.out.println(member);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package collection.hashmap;</span><br><span class="line"></span><br><span class="line">public class MemberHashMapTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        MemberHashMap manager &#x3D; new MemberHashMap();</span><br><span class="line"></span><br><span class="line">        Member memberLee &#x3D; new Member(100,&quot;Lee&quot;);</span><br><span class="line">        Member memberKim &#x3D; new Member(101,&quot;Kim&quot;);</span><br><span class="line">        Member memberPark &#x3D; new Member(102,&quot;Park&quot;);</span><br><span class="line">        Member memberPark2 &#x3D; new Member(102,&quot;Park&quot;);</span><br><span class="line"></span><br><span class="line">        manager.addMember(memberLee);</span><br><span class="line">        manager.addMember(memberKim);</span><br><span class="line">        manager.addMember(memberPark);</span><br><span class="line">        manager.addMember(memberPark2); &#x2F;&#x2F;key type인 Integer에 이미 equals()와 hashCode()가 재정의 되어있다.</span><br><span class="line">                                        &#x2F;&#x2F;그렇기 때문에 따로 재정의해주지 않아도 안들어간다.</span><br><span class="line"></span><br><span class="line">        manager.showAllMember();</span><br><span class="line"></span><br><span class="line">        manager.removeMember(101);</span><br><span class="line">        manager.showAllMember();</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>TreeMap 클래스<br>key 객체를 정렬하여 key-value를 pair로 관리하는 클래스<br>정렬을 위하여 key에 사용되는 클래스에 Comparable 또는 Comparator 인터페이스를 구현   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package collection.treemap;</span><br><span class="line"></span><br><span class="line">import java.util.Iterator;</span><br><span class="line">import java.util.TreeMap;</span><br><span class="line"></span><br><span class="line">public class MemberTreeMap &#123;</span><br><span class="line"></span><br><span class="line">    TreeMap&lt;Integer,Member&gt; treeMap;</span><br><span class="line"></span><br><span class="line">    public MemberTreeMap() &#123;</span><br><span class="line">        treeMap &#x3D; new TreeMap&lt;Integer, Member&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void addMember(Member member) &#123;</span><br><span class="line">        treeMap.put(member.getMemberId(),member);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean removeMember(int memberId) &#123;</span><br><span class="line">        if (treeMap.containsKey(memberId)) &#123;</span><br><span class="line">            treeMap.remove(memberId);</span><br><span class="line">            return true;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(&quot;회원 번호가 없습니다.&quot;);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showAllMember() &#123;</span><br><span class="line">        Iterator&lt;Integer&gt; ir &#x3D; treeMap.keySet().iterator();</span><br><span class="line">        while (ir.hasNext()) &#123;</span><br><span class="line">            int key &#x3D; ir.next();</span><br><span class="line">            Member member &#x3D; treeMap.get(key);</span><br><span class="line">            System.out.println(member);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package collection.treemap;</span><br><span class="line"></span><br><span class="line">public class MemberTreeMapTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        MemberTreeMap manager &#x3D; new MemberTreeMap();</span><br><span class="line"></span><br><span class="line">        Member memberLee &#x3D; new Member(200,&quot;Lee&quot;);</span><br><span class="line">        Member memberKim &#x3D; new Member(400,&quot;Kim&quot;);</span><br><span class="line">        Member memberPark &#x3D; new Member(100,&quot;Park&quot;);</span><br><span class="line"></span><br><span class="line">        manager.addMember(memberLee);</span><br><span class="line">        manager.addMember(memberKim);</span><br><span class="line">        manager.addMember(memberPark);</span><br><span class="line"></span><br><span class="line">        manager.showAllMember(); &#x2F;&#x2F;Integer 클래스에서 Comparable가 구현되어 있으므로</span><br><span class="line">                                 &#x2F;&#x2F;따로 구현하지 않더라도 정렬되어있다.</span><br><span class="line"></span><br><span class="line">        manager.removeMember(200);</span><br><span class="line">        manager.showAllMember();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_55/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_56/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_56/" class="post-title-link" itemprop="url">56. 내부 클래스</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="56-내부-클래스"><a href="#56-내부-클래스" class="headerlink" title="56. 내부 클래스"></a>56. 내부 클래스</h4><ul>
-<li>내부 클래스란<br>클래스 내부에 구현된 클래스 (중첩된 클래스)<br>클래스 내부에서 사용하기 위해 선언하고 구현하는 클래스<br>주로 외부 클래스 생성자에서 내부 클래스를 생성   </li>
-</ul>
-<p>인스턴스 내부 클래스, 정적 내부 클래스   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package innerclass;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line"></span><br><span class="line">    int outNum &#x3D; 100;</span><br><span class="line">    static int sNum &#x3D;200;</span><br><span class="line"></span><br><span class="line">    Runnable getRunnable(int i) &#123; &#x2F;&#x2F;Runnable 한 type의 객체를 반환하는 메서드</span><br><span class="line"></span><br><span class="line">        int num &#x3D; 100; &#x2F;&#x2F;지역변수 i, num</span><br><span class="line">        class MyRunnable implements Runnable &#123; &#x2F;&#x2F;지역 내부 클래스, 메서드 내에 구현되어 있음</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                &#x2F;&#x2F;num +&#x3D; 10; 메서드의 지역변수 변경할 수 없음.</span><br><span class="line">                &#x2F;&#x2F; i &#x3D; 200;  지역 내부 클래스를 포함하는 메서드의 지역변수는 내부적으로 final이 된다..</span><br><span class="line"></span><br><span class="line">                System.out.println(num);</span><br><span class="line">                System.out.println(i);</span><br><span class="line">                System.out.println(outNum);</span><br><span class="line">                System.out.println(sNum);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new MyRunnable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class LocalInnerClassTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Outer outer &#x3D; new Outer();</span><br><span class="line">        Runnable runnable &#x3D; outer.getRunnable(30);</span><br><span class="line"></span><br><span class="line">        runnable.run(); &#x2F;&#x2F;getRunnable 메서드는 이미 종료되어 지역변수는 없어져있다.</span><br><span class="line">                        &#x2F;&#x2F;지역 내부 클래스의 메서드(run)은 언제든지 호출될 수 있다.</span><br><span class="line">                        &#x2F;&#x2F;그렇기 때문에 지역 내부 클래스를 포함하는 메서드의 지역변수는 상수(final)가 된다.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>지역 내부 클래스   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package innerclass;</span><br><span class="line"></span><br><span class="line">class Outer &#123;</span><br><span class="line"></span><br><span class="line">    int outNum &#x3D; 100;</span><br><span class="line">    static int sNum &#x3D;200;</span><br><span class="line"></span><br><span class="line">    Runnable getRunnable(int i) &#123; &#x2F;&#x2F;Runnable 한 type의 객체를 반환하는 메서드</span><br><span class="line"></span><br><span class="line">        int num &#x3D; 100; &#x2F;&#x2F;지역변수 i, num</span><br><span class="line">        class MyRunnable implements Runnable &#123; &#x2F;&#x2F;지역 내부 클래스, 메서드 내에 구현되어 있음</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                &#x2F;&#x2F;num +&#x3D; 10; 메서드의 지역변수 변경할 수 없음.</span><br><span class="line">                &#x2F;&#x2F; i &#x3D; 200;  지역 내부 클래스를 포함하는 메서드의 지역변수는 내부적으로 final이 된다..</span><br><span class="line"></span><br><span class="line">                System.out.println(num);</span><br><span class="line">                System.out.println(i);</span><br><span class="line">                System.out.println(outNum);</span><br><span class="line">                System.out.println(sNum);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return new MyRunnable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class LocalInnerClassTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Outer outer &#x3D; new Outer();</span><br><span class="line">        Runnable runnable &#x3D; outer.getRunnable(30);</span><br><span class="line"></span><br><span class="line">        runnable.run(); &#x2F;&#x2F;getRunnable 메서드는 이미 종료되어 지역변수는 없어져있다.</span><br><span class="line">                        &#x2F;&#x2F;지역 내부 클래스의 메서드(run)은 언제든지 호출될 수 있다.</span><br><span class="line">                        &#x2F;&#x2F;그렇기 때문에 지역 내부 클래스를 포함하는 메서드의 지역변수는 상수(final)가 된다.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>익명 내부 클래스(가장 많이 사용)   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">package innerclass;</span><br><span class="line"></span><br><span class="line">class Outer2 &#123;</span><br><span class="line"></span><br><span class="line">    int outNum &#x3D; 100;</span><br><span class="line">    static int sNum &#x3D;200;</span><br><span class="line"></span><br><span class="line">    Runnable getRunnable(int i) &#123; &#x2F;&#x2F;Runnable 한 type의 객체를 반환하는 메서드</span><br><span class="line"></span><br><span class="line">        int num &#x3D; 100; &#x2F;&#x2F;지역변수 i, num</span><br><span class="line">        return new Runnable() &#123; &#x2F;&#x2F;익명 내부 클래스, 메서드 내부</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">                &#x2F;&#x2F;num +&#x3D; 10; 메서드의 지역변수 변경할 수 없음.</span><br><span class="line">                &#x2F;&#x2F; i &#x3D; 200;  지역 내부 클래스를 포함하는 메서드의 지역변수는 내부적으로 final이 된다..</span><br><span class="line"></span><br><span class="line">                System.out.println(num);</span><br><span class="line">                System.out.println(i);</span><br><span class="line">                System.out.println(outNum);</span><br><span class="line">                System.out.println(sNum);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;; &#x2F;&#x2F;익명 내부 클래스 구현 끝 세미콜론</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Runnable runner &#x3D; new Runnable() &#123;  &#x2F;&#x2F;익명 내부 클래스2, 메서드 외부</span><br><span class="line">                                        &#x2F;&#x2F;하나의 인터페이스나 추상클래스에 대해서 상속 또는 구현하는 별개의 클래스를 생성하지 않아도 </span><br><span class="line">                                        &#x2F;&#x2F;바로 이름 없이 생성할 수 있다.</span><br><span class="line">        @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            System.out.println(&quot;test&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class AnonymousInnerClassTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Outer2 outer &#x3D; new Outer2();</span><br><span class="line">        Runnable runnable &#x3D; outer.getRunnable(30);</span><br><span class="line"></span><br><span class="line">        runnable.run(); </span><br><span class="line">        outer.runner.run();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_56/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_58/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_58/" class="post-title-link" itemprop="url">58. 람다식</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="58-람다식"><a href="#58-람다식" class="headerlink" title="58. 람다식"></a>58. 람다식</h4><ul>
-<li><p>람다식이란? (java 8 or newer)<br>자바에서 함수형 프로그래밍을 구현하는 방식<br>클래스를 생성하지 않고 함수의 호출만으로 기능 수행 (내부적으로 익명 객체 사용)<br>함수형 인터페이스 선언    </p>
-</li>
-<li><p>함수형 프로그래밍이란?<br>순수 함수를 구현하고 호출<br>매개변수만 사용하기 때문에 외부에 사이드 이펙트를 주지 않고 병렬 처리 가능<br>안정적인 확장성있는 프로그래밍 방식    </p>
-</li>
-</ul>
-<p>문법</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">InterFace itfc &#x3D; str -&gt; &#123;System.out.println(str);&#125;;</span><br><span class="line">InterFace2 itfc2 &#x3D; (x,y) -&gt; x+y &#x2F;&#x2F;구현부가 return 문 하나라면 return, 중괄호 생략 가능</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package lambda;</span><br><span class="line"></span><br><span class="line">public class TestStringConcat &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        StringConImpl impl &#x3D; new StringConImpl(); &#x2F;&#x2F;객체지향에서는 인터페이스를 구현한 클래스를 사용</span><br><span class="line">        impl.makeString(&quot;hello&quot;,&quot;world&quot;);</span><br><span class="line"></span><br><span class="line">        StringConcat concat &#x3D; (s,v) -&gt; System.out.println(s+&quot; &quot;+v); &#x2F;&#x2F;함수형 프로그래밍, 람다식 사용</span><br><span class="line">        concat.makeString(&quot;hello&quot;,&quot;world&quot;); &#x2F;&#x2F;클래스 구현이 필요없고, 메서드 구현을 따로 만들 필요도 없음.</span><br><span class="line">                                            &#x2F;&#x2F;실제로는 아래처럼 익명 내부클래스로 동작한다.</span><br><span class="line"></span><br><span class="line">        StringConcat concat2 &#x3D; new StringConcat() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void makeString(String str1, String str2) &#123;</span><br><span class="line">                System.out.println(str1+&quot; &quot;+str2);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        concat2.makeString(&quot;hello&quot;,&quot;world&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>람다식은 프로그램내에서 변수처럼 사용할 수 있다.     </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package lambda;</span><br><span class="line"></span><br><span class="line">interface PrintString&#123;</span><br><span class="line">    void showString(String str);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class TestLambda &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        PrintString lambdaStr &#x3D; str -&gt; System.out.println(str); &#x2F;&#x2F;함수의 구현부가 변수로 대입</span><br><span class="line">        lambdaStr.showString(&quot;Test1&quot;);</span><br><span class="line"></span><br><span class="line">        showMyString(lambdaStr); &#x2F;&#x2F;매개변수로 활용</span><br><span class="line">        PrintString lambdaStr2 &#x3D; returnString(); &#x2F;&#x2F;반환된 구현부를 변수에 대입</span><br><span class="line">        lambdaStr2.showString(&quot;Test3&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void showMyString(PrintString p) &#123;</span><br><span class="line">        p.showString(&quot;Test2&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static PrintString returnString() &#123;</span><br><span class="line">        return str-&gt;System.out.println(str+&quot;!!!&quot;); &#x2F;&#x2F;함수의 구현부를 반환</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_58/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_60/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_60/" class="post-title-link" itemprop="url">60. 스트림</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="60-스트림"><a href="#60-스트림" class="headerlink" title="60. 스트림"></a>60. 스트림</h4><p>자료의 대상과 관계없이 동일한 연산을 수행할 수 있는 기능(자료의 추상화)<br>배열, 컬렉션에 동일한 연산이 수행되어 일관성 있는 처리 가능<br>한번 생성하고 사용한 스트림은 재사용할 수 없음<br>스트림 연산은 기존 자료를 변경하지 않음<br>중간 연산과 최종 연산으로 구분 됨<br>최종 연산이 수행되어야 모든 연산이 적용되는 지연 연산  </p>
-<ul>
-<li><p>중간 연산<br>filter(), map()<br>조건에 맞는 요소를 추출하거나 요소를 변환 함<br>문자열의 길이가 5이상인 요소만 출력하기  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sList.stream().filter(s-&gt;s.length()&gt;&#x3D;5).forEach(s-&gt;System.out.println(s));</span><br></pre></td></tr></table></figure>
-<p>고객 클래스에서 고객 이름만 가져오기    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">customerList.stream().map(c-&gt;c.getName()).forEach(s-&gt;System.out.println(s));</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>최종 연산<br>스트림의 자료를 소모하면서 연산을 수행<br>최종 연산 후에 스트림은 더이상 다른 연산을 적용할 수 없음<br>forEach() : 요소를 하나씩 꺼내 옴<br>count() : 요소의 개수<br>sum() : 요소의 합<br>등 여러 가지 최종 연산이 있음   </p>
-</li>
-</ul>
-<p>배열 스트림</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class IntArrayTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] arr &#x3D; &#123;1,2,3,4,5&#125;;</span><br><span class="line"></span><br><span class="line">        int sum &#x3D; Arrays.stream(arr).sum();</span><br><span class="line">        int count &#x3D; (int)Arrays.stream(arr).count(); &#x2F;&#x2F;썼으니 재생성, long이므로 형변환</span><br><span class="line"></span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        System.out.println(count);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>콜렉션 스트림</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line">public class ArrayListStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; sList &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        sList.add(&quot;Tomas&quot;);</span><br><span class="line">        sList.add(&quot;Edward&quot;);</span><br><span class="line">        sList.add(&quot;Jack&quot;);</span><br><span class="line"></span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; sList.stream(); &#x2F;&#x2F;stream 객체 생성</span><br><span class="line">        stream.forEach(s -&gt; System.out.print(s + &quot; &quot;));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().sorted().forEach(s -&gt; System.out.print(s + &quot; &quot;)); &#x2F;&#x2F;sorted 중간 연산 추가</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().map(s -&gt; s.length()).forEach(n -&gt; System.out.print(n + &quot; &quot;)); &#x2F;&#x2F;map(변환) 중간 연산 추가</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">    </span><br><span class="line">* reduce() 연산   </span><br><span class="line">정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용    </span><br><span class="line">최종 연산으로 스트림의 요소를 소모하며 연산 수행     </span><br><span class="line"></span><br><span class="line">배열의 모든 요소의 합을 구하는 reduce() 연산</span><br></pre></td></tr></table></figure>
-<p>Arrays.stream(arr).reduce(0,(a,b)-&gt;a+b));</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_60/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_63/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_63/" class="post-title-link" itemprop="url">63. 예외와 예외 처리</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="63-예외와-예외-처리"><a href="#63-예외와-예외-처리" class="headerlink" title="63. 예외와 예외 처리"></a>63. 예외와 예외 처리</h4><p>컴파일 오류 : 프로그램 코드 작성 중 발생하는 문법적 오류<br>실행 오류 : 실행중인 프로그램이 의도치 않은 동작을 하거나(bug) 프로그램이 중단되는 오류(runtime error)<br>자바는 예외 처리를 통하여 프로그램의 비정상 종료를 막고 log를 남길 수 있음    </p>
-<p>시스템 오류(error) : 가상 머신에서 발생, 프로그래머가 처리할 수 없음<br>동적 메모리를 다 사용한 경우, stack over flow 등<br>예외(Exception) : 프로그램에서 제어할 수 있는 오류<br>읽으려는 파일이 없는 경우, 네트웍이나 소켓 연결 오류 등<br>자바 프로그램에서는 예외에 대한 처리를 수행 함</p>
-<p>Exception 클레스 : 모든 예외 클래스의 최상위 클래스<br>IOException, RuntimeException 등     </p>
-<p>try~catch 문으로 예외처리하기<br>try {<br>예외가 발생할 수 있는 동작<br>} catch(처리할 예외 타입 e) {<br>try블록 안에서 예외가 발생했을 때 수행되는 부분<br>}  </p>
-<p>try {<br>예외가 발생할 수 있는 동작<br>} catch(처리할 예외 타입 e) {<br>try블록 안에서 예외가 발생했을 때 수행되는 부분<br>} finally {<br>예외 발생 여부와 상관 없이 항상 수행되는 부분<br>리소스를 정리하는 코드를 주로 쓴다<br>}  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">public class ArrayExceptionTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] arr &#x3D; new int[5];</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            for (int i &#x3D; 0; i &lt;&#x3D; 5; i++) &#123;</span><br><span class="line">                System.out.println(arr[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;catch(ArrayIndexOutOfBoundsException e) &#123; &#x2F;&#x2F;IDE가 잡아주지 않으므로 직접 써야함</span><br><span class="line">            System.out.println(e);</span><br><span class="line">            System.out.println(&quot;예외 처리&quot;);</span><br><span class="line">        &#125; &#x2F;&#x2F;예외만 처리되고 프로그램은 계속 수행됨</span><br><span class="line">        System.out.println(&quot;프로그램 종료&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>finally<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">package exception;</span><br><span class="line"></span><br><span class="line">import java.io.File;</span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileNotFoundException;</span><br><span class="line"></span><br><span class="line">public class ExceptionTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        FileInputStream fis &#x3D; null;</span><br><span class="line">        System.out.println(new File(&quot;&quot;).getAbsolutePath()); &#x2F;&#x2F;working directory 확인</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            fis &#x3D; new FileInputStream(&quot;IdeaProjects&#x2F;Chapter13&#x2F;a.txt&quot;);</span><br><span class="line">        &#125; catch (FileNotFoundException e) &#123;</span><br><span class="line">            System.out.println(e);</span><br><span class="line">            &#x2F;&#x2F;return;</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            try &#123;</span><br><span class="line">                fis.close(); &#x2F;&#x2F;stream을 close하는 작업을 진행해야되므로</span><br><span class="line">                System.out.println(&quot;finally&quot;);</span><br><span class="line">            &#125; catch (Exception e) &#123;</span><br><span class="line">                System.out.println(e);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;end&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>try<del>with</del>resources 문 (java 7)<br>리소스를 자동으로 해제하도록 제공해주는 구문<br>해당 리소스가 AutoCloseable(인터페이스)을 구현한 경우 close()를 명시적으로 호출하지 않아도<br>try{}블록에서 오픈된 리소스는 정상적인 경우나 예외가 발생한 경우 모두 자동으로 close()가 호출 됨    </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_63/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_56/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -1075,7 +574,7 @@ key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), ha
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
   </nav>
 
 
@@ -1169,6 +668,10 @@ key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), ha
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -1193,7 +696,7 @@ key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), ha
   </span>
   <span class="author" itemprop="copyrightHolder">Jeong In</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
         
@@ -1219,7 +722,7 @@ key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), ha
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -1230,6 +733,10 @@ key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), ha
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 

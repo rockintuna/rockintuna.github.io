@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta property="og:type" content="website">
@@ -99,6 +99,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -128,20 +129,43 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
 
     
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
 
 
     <main class="main">
@@ -155,7 +179,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_45/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_10/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -169,96 +193,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_springboot_1_45/" class="post-title-link" itemprop="url">45. 회원가입</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-              
-
-              <time title="Post created: 2020-08-12 21:22:41 / Updated at: 21:55:07" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="45-회원가입"><a href="#45-회원가입" class="headerlink" title="45. 회원가입"></a>45. 회원가입</h4><p>BCrypt를 이용한 Hash 암호화를 사용하기 위해<br>제공되는 Spring Security 프로젝트 사용<br>HttpSecurity 부분을 직접 설정할 예정이다  </p>
-<p>회원가입 변수<br>Email<br>Name<br>Password (2회 인증은 보통 front에서)  </p>
-<ul>
-<li>eatgo-customer-api<br>Gradle - Spring security 의존성 추가<br>build.gradle<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation project(&#39;:eatgo-common&#39;)</span><br><span class="line"></span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-web&#39;</span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-security&#39;</span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-data-jpa&#39;</span><br><span class="line">    implementation &#39;com.h2database:h2&#39;</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<p>Spring security를 의존성으로 추가하면 기본적으로 <a href="http://localhost:8080/login" target="_blank" rel="noopener">http://localhost:8080/login</a> 페이지가 제공된다. </p>
-<p>그러나 따로 API 서버를 사용하기 때문에 위와같은 페이지가 불필요하다.  </p>
-<p>WebSecurityConfig Class를 상속받는 Config Class를 SpringBootApplication Class와 같은 위치에 생성하고<br>configure 메서드를 Overriding하여 설정 변경    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">public class SecurityJavaConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http</span><br><span class="line">                .formLogin().disable() &#x2F;&#x2F;login page 사용안함  </span><br><span class="line">                &#x2F;&#x2F;Connection 관련된 부분인데 </span><br><span class="line">                &#x2F;&#x2F;disable하지 않으면 h2-console을 사용할 수 없어서 일단 설정</span><br><span class="line">                .cors().disable() </span><br><span class="line">                .csrf().disable()</span><br><span class="line">                .headers().frameOptions().disable();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_45/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_48/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_1_48/" class="post-title-link" itemprop="url">48. 인증</a>
+            <a href="/2020/08/12/hexo_springboot_1_10/" class="post-title-link" itemprop="url">10. 의존성 주입 (DI)</a>
         </h2>
 
         <div class="post-meta">
@@ -295,18 +230,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="48-인증"><a href="#48-인증" class="headerlink" title="48. 인증"></a>48. 인증</h4><p>POST /session<br>session이라는 resource를 구현할것이다<br>session이 올바르게 만들어졌다는 정보를 유지하기위해 accessToken을 사용한다<br>DTO(Data Transfer Object)를 통해 데이터 교환<br>SessionResponseDto session 결과(accessToken 등) 교환<br>SessionRequestDto session을 만들기위한 request 데이터 교환</p>
-<p>SessionResponseDto</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;SessionDTO는 accessToken등 그 외 데이터를 처리하는 Class</span><br><span class="line">@Data &#x2F;&#x2F;DTO는 순수한 data객체이기 때문에 @Data 사용하면 유용하다</span><br><span class="line">@Builder</span><br><span class="line">public class SessionResponseDto &#123;</span><br><span class="line"></span><br><span class="line">    private String accessToken;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>SessionRequestDto</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Data</span><br><span class="line">public class SessionRequestDto &#123;</span><br><span class="line"></span><br><span class="line">    private String email;</span><br><span class="line">    private String password;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Session Controller</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class SessionController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserService userService;</span><br><span class="line"></span><br><span class="line">    @PostMapping(&quot;&#x2F;session&quot;)</span><br><span class="line">    public ResponseEntity&lt;SessionResponseDto&gt; create(</span><br><span class="line">            @RequestBody SessionRequestDto resource  &#x2F;&#x2F;리소스 확인용 requestDTO </span><br><span class="line">    ) throws URISyntaxException &#123;</span><br><span class="line">        String email &#x3D; resource.getEmail();</span><br><span class="line">        String password &#x3D; resource.getPassword();</span><br><span class="line">        User user &#x3D; userService.authenticate(email,password);</span><br><span class="line"></span><br><span class="line">        String accessToken &#x3D; user.getAccessToken();</span><br><span class="line"></span><br><span class="line">        String url &#x3D; &quot;&#x2F;session&quot;;</span><br><span class="line">        return ResponseEntity.created(new URI(url)).body(</span><br><span class="line">                SessionResponseDto.builder()  &#x2F;&#x2F;responseDTO 객체를 전달  </span><br><span class="line">                        .accessToken(accessToken)</span><br><span class="line">                        .build());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="10-의존성-주입-DI"><a href="#10-의존성-주입-DI" class="headerlink" title="10. 의존성 주입 (DI)"></a>10. 의존성 주입 (DI)</h4><p>의존성 주입 (Dependency injection)   </p>
+<p>의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것<br>ex1) A는 B에 의존 =&gt; A가 B를 사용한다 =&gt; B의 변화가 A에 영향을 끼친다 =&gt; 효과적인 관리가 필요하다<br>ex2) RestaurantController는 RestaurantRepository에 의존한다.  </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_48/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_10/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -330,7 +258,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_52/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -344,7 +272,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_springboot_1_52/" class="post-title-link" itemprop="url">52. JWT</a>
+            <a href="/2020/08/12/hexo_springboot_1_11/" class="post-title-link" itemprop="url">11. 레이어 분리</a>
         </h2>
 
         <div class="post-meta">
@@ -381,18 +309,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="52-JWT"><a href="#52-JWT" class="headerlink" title="52. JWT"></a>52. JWT</h4><p>JWT (Json Web Tokens)<br>Json 포맷을 이용해 웹에서 활용할 수 있는 Access Token을 다루는 표준  </p>
-<p>3 Parts<br>Header - Type, 알고리즘<br>Payload - 실제 데이터(Claims)<br>Signature - 위변조 서명  </p>
-<p>Base64 URL Encoding을 통해 Json 포맷을 문자열로 변경한다.<br>문자열로 변경되면 Header.Payload.Signature 형식으로 된다.<br>위변조 되지 않았음을 증명하기 위해 HS256 알고리즘을 이용할 것이다.  </p>
-<p>eatgo-common-api, build.gradle<br>Java JWT library 추가  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-web&#39;</span><br><span class="line">    implementation &#39;org.springframework.boot:spring-boot-starter-data-jpa&#39;</span><br><span class="line">    implementation &#39;com.h2database:h2&#39;</span><br><span class="line">    implementation &#39;io.jsonwebtoken:jjwt-api:0.10.7&#39;</span><br></pre></td></tr></table></figure>
-
-
-<p>JwtUtil 클래스 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public class JwtUtil &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    private Key key;</span><br><span class="line"></span><br><span class="line">    public JwtUtil(String secret) &#123;</span><br><span class="line">        this.key &#x3D; Keys.hmacShaKeyFor(secret.getBytes()); &#x2F;&#x2F;secret HS key 생성  </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String createToken(long userId, String name) &#123;</span><br><span class="line">        String token &#x3D; Jwts.builder()  </span><br><span class="line">                .claim(&quot;userId&quot;,userId)  </span><br><span class="line">                .claim(&quot;name&quot;,name)  </span><br><span class="line">                .signWith(key, SignatureAlgorithm.HS256)  &#x2F;&#x2F;HS256 알고리즘 사용  </span><br><span class="line">                .compact();</span><br><span class="line"></span><br><span class="line">        return token;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="11-레이어-분리"><a href="#11-레이어-분리" class="headerlink" title="11. 레이어 분리"></a>11. 레이어 분리</h4><p>UI Layer는 interfaces 패키지로 분리하여 Controller를 저장했다.<br>Domain Layer는 domain 패키지로 분리하여 도메인 모델과 저장소를 저장했다.   </p>
+<p>Application Layer를 중간에 추가할 것이다.<br>application 패키지 추가 및 MenuItem 도메인 모델 추가    </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_52/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_11/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -416,7 +337,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_54/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -430,7 +351,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_springboot_1_54/" class="post-title-link" itemprop="url">54. 인가(Authorization)</a>
+            <a href="/2020/08/12/hexo_springboot_1_13/" class="post-title-link" itemprop="url">13. 가짜 객체</a>
         </h2>
 
         <div class="post-meta">
@@ -467,16 +388,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="54-인가-Authorization"><a href="#54-인가-Authorization" class="headerlink" title="54. 인가(Authorization)"></a>54. 인가(Authorization)</h4><p>인증은 사용자를 증명하는 단계였다면,<br>인가는 발급된 access Token을 어떻게 다루고<br>어떤 서비스를 사용할 수 있는지 다루는 부분이다.  </p>
-<p>Http의 Header를 통해서 Access Token을 전달한다.<br>Header의 key와 value는 아래와 같은 쌍으로 전달할것이다.<br>Authorization : Bearer  </p>
-<p>StateLess<br>따로 세션에 대한 정보를 저장하지 않고 받은 Token을 Filter가 계속해서 작업하도록 할 것이다.  </p>
-<p>BasicAuthenticationFilter<br>Filter 추가로 모든 요청에 대해 JWT Token이 실제로 세팅되었는지 확인하고<br>Access Token에서 정보를 얻어서 사용자 정보를 활용한다.</p>
-<p>UsernamePasswordAuthenticationToken<br>AuthenticationToken 객체를 활용하여 어떤사용자가 사용중인지 확인<br>JWT를 분석하여 내부적으로 사용할 AuthenticationToken을 만들것이다.  </p>
-<p>eatgo-customer-api</p>
-<p>JwtAuthenticationFilter 클래스 작성<br>(BasicAuthenticationFilter 클래스를 참조하고<br>doFilterInternal 메서드를 오버라이딩)</p>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="13-가짜-객체"><a href="#13-가짜-객체" class="headerlink" title="13. 가짜 객체"></a>13. 가짜 객체</h4><p>의존성 주입이 너무 많이 된 경우,<br>테스트 하고자 하는 대상 외의 것들에 대한 의존성이 너무 커져서 테스트가 어려워지고<br>테스트를 진행하기 위해 의존하는 부분들을 모두 만들어줘야 한다.     </p>
+<p>이때 사용할만한 것이 Mock Object.<br>Mock Object를 만들기 위해서 spring에서는 Mockito라는 framework 사용    </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_54/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_13/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -500,7 +416,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_56/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -514,7 +430,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_springboot_1_56/" class="post-title-link" itemprop="url">56. 로그인 API 분리</a>
+            <a href="/2020/08/12/hexo_springboot_1_14/" class="post-title-link" itemprop="url">14. 가게 추가</a>
         </h2>
 
         <div class="post-meta">
@@ -551,17 +467,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="56-로그인-API-분리"><a href="#56-로그인-API-분리" class="headerlink" title="56. 로그인 API 분리"></a>56. 로그인 API 분리</h4><p>eatgo-login-api를 새로 만들어 로그인 처리를 할것이다.<br>이게 가능한 이유는 Stateless이기 때문인데<br>사용자의 로그인 등 활동에 대해서는 관리하지 않지만 JWT의 accessToken을 활용할 수 있다.  </p>
-<p>eatgo-login-api<br>UserService에서 인증 부분만 login API로 옮겼다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">@Transactional</span><br><span class="line">public class UserService &#123;</span><br><span class="line"></span><br><span class="line">    private UserRepository userRepository;</span><br><span class="line">    private PasswordEncoder passwordEncoder;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) &#123;</span><br><span class="line">        this.userRepository &#x3D; userRepository;</span><br><span class="line">        this.passwordEncoder &#x3D; passwordEncoder;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public User authenticate(String email, String password) &#123;</span><br><span class="line">        User user &#x3D; userRepository.findByEmail(email)</span><br><span class="line">                .orElseThrow(() -&gt; new EmailNotExistedException(email));</span><br><span class="line"></span><br><span class="line">        if (!passwordEncoder.matches(password, user.getPassword())) &#123;</span><br><span class="line">            throw new PasswordWrongException();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return user;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Session과 관련된 부분을 모두 login API로 Move하였다.<br>SessionController, SessionRequestDto, SessionResponseDto, SessionErrorAdvice  </p>
-<p>일반 고객과 가게 주인의 계정 정보를 구분하기 위하여<br>User 객체의 restaurantId 속성을 만들어서 null이 아니면 가게 주인으로 인식되도록 하였고<br>setrestaurantId()를 실행하면 level이 자동으로 바뀌도록 하였다.</p>
-<p>User Class</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">private Long restaurantId;</span><br><span class="line"></span><br><span class="line">public void setRestaurantId(Long restaurantId) &#123;</span><br><span class="line">    this.level &#x3D; 50L;</span><br><span class="line">    this.restaurantId &#x3D; restaurantId;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public boolean isRestaurantOwner() &#123;</span><br><span class="line">    return level &#x3D;&#x3D; 50;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="14-가게-추가"><a href="#14-가게-추가" class="headerlink" title="14. 가게 추가"></a>14. 가게 추가</h4><p>POST 메서드를 사용하여 /restaurants 에 추가할 것임<br>성공하면 HTTP status 201<br>넣을 레스토랑 정보는 Header에 담아 보내게 되는데<br>Header Location에 리소스 주소가 들어가게 된다.   </p>
+<p>Client에서 보내준 결과를 JSON parser가 수행되도록 할 수 있다.<br>Empty {}</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_56/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_14/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -585,7 +495,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_59/">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_16/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -599,7 +509,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2020/08/12/hexo_springboot_1_59/" class="post-title-link" itemprop="url">59. 테이블 예약 기능</a>
+            <a href="/2020/08/12/hexo_springboot_1_16/" class="post-title-link" itemprop="url">16. JPA</a>
         </h2>
 
         <div class="post-meta">
@@ -636,373 +546,11 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="59-테이블-예약-기능"><a href="#59-테이블-예약-기능" class="headerlink" title="59. 테이블 예약 기능"></a>59. 테이블 예약 기능</h4><p>eatgo-restaurant-api 를 추가하여 가게 주인이 사용하는 부분 추가할 것이다.  </p>
-<p>Reservation 도메인 모델을 추가 할 것이다.<br>속성 : userId, name, date, time, partySize…  </p>
-<p>예약<br>POST /reservations  </p>
-<p>예약 확인<br>GET /reservations  </p>
-<p>eatgo-common-api<br>Reservation 모델 생성</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Getter</span><br><span class="line">@Builder</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">public class Reservation &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    private Long restaurantId;</span><br><span class="line"></span><br><span class="line">    private Long userId;</span><br><span class="line"></span><br><span class="line">    @Setter</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    @Setter</span><br><span class="line">    @NotEmpty</span><br><span class="line">    private String date;</span><br><span class="line"></span><br><span class="line">    @Setter</span><br><span class="line">    @NotEmpty</span><br><span class="line">    private String time;</span><br><span class="line"></span><br><span class="line">    @Setter</span><br><span class="line">    @NotNull</span><br><span class="line">    private Integer partySize;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Reservation Repository</p>
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="16-JPA"><a href="#16-JPA" class="headerlink" title="16. JPA"></a>16. JPA</h4><p>데이터의 영속화(Persistence) 작업이 필요하다.<br>Java는 영속화에 대한 표준을 가지고 있다.<br>= JPA (Java Persistence API)    </p>
+<p>Hibernate : JPA에서 유명한 Library<br>@Entity : Identifier로 구분되는 객체   </p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_59/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_62/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_1_62/" class="post-title-link" itemprop="url">62. API 한번에 실행하기</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="62-API-한번에-실행하기"><a href="#62-API-한번에-실행하기" class="headerlink" title="62. API 한번에 실행하기"></a>62. API 한번에 실행하기</h4><p>MySQL DB를 사용할것임<br>Container 기술을 활용하여 하나의 컴퓨터에서 가상화된 여러 개의 Container를 올려 여러 서버를 동시에 실행 (Docker)<br>Docker Compose를 활용  </p>
-<p>build.gradle 의존성 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">~</span><br><span class="line">	implementation &#39;mysql:mysql-connector-java&#39;</span><br><span class="line">~</span><br></pre></td></tr></table></figure>
-
-<p>application.yml datasource 추가</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  profiles: mysql</span><br><span class="line">  datasource:</span><br><span class="line">    url: jdbc:mysql:&#x2F;&#x2F;$&#123;MYSQL_HOST&#125;:3306&#x2F;$&#123;MYSQL_DATABASE&#125;</span><br><span class="line">    username: $&#123;MYSQL_USER&#125;</span><br><span class="line">    password: $&#123;MYSQL_PASSWORD&#125;</span><br></pre></td></tr></table></figure>
-
-<p>docker-compose.yml 생성<br>각 서비스 등록  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br></pre></td><td class="code"><pre><span class="line">version: &#39;3&#39;</span><br><span class="line">services:</span><br><span class="line">  mysql:</span><br><span class="line">    image: mariadb:10.4.7</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;data&#x2F;mariadb:&#x2F;var&#x2F;lib&#x2F;mysql</span><br><span class="line">    ports:</span><br><span class="line">      - 13306:3306</span><br><span class="line">    command: |</span><br><span class="line">      --character-set-server&#x3D;utf8mb4</span><br><span class="line">      --collation-server&#x3D;utf8mb4_unicode_ci</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: [&quot;CMD&quot;, &quot;mysqladmin&quot; ,&quot;ping&quot;, &quot;-h&quot;, &quot;localhost&quot;]</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  login-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-login-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8001:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  admin-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-admin-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8002:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  customer-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-customer-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8003:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  restaurant-api:</span><br><span class="line">    image: openjdk:11</span><br><span class="line">    env_file: .env</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;run.sh:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;run.sh</span><br><span class="line">      - .&#x2F;eatgo-restaurant-api&#x2F;build&#x2F;libs:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo&#x2F;libs</span><br><span class="line">    ports:</span><br><span class="line">      - 8004:8080</span><br><span class="line">    depends_on:</span><br><span class="line">      - mysql</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; sh run.sh&quot;</span><br><span class="line">  admin-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-admin-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8082:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8002</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  customer-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-customer-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8083:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8003</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br><span class="line">  restaurant-web:</span><br><span class="line">    image: node:10.16.3</span><br><span class="line">    volumes:</span><br><span class="line">      - .&#x2F;eatgo-restaurant-web:&#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo</span><br><span class="line">    ports:</span><br><span class="line">      - 8084:3000</span><br><span class="line">    environment:</span><br><span class="line">      - VUE_APP_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8004</span><br><span class="line">      - VUE_APP_LOGIN_API_BASE_URL&#x3D;http:&#x2F;&#x2F;localhost:8001</span><br><span class="line">    command: bash -c &quot;cd &#x2F;Users&#x2F;ijeong-in&#x2F;Git_repo&#x2F;eatgo &amp;&amp; npm run serve&quot;</span><br><span class="line">    healthcheck:</span><br><span class="line">      test: curl -sS http:&#x2F;&#x2F;localhost:8080 || exit 1</span><br><span class="line">      timeout: 10s</span><br><span class="line">      retries: 10</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_62/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_01/" class="post-title-link" itemprop="url">01. 객체 지향 프로그래밍과 클래스</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="01-객체-지향-프로그래밍과-클래스"><a href="#01-객체-지향-프로그래밍과-클래스" class="headerlink" title="01. 객체 지향 프로그래밍과 클래스"></a>01. 객체 지향 프로그래밍과 클래스</h4><ul>
-<li><p>객체 (Object)<br>의사나 행위가 미치는 대상 (사전적)<br>구체적, 추상적 데이터의 단위<br>예) 사람, 자동차, 주문, 생산, 관리…   </p>
-</li>
-<li><p>객체 지향 프로그래밍<br>객체를 기반으로 하는 프로그래밍<br>객체를 정의하고, 객체의 기능을 구현하며, 객체간의 협력을 구현<br>&lt;&gt; 절차 지향 프로그래밍      </p>
-</li>
-<li><p>클래스<br>객체를 코드로 구현한 것<br>객체 지향 프로그래밍의 가장 기본적인 요소<br>객체의 청사진     </p>
-</li>
-<li><p>멤버 변수<br>객체가 가지는 속성을 변수로 표현<br>클래스의 멤버 변수</p>
-</li>
-<li><p>메서드<br>객체의 기능을 구현  </p>
-</li>
-</ul>
-<p>class 생성하기.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package classpart;</span><br><span class="line"></span><br><span class="line">public class Student &#123;  &#x2F;&#x2F;객체를 코드로 표현 -&gt; class</span><br><span class="line">    &#x2F;&#x2F;public class는 java file내에 하나만 존재하며 java file이름과 동일해야 한다.</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;객체의 속성을 변수로 표현 (멤버 변수, 속성)</span><br><span class="line">    public int studentId; &#x2F;&#x2F;public &#x3D; 접근제어자</span><br><span class="line">    public String studentName; &#x2F;&#x2F;문자열을 사용하기 위해 java에서 제공되는 class (java.lang package)</span><br><span class="line">    public String address;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;기능은 메서드로 구현</span><br><span class="line">    public void showStudentInfo() &#123; &#x2F;&#x2F;void:반환하는 값의 자료형을 나타냄(없음)</span><br><span class="line">                                    &#x2F;&#x2F;메서드 명 다음의 괄호 안에 매개변수가 있을수 도 있다.</span><br><span class="line">        System.out.println(studentName+&quot;,&quot;+address);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>다른 class에서 Student class 사용하기.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">package classpart;</span><br><span class="line"></span><br><span class="line">public class StudentTest &#123; &#x2F;&#x2F;객체를 사용하는 건 다른 클래스인 경우가 대부분이다.</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student studentLee &#x3D; new Student(); &#x2F;&#x2F;인스턴스 생성</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;참조 변수 사용 studentLee</span><br><span class="line">        studentLee.studentName &#x3D; &quot;이순신&quot;;  &#x2F;&#x2F;생성된 인스턴스(객체)의 멤버 변수를 사용할 수 있다.</span><br><span class="line">        studentLee.address &#x3D; &quot;서울&quot;;</span><br><span class="line"></span><br><span class="line">        studentLee.showStudentInfo(); &#x2F;&#x2F;생성된 인스턴스(객체)의 메서드를 사용할 수 있다.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_01/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_03/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_03/" class="post-title-link" itemprop="url">03. 함수와 메서드</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="03-함수와-메서드"><a href="#03-함수와-메서드" class="headerlink" title="03. 함수와 메서드"></a>03. 함수와 메서드</h4><ul>
-<li>함수(function)<br>하나의 기능을 수행하는 일련의 코드<br>함수는 호출하여 사용하 기능이 수행된 후 값을 반환할 수 있음<br>함수로 구현된 기능은 여러 곳에서 호출되어 사용될 수 있음 (코드의 재사용)<br>가독성, 유지보수에 좋다.</li>
-</ul>
-<p>함수는 이름, 매개변수, 반환 값, 몸체로 구성된다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">package classpart;</span><br><span class="line"></span><br><span class="line">public class FunctionTest &#123;</span><br><span class="line">    &#x2F;&#x2F;            반환type 이름(매개변수)</span><br><span class="line">    public static int addNum(int num1, int num2) &#123; &#x2F;&#x2F;2개의 매개변수 및 int 반환 값이 필요하다.</span><br><span class="line">        int result;</span><br><span class="line">        result &#x3D; num1+num2;</span><br><span class="line">        return result; &#x2F;&#x2F;반환 값 result</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void sayHello(String greeting) &#123; &#x2F;&#x2F;반환 값이 없는 함수 (void)</span><br><span class="line">        System.out.println(greeting);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static int calcSum() &#123; &#x2F;&#x2F;매개변수가 없고 반환 값만 있는 함수</span><br><span class="line"></span><br><span class="line">        int sum&#x3D;0;</span><br><span class="line">        int i;</span><br><span class="line"></span><br><span class="line">        for (i&#x3D;0;i&lt;&#x3D;100;i++) &#123;</span><br><span class="line">            sum +&#x3D; i;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return sum;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int n1 &#x3D; 10;</span><br><span class="line">        int n2 &#x3D; 20;</span><br><span class="line"></span><br><span class="line">        int total &#x3D; addNum(n1,n2); &#x2F;&#x2F;매개변수를 통해 함수의 반환 값을 int 변수로 받음.</span><br><span class="line">        sayHello(&quot;안녕&quot;); &#x2F;&#x2F;반환 값 없이 매개변수 출력</span><br><span class="line">        int num &#x3D; calcSum(); &#x2F;&#x2F;매개변수 없이 반환 값을 int 변수로 받음.</span><br><span class="line"></span><br><span class="line">        System.out.println(total);</span><br><span class="line">        System.out.println(num);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p>메서드<br>객체의 기능을 구현하기 위해 클래스 내에서 구현되는 함수<br>메서드를 구현함으로써 객체의 기능이 구현됨<br>메서드 이름은 사용하는 쪽에 맞게 명명<br>ex) getStudentName() (camel notation)<br>지역변수 : 함수 내에서 사용되는 변수   </p>
-</li>
-<li><p>메모리<br>stack : 함수 호출에 사용되는 memory, 함수의 호출이 끝나면 반환된다.<br>점유된 순서의 반대로 반환된다. (main부터 점유, main을 끝으로 반환.)</p>
-</li>
-</ul>
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_03/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_05/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_05/" class="post-title-link" itemprop="url">05. 인스턴스, 힙메모리</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="05-인스턴스-힙메모리"><a href="#05-인스턴스-힙메모리" class="headerlink" title="05. 인스턴스, 힙메모리"></a>05. 인스턴스, 힙메모리</h4><ul>
-<li>인스턴스<br>클래스로부터 생성된 객체<br>힙 메모리에 멤버 변수의 크기에 따라 메모리가 생성<br>new 키워드를 이용하여 여러 개의 인스턴스를 생성<br>가비지 콜렉터 스레드에 의해 반환됨(프로그래머가 직접 free하지 않아도 된다.)<br>참조 변수 : 생성된 인스턴스를 가리키는 변수<br>참조 값 : 생성된 인스턴스의 메모리 주소 값</li>
-</ul>
-<p>멤버변수 사용 : 참조변수.멤버변수<br>메서드 사용 : 참조변수.메서드();    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package classpart;</span><br><span class="line"></span><br><span class="line">public class StudentTest &#123; &#x2F;&#x2F;객체를 사용하는 건 다른 클래스인 경우가 대부분이다.</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student studentLee &#x3D; new Student(); &#x2F;&#x2F;인스턴스 생성</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;참조 변수 사용 studentLee</span><br><span class="line">        studentLee.studentName &#x3D; &quot;이순신&quot;;  &#x2F;&#x2F;생성된 인스턴스(객체)의 멤버 변수를 사용할 수 있다.</span><br><span class="line">        studentLee.address &#x3D; &quot;서울&quot;;</span><br><span class="line"></span><br><span class="line">        studentLee.showStudentInfo(); &#x2F;&#x2F;생성된 인스턴스(객체)의 메서드를 사용할 수 있다.</span><br><span class="line"></span><br><span class="line">        Student studentKim &#x3D; new Student(); &#x2F;&#x2F;new 키워드를 통해 인스턴스 생성</span><br><span class="line">                                            &#x2F;&#x2F;생성 될 때 Student class의 멤버 변수 만큼 Heap 메모리 생성</span><br><span class="line">        studentKim.studentName&#x3D;&quot;김유신&quot;;</span><br><span class="line">        studentKim.address&#x3D;&quot;경주&quot;;</span><br><span class="line"></span><br><span class="line">        studentKim.showStudentInfo();</span><br><span class="line"></span><br><span class="line">        System.out.println(studentLee); &#x2F;&#x2F;참조 변수 출력&gt;참조 값 classpart.Student@60f82f98 package.class@heap memory address</span><br><span class="line">        System.out.println(studentKim);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_05/#more" rel="contents">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_16/#more" rel="contents">
                 더 읽어보기 &raquo;
               </a>
             </div>
@@ -1025,7 +573,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
   </nav>
 
 
@@ -1119,6 +667,10 @@
 
 
       </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
 
     </div>
   </aside>
@@ -1143,7 +695,7 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Jeong In</span>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
   </div>
 
         
@@ -1169,7 +721,7 @@
 <script src="/js/motion.js"></script>
 
 
-<script src="/js/schemes/muse.js"></script>
+<script src="/js/schemes/pisces.js"></script>
 
 
 <script src="/js/next-boot.js"></script>
@@ -1180,6 +732,10 @@
   
 
 
+
+
+  
+<script src="/js/local-search.js"></script>
 
 
 
