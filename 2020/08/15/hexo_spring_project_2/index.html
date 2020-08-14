@@ -28,7 +28,7 @@
 <meta property="og:description" content="IoC (Inversion of Control)Spring의 대표적인 특징 중 하나. 어떤 객체가 사용하는 의존 객체를 직접 만들어서 사용하는게 아니라, 주입(DI)받아서 사용하는 것.   Spring IoC Container : 애플리케이션 컴포넌트의 중앙 저장소. ApplicationContext : IoC 컨테이너의 핵심적인 인터페이스. IoC 컨테이">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-14T15:13:04.000Z">
-<meta property="article:modified_time" content="2020-08-14T15:13:04.537Z">
+<meta property="article:modified_time" content="2020-08-14T15:33:57.432Z">
 <meta property="article:author" content="Jeong In">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
@@ -207,8 +207,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">작성일</span>
+              
 
-              <time title="Post created: 2020-08-15 00:13:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:33:57" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -267,7 +268,7 @@
 <p>이 방법은 리플랙션이나 프록시를 사용하지 않기 때문에 애플리케이션 구동 시 성능상의 이점이 있다지만..<br>ComponentScan을 대체하기에는 쓰기 불편해서 좋은 방법은 아닌 것 같다. </p>
 <p>Bean을 꺼내어 쓰는 방법<br> : @Autowired 또는 @Inject 또는 ApplicationContext.getBean()으로 직접 꺼내기<br>Bean으로 등록된 Class만 Bean을 꺼내어 쓸 수 있다.</p>
 <p>의존성 주입(Dependency Injection)<br> : @Autowired 또는 @Inject를 사용하는데,<br> 예외로 생성자가 오직 하나이면서 Bean을 파라미터로 받는다면 @Autowired를 생략하고도 DI를 자동으로 해준다.<br> @Autowired/@Inject를 붙인다면 생성자/필드/Setter에 붙이게 된다.</p>
-<p>###@Autowired에 대하여…<br>어노테이션을 setter에 달려있고 의존성의 Bean이 없을 때,<br>setter임에도 불구하고 생각과 달리 다른 경우와 마찬가지로 객체생성이 불가능할 수 있는데<br>Spring이 해당 의존성을 위해 Bean을 찾기 때문이다.<br>이를 피하기 위해서는 @Autowired(required = false)로 설정하여 의존성 주입이 안된 상태로 생성할 수 있다.<br>필드에 어노테이션을 다는 경우도 비슷함.  </p>
+<h4 id="Autowired에-대하여…"><a href="#Autowired에-대하여…" class="headerlink" title="@Autowired에 대하여…"></a>@Autowired에 대하여…</h4><p>어노테이션을 setter에 달려있고 의존성의 Bean이 없을 때,<br>setter임에도 불구하고 생각과 달리 다른 경우와 마찬가지로 객체생성이 불가능할 수 있는데<br>Spring이 해당 의존성을 위해 Bean을 찾기 때문이다.<br>이를 피하기 위해서는 @Autowired(required = false)로 설정하여 의존성 주입이 안된 상태로 생성할 수 있다.<br>필드에 어노테이션을 다는 경우도 비슷함.  </p>
 <p>그리고 의존성 타입의 Bean이 여러가지 일 경우에 객체생성이 안될 수 있는데,<br>이때는 주입받으려는 Bean을 @Primary로 마킹하거나,</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Repository @Primary</span><br><span class="line">public class PrimaryBookRepository implements BookRepository &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>해당 타입의 모든 Bean을 주입 받거나</p>
@@ -277,7 +278,7 @@
 
 <p>BeanPostProcessor<br> : 빈 라이프 사이클 인터페이스이다.<br> 빈 인스턴스의 생성 전후에 부가적인 작업을 할 수 있다.<br> 특히, AutowiredAnnotationBeanPostProcessor의 postProcessorBeforeInitialization 메서드로 인해<br> 빈 인스턴스 생성 전에 @Autowired 어노테이션을 처리한다.</p>
 <p>BeanFactoryPostProcessor<br> : 다른 모든 Bean들을 만들기 이전에 수행된다.<br> 특히, BeanFactoryPostProcessor를 구현한 ConfigurationClassPostProcessor는 @ComponentScan 어노테이션을 처리한다.  </p>
-<p>###빈의 스코프에 대하여…<br>빈의 스코프는 기본적으로 싱글톤이고, 그 외에 프로토타입이 있다.<br>프로토타입</p>
+<h4 id="빈의-스코프에-대하여…"><a href="#빈의-스코프에-대하여…" class="headerlink" title="빈의 스코프에 대하여…"></a>빈의 스코프에 대하여…</h4><p>빈의 스코프는 기본적으로 싱글톤이고, 그 외에 프로토타입이 있다.<br>프로토타입</p>
 <ul>
 <li>Request</li>
 <li>Session</li>
@@ -291,7 +292,7 @@
 <li>Object-Provider<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectProvider&lt;Proto&gt; proto;</span><br></pre></td></tr></table></figure></li>
 <li>Provider</li>
 </ul>
-<p>###ApplicationContext의 기능 Environment…<br>EnvironmentCapable<br> : 프로파일과 프로퍼티를 다루는 인터페이스이다.  </p>
+<h4 id="ApplicationContext의-기능-Environment…"><a href="#ApplicationContext의-기능-Environment…" class="headerlink" title="ApplicationContext의 기능 Environment…"></a>ApplicationContext의 기능 Environment…</h4><p>EnvironmentCapable<br> : 프로파일과 프로퍼티를 다루는 인터페이스이다.  </p>
 <p>프로파일<br> : 빈들의 그룹, Environment가 활성화할 프로파일을 확인하고 설정한다.<br> 환경에따라 사용할 빈을 구분할 때 사용된다. (ex 프로덕션에서는 A 빈, 테스트환경에서는 B 빈을 사용)</p>
 <p>프로파일 정의하기</p>
 <ul>
@@ -302,7 +303,7 @@
 <p>@Bean @Profile(“test”)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">@Profile에는 표현식으로 !(not), &amp;(and), |(or) 가능.</span><br><span class="line"></span><br><span class="line">프로파일 지정하기</span><br><span class="line"> - JVM 시스템 프로퍼티 [-Dspring.profiles.avtive&#x3D;”test,A,B,...”]</span><br><span class="line">  &#x3D;&#x3D; intelliJ의 Run&#x2F;Debug Configuration의 Active profiles </span><br><span class="line"> </span><br><span class="line"> - @ActiveProfiles (테스트용)</span><br><span class="line"></span><br><span class="line">프로퍼티</span><br><span class="line"> : 다양한 방법으로 정의할 수 있는 설정 값, Environment가 프로퍼티 소스를 설정하고 프로퍼티 값을 가져온다.  </span><br><span class="line"> 프로퍼티는 우선순위가 있다.(계층형이다.)</span><br><span class="line"> 1.ServletConfig</span><br><span class="line"> 1.ServletContext</span><br><span class="line"> 1.JNDI (java:comp&#x2F;env&#x2F;)</span><br><span class="line"> 1.JVM 시스템 프로퍼티 (-Dkey&#x3D;&quot;value&quot;)</span><br><span class="line"> 1.JVM 시스템 환경 변수 (OS 환경 변수)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Environment를 통해 프로퍼티 추가하기</span><br></pre></td></tr></table></figure>
 <p>@PropertySource(“classpath:/app.properties”)</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.properties 파일을 참조한다.</span><br><span class="line">참고로 스프링부트에서는 application.properties라는 기본 프로퍼티 소스를 지원한다.  </span><br><span class="line"></span><br><span class="line">###ApplicationContext의 기능 MessageSource...</span><br><span class="line">MessageSource</span><br><span class="line"> : i18n(국제화) 기능을 제공하는 인터페이스이다.  </span><br><span class="line"> </span><br><span class="line">MessageSource의 getMessage로 참조할 수 있다.</span><br><span class="line">Locale에 따라서 다른 메세지를 보여준다.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">app.properties 파일을 참조한다.</span><br><span class="line">참고로 스프링부트에서는 application.properties라는 기본 프로퍼티 소스를 지원한다.  </span><br><span class="line"></span><br><span class="line">#### ApplicationContext의 기능 MessageSource...</span><br><span class="line">MessageSource</span><br><span class="line"> : i18n(국제화) 기능을 제공하는 인터페이스이다.  </span><br><span class="line"> </span><br><span class="line">MessageSource의 getMessage로 참조할 수 있다.</span><br><span class="line">Locale에 따라서 다른 메세지를 보여준다.</span><br></pre></td></tr></table></figure>
 <p> @Autowired<br> MessageSource messageSource;</p>
 <p> public void run() {</p>
 <pre><code>System.out.println(messageSource.getMessage(&quot;code1&quot;), Locale.KOREA);</code></pre><p> }</p>
@@ -312,7 +313,7 @@
 messageSource.setBasename(&quot;classpath:/messages&quot;);
 messageSource.setDefaultEncoding(&quot;UTF-8&quot;);
 return messageSource;</code></pre><p> }</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">###ApplicationContext의 기능 ApplicationEventPublisher...  </span><br><span class="line">ApplicationEventPublisher</span><br><span class="line"> : 이벤트 프로그래밍에 필요한 인터페이스. 옵저버 패턴의 구현체이다.  </span><br><span class="line"> </span><br><span class="line">spring 4.2 전에는  </span><br><span class="line">이벤트 만들기</span><br><span class="line">ApplicationEvent Class를 상속받아야 한다.</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#### ApplicationContext의 기능 ApplicationEventPublisher...  </span><br><span class="line">ApplicationEventPublisher</span><br><span class="line"> : 이벤트 프로그래밍에 필요한 인터페이스. 옵저버 패턴의 구현체이다.  </span><br><span class="line"> </span><br><span class="line">spring 4.2 전에는  </span><br><span class="line">이벤트 만들기</span><br><span class="line">ApplicationEvent Class를 상속받아야 한다.</span><br></pre></td></tr></table></figure>
 <p>public class MyEvent extends ApplicationEvent {<br> public MyEvent(Object source) {</p>
 <pre><code>super(source);</code></pre><p> }<br>}</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br><span class="line">ApplicationListener&lt;이벤트&gt; 인터페이스를 구현하고 빈으로 등록되어야 한다.</span><br></pre></td></tr></table></figure>
@@ -341,7 +342,7 @@ return messageSource;</code></pre><p> }</p>
 <li>ContextClosedEvent</li>
 <li>RequestHandledEvent</li>
 </ul>
-<p>###ResouceLoader<br> : 리소스를 읽어오는 기능을 제공하는 인터페이스  </p>
+<h4 id="ResouceLoader"><a href="#ResouceLoader" class="headerlink" title="ResouceLoader"></a>ResouceLoader</h4><p> : 리소스를 읽어오는 기능을 제공하는 인터페이스  </p>
 <p> Resource getResource(String location);</p>
 <p> 파일시스템에서 읽어오기<br> 클래스패스에서 읽어오기(target/classes) getResource(“classpath:test.txt”);<br>    resources에 있는 파일들이 빌드될 때 클래스패스에 들어가게 된다.<br> URL로 읽어오기<br> 상대/절대 경로로 읽어오기</p>
 
@@ -427,7 +428,7 @@ return messageSource;</code></pre><p> }</p>
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IoC-Inversion-of-Control"><span class="nav-number">1.</span> <span class="nav-text">IoC (Inversion of Control)</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IoC-Inversion-of-Control"><span class="nav-number">1.</span> <span class="nav-text">IoC (Inversion of Control)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Autowired에-대하여…"><span class="nav-number">1.0.1.</span> <span class="nav-text">@Autowired에 대하여…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#빈의-스코프에-대하여…"><span class="nav-number">1.0.2.</span> <span class="nav-text">빈의 스코프에 대하여…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ApplicationContext의-기능-Environment…"><span class="nav-number">1.0.3.</span> <span class="nav-text">ApplicationContext의 기능 Environment…</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ResouceLoader"><span class="nav-number">1.0.4.</span> <span class="nav-text">ResouceLoader</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

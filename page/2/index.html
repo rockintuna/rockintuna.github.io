@@ -202,8 +202,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">작성일</span>
+              
 
-              <time title="Post created: 2020-08-15 00:13:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:36:43" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -231,9 +232,8 @@
 
       
           <h2 id="데이터-바인딩"><a href="#데이터-바인딩" class="headerlink" title="데이터 바인딩"></a>데이터 바인딩</h2><p>프로퍼티 값을 타겟 객체에 설정하는 기능.<br>즉, 사용자 입력값(문자열)을 객체가 가지고 있는 int, Date, Boolean 또는 도메인 타입 등으로 변환해 넣어주는 기능이다.  </p>
-<p>###PropertyEditor<br>DataBinder가 변환 작업에 사용하는 인터페이스.  </p>
+<h4 id="PropertyEditor"><a href="#PropertyEditor" class="headerlink" title="PropertyEditor"></a>PropertyEditor</h4><p>DataBinder가 변환 작업에 사용하는 인터페이스.  </p>
 <p>문자열을 객체로 변환하는 Editor 만들기</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class EventEditor extends PropertyEditorSupport &#123;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    public String setAsText(String text) throws IllegalArgumentException &#123;</span><br><span class="line">        setValue(new Event(Integer.parseInt(text)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/08/15/hexo_spring_project_6/#more" rel="contents">
@@ -283,8 +283,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">작성일</span>
+              
 
-              <time title="Post created: 2020-08-15 00:13:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:37:13" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -311,14 +312,12 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="SpEL-스프링-Expression-Language"><a href="#SpEL-스프링-Expression-Language" class="headerlink" title="SpEL (스프링 Expression Language)"></a>SpEL (스프링 Expression Language)</h2><p>###스프링 EL이란? (upto spring3.0)  </p>
-<ol>
+          <h2 id="SpEL-스프링-Expression-Language"><a href="#SpEL-스프링-Expression-Language" class="headerlink" title="SpEL (스프링 Expression Language)"></a>SpEL (스프링 Expression Language)</h2><h4 id="스프링-EL이란-upto-spring3-0"><a href="#스프링-EL이란-upto-spring3-0" class="headerlink" title="스프링 EL이란? (upto spring3.0)"></a>스프링 EL이란? (upto spring3.0)</h4><ol>
 <li>객체 그래프를 조회하고 조작하는 기능 제공</li>
 <li>Unified EL과 비슷하지만, 메소드 호출이나 문자열 템플릿 기능을 지원한다.</li>
 <li>OGNL, MVEL, JBoss EL 등 여러 EL이 있지만 SpEL은 모든 스프링 프로젝트 전반에 걸쳐 사용하도록 만들어져있다.</li>
 </ol>
-<p>###문법  </p>
-<p>#{“표현식”}  </p>
+<h4 id="문법"><a href="#문법" class="headerlink" title="문법"></a>문법</h4><p>#{“표현식”}  </p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/08/15/hexo_spring_project_7/#more" rel="contents">
@@ -368,8 +367,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">작성일</span>
+              
 
-              <time title="Post created: 2020-08-15 00:13:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:37:34" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
