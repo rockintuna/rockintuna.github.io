@@ -1491,9 +1491,9 @@ public String apply(String s1, String s2) {
       </categories>
   </entry>
   <entry>
-    <title>01. 스프링 학습 전 필요지식</title>
-    <url>/2020/08/12/hexo_spring_project_1/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="01-스프링-학습-전-필요지식"><a href="#01-스프링-학습-전-필요지식" class="headerlink" title="01. 스프링 학습 전 필요지식"></a>01. 스프링 학습 전 필요지식</h4><ul>
+    <title>maven / logback</title>
+    <url>/2020/08/15/hexo_spring_project_1/</url>
+    <content><![CDATA[<h2 id="maven-logback"><a href="#maven-logback" class="headerlink" title="maven / logback"></a>maven / logback</h2><ul>
 <li>maven  </li>
 </ul>
 <p>build를 담당하는 maven &amp; gradle<br>mvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.<br>다운받은 jar파일들은 User Home 디렉토리의 .m2/repository에 보관된다.<br>설정 파일<br>maven : pom.xml<br>gradle : build.gradle<br>컴파일하면 target으로 실행가능하도록 생성됨  </p>
@@ -1546,9 +1546,9 @@ public String apply(String s1, String s2) {
       </tags>
   </entry>
   <entry>
-    <title>02. IoC (Inversion of Control)</title>
-    <url>/2020/08/12/hexo_spring_project_2/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="02-IoC-Inversion-of-Control"><a href="#02-IoC-Inversion-of-Control" class="headerlink" title="02. IoC (Inversion of Control)"></a>02. IoC (Inversion of Control)</h4><p>Spring의 대표적인 특징 중 하나.</p>
+    <title>IoC (Inversion of Control)</title>
+    <url>/2020/08/15/hexo_spring_project_2/</url>
+    <content><![CDATA[<h2 id="IoC-Inversion-of-Control"><a href="#IoC-Inversion-of-Control" class="headerlink" title="IoC (Inversion of Control)"></a>IoC (Inversion of Control)</h2><p>Spring의 대표적인 특징 중 하나.</p>
 <p>어떤 객체가 사용하는 의존 객체를 직접 만들어서 사용하는게 아니라, 주입(DI)받아서 사용하는 것.  </p>
 <p>Spring IoC Container<br> : 애플리케이션 컴포넌트의 중앙 저장소.</p>
 <p>ApplicationContext<br> : IoC 컨테이너의 핵심적인 인터페이스.<br> IoC 컨테이너의 최상위 인터페이스인 BeanFactory를 상속받아 여러 기능이 추가됨.</p>
@@ -1654,6 +1654,9 @@ return messageSource;</code></pre><p> }</p>
 <li>ContextClosedEvent</li>
 <li>RequestHandledEvent</li>
 </ul>
+<p>###ResouceLoader<br> : 리소스를 읽어오는 기능을 제공하는 인터페이스  </p>
+<p> Resource getResource(String location);</p>
+<p> 파일시스템에서 읽어오기<br> 클래스패스에서 읽어오기(target/classes) getResource(“classpath:test.txt”);<br>    resources에 있는 파일들이 빌드될 때 클래스패스에 들어가게 된다.<br> URL로 읽어오기<br> 상대/절대 경로로 읽어오기</p>
 ]]></content>
       <categories>
         <category>Study</category>
@@ -1664,15 +1667,44 @@ return messageSource;</code></pre><p> }</p>
       </tags>
   </entry>
   <entry>
-    <title>03. AOP (Aspect Oriented Programming)</title>
-    <url>/2020/08/12/hexo_spring_project_3/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="03-AOP-Aspect-Oriented-Programming"><a href="#03-AOP-Aspect-Oriented-Programming" class="headerlink" title="03. AOP (Aspect Oriented Programming)"></a>03. AOP (Aspect Oriented Programming)</h4><p>AOP의 핵심은 흩어진 코드(여러 곳에서 반복되는 코드)를 한 곳으로 모으는 것.</p>
+    <title>AOP (Aspect Oriented Programming)</title>
+    <url>/2020/08/15/hexo_spring_project_3/</url>
+    <content><![CDATA[<h2 id="AOP-Aspect-Oriented-Programming"><a href="#AOP-Aspect-Oriented-Programming" class="headerlink" title="AOP (Aspect Oriented Programming)"></a>AOP (Aspect Oriented Programming)</h2><p>흩어진 Concern을 Aspect로 모듈화 할 수 있는 프로그래밍 기법이다.<br>AOP의 핵심은 흩어진 코드(여러 곳에서 반복되는 코드)를 한 곳으로 모으는 것.<br>AOP의 구현체로 AspectJ와 스프링 AOP가 있다.  </p>
+<p>Concern(여러 경로에 흩어져 있는 비슷한 코드)의 변경이 있을때<br>Concern들을 Aspect로 모아서 Aspect만 변경함으로서<br>모든 경로에서 각각 따로 변경해줘야 하는 번거로움을 방지해준다.  </p>
+<p>###AOP 주요 개념<br>Aspect : 모아진 코드와 정보 집합 모듈<br>Advice : 구현될 기능<br>PointCut : 어디에 적용되는지의 정보<br>Target : 적용이 되는 대상<br>Join Point : 생성자 호출 직전/직후, 메서드 호출시 등등 적용 가능한 시점</p>
+<p>###AOP 적용 방법<br>AspectJ<br>컴파일 타임 : 자바파일을 class 파일로 만들 때, 추가 컴파일링 필요<br>로딩 타임 : class 로딩 시점, java agent 로드타임위버 설정 필요<br>Spring AOP (쉽고 현실적임)<br>런 타임 : A 빈이 만들어질때 A 타입의 proxy 빈을 만들어서 proxy 빈이 Advice를 먼저 호출  </p>
 <p>대표적으로 @Transactional 어노테이션이 있는데,<br>트랜잭션 처리(트랜잭션 시작, 커밋/롤백)에 대한 동일한 부분을 어노테이션 하나로 처리한다.<br>참고로 JPA Repository의 모든 메서드에는 @Transactional이 생략되어 적용되어있다.  </p>
-<p>AOP 직접 활용하기<br>Annotation 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD) &#x2F;&#x2F; 이 어노테이션은 메서드에 붙일것.  </span><br><span class="line">@Retention(RetentionPolicy.RUNTIME) &#x2F;&#x2F; 코드의 유지기간  </span><br><span class="line">public interface LogExecutionTime &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###스프링 AOP<br>프록시 기반의 AOP 구현체이며 스프링 빈에만 적용할 수 있다.  </p>
+<p>프록시 패턴은 주로 접근 제어 또는 부가기능을 추가하기 위해 사용한다.  </p>
+<ol>
+<li>프록시는 Real Subject와 같은 인터페이스를 구현하고(같은 타입) Real Subject를 의존한다.    </li>
+<li>프록시에만 부가기능을 추가하고 Real Subject는 변경하지 않는다.  </li>
+<li>사용자는 부가기능이 구현된 프록시를 사용한다.</li>
+</ol>
+<p>이때, 프록시를 작성하는 어려움이나 반복적인 코드, 그리고 객체들 사이의 복잡한 관계 등 문제가 발생하는데  </p>
+<p>스프링 AOP는 스프링 IoC 컨테이너가 제공하는 기반시설과<br>런 타임 시점에 동적으로 프록시를 만들어 주는 기능(Dynamic Proxy)을 사용하여 이런 문제를 해결한다.  </p>
+<p>스프링 IoC 컨테이너의 AbstractAutoProxyCreator(implements BeanPostProcessor)에 의하여<br>기존 빈을 대체하는 프록시를 동적으로 생성하고 프록시를 기존 빈 대신에 컨테이너에 등록한다.  </p>
+<p>Aspect 정의<br>Pointcut과 Advice의 정보가 필요하다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Aspect Bean 이어야 한다.</span><br><span class="line">@Aspect</span><br><span class="line">public class PerfAspect &#123;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Advice 생성</span><br><span class="line">    @Around(&quot;execution(* kr.co.testproject..*.EventService.*(..))&quot;) </span><br><span class="line">    &#x2F;&#x2F;Advice는 @Around 어노테이션이 붙어야 하고 값으로 pointcut을 이름으로 적용하거나 또는 직접 정의할 수 있다.</span><br><span class="line">    &#x2F;&#x2F;표현식을 사용할 수 있다. </span><br><span class="line">    public Object logPerf(ProceedingJoinPoint pjp) throws Throwable &#123; </span><br><span class="line">    &#x2F;&#x2F;ProceedingJoinPoint는 적용될 메소드라고 보면 된다.</span><br><span class="line">        long begin &#x3D; System.currentTimeMillis();</span><br><span class="line">        Object retVal &#x3D; pjp.proceed(); &#x2F;&#x2F;메소드 호출</span><br><span class="line">        System.out.println(System.currentTimeMillis() - begin);</span><br><span class="line">        return retVal;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>또는 어노테이션으로 pointcut을 정의할 수 있는데<br>먼저 어노테이션을 생성하고</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD) &#x2F;&#x2F; 이 어노테이션은 메서드에 붙일것이다라고 명시.  </span><br><span class="line">@Retention(RetentionPolicy.CLASS) &#x2F;&#x2F; 어노테이션 정보를 유지할 기간, AOP는 CLASS 이상으로 사용해야 한다.  </span><br><span class="line">public @interface PerfLogging &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Aspect의 @Around에서 execution 대신 어노테이션 표현식을 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Around(&quot;@annotation(PerfLogging)&quot;) </span><br><span class="line">&#x2F;&#x2F;@PerfLogging 어노테이션이 붙은 메서드가 pointcut이 된다.</span><br></pre></td></tr></table></figure>
+
+<p>또는 특정 Bean에 적용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Around(&quot;bean(simpleEventService)&quot;) </span><br><span class="line">&#x2F;&#x2F;@PerfLogging 어노테이션이 붙은 메서드가 pointcut이 된다.</span><br></pre></td></tr></table></figure>
+
+<p>단순히 메서드 실행 기준 특정 시점에만 부가기능이 있는 경우에는<br>@Around 대신 @Before, @AfterReturning, @AfterThrowing를 사용해도 된다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Before(&quot;bean(simpleEventService)&quot;)</span><br></pre></td></tr></table></figure>
+
+
+<p>###스프링 AOP 활용하기 예시<br>Annotation 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD)  </span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)  </span><br><span class="line">public @interface LogExecutionTime &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>실제 Aspect 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Aspect는 Bean이어야 한다.</span><br><span class="line">@Aspect</span><br><span class="line">public class LogAspect &#123;</span><br><span class="line">	Logger logger &#x3D; LoggerFactory.getLogger(LogAspect.class);</span><br><span class="line"></span><br><span class="line">	@Around(&quot;@annotation(LogExecutionTime)&quot;)</span><br><span class="line">	public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable &#123;</span><br><span class="line">		StopWatch stopWatch &#x3D; new StopWatch();</span><br><span class="line">		stopWatch.start();</span><br><span class="line"></span><br><span class="line">		Object proceed &#x3D; joinPoint.proceed();</span><br><span class="line"></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		logger.info(stopWatch.prettyPrint());</span><br><span class="line"></span><br><span class="line">		return proceed;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">@Aspect</span><br><span class="line">public class LogAspect &#123;</span><br><span class="line">	Logger logger &#x3D; LoggerFactory.getLogger(LogAspect.class);</span><br><span class="line"></span><br><span class="line">	@Around(&quot;@annotation(LogExecutionTime)&quot;)</span><br><span class="line">	public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable &#123;</span><br><span class="line">		StopWatch stopWatch &#x3D; new StopWatch();</span><br><span class="line">		stopWatch.start();</span><br><span class="line"></span><br><span class="line">		Object proceed &#x3D; joinPoint.proceed();</span><br><span class="line"></span><br><span class="line">		stopWatch.stop();</span><br><span class="line">		logger.info(stopWatch.prettyPrint());</span><br><span class="line"></span><br><span class="line">		return proceed;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Annotation 달기</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@LogExecutionTime</span><br><span class="line">@GetMapping(&quot;&#x2F;owners&#x2F;find&quot;)</span><br><span class="line">public String initFindForm(Map&lt;String, Object&gt; model) &#123;</span><br><span class="line">	model.put(&quot;owner&quot;, new Owner());</span><br><span class="line">	return &quot;owners&#x2F;findOwners&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -1688,9 +1720,9 @@ return messageSource;</code></pre><p> }</p>
       </tags>
   </entry>
   <entry>
-    <title>03. PSA (Portable Service Abstraction)</title>
-    <url>/2020/08/12/hexo_spring_project_4/</url>
-    <content><![CDATA[<h1 id="스프링-프로젝트"><a href="#스프링-프로젝트" class="headerlink" title="스프링 프로젝트"></a>스프링 프로젝트</h1><h3 id="스프링-프레임워크-실습-및-프로젝트"><a href="#스프링-프레임워크-실습-및-프로젝트" class="headerlink" title="스프링 프레임워크 실습 및 프로젝트"></a>스프링 프레임워크 실습 및 프로젝트</h3><h4 id="03-PSA-Portable-Service-Abstraction"><a href="#03-PSA-Portable-Service-Abstraction" class="headerlink" title="03. PSA (Portable Service Abstraction)"></a>03. PSA (Portable Service Abstraction)</h4><p>이미 잘 만들어진 인터페이스를 사용하는 것.<br>확장성이 좋지 못한 코드 또는 기술에 특화되어 있는 코드에 사용하면 좋다.</p>
+    <title>PSA (Portable Service Abstraction)</title>
+    <url>/2020/08/15/hexo_spring_project_4/</url>
+    <content><![CDATA[<h2 id="PSA-Portable-Service-Abstraction"><a href="#PSA-Portable-Service-Abstraction" class="headerlink" title="PSA (Portable Service Abstraction)"></a>PSA (Portable Service Abstraction)</h2><p>이미 잘 만들어진 인터페이스를 사용하는 것.<br>확장성이 좋지 못한 코드 또는 기술에 특화되어 있는 코드에 사용하면 좋다.</p>
 <p>Spring Framework이 제공하는 API는 대부분이 추상화되어있다.  </p>
 <hr>
 <p>####추상화 예제</p>
@@ -2872,5 +2904,137 @@ public void getRestaurantWithNotExisted() {
     <title>sample</title>
     <url>/2020/08/12/sample/</url>
     <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Resource / Validation</title>
+    <url>/2020/08/15/hexo_spring_project_5/</url>
+    <content><![CDATA[<h2 id="Resource-Validation"><a href="#Resource-Validation" class="headerlink" title="Resource / Validation"></a>Resource / Validation</h2><p>###Resource 추상화<br>Spring에서는 java.net.URL을 추상화한 Resource 가 있다.  </p>
+<p>추상화한 이유…<br>Resource는 classpath 기준으로 읽어올 수 있다.<br>ServletContext를 기준으로 읽어올 수 없다.<br>구현이 복잡하고 편의성 메소드가 부족하다.  </p>
+<p>구현체…<br>UrlResource<br>ClassPathResource (classpath: 접두어 지원)<br>FileSystemResource<br>ServletContextResource : 웹 어플리케이션 루트에서 상대 경로로 리소스를 찾는다.  </p>
+<p>Resource의 타입은 ApplicationContext의 타입에 따라 결정된다.<br>ex)</p>
+<ul>
+<li>ClassPathXmlApplicationContext -&gt; ClassPathResource</li>
+<li>FileSystemXmlApplicationContext -&gt; FileSystemResource</li>
+<li>WebXmlApplicationContext -&gt; ServletContextResource</li>
+</ul>
+<p>ApplicationContext 타입과 무관하게 Resource 타입을 정하려면<br>java.net.URL 접두어를 사용한다. (classpath:, file:)</p>
+<p>접두어가 있으면 가시성이 좋아지기 때문에 접두어를 쓰는 것이 좋다.<br>(ApplicationContext 타입을 모르면 복잡해지기 때문에)</p>
+<p>###Validation 추상화</p>
+<p>애플리케이션에서 사용하는 객체들을 검증할때 사용하는 인터페이스.  </p>
+<p>Validation 인터페이스는 두개의 메소드를 구현해야 한다.<br>boolean supports(Class clazz) : 검증할 Class가 Validator가 지원하는지 확인하는 메소드<br>void validate(Object target, Errors errors) : 실제 검증 로직을 구현 (ValidationUtils를 사용)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class EventValidator implements Validator &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean supports(Class&lt;?&gt; clazz) &#123;</span><br><span class="line">        return Event.class.equals(clazz);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void validate(Object target, Errors errors) &#123;</span><br><span class="line">        ValidationUtils.rejectIfEmptyOrWhitespace</span><br><span class="line">            (errors, &quot;title&quot;, &quot;NotEmpty&quot;, &quot;Empty title is not allowed.&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>한편, 스프링 부트에서는 간단한 검증은 Validator를 따로 작성하지 않아도<br>LocalValidatorFactoryBean이 빈으로 등록되어 있다.</p>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>데이터 바인딩</title>
+    <url>/2020/08/15/hexo_spring_project_6/</url>
+    <content><![CDATA[<h2 id="데이터-바인딩"><a href="#데이터-바인딩" class="headerlink" title="데이터 바인딩"></a>데이터 바인딩</h2><p>프로퍼티 값을 타겟 객체에 설정하는 기능.<br>즉, 사용자 입력값(문자열)을 객체가 가지고 있는 int, Date, Boolean 또는 도메인 타입 등으로 변환해 넣어주는 기능이다.  </p>
+<p>###PropertyEditor<br>DataBinder가 변환 작업에 사용하는 인터페이스.  </p>
+<p>문자열을 객체로 변환하는 Editor 만들기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class EventEditor extends PropertyEditorSupport &#123;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    public String setAsText(String text) throws IllegalArgumentException &#123;</span><br><span class="line">        setValue(new Event(Integer.parseInt(text)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PropertyEditorSupport는 PropertyEditor의 구현체이다.<br>참고로 PropertyEditor는 쓰레드 세이프 하지 않기 때문에 절대로 싱글톤 빈으로 등록하지 않는다.<br>그리고 Object / String 간 변환만 지원한다.<br>사용할 때는 @InitBinder로 사용할 PropertyEditor를 등록할 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@InitBinder</span><br><span class="line">public void init(WebDataBinder webDataBinder) &#123;</span><br><span class="line">    webDataBinder.registerCustomEditor(Event.class, new EventEditor());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>###Converter와 Formatter</p>
+<p>####Converter<br>Source 타입을 Target 타입으로 변환, 상태 정보가 없기 때문에(stateless) 쓰레드 세이프하다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class StringToEventConverter implements Converter&lt;String, Event&gt; &#123;</span><br><span class="line">        </span><br><span class="line">    @Override</span><br><span class="line">    public Event convert(String source) &#123;</span><br><span class="line">        return new Event(Integer.parseInt(source));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">WebMvcConfigurer 에서 설정, ConverterRegistry에 등록하여 사용한다.</span><br></pre></td></tr></table></figure>
+<p>@Configuration<br>public class WebConfig implements WebMvcConfigurer {</p>
+<pre><code>@Override
+public void addFormatters(FormatterRegistry registry) {
+    registry.addConverter(new StringToEventConverter());
+}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">####Formatter</span><br><span class="line">보다 Web에 특화된 인터페이스</span><br><span class="line">String과 Object 변환, Locale에 따른 i18n 기능.</span><br></pre></td></tr></table></figure>
+<p>@Component<br>public class EventFormatter implements Formatter<Event> {<br>    @Override<br>    public Event parse(String text, Locale locale) throws ParseException {<br>        return new Event(Integer.parseInt(text));<br>    }</p>
+<pre><code>@Override
+public Event print(Event object, Locale locale) {
+    return object.getId().toString();
+}</code></pre><p>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">WebMvcConfigurer 에서 설정, FormatterRegistry에 등록하여 사용한다.</span><br></pre></td></tr></table></figure>
+<p>@Configuration<br>public class WebConfig implements WebMvcConfigurer {</p>
+<pre><code>@Override
+public void addFormatters(FormatterRegistry registry) {
+    registry.addFormatter(new EventFormatter());
+}</code></pre><p>}</p>
+<pre><code>
+####ConversionService
+Converter/Formatter는 DataBinder 대신에 ConversionService에서 쓰레드 세이프하게 실제 변환 작업이 수행된다.  
+스프링 MVC, 빈(value) 설정, SpEL에서 사용한다.  
+DefaultFormattingConversionService
+ : ConversionService와 FormatterRegistry를 구현하고 그 외 여러 기본 컨버터와 포매터가 등록되어 있다.  
+
+conversionService를 toString()으로 확인하면 등록된 모든 Converter, Formatter를 확인할 수 있다.  
+
+참고로 스프링 부트에서는 DefaultFormattingConversionService를 상속받는 WebConversionService가 빈으로 등록되고
+WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으로 등록해준다.  
+</code></pre>]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpEL (스프링 Expression Language)</title>
+    <url>/2020/08/15/hexo_spring_project_7/</url>
+    <content><![CDATA[<h2 id="SpEL-스프링-Expression-Language"><a href="#SpEL-스프링-Expression-Language" class="headerlink" title="SpEL (스프링 Expression Language)"></a>SpEL (스프링 Expression Language)</h2><p>###스프링 EL이란? (upto spring3.0)  </p>
+<ol>
+<li>객체 그래프를 조회하고 조작하는 기능 제공</li>
+<li>Unified EL과 비슷하지만, 메소드 호출이나 문자열 템플릿 기능을 지원한다.</li>
+<li>OGNL, MVEL, JBoss EL 등 여러 EL이 있지만 SpEL은 모든 스프링 프로젝트 전반에 걸쳐 사용하도록 만들어져있다.</li>
+</ol>
+<p>###문법  </p>
+<p>#{“표현식”}  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Value(&quot;#&#123;100 + 100&#125;&quot;)</span><br><span class="line">int value;</span><br></pre></td></tr></table></figure>
+<p>${“프로퍼티”}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Value(&quot;$&#123;my.value&#125;&quot;)</span><br><span class="line">int value;</span><br></pre></td></tr></table></figure>
+<p>참고로 표현식 내부에 프로퍼티를 사용할 수 있지만 반대는 안된다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    @Value(&quot;#&#123;$&#123;my.value&#125; eq 100&#125;&quot;)</span><br><span class="line">    boolean isValue100;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line">Sample Bean 참조</span><br></pre></td></tr></table></figure>
+<pre><code>@Value(#{sample.data})
+int value;</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">SpEL의 해석은 SpelExpressionParser에 의해 이루어진다.</span><br></pre></td></tr></table></figure>
+<p>ExpressionParser parser = new SpelExpressionParser();<br>Expression expression = parser.parseExpression(“2 + 100”);<br>Integer value = expression.getValue(Integer.class);</p>
+<pre><code>
+###SpEL이 사용되는 곳  
+@Value  
+@ConditionalOnExpression (EL을 이용하여 선별적으로 Bean 등록)  
+스프링 시큐리티   
+스프링 데이터 @Query  
+Thymeleaf  
+</code></pre>]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Null-safety</title>
+    <url>/2020/08/15/hexo_spring_project_8/</url>
+    <content><![CDATA[<h2 id="Null-safety"><a href="#Null-safety" class="headerlink" title="Null-safety"></a>Null-safety</h2><p>Spring 5부터 추가된 Null 관련 어노테이션.<br>org.springframework.lang</p>
+<p>컴파일 시점에 최대한 NullPointerException을 방지할 수 있다.  </p>
+<p>@NonNull : IntelliJ에서 null이면 미리 경고받을 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@NonNull &#x2F;&#x2F;return이 Null인지 확인</span><br><span class="line">public String greeting(@NonNull String name) &#123; &#x2F;&#x2F;매개변수가 Null인지 확인</span><br><span class="line">    return &quot;Hi! &quot;+name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>@Nullable  </p>
+<p>패키지 레벨 설정 (설정된 패키지 이하로 모두 설정)<br>@NonNullApi<br>@NonNullFields   </p>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>spring</tag>
+      </tags>
   </entry>
 </search>
