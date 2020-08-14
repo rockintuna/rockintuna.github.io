@@ -28,7 +28,7 @@
 <meta property="og:description" content="Java 기초09. 상수와 리터럴, 형변환상수 : 변하지 않는 수 (final 키워드)    리터럴 : 프로그램에서 사용하는 모든 숫자, 값, 논리 값모든 리터럴은 상수 풀(constant pool)에 저장되어 있다.저장될 때 정수는 int, 실수는 double로 저장 된다.    형 변환">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-12T12:14:17.000Z">
-<meta property="article:modified_time" content="2020-08-12T12:14:17.284Z">
+<meta property="article:modified_time" content="2020-08-14T15:44:21.164Z">
 <meta property="article:author" content="Jeong In">
 <meta name="twitter:card" content="summary">
 
@@ -209,6 +209,13 @@
 
               <time title="Post created: 2020-08-12 21:14:17" itemprop="dateCreated datePublished" datetime="2020-08-12T21:14:17+09:00">2020-08-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-15 00:44:21" itemprop="dateModified" datetime="2020-08-15T00:44:21+09:00">2020-08-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -253,23 +260,10 @@
 <li>8진수(0) : 012;</li>
 <li>16진수(0X) : 0XA;</li>
 </ul>
-<pre><code>package variable;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">package variable;</span><br><span class="line"></span><br><span class="line">public class BinaryTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num &#x3D; 10;</span><br><span class="line">        int bNum &#x3D; 0B1010;</span><br><span class="line">        int oNum &#x3D; 012;</span><br><span class="line">        int xNum &#x3D; 0XA;</span><br><span class="line"></span><br><span class="line">        System.out.println(num);</span><br><span class="line">        System.out.println(bNum);</span><br><span class="line">        System.out.println(oNum);</span><br><span class="line">        System.out.println(xNum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class BinaryTest {
-    public static void main(String[] args) {
 
-        int num = 10;
-        int bNum = 0B1010;
-        int oNum = 012;
-        int xNum = 0XA;
 
-        System.out.println(num);
-        System.out.println(bNum);
-        System.out.println(oNum);
-        System.out.println(xNum);
-    }
-}
-</code></pre>
     </div>
 
     

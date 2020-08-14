@@ -28,7 +28,7 @@
 <meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기10. 의존성 주입 (DI)의존성 주입 (Dependency injection)    의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것ex1) A는 B에 의존 &#x3D;&gt; A가 B를 사용한다 &#x3D;&gt; B의 변화가 A에 영향을 끼친다 &#x3D;&gt; 효과적인 관리가 필요하다ex2) Restaura">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
-<meta property="article:modified_time" content="2020-08-12T12:22:41.327Z">
+<meta property="article:modified_time" content="2020-08-14T15:45:48.626Z">
 <meta property="article:author" content="Jeong In">
 <meta property="article:tag" content="spring boot">
 <meta name="twitter:card" content="summary">
@@ -210,6 +210,13 @@
 
               <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-15 00:45:48" itemprop="dateModified" datetime="2020-08-15T00:45:48+09:00">2020-08-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,35 +249,26 @@
 <p>Demo<br>Repository  </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Spring이 직접 관리하도록</span><br><span class="line">public class RestaurantRepository &#123;</span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Controller  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@RestController </span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository repository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">주의해야 할 것은 WebMvcTest에서 제대로 사용되지 못하기 때문에</span><br><span class="line">직접 의존성 주입을 해야할 필요가 있다   </span><br><span class="line"></span><br><span class="line">Controller Test</span><br></pre></td></tr></table></figure>
-<p>@RunWith(SpringRunner.class)<br>@WebMvcTest(RestaurantController.class)<br>public class RestaurantControllerTest {</p>
-<pre><code>@Autowired
-private MockMvc mvc;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RestController </span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository repository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@SpyBean //WebMvcTest에서는 제대로된 저장소를 사용할수 없기때문에 직접 의존성 주입
-private RestaurantRepository restaurantRepository;</code></pre><p>~<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">의존성 주입을 통해 얻을 수 있는 이점은 </span><br><span class="line">객체 간의 의존성을 좀더 유연하게 해준다.     </span><br><span class="line">예를 들어 저장소를 interface로 만들어 의존성 주입을 하면</span><br><span class="line">여러 구현체를 만들수 있고 얼마든지 다른 형태로 변경할 수 있다.</span><br><span class="line">(Controller가 직접적으로 저장소에 의존하고 있던 것을 분리할 수 있다.)     </span><br><span class="line"></span><br><span class="line">저장소</span><br></pre></td></tr></table></figure>
-<p>package kr.co.fastcampus.eatgo.domain;</p>
-<p>import java.util.List;</p>
-<p>public interface RestaurantRepository {<br>    List<Restaurant> findAll();</p>
-<pre><code>Restaurant findById(Long id);</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">구현체</span><br></pre></td></tr></table></figure>
-<p>package kr.co.fastcampus.eatgo.domain;</p>
-<p>import org.springframework.stereotype.Component;</p>
-<p>import java.util.ArrayList;<br>import java.util.List;</p>
-<p>@Component //Spring이 직접 관리하도록<br>public class RestaurantRepositoryImpl implements RestaurantRepository {</p>
-<p>~<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Controller</span><br></pre></td></tr></table></figure>
-<p>@RestController<br>public class RestaurantController {</p>
-<pre><code>@Autowired 
-private RestaurantRepository repository; //구현체가 아닌 인터페이스를 사용할 수 있다  </code></pre><p>~<br>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">주의해야 할 것은 SpyBean에서 실질적인 구현이 없는것은 사용할 수 없으므로</span><br><span class="line">어떤 구현을 사용할 것인지 입력해주어야 한다.</span><br></pre></td></tr></table></figure>
-<p>@RunWith(SpringRunner.class)<br>@WebMvcTest(RestaurantController.class)<br>public class RestaurantControllerTest {</p>
-<pre><code>@Autowired
-private MockMvc mvc;
+<p>주의해야 할 것은 WebMvcTest에서 제대로 사용되지 못하기 때문에<br>직접 의존성 주입을 해야할 필요가 있다   </p>
+<p>Controller Test     </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class) </span><br><span class="line">@WebMvcTest(RestaurantController.class)</span><br><span class="line">public class RestaurantControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    @SpyBean &#x2F;&#x2F;WebMvcTest에서는 제대로된 저장소를 사용할수 없기때문에 직접 의존성 주입</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@SpyBean(RestaurantRepositoryImpl.class) //어떤 구현체를 사용할 것인지 입력해줘야 한다     
-private RestaurantRepository restaurantRepository;</code></pre><pre><code></code></pre>
+<p>의존성 주입을 통해 얻을 수 있는 이점은<br>객체 간의 의존성을 좀더 유연하게 해준다.<br>예를 들어 저장소를 interface로 만들어 의존성 주입을 하면<br>여러 구현체를 만들수 있고 얼마든지 다른 형태로 변경할 수 있다.<br>(Controller가 직접적으로 저장소에 의존하고 있던 것을 분리할 수 있다.)     </p>
+<p>저장소  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package kr.co.fastcampus.eatgo.domain;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public interface RestaurantRepository &#123;</span><br><span class="line">    List&lt;Restaurant&gt; findAll();</span><br><span class="line"></span><br><span class="line">    Restaurant findById(Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>구현체</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">package kr.co.fastcampus.eatgo.domain;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@Component &#x2F;&#x2F;Spring이 직접 관리하도록</span><br><span class="line">public class RestaurantRepositoryImpl implements RestaurantRepository &#123;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Controller</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired </span><br><span class="line">    private RestaurantRepository repository; &#x2F;&#x2F;구현체가 아닌 인터페이스를 사용할 수 있다  </span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>주의해야 할 것은 SpyBean에서 실질적인 구현이 없는것은 사용할 수 없으므로<br>어떤 구현을 사용할 것인지 입력해주어야 한다.   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class) </span><br><span class="line">@WebMvcTest(RestaurantController.class) </span><br><span class="line">public class RestaurantControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    @SpyBean(RestaurantRepositoryImpl.class) &#x2F;&#x2F;어떤 구현체를 사용할 것인지 입력해줘야 한다     </span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br></pre></td></tr></table></figure>
+
+
+
     </div>
 
     

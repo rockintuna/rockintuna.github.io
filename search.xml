@@ -174,23 +174,10 @@
 <li>8진수(0) : 012;</li>
 <li>16진수(0X) : 0XA;</li>
 </ul>
-<pre><code>package variable;
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package variable;</span><br><span class="line"></span><br><span class="line">public class BinaryTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num &#x3D; 10;</span><br><span class="line">        int bNum &#x3D; 0B1010;</span><br><span class="line">        int oNum &#x3D; 012;</span><br><span class="line">        int xNum &#x3D; 0XA;</span><br><span class="line"></span><br><span class="line">        System.out.println(num);</span><br><span class="line">        System.out.println(bNum);</span><br><span class="line">        System.out.println(oNum);</span><br><span class="line">        System.out.println(xNum);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class BinaryTest {
-    public static void main(String[] args) {
 
-        int num = 10;
-        int bNum = 0B1010;
-        int oNum = 012;
-        int xNum = 0XA;
-
-        System.out.println(num);
-        System.out.println(bNum);
-        System.out.println(oNum);
-        System.out.println(xNum);
-    }
-}
-</code></pre>]]></content>
+]]></content>
       <categories>
         <category>Study</category>
         <category>Java Basic</category>
@@ -245,26 +232,10 @@ public class BinaryTest {
 </li>
 </ul>
 <p>어디에 사용하나<br>마스크 : 몇개의 비트 값만 사용할 떄<br>비트켜기 : &amp;00001111 하위 4bit중 1인 비트만 꺼내기<br>비트끄기 : |11110000 하위 4bit중 0인 비트만 0으로 만들기<br>비트토글 : 모든 비트들을 0은 1로, 1은 0으로 바꾸고 싶을 때<br>shift를 통해 곱하기를 빠르게      </p>
-<pre><code>package operator;
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package operator;</span><br><span class="line"></span><br><span class="line">public class OperatorEx4 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int num1 &#x3D; 0B00001010; &#x2F;&#x2F;10</span><br><span class="line">        int num2 &#x3D; 0B00000101; &#x2F;&#x2F;5</span><br><span class="line"></span><br><span class="line">        System.out.println(num1 &amp; num2); &#x2F;&#x2F;00000000 0</span><br><span class="line">        System.out.println(num1 | num2); &#x2F;&#x2F;00001111 15</span><br><span class="line">        System.out.println(num1 ^ num2); &#x2F;&#x2F;00001111 15</span><br><span class="line">        System.out.println(num2 &lt;&lt; 1); &#x2F;&#x2F;(x2) 00001010 10</span><br><span class="line">        System.out.println(num2 &lt;&lt; 2); &#x2F;&#x2F;(x2^2) 00010100 20</span><br><span class="line">        System.out.println(num2 &lt;&lt; 3); &#x2F;&#x2F;(x2^3) 00010100 40</span><br><span class="line">        System.out.println(num2 &gt;&gt; 2); &#x2F;&#x2F;(&#x2F;2^2) 00000001 1</span><br><span class="line">        System.out.println(num2 &lt;&lt;&#x3D; 3); &#x2F;&#x2F;복합 대입 연산자 40</span><br><span class="line">        System.out.println(num2); &#x2F;&#x2F;40</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public class OperatorEx4 {
-    public static void main(String[] args) {
 
-        int num1 = 0B00001010; //10
-        int num2 = 0B00000101; //5
-
-        System.out.println(num1 &amp; num2); //00000000 0
-        System.out.println(num1 | num2); //00001111 15
-        System.out.println(num1 ^ num2); //00001111 15
-        System.out.println(num2 &lt;&lt; 1); //(x2) 00001010 10
-        System.out.println(num2 &lt;&lt; 2); //(x2^2) 00010100 20
-        System.out.println(num2 &lt;&lt; 3); //(x2^3) 00010100 40
-        System.out.println(num2 &gt;&gt; 2); //(/2^2) 00000001 1
-        System.out.println(num2 &lt;&lt;= 3); //복합 대입 연산자 40
-        System.out.println(num2); //40
-
-    }
-}</code></pre>]]></content>
+]]></content>
       <categories>
         <category>Study</category>
         <category>Java Basic</category>
@@ -1183,33 +1154,18 @@ key가 되는 객체는 객체의 유일성 여부를 알기 위해 equals(), ha
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class IntArrayTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] arr &#x3D; &#123;1,2,3,4,5&#125;;</span><br><span class="line"></span><br><span class="line">        int sum &#x3D; Arrays.stream(arr).sum();</span><br><span class="line">        int count &#x3D; (int)Arrays.stream(arr).count(); &#x2F;&#x2F;썼으니 재생성, long이므로 형변환</span><br><span class="line"></span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        System.out.println(count);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>콜렉션 스트림</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line">public class ArrayListStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; sList &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        sList.add(&quot;Tomas&quot;);</span><br><span class="line">        sList.add(&quot;Edward&quot;);</span><br><span class="line">        sList.add(&quot;Jack&quot;);</span><br><span class="line"></span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; sList.stream(); &#x2F;&#x2F;stream 객체 생성</span><br><span class="line">        stream.forEach(s -&gt; System.out.print(s + &quot; &quot;));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().sorted().forEach(s -&gt; System.out.print(s + &quot; &quot;)); &#x2F;&#x2F;sorted 중간 연산 추가</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().map(s -&gt; s.length()).forEach(n -&gt; System.out.print(n + &quot; &quot;)); &#x2F;&#x2F;map(변환) 중간 연산 추가</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">    </span><br><span class="line">* reduce() 연산   </span><br><span class="line">정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용    </span><br><span class="line">최종 연산으로 스트림의 요소를 소모하며 연산 수행     </span><br><span class="line"></span><br><span class="line">배열의 모든 요소의 합을 구하는 reduce() 연산</span><br></pre></td></tr></table></figure>
-<p>Arrays.stream(arr).reduce(0,(a,b)-&gt;a+b));</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>package stream;</p>
-<p>import java.util.Arrays;<br>import java.util.function.BinaryOperator;</p>
-<p>class CompareString implements BinaryOperator<String> {</p>
-<pre><code>@Override
-public String apply(String s1, String s2) {
-    if(s1.getBytes().length &gt;= s2.getBytes().length) {
-        return s1;
-    } else {
-        return s2;
-    }
-}</code></pre><p>}<br>public class ReduceTest {<br>    public static void main(String[] args) {</p>
-<pre><code>    String[] greetings = {&quot;안녕하세요&quot;,&quot;hello&quot;,&quot;Good Morning&quot;,&quot;반갑습니다&quot;};
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line">public class ArrayListStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; sList &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        sList.add(&quot;Tomas&quot;);</span><br><span class="line">        sList.add(&quot;Edward&quot;);</span><br><span class="line">        sList.add(&quot;Jack&quot;);</span><br><span class="line"></span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; sList.stream(); &#x2F;&#x2F;stream 객체 생성</span><br><span class="line">        stream.forEach(s -&gt; System.out.print(s + &quot; &quot;));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().sorted().forEach(s -&gt; System.out.print(s + &quot; &quot;)); &#x2F;&#x2F;sorted 중간 연산 추가</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().map(s -&gt; s.length()).forEach(n -&gt; System.out.print(n + &quot; &quot;)); &#x2F;&#x2F;map(변환) 중간 연산 추가</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    System.out.println(Arrays.stream(greetings).reduce(&quot;&quot;,(s1,s2) -&gt; {
-        if(s1.getBytes().length &gt;= s2.getBytes().length) {
-            return s1;
-        } else {
-            return s2;
-        }
-    }));
-    //람다식 대신 BinaryOperator가 구현된 클래스를 사용
-    System.out.println(Arrays.stream(greetings).reduce(new CompareString()).get());
-}</code></pre><p>}</p>
-<pre><code></code></pre>]]></content>
+<ul>
+<li>reduce() 연산<br>정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용<br>최종 연산으로 스트림의 요소를 소모하며 연산 수행     </li>
+</ul>
+<p>배열의 모든 요소의 합을 구하는 reduce() 연산   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Arrays.stream(arr).reduce(0,(a,b)-&gt;a+b));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.function.BinaryOperator;</span><br><span class="line"></span><br><span class="line">class CompareString implements BinaryOperator&lt;String&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String apply(String s1, String s2) &#123;</span><br><span class="line">        if(s1.getBytes().length &gt;&#x3D; s2.getBytes().length) &#123;</span><br><span class="line">            return s1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return s2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class ReduceTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String[] greetings &#x3D; &#123;&quot;안녕하세요&quot;,&quot;hello&quot;,&quot;Good Morning&quot;,&quot;반갑습니다&quot;&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(Arrays.stream(greetings).reduce(&quot;&quot;,(s1,s2) -&gt; &#123;</span><br><span class="line">            if(s1.getBytes().length &gt;&#x3D; s2.getBytes().length) &#123;</span><br><span class="line">                return s1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return s2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;));</span><br><span class="line">        &#x2F;&#x2F;람다식 대신 BinaryOperator가 구현된 클래스를 사용</span><br><span class="line">        System.out.println(Arrays.stream(greetings).reduce(new CompareString()).get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
       <categories>
         <category>Study</category>
         <category>JAVA OOP</category>
@@ -1608,43 +1564,48 @@ public String apply(String s1, String s2) {
 <p>프로파일<br> : 빈들의 그룹, Environment가 활성화할 프로파일을 확인하고 설정한다.<br> 환경에따라 사용할 빈을 구분할 때 사용된다. (ex 프로덕션에서는 A 빈, 테스트환경에서는 B 빈을 사용)</p>
 <p>프로파일 정의하기</p>
 <ul>
-<li><p>클래스에 정의<br>test 프로파일로 애플리케이션을 실행할 때 사용될 Java Configuration</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration @Profile(&quot;test&quot;)</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line">proc 프로파일이 아닌 애플리케이션을 실행할 때 사용될 Component</span><br></pre></td></tr></table></figure>
-<p>@Component @Profile(“!proc”)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- Bean 생성 메서드에 정의</span><br></pre></td></tr></table></figure>
-<p>@Bean @Profile(“test”)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">@Profile에는 표현식으로 !(not), &amp;(and), |(or) 가능.</span><br><span class="line"></span><br><span class="line">프로파일 지정하기</span><br><span class="line"> - JVM 시스템 프로퍼티 [-Dspring.profiles.avtive&#x3D;”test,A,B,...”]</span><br><span class="line">  &#x3D;&#x3D; intelliJ의 Run&#x2F;Debug Configuration의 Active profiles </span><br><span class="line"> </span><br><span class="line"> - @ActiveProfiles (테스트용)</span><br><span class="line"></span><br><span class="line">프로퍼티</span><br><span class="line"> : 다양한 방법으로 정의할 수 있는 설정 값, Environment가 프로퍼티 소스를 설정하고 프로퍼티 값을 가져온다.  </span><br><span class="line"> 프로퍼티는 우선순위가 있다.(계층형이다.)</span><br><span class="line"> 1.ServletConfig</span><br><span class="line"> 1.ServletContext</span><br><span class="line"> 1.JNDI (java:comp&#x2F;env&#x2F;)</span><br><span class="line"> 1.JVM 시스템 프로퍼티 (-Dkey&#x3D;&quot;value&quot;)</span><br><span class="line"> 1.JVM 시스템 환경 변수 (OS 환경 변수)</span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">Environment를 통해 프로퍼티 추가하기</span><br></pre></td></tr></table></figure>
-<p>@PropertySource(“classpath:/app.properties”)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">app.properties 파일을 참조한다.</span><br><span class="line">참고로 스프링부트에서는 application.properties라는 기본 프로퍼티 소스를 지원한다.  </span><br><span class="line"></span><br><span class="line">#### ApplicationContext의 기능 MessageSource...</span><br><span class="line">MessageSource</span><br><span class="line"> : i18n(국제화) 기능을 제공하는 인터페이스이다.  </span><br><span class="line"> </span><br><span class="line">MessageSource의 getMessage로 참조할 수 있다.</span><br><span class="line">Locale에 따라서 다른 메세지를 보여준다.</span><br></pre></td></tr></table></figure>
-<p> @Autowired<br> MessageSource messageSource;</p>
-<p> public void run() {</p>
-<pre><code>System.out.println(messageSource.getMessage(&quot;code1&quot;), Locale.KOREA);</code></pre><p> }</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"> </span><br><span class="line">스프링부트에서는 messages로 시작하는 소스들을 자동으로 참조한다.</span><br><span class="line">messages.properties</span><br><span class="line">messages_ko_KR.properties</span><br><span class="line"></span><br><span class="line">리로딩 기능이 있는 메시지 소스를 @Bean으로 직접 만들어서 참조</span><br></pre></td></tr></table></figure>
-<p> @Bean<br> public MessageSource messageSource() {</p>
-<pre><code>var messageSource = new ReloadableResourceBundleMessageSource();
-messageSource.setBasename(&quot;classpath:/messages&quot;);
-messageSource.setDefaultEncoding(&quot;UTF-8&quot;);
-return messageSource;</code></pre><p> }</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### ApplicationContext의 기능 ApplicationEventPublisher...  </span><br><span class="line">ApplicationEventPublisher</span><br><span class="line"> : 이벤트 프로그래밍에 필요한 인터페이스. 옵저버 패턴의 구현체이다.  </span><br><span class="line"> </span><br><span class="line">spring 4.2 전에는  </span><br><span class="line">이벤트 만들기</span><br><span class="line">ApplicationEvent Class를 상속받아야 한다.</span><br></pre></td></tr></table></figure>
-<p>public class MyEvent extends ApplicationEvent {<br> public MyEvent(Object source) {</p>
-<pre><code>super(source);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br><span class="line">ApplicationListener&lt;이벤트&gt; 인터페이스를 구현하고 빈으로 등록되어야 한다.</span><br></pre></td></tr></table></figure>
-<p>@Component<br>public class MyEventHandler implements ApplicationListener<MyEvent> {<br> @Override<br> public void onApplicationEvent(MyEvent event) {</p>
-<pre><code>System.out.println(&quot;이벤트 확인&quot;);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">spring 4.2 부터는 이벤트나 이벤트 핸들러 생성에서 상속&#x2F;구현이 빠지고 어노테이션으로 처리한다.</span><br><span class="line">이벤트 만들기</span><br></pre></td></tr></table></figure>
-<p>public class MyEvent {<br> private Object source;</p>
-<p> public MyEvent(Object source) {</p>
-<pre><code>this.source = source;</code></pre><p> }</p>
-<p> public Object getSource() {</p>
-<pre><code>return source;</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 핸들러 만들기</span><br></pre></td></tr></table></figure>
-<p>@Component<br>public class MyEventHandler {</p>
-<p> @EventListener<br> public void handle(MyEvent event) {</p>
-<pre><code>System.out.println(&quot;이벤트 확인&quot;);</code></pre><p> }<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">이벤트 발생시키기</span><br></pre></td></tr></table></figure>
-<p> ApplicationEventPublisher.publishEvent(new MyEvent(this));</p>
-<pre><code></code></pre></li>
+<li>클래스에 정의<br>test 프로파일로 애플리케이션을 실행할 때 사용될 Java Configuration<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration @Profile(&quot;test&quot;)</span><br></pre></td></tr></table></figure>
+proc 프로파일이 아닌 애플리케이션을 실행할 때 사용될 Component <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component @Profile(&quot;!proc&quot;)</span><br></pre></td></tr></table></figure></li>
+<li>Bean 생성 메서드에 정의<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean @Profile(&quot;test&quot;)</span><br></pre></td></tr></table></figure>
+
+</li>
 </ul>
+<p>@Profile에는 표현식으로 !(not), &amp;(and), |(or) 가능.</p>
+<p>프로파일 지정하기</p>
+<ul>
+<li><p>JVM 시스템 프로퍼티 [-Dspring.profiles.avtive=”test,A,B,…”]<br>== intelliJ의 Run/Debug Configuration의 Active profiles </p>
+</li>
+<li><p>@ActiveProfiles (테스트용)</p>
+</li>
+</ul>
+<p>프로퍼티<br> : 다양한 방법으로 정의할 수 있는 설정 값, Environment가 프로퍼티 소스를 설정하고 프로퍼티 값을 가져온다.<br> 프로퍼티는 우선순위가 있다.(계층형이다.)<br> 1.ServletConfig<br> 1.ServletContext<br> 1.JNDI (java:comp/env/)<br> 1.JVM 시스템 프로퍼티 (-Dkey=”value”)<br> 1.JVM 시스템 환경 변수 (OS 환경 변수)</p>
+<p>Environment를 통해 프로퍼티 추가하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PropertySource(&quot;classpath:&#x2F;app.properties&quot;)</span><br></pre></td></tr></table></figure>
+<p>app.properties 파일을 참조한다.<br>참고로 스프링부트에서는 application.properties라는 기본 프로퍼티 소스를 지원한다.  </p>
+<h4 id="ApplicationContext의-기능-MessageSource…"><a href="#ApplicationContext의-기능-MessageSource…" class="headerlink" title="ApplicationContext의 기능 MessageSource…"></a>ApplicationContext의 기능 MessageSource…</h4><p>MessageSource<br> : i18n(국제화) 기능을 제공하는 인터페이스이다.  </p>
+<p>MessageSource의 getMessage로 참조할 수 있다.<br>Locale에 따라서 다른 메세지를 보여준다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">MessageSource messageSource;</span><br><span class="line"></span><br><span class="line">public void run() &#123;</span><br><span class="line">    System.out.println(messageSource.getMessage(&quot;code1&quot;), Locale.KOREA);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>스프링부트에서는 messages로 시작하는 소스들을 자동으로 참조한다.<br>messages.properties<br>messages_ko_KR.properties</p>
+<p>리로딩 기능이 있는 메시지 소스를 @Bean으로 직접 만들어서 참조</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public MessageSource messageSource() &#123;</span><br><span class="line">    var messageSource &#x3D; new ReloadableResourceBundleMessageSource();</span><br><span class="line">    messageSource.setBasename(&quot;classpath:&#x2F;messages&quot;);</span><br><span class="line">    messageSource.setDefaultEncoding(&quot;UTF-8&quot;);</span><br><span class="line">    return messageSource;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ApplicationContext의-기능-ApplicationEventPublisher…"><a href="#ApplicationContext의-기능-ApplicationEventPublisher…" class="headerlink" title="ApplicationContext의 기능 ApplicationEventPublisher…"></a>ApplicationContext의 기능 ApplicationEventPublisher…</h4><p>ApplicationEventPublisher<br> : 이벤트 프로그래밍에 필요한 인터페이스. 옵저버 패턴의 구현체이다.  </p>
+<p>spring 4.2 전에는<br>이벤트 만들기<br>ApplicationEvent Class를 상속받아야 한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class MyEvent extends ApplicationEvent &#123;</span><br><span class="line">    public MyEvent(Object source) &#123;</span><br><span class="line">        super(source);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이벤트 핸들러 만들기<br>ApplicationListener&lt;이벤트&gt; 인터페이스를 구현하고 빈으로 등록되어야 한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyEventHandler implements ApplicationListener&lt;MyEvent&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onApplicationEvent(MyEvent event) &#123;</span><br><span class="line">        System.out.println(&quot;이벤트 확인&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>spring 4.2 부터는 이벤트나 이벤트 핸들러 생성에서 상속/구현이 빠지고 어노테이션으로 처리한다.<br>이벤트 만들기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class MyEvent &#123;</span><br><span class="line">    private Object source;</span><br><span class="line"></span><br><span class="line">    public MyEvent(Object source) &#123;</span><br><span class="line">        this.source &#x3D; source;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public Object getSource() &#123;</span><br><span class="line">        return source;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이벤트 핸들러 만들기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MyEventHandler &#123;</span><br><span class="line">    </span><br><span class="line">    @EventListener</span><br><span class="line">    public void handle(MyEvent event) &#123;</span><br><span class="line">        System.out.println(&quot;이벤트 확인&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이벤트 발생시키기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ApplicationEventPublisher.publishEvent(new MyEvent(this));</span><br></pre></td></tr></table></figure>
+
 <p>만약 이벤트 핸들러가 여러개라면, Spring은 기본적으로 이벤트를 여러 핸들러로 순차적으로 처리하게 된다.<br>이때, 순서를 정하고 싶다면 핸들러에 @Order 어노테이션을 사용한다.<br>또는 비동기적(여러 쓰레드)으로 처리하고 싶다면 @Async 사용한다. (Java Configuration File에서는 @EnableAsync 필요)  </p>
 <p>Spring에서 제공하는 기본 이벤트</p>
 <ul>
@@ -1861,35 +1822,26 @@ return messageSource;</code></pre><p> }</p>
 <p>Demo<br>Repository  </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component &#x2F;&#x2F;Spring이 직접 관리하도록</span><br><span class="line">public class RestaurantRepository &#123;</span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>Controller  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController </span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository repository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">주의해야 할 것은 WebMvcTest에서 제대로 사용되지 못하기 때문에</span><br><span class="line">직접 의존성 주입을 해야할 필요가 있다   </span><br><span class="line"></span><br><span class="line">Controller Test</span><br></pre></td></tr></table></figure>
-<p>@RunWith(SpringRunner.class)<br>@WebMvcTest(RestaurantController.class)<br>public class RestaurantControllerTest {</p>
-<pre><code>@Autowired
-private MockMvc mvc;
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController </span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository repository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@SpyBean //WebMvcTest에서는 제대로된 저장소를 사용할수 없기때문에 직접 의존성 주입
-private RestaurantRepository restaurantRepository;</code></pre><p>~<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">의존성 주입을 통해 얻을 수 있는 이점은 </span><br><span class="line">객체 간의 의존성을 좀더 유연하게 해준다.     </span><br><span class="line">예를 들어 저장소를 interface로 만들어 의존성 주입을 하면</span><br><span class="line">여러 구현체를 만들수 있고 얼마든지 다른 형태로 변경할 수 있다.</span><br><span class="line">(Controller가 직접적으로 저장소에 의존하고 있던 것을 분리할 수 있다.)     </span><br><span class="line"></span><br><span class="line">저장소</span><br></pre></td></tr></table></figure>
-<p>package kr.co.fastcampus.eatgo.domain;</p>
-<p>import java.util.List;</p>
-<p>public interface RestaurantRepository {<br>    List<Restaurant> findAll();</p>
-<pre><code>Restaurant findById(Long id);</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">구현체</span><br></pre></td></tr></table></figure>
-<p>package kr.co.fastcampus.eatgo.domain;</p>
-<p>import org.springframework.stereotype.Component;</p>
-<p>import java.util.ArrayList;<br>import java.util.List;</p>
-<p>@Component //Spring이 직접 관리하도록<br>public class RestaurantRepositoryImpl implements RestaurantRepository {</p>
-<p>~<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Controller</span><br></pre></td></tr></table></figure>
-<p>@RestController<br>public class RestaurantController {</p>
-<pre><code>@Autowired 
-private RestaurantRepository repository; //구현체가 아닌 인터페이스를 사용할 수 있다  </code></pre><p>~<br>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">주의해야 할 것은 SpyBean에서 실질적인 구현이 없는것은 사용할 수 없으므로</span><br><span class="line">어떤 구현을 사용할 것인지 입력해주어야 한다.</span><br></pre></td></tr></table></figure>
-<p>@RunWith(SpringRunner.class)<br>@WebMvcTest(RestaurantController.class)<br>public class RestaurantControllerTest {</p>
-<pre><code>@Autowired
-private MockMvc mvc;
+<p>주의해야 할 것은 WebMvcTest에서 제대로 사용되지 못하기 때문에<br>직접 의존성 주입을 해야할 필요가 있다   </p>
+<p>Controller Test     </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RunWith(SpringRunner.class) </span><br><span class="line">@WebMvcTest(RestaurantController.class)</span><br><span class="line">public class RestaurantControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    @SpyBean &#x2F;&#x2F;WebMvcTest에서는 제대로된 저장소를 사용할수 없기때문에 직접 의존성 주입</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-@SpyBean(RestaurantRepositoryImpl.class) //어떤 구현체를 사용할 것인지 입력해줘야 한다     
-private RestaurantRepository restaurantRepository;</code></pre><pre><code></code></pre>]]></content>
+<p>의존성 주입을 통해 얻을 수 있는 이점은<br>객체 간의 의존성을 좀더 유연하게 해준다.<br>예를 들어 저장소를 interface로 만들어 의존성 주입을 하면<br>여러 구현체를 만들수 있고 얼마든지 다른 형태로 변경할 수 있다.<br>(Controller가 직접적으로 저장소에 의존하고 있던 것을 분리할 수 있다.)     </p>
+<p>저장소  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package kr.co.fastcampus.eatgo.domain;</span><br><span class="line"></span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">public interface RestaurantRepository &#123;</span><br><span class="line">    List&lt;Restaurant&gt; findAll();</span><br><span class="line"></span><br><span class="line">    Restaurant findById(Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>구현체</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">package kr.co.fastcampus.eatgo.domain;</span><br><span class="line"></span><br><span class="line">import org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line"></span><br><span class="line">@Component &#x2F;&#x2F;Spring이 직접 관리하도록</span><br><span class="line">public class RestaurantRepositoryImpl implements RestaurantRepository &#123;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Controller</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired </span><br><span class="line">    private RestaurantRepository repository; &#x2F;&#x2F;구현체가 아닌 인터페이스를 사용할 수 있다  </span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>주의해야 할 것은 SpyBean에서 실질적인 구현이 없는것은 사용할 수 없으므로<br>어떤 구현을 사용할 것인지 입력해주어야 한다.   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RunWith(SpringRunner.class) </span><br><span class="line">@WebMvcTest(RestaurantController.class) </span><br><span class="line">public class RestaurantControllerTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    @SpyBean(RestaurantRepositoryImpl.class) &#x2F;&#x2F;어떤 구현체를 사용할 것인지 입력해줘야 한다     </span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Boot Project</category>
@@ -1935,84 +1887,17 @@ private RestaurantRepository restaurantRepository;</code></pre><pre><code></code
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MenuItemRepositoryImpl implements MenuItemRepository&#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;MenuItem&gt; menuitems &#x3D; new ArrayList&lt;MenuItem&gt;();</span><br><span class="line">    </span><br><span class="line">    public MenuItemRepositoryImpl() &#123;</span><br><span class="line">        menuitems.add(new MenuItem(&quot;Kimchi&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;MenuItem&gt; findAllByRestaurantId(Long restaurantId) &#123;</span><br><span class="line">        return this.menuitems;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Controller</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;) &#x2F;&#x2F;&#123;&#125;로 바뀌는 부분을 매핑가능</span><br><span class="line">    public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) &#123; &#x2F;&#x2F;주소의 파라미터를 활용할 수 있음</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurantRepository.findById(id); &#x2F;&#x2F;저장소에서 기능을 생성하여 사용</span><br><span class="line"></span><br><span class="line">        List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">        restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">        return restaurant;</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line">위처럼 Controller가 복잡해진다...</span><br><span class="line">때문에 application layer를 추가해서 기능적인 부분을 분리한다.  </span><br><span class="line">하려고 하는것은 다음과 같다     </span><br><span class="line">application layer 역할을 해줄 RestaurantService 객체 생성    </span><br><span class="line">Service에서 구현된 기능을 Controller에서 사용   </span><br><span class="line">repository에 대한 의존성을 Service로 이관     </span><br><span class="line"></span><br><span class="line">RestaurantService</span><br></pre></td></tr></table></figure>
-<p>@Service //Spring에서 application으로 정의<br>public class RestaurantService {<br>    //의존성 연결을 Service에서 미리<br>    @Autowired<br>    private RestaurantRepository restaurantRepository;</p>
-<pre><code>@Autowired
-private MenuItemRepository menuItemRepository;
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">@GetMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;) &#x2F;&#x2F;&#123;&#125;로 바뀌는 부분을 매핑가능</span><br><span class="line">public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) &#123; &#x2F;&#x2F;주소의 파라미터를 활용할 수 있음</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D; restaurantRepository.findById(id); &#x2F;&#x2F;저장소에서 기능을 생성하여 사용</span><br><span class="line"></span><br><span class="line">    List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">    restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">    return restaurant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위처럼 Controller가 복잡해진다…<br>때문에 application layer를 추가해서 기능적인 부분을 분리한다.<br>하려고 하는것은 다음과 같다<br>application layer 역할을 해줄 RestaurantService 객체 생성<br>Service에서 구현된 기능을 Controller에서 사용<br>repository에 대한 의존성을 Service로 이관     </p>
+<p>RestaurantService</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Service &#x2F;&#x2F;Spring에서 application으로 정의</span><br><span class="line">public class RestaurantService &#123;</span><br><span class="line">    &#x2F;&#x2F;의존성 연결을 Service에서 미리</span><br><span class="line">    @Autowired </span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line">    </span><br><span class="line">    public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) &#123;</span><br><span class="line">        this.restaurantRepository &#x3D; restaurantRepository;</span><br><span class="line">        this.menuItemRepository &#x3D; menuItemRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Controller에서 사용될 기능 구현    </span><br><span class="line">    public List&lt;Restaurant&gt; getRestaurants() &#123;</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantRepository.findAll();</span><br><span class="line">        return restaurants;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Restaurant getRestaurant(Long id) &#123;</span><br><span class="line">        &#x2F;&#x2F;가게 정보 </span><br><span class="line">        Restaurant restaurant &#x3D;  restaurantRepository.findById(id);</span><br><span class="line">        &#x2F;&#x2F;메뉴 정보 </span><br><span class="line">        List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">        restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">        return restaurant;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) {
-    this.restaurantRepository = restaurantRepository;
-    this.menuItemRepository = menuItemRepository;
-}
+<p>Controller 처럼 Service 또한 Test를 하자<br>Service Test    </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class RestaurantServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    private RestaurantService restaurantService;</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">    @Before &#x2F;&#x2F;모든 Test가 실행되기 전에 수행 됨</span><br><span class="line">    public void setUp() &#123;</span><br><span class="line">        restaurantRepository &#x3D; new RestaurantRepositoryImpl();</span><br><span class="line">        menuItemRepository &#x3D; new MenuItemRepositoryImpl();</span><br><span class="line">        restaurantService &#x3D; new RestaurantService(restaurantRepository,menuItemRepository);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getRestaurants() &#123;</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantService.getRestaurants();</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurants.get(0);</span><br><span class="line">        assertThat(restaurant.getId(), is(1004L));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getRestaurant() &#123;</span><br><span class="line">        Restaurant restaurant &#x3D; restaurantService.getRestaurant(1004L);</span><br><span class="line"></span><br><span class="line">        assertThat(restaurant.getId(), is(1004L));</span><br><span class="line"></span><br><span class="line">        MenuItem menuItem &#x3D; restaurant.getMenuItems().get(0);</span><br><span class="line"></span><br><span class="line">        assertThat(menuItem.getName(), is(&quot;Kimchi&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-//Controller에서 사용될 기능 구현    
-public List&lt;Restaurant&gt; getRestaurants() {
-    List&lt;Restaurant&gt; restaurants = restaurantRepository.findAll();
-    return restaurants;
-}
-
-public Restaurant getRestaurant(Long id) {
-    //가게 정보 
-    Restaurant restaurant =  restaurantRepository.findById(id);
-    //메뉴 정보 
-    List&lt;MenuItem&gt; menuItems = menuItemRepository.findAllByRestaurantId(id);
-    restaurant.setMenuItems(menuItems);
-
-    return restaurant;
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Controller 처럼 Service 또한 Test를 하자   </span><br><span class="line">Service Test</span><br></pre></td></tr></table></figure>
-<p>public class RestaurantServiceTest {</p>
-<pre><code>private RestaurantService restaurantService;
-private RestaurantRepository restaurantRepository;
-private MenuItemRepository menuItemRepository;
-
-@Before //모든 Test가 실행되기 전에 수행 됨
-public void setUp() {
-    restaurantRepository = new RestaurantRepositoryImpl();
-    menuItemRepository = new MenuItemRepositoryImpl();
-    restaurantService = new RestaurantService(restaurantRepository,menuItemRepository);
-}
-
-@Test
-public void getRestaurants() {
-    List&lt;Restaurant&gt; restaurants = restaurantService.getRestaurants();
-
-    Restaurant restaurant = restaurants.get(0);
-    assertThat(restaurant.getId(), is(1004L));
-}
-
-@Test
-public void getRestaurant() {
-    Restaurant restaurant = restaurantService.getRestaurant(1004L);
-
-    assertThat(restaurant.getId(), is(1004L));
-
-    MenuItem menuItem = restaurant.getMenuItems().get(0);
-
-    assertThat(menuItem.getName(), is(&quot;Kimchi&quot;));
-
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Controller가 단순화 된다.</span><br></pre></td></tr></table></figure>
-<p>@RestController<br>public class RestaurantController {</p>
-<pre><code>@Autowired //Service만 의존성 연결
-private RestaurantService restaurantService;
-
-@GetMapping(&quot;/restaurants&quot;)
-public List&lt;Restaurant&gt; list() {
-
-    List&lt;Restaurant&gt; restaurants = restaurantService.getRestaurants();
-    return restaurants;
-}
-
-@GetMapping(&quot;/restaurants/{id}&quot;)
-public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) {
-
-    Restaurant restaurant = restaurantService.getRestaurant(id); //기본 정보 + 메뉴 정보를 가져올 새로운 메서드
-    //repository가 저장소 역할을 했다면, 복잡한 처리들을 저장할 application layer
-
-    return restaurant;
-}</code></pre><p>}</p>
-<pre><code></code></pre>]]></content>
+<p>Controller가 단순화 된다.     </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Service만 의존성 연결</span><br><span class="line">    private RestaurantService restaurantService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">    public List&lt;Restaurant&gt; list() &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantService.getRestaurants();</span><br><span class="line">        return restaurants;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) &#123;</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurantService.getRestaurant(id); &#x2F;&#x2F;기본 정보 + 메뉴 정보를 가져올 새로운 메서드</span><br><span class="line">        &#x2F;&#x2F;repository가 저장소 역할을 했다면, 복잡한 처리들을 저장할 application layer</span><br><span class="line"></span><br><span class="line">        return restaurant;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Boot Project</category>
@@ -2052,57 +1937,28 @@ public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) {
 
 <p>Controller에 가게를 추가하는 작업을 추가할 것이고,<br>Service에 실제로 기능을 구현할 것이다.   </p>
 <p>1.POST 요청을 처리하기 위한 Controller 생성</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    @PostMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">    public ResponseEntity&lt;?&gt; create(@RequestBody Restaurant resource) &#x2F;&#x2F;content로 넘겨준 내용을 매개변수로 받기</span><br><span class="line">            throws URISyntaxException &#123;</span><br><span class="line"></span><br><span class="line">        String name&#x3D;resource.getName();</span><br><span class="line">        String address&#x3D;resource.getAddress();</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; new Restaurant(1234L,name,address);</span><br><span class="line">        restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">        URI location &#x3D; new URI(&quot;&#x2F;restaurants&#x2F;&quot;+restaurant.getId());</span><br><span class="line">        return ResponseEntity.created(location).body(&quot;&#123;&#125;&quot;); &#x2F;&#x2F;빈 내용</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;   </span><br><span class="line">Controller Test</span><br></pre></td></tr></table></figure>
-<pre><code>@Test
-public void create() throws Exception {
-    mvc.perform(post(&quot;/restaurants&quot;)
-            .contentType(MediaType.APPLICATION_JSON) //JSON 타입임을 알려준다
-            .content(&quot;{\&quot;name\&quot;:\&quot;BeRyong\&quot;,\&quot;address\&quot;:\&quot;Busan\&quot;}&quot;)) //JSON 타입으로 데이터 전달
-            .andExpect(status().isCreated())
-            .andExpect(header().string(&quot;location&quot;, &quot;/restaurants/1234&quot;))
-            .andExpect(content().string(&quot;{}&quot;)); //비어있는지 확인
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt; create(@RequestBody Restaurant resource) &#x2F;&#x2F;content로 넘겨준 내용을 매개변수로 받기</span><br><span class="line">        throws URISyntaxException &#123;</span><br><span class="line"></span><br><span class="line">    String name&#x3D;resource.getName();</span><br><span class="line">    String address&#x3D;resource.getAddress();</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D; new Restaurant(1234L,name,address);</span><br><span class="line">    restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">    URI location &#x3D; new URI(&quot;&#x2F;restaurants&#x2F;&quot;+restaurant.getId());</span><br><span class="line">    return ResponseEntity.created(location).body(&quot;&#123;&#125;&quot;); &#x2F;&#x2F;빈 내용</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Controller Test</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void create() throws Exception &#123;</span><br><span class="line">    mvc.perform(post(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">            .contentType(MediaType.APPLICATION_JSON) &#x2F;&#x2F;JSON 타입임을 알려준다</span><br><span class="line">            .content(&quot;&#123;\&quot;name\&quot;:\&quot;BeRyong\&quot;,\&quot;address\&quot;:\&quot;Busan\&quot;&#125;&quot;)) &#x2F;&#x2F;JSON 타입으로 데이터 전달</span><br><span class="line">            .andExpect(status().isCreated())</span><br><span class="line">            .andExpect(header().string(&quot;location&quot;, &quot;&#x2F;restaurants&#x2F;1234&quot;))</span><br><span class="line">            .andExpect(content().string(&quot;&#123;&#125;&quot;)); &#x2F;&#x2F;비어있는지 확인</span><br><span class="line"></span><br><span class="line">    verify(restaurantService).addRestaurant(any()); &#x2F;&#x2F;any():뭘 넣든지 작동할 수 있도록, Mockito에서 제공</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    verify(restaurantService).addRestaurant(any()); //any():뭘 넣든지 작동할 수 있도록, Mockito에서 제공
-}</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2.Service 및 Repository 추가    </span><br><span class="line">Restaurant Service Test</span><br></pre></td></tr></table></figure>
-<pre><code>@Test
-public void addRestaurant() {
-    Restaurant restaurant = new Restaurant(&quot;BeRyong&quot;, &quot;Busan&quot;);
+<p>2.Service 및 Repository 추가<br>Restaurant Service Test</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void addRestaurant() &#123;</span><br><span class="line">    Restaurant restaurant &#x3D; new Restaurant(&quot;BeRyong&quot;, &quot;Busan&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;가짜 saved</span><br><span class="line">    Restaurant saved &#x3D; new Restaurant(1234L,&quot;BeRyong&quot;, &quot;Busan&quot;);</span><br><span class="line">    given(restaurantRepository.save(any())).willReturn(saved);</span><br><span class="line"></span><br><span class="line">    Restaurant created &#x3D; restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">    assertThat(created.getId(), is(1234L));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    //가짜 saved
-    Restaurant saved = new Restaurant(1234L,&quot;BeRyong&quot;, &quot;Busan&quot;);
-    given(restaurantRepository.save(any())).willReturn(saved);
+<p>Restaurant Service</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public Restaurant addRestaurant(Restaurant restaurant) &#123;</span><br><span class="line">    return restaurantRepository.save(restaurant);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    Restaurant created = restaurantService.addRestaurant(restaurant);
+<p>Restaurant Repository Test</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class RestaurantRepositoryImplTest &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void save() &#123;</span><br><span class="line">        RestaurantRepository repository &#x3D; new RestaurantRepositoryImpl();</span><br><span class="line"></span><br><span class="line">        int oldCount &#x3D; repository.findAll().size();</span><br><span class="line">        Restaurant restaurant &#x3D; new Restaurant(&quot;BeRyong&quot;,&quot;Busan&quot;);</span><br><span class="line">        repository.save(restaurant);</span><br><span class="line"></span><br><span class="line">        assertThat(restaurant.getId(), is(1234L)); &#x2F;&#x2F;저장된 뒤 id가 생성되었는지 확인    </span><br><span class="line">        int newCount &#x3D; repository.findAll().size();</span><br><span class="line"></span><br><span class="line">        assertThat(newCount-oldCount, is(1)); &#x2F;&#x2F;개수가 늘어났는지 확인</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    assertThat(created.getId(), is(1234L));
-}</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Restaurant Service</span><br></pre></td></tr></table></figure>
-<pre><code>public Restaurant addRestaurant(Restaurant restaurant) {
-    return restaurantRepository.save(restaurant);
-}</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Restaurant Repository Test</span><br></pre></td></tr></table></figure>
-<p>public class RestaurantRepositoryImplTest {</p>
-<pre><code>@Test
-public void save() {
-    RestaurantRepository repository = new RestaurantRepositoryImpl();
+<p>Restaurant Repository</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Restaurant save(Restaurant restaurant) &#123;</span><br><span class="line">    restaurant.setId(1234L);</span><br><span class="line">    restaurants.add(restaurant);</span><br><span class="line">    return restaurant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    int oldCount = repository.findAll().size();
-    Restaurant restaurant = new Restaurant(&quot;BeRyong&quot;,&quot;Busan&quot;);
-    repository.save(restaurant);
-
-    assertThat(restaurant.getId(), is(1234L)); //저장된 뒤 id가 생성되었는지 확인    
-    int newCount = repository.findAll().size();
-
-    assertThat(newCount-oldCount, is(1)); //개수가 늘어났는지 확인
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Restaurant Repository</span><br></pre></td></tr></table></figure>
-<pre><code>@Override
-public Restaurant save(Restaurant restaurant) {
-    restaurant.setId(1234L);
-    restaurants.add(restaurant);
-    return restaurant;
-}</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">POST by HTTPie</span><br><span class="line">&#96;&#96;&#96;shell script</span><br><span class="line">$ http POST localhost:8080&#x2F;restaurants name&#x3D;BeRyong address&#x3D;Busan</span><br></pre></td></tr></table></figure>
+<p>POST by HTTPie</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> http POST localhost:8080/restaurants name=BeRyong address=Busan</span></span><br></pre></td></tr></table></figure>
 
 <p>GET by HTTPie</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> http GET localhost:8080/restaurants</span></span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 </span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Date: Mon, 01 Jun 2020 21:07:17 GMT</span><br><span class="line">Keep-Alive: timeout=60</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "address": "Seoul",</span><br><span class="line">        "id": 1004,</span><br><span class="line">        "information": "Bob zip in Seoul",</span><br><span class="line">        "menuItems": [],</span><br><span class="line">        "name": "Bob zip"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        "address": "Seoul",</span><br><span class="line">        "id": 2020,</span><br><span class="line">        "information": "Cyber Food in Seoul",</span><br><span class="line">        "menuItems": [],</span><br><span class="line">        "name": "Cyber Food"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        "address": "Busan",</span><br><span class="line">        "id": 1234,</span><br><span class="line">        "information": "BeRyong in Busan",</span><br><span class="line">        "menuItems": [],</span><br><span class="line">        "name": "BeRyong"</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 
 ]]></content>
       <categories>
@@ -2126,10 +1982,12 @@ public Restaurant save(Restaurant restaurant) {
 <p>View &gt; Tool Windows &gt; Gradle &gt; Refresh Gradle Dependencies</p>
 <p>Restaurant 와 MenuItem 를 Entity로 정의  </p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class Restaurant &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private String address;</span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    @Transient &#x2F;&#x2F;영속화에서 제외   </span><br><span class="line">    private List&lt;MenuItem&gt; menuItems &#x3D; new ArrayList&lt;MenuItem&gt;();</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class MenuItem &#123;</span><br><span class="line"></span><br><span class="line">    @Id &#x2F;&#x2F;Identifier for Entity</span><br><span class="line">    @GeneratedValue &#x2F;&#x2F;1부터 순차적으로 들어감</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    private Long restaurantId;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">Repository 인터페이스를 통해 JPA 사용</span><br></pre></td></tr></table></figure>
-<p>public interface MenuItemRepository<br>        extends CrudRepository&lt;MenuItem, Long&gt; { //인터페이스만 이용하여 JPA와 연결하여 사용 &lt;T, ID&gt;<br>                                                 //T : Entity의 타입, ID : id의 타입<br>    List<MenuItem> findAllByRestaurantId(Long restaurantId);</p>
-<p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#96;&#96;&#96;</span><br><span class="line">public interface RestaurantRepository</span><br><span class="line">        extends CrudRepository&lt;Restaurant, Long&gt; &#123;</span><br><span class="line">    List&lt;Restaurant&gt; findAll();</span><br><span class="line"></span><br><span class="line">    Optional&lt;Restaurant&gt; findById(Long id); &#x2F;&#x2F;Optional : 존재할 수도 있지만 안할수도 있는 객체</span><br><span class="line">                                            &#x2F;&#x2F;NPE 회피..</span><br><span class="line">    Restaurant save(Restaurant restaurant);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class MenuItem &#123;</span><br><span class="line"></span><br><span class="line">    @Id &#x2F;&#x2F;Identifier for Entity</span><br><span class="line">    @GeneratedValue &#x2F;&#x2F;1부터 순차적으로 들어감</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    private Long restaurantId;</span><br><span class="line"></span><br><span class="line">~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Repository 인터페이스를 통해 JPA 사용     </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public interface MenuItemRepository</span><br><span class="line">        extends CrudRepository&lt;MenuItem, Long&gt; &#123; &#x2F;&#x2F;인터페이스만 이용하여 JPA와 연결하여 사용 &lt;T, ID&gt;</span><br><span class="line">                                                 &#x2F;&#x2F;T : Entity의 타입, ID : id의 타입</span><br><span class="line">    List&lt;MenuItem&gt; findAllByRestaurantId(Long restaurantId);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public interface RestaurantRepository</span><br><span class="line">        extends CrudRepository&lt;Restaurant, Long&gt; &#123;</span><br><span class="line">    List&lt;Restaurant&gt; findAll();</span><br><span class="line"></span><br><span class="line">    Optional&lt;Restaurant&gt; findById(Long id); &#x2F;&#x2F;Optional : 존재할 수도 있지만 안할수도 있는 객체</span><br><span class="line">                                            &#x2F;&#x2F;NPE 회피..</span><br><span class="line">    Restaurant save(Restaurant restaurant);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Boot Project</category>
@@ -2265,34 +2123,22 @@ public List&lt;Restaurant&gt; list() {
 <p>@ControllerAdvice : 예외를 받아 처리할 클래스  </p>
 <p>Demo<br>존재하지 않는 id의 가게를 조회했을 때 http status 404를 response하려면</p>
 <p>id:404(없는 id)의 디테일을 Get했을때 not found를 받고싶다.  </p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    @Test</span><br><span class="line">    public void detailWithNotExist() throws Exception &#123;</span><br><span class="line">        given(restaurantService.getRestaurant(404L))</span><br><span class="line">                .willThrow(new RestaurantNotFoundException(404L)); &#x2F;&#x2F;서비스는 사용자 예외를 던질건데  </span><br><span class="line"></span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&#x2F;404&quot;))</span><br><span class="line">                .andExpect(status().isNotFound()) &#x2F;&#x2F;status 404인지 확인하고싶다.</span><br><span class="line">                .andExpect(content().string(&quot;&#123;&#125;&quot;)); &#x2F;&#x2F;빈 body도 받는지 확인하고싶다.  </span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line"></span><br><span class="line">사용자 예외 클래스 생성</span><br></pre></td></tr></table></figure>
-<p>public class RestaurantNotFoundException extends RuntimeException {</p>
-<pre><code>public RestaurantNotFoundException(long id) {
-    super(&quot;Could not find restaurant &quot;+id); //RuntimeException의 매개변수 massage(String)
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Controller에서 try&#x2F;catch로 예외처리 해줄수도 있겠지만  </span><br><span class="line">예외처리를 맡아줄 ControllerAdvice를 생성해준다.</span><br></pre></td></tr></table></figure>
-<p>@ControllerAdvice //예외를 처리할 클래스<br>public class RestaurantErrorAdvice {</p>
-<pre><code>@ResponseBody
-@ResponseStatus(HttpStatus.NOT_FOUND) //response 404 할것임
-@ExceptionHandler(RestaurantNotFoundException.class) //어떤 예외에 대한 정의
-public String handleNotFound() {
-    return &quot;{}&quot;; //예외 처리하고 비어있는 body를 보낼것이다.
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Service에서도 test 진행</span><br></pre></td></tr></table></figure>
-<pre><code>@Test(expected = RestaurantNotFoundException.class) //사용자 예외가 발생할까?  
-public void getRestaurantWithNotExisted() {
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void detailWithNotExist() throws Exception &#123;</span><br><span class="line">    given(restaurantService.getRestaurant(404L))</span><br><span class="line">            .willThrow(new RestaurantNotFoundException(404L)); &#x2F;&#x2F;서비스는 사용자 예외를 던질건데  </span><br><span class="line"></span><br><span class="line">    mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;restaurants&#x2F;404&quot;))</span><br><span class="line">            .andExpect(status().isNotFound()) &#x2F;&#x2F;status 404인지 확인하고싶다.</span><br><span class="line">            .andExpect(content().string(&quot;&#123;&#125;&quot;)); &#x2F;&#x2F;빈 body도 받는지 확인하고싶다.  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    Restaurant restaurant = restaurantService.getRestaurant(404L);
-}</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">orElseThrow()로 예외 처리</span><br></pre></td></tr></table></figure>
-<pre><code>public Restaurant getRestaurant(Long id) {
+<p>사용자 예외 클래스 생성 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class RestaurantNotFoundException extends RuntimeException &#123;</span><br><span class="line"></span><br><span class="line">    public RestaurantNotFoundException(long id) &#123;</span><br><span class="line">        super(&quot;Could not find restaurant &quot;+id); &#x2F;&#x2F;RuntimeException의 매개변수 massage(String)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    Restaurant restaurant =  restaurantRepository.findById(id)
-            .orElseThrow(() -&gt; new RestaurantNotFoundException(id)); //사용자 예외 처리
-    List&lt;MenuItem&gt; menuItems = menuItemRepository.findAllByRestaurantId(id);
-    restaurant.setMenuItems(menuItems);
+<p>Controller에서 try/catch로 예외처리 해줄수도 있겠지만<br>예외처리를 맡아줄 ControllerAdvice를 생성해준다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ControllerAdvice &#x2F;&#x2F;예외를 처리할 클래스  </span><br><span class="line">public class RestaurantErrorAdvice &#123;</span><br><span class="line"></span><br><span class="line">    @ResponseBody</span><br><span class="line">    @ResponseStatus(HttpStatus.NOT_FOUND) &#x2F;&#x2F;response 404 할것임</span><br><span class="line">    @ExceptionHandler(RestaurantNotFoundException.class) &#x2F;&#x2F;어떤 예외에 대한 정의</span><br><span class="line">    public String handleNotFound() &#123;</span><br><span class="line">        return &quot;&#123;&#125;&quot;; &#x2F;&#x2F;예외 처리하고 비어있는 body를 보낼것이다.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    return restaurant;
-}</code></pre><pre><code></code></pre>]]></content>
+<p>Service에서도 test 진행</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test(expected &#x3D; RestaurantNotFoundException.class) &#x2F;&#x2F;사용자 예외가 발생할까?  </span><br><span class="line">public void getRestaurantWithNotExisted() &#123;</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D; restaurantService.getRestaurant(404L);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>orElseThrow()로 예외 처리</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public Restaurant getRestaurant(Long id) &#123;</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D;  restaurantRepository.findById(id)</span><br><span class="line">            .orElseThrow(() -&gt; new RestaurantNotFoundException(id)); &#x2F;&#x2F;사용자 예외 처리</span><br><span class="line">    List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">    restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">    return restaurant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Boot Project</category>
@@ -2867,9 +2713,13 @@ public void getRestaurantWithNotExisted() {
 
 <p>Custom Exception이 아니더라도 응답은 일관성있게 나가는 것이 좋다.<br>=&gt; Exception Handler 사용<br>특정 클래스에서만 사용하지 않고 API 전역적으로 사용하려고 한다.<br>=&gt; RestControllerAdvice</p>
 <p>서버의 오류메세지를 클라이언트로 보내는것은 보안적으로 위험하다.<br>=&gt; 실제 error 메세지 대신 일반적인 문구를 사용</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@RestControllerAdvice</span><br><span class="line">public class GlobalExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(RenameNotPermittedException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public ErrorResponse handleRenameNotPermittedException(RenameNotPermittedException ex) &#123;</span><br><span class="line">        return ErrorResponse.of(HttpStatus.BAD_REQUEST,ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(PersonNotFoundException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public ErrorResponse handlePersonNotFoundException(PersonNotFoundException ex) &#123;</span><br><span class="line">        return ErrorResponse.of(HttpStatus.BAD_REQUEST,ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(MethodArgumentNotValidException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) &#123;</span><br><span class="line">        return ErrorResponse.of(HttpStatus.BAD_REQUEST,ex.getBindingResult().getFieldError());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(RuntimeException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    public ErrorResponse handleRuntimeException(RuntimeException ex) &#123;</span><br><span class="line">        log.error(&quot;서버 오류 : &#123;&#125;&quot;, ex.getMessage(), ex);</span><br><span class="line">        return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR,&quot;알 수 없는 서버 오류가 발생하였습니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;   </span><br><span class="line">    </span><br><span class="line">Parameter Validator</span><br></pre></td></tr></table></figure>
-<p>public class PersonDto {<br>    //null, empty, blank 예외처리, 디폴트 메시지 설정<br>    @NotBlank(message = “이름은 필수값입니다.”)<br>    private String name;</p>
-<pre><code></code></pre>]]></content>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@RestControllerAdvice</span><br><span class="line">public class GlobalExceptionHandler &#123;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(RenameNotPermittedException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public ErrorResponse handleRenameNotPermittedException(RenameNotPermittedException ex) &#123;</span><br><span class="line">        return ErrorResponse.of(HttpStatus.BAD_REQUEST,ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(PersonNotFoundException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public ErrorResponse handlePersonNotFoundException(PersonNotFoundException ex) &#123;</span><br><span class="line">        return ErrorResponse.of(HttpStatus.BAD_REQUEST,ex.getMessage());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(MethodArgumentNotValidException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.BAD_REQUEST)</span><br><span class="line">    public ErrorResponse handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) &#123;</span><br><span class="line">        return ErrorResponse.of(HttpStatus.BAD_REQUEST,ex.getBindingResult().getFieldError());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ExceptionHandler(RuntimeException.class)</span><br><span class="line">    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)</span><br><span class="line">    public ErrorResponse handleRuntimeException(RuntimeException ex) &#123;</span><br><span class="line">        log.error(&quot;서버 오류 : &#123;&#125;&quot;, ex.getMessage(), ex);</span><br><span class="line">        return ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR,&quot;알 수 없는 서버 오류가 발생하였습니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Parameter Validator</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class PersonDto &#123;</span><br><span class="line">    &#x2F;&#x2F;null, empty, blank 예외처리, 디폴트 메시지 설정</span><br><span class="line">    @NotBlank(message &#x3D; &quot;이름은 필수값입니다.&quot;)</span><br><span class="line">    private String name;</span><br></pre></td></tr></table></figure>
+
+
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Boot Project</category>
@@ -2943,37 +2793,21 @@ public void getRestaurantWithNotExisted() {
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@InitBinder</span><br><span class="line">public void init(WebDataBinder webDataBinder) &#123;</span><br><span class="line">    webDataBinder.registerCustomEditor(Event.class, new EventEditor());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="Converter와-Formatter"><a href="#Converter와-Formatter" class="headerlink" title="Converter와 Formatter"></a>Converter와 Formatter</h4><h5 id="Converter"><a href="#Converter" class="headerlink" title="Converter"></a>Converter</h5><p>Source 타입을 Target 타입으로 변환, 상태 정보가 없기 때문에(stateless) 쓰레드 세이프하다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class StringToEventConverter implements Converter&lt;String, Event&gt; &#123;</span><br><span class="line">        </span><br><span class="line">    @Override</span><br><span class="line">    public Event convert(String source) &#123;</span><br><span class="line">        return new Event(Integer.parseInt(source));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">WebMvcConfigurer 에서 설정, ConverterRegistry에 등록하여 사용한다.</span><br></pre></td></tr></table></figure>
-<p>@Configuration<br>public class WebConfig implements WebMvcConfigurer {</p>
-<pre><code>@Override
-public void addFormatters(FormatterRegistry registry) {
-    registry.addConverter(new StringToEventConverter());
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">##### Formatter</span><br><span class="line">보다 Web에 특화된 인터페이스</span><br><span class="line">String과 Object 변환, Locale에 따른 i18n 기능.</span><br></pre></td></tr></table></figure>
-<p>@Component<br>public class EventFormatter implements Formatter<Event> {<br>    @Override<br>    public Event parse(String text, Locale locale) throws ParseException {<br>        return new Event(Integer.parseInt(text));<br>    }</p>
-<pre><code>@Override
-public Event print(Event object, Locale locale) {
-    return object.getId().toString();
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">WebMvcConfigurer 에서 설정, FormatterRegistry에 등록하여 사용한다.</span><br></pre></td></tr></table></figure>
-<p>@Configuration<br>public class WebConfig implements WebMvcConfigurer {</p>
-<pre><code>@Override
-public void addFormatters(FormatterRegistry registry) {
-    registry.addFormatter(new EventFormatter());
-}</code></pre><p>}</p>
-<pre><code>
-##### ConversionService
-Converter/Formatter는 DataBinder 대신에 ConversionService에서 쓰레드 세이프하게 실제 변환 작업이 수행된다.  
-스프링 MVC, 빈(value) 설정, SpEL에서 사용한다.  
-DefaultFormattingConversionService
- : ConversionService와 FormatterRegistry를 구현하고 그 외 여러 기본 컨버터와 포매터가 등록되어 있다.  
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class StringToEventConverter implements Converter&lt;String, Event&gt; &#123;</span><br><span class="line">        </span><br><span class="line">    @Override</span><br><span class="line">    public Event convert(String source) &#123;</span><br><span class="line">        return new Event(Integer.parseInt(source));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-conversionService를 toString()으로 확인하면 등록된 모든 Converter, Formatter를 확인할 수 있다.  
+<p>WebMvcConfigurer 에서 설정, ConverterRegistry에 등록하여 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addConverter(new StringToEventConverter());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-참고로 스프링 부트에서는 DefaultFormattingConversionService를 상속받는 WebConversionService가 빈으로 등록되고
-WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으로 등록해준다.  
+<h5 id="Formatter"><a href="#Formatter" class="headerlink" title="Formatter"></a>Formatter</h5><p>보다 Web에 특화된 인터페이스<br>String과 Object 변환, Locale에 따른 i18n 기능.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class EventFormatter implements Formatter&lt;Event&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Event parse(String text, Locale locale) throws ParseException &#123;</span><br><span class="line">        return new Event(Integer.parseInt(text));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    public Event print(Event object, Locale locale) &#123;</span><br><span class="line">        return object.getId().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</code></pre>]]></content>
+<p>WebMvcConfigurer 에서 설정, FormatterRegistry에 등록하여 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addFormatter(new EventFormatter());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="ConversionService"><a href="#ConversionService" class="headerlink" title="ConversionService"></a>ConversionService</h5><p>Converter/Formatter는 DataBinder 대신에 ConversionService에서 쓰레드 세이프하게 실제 변환 작업이 수행된다.<br>스프링 MVC, 빈(value) 설정, SpEL에서 사용한다.<br>DefaultFormattingConversionService<br> : ConversionService와 FormatterRegistry를 구현하고 그 외 여러 기본 컨버터와 포매터가 등록되어 있다.  </p>
+<p>conversionService를 toString()으로 확인하면 등록된 모든 Converter, Formatter를 확인할 수 있다.  </p>
+<p>참고로 스프링 부트에서는 DefaultFormattingConversionService를 상속받는 WebConversionService가 빈으로 등록되고<br>WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으로 등록해준다.  </p>
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Framework</category>
@@ -2995,19 +2829,15 @@ WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으
 <p>${“프로퍼티”}</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Value(&quot;$&#123;my.value&#125;&quot;)</span><br><span class="line">int value;</span><br></pre></td></tr></table></figure>
 <p>참고로 표현식 내부에 프로퍼티를 사용할 수 있지만 반대는 안된다.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">    @Value(&quot;#&#123;$&#123;my.value&#125; eq 100&#125;&quot;)</span><br><span class="line">    boolean isValue100;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line">Sample Bean 참조</span><br></pre></td></tr></table></figure>
-<pre><code>@Value(#{sample.data})
-int value;</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">SpEL의 해석은 SpelExpressionParser에 의해 이루어진다.</span><br></pre></td></tr></table></figure>
-<p>ExpressionParser parser = new SpelExpressionParser();<br>Expression expression = parser.parseExpression(“2 + 100”);<br>Integer value = expression.getValue(Integer.class);</p>
-<pre><code>
-#### SpEL이 사용되는 곳  
-@Value  
-@ConditionalOnExpression (EL을 이용하여 선별적으로 Bean 등록)  
-스프링 시큐리티   
-스프링 데이터 @Query  
-Thymeleaf  
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Value(&quot;#&#123;$&#123;my.value&#125; eq 100&#125;&quot;)</span><br><span class="line">boolean isValue100;</span><br></pre></td></tr></table></figure>
+<p>Sample Bean 참조</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Value(#&#123;sample.data&#125;)</span><br><span class="line">int value;</span><br></pre></td></tr></table></figure>
 
-</code></pre>]]></content>
+<p>SpEL의 해석은 SpelExpressionParser에 의해 이루어진다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">ExpressionParser parser &#x3D; new SpelExpressionParser();</span><br><span class="line">Expression expression &#x3D; parser.parseExpression(&quot;2 + 100&quot;);</span><br><span class="line">Integer value &#x3D; expression.getValue(Integer.class);</span><br></pre></td></tr></table></figure>
+
+<h4 id="SpEL이-사용되는-곳"><a href="#SpEL이-사용되는-곳" class="headerlink" title="SpEL이 사용되는 곳"></a>SpEL이 사용되는 곳</h4><p>@Value<br>@ConditionalOnExpression (EL을 이용하여 선별적으로 Bean 등록)<br>스프링 시큐리티<br>스프링 데이터 @Query<br>Thymeleaf  </p>
+]]></content>
       <categories>
         <category>Study</category>
         <category>Spring Framework</category>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="데이터 바인딩프로퍼티 값을 타겟 객체에 설정하는 기능.즉, 사용자 입력값(문자열)을 객체가 가지고 있는 int, Date, Boolean 또는 도메인 타입 등으로 변환해 넣어주는 기능이다.   PropertyEditorDataBinder가 변환 작업에 사용하는 인터페이스.   문자열을 객체로 변환하는 Editor 만들기">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-14T15:13:04.000Z">
-<meta property="article:modified_time" content="2020-08-14T15:36:43.448Z">
+<meta property="article:modified_time" content="2020-08-14T15:43:04.284Z">
 <meta property="article:author" content="Jeong In">
 <meta property="article:tag" content="spring">
 <meta name="twitter:card" content="summary">
@@ -209,7 +209,7 @@
               <span class="post-meta-item-text">작성일</span>
               
 
-              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:36:43" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:43:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -244,37 +244,21 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@InitBinder</span><br><span class="line">public void init(WebDataBinder webDataBinder) &#123;</span><br><span class="line">    webDataBinder.registerCustomEditor(Event.class, new EventEditor());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h4 id="Converter와-Formatter"><a href="#Converter와-Formatter" class="headerlink" title="Converter와 Formatter"></a>Converter와 Formatter</h4><h5 id="Converter"><a href="#Converter" class="headerlink" title="Converter"></a>Converter</h5><p>Source 타입을 Target 타입으로 변환, 상태 정보가 없기 때문에(stateless) 쓰레드 세이프하다.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class StringToEventConverter implements Converter&lt;String, Event&gt; &#123;</span><br><span class="line">        </span><br><span class="line">    @Override</span><br><span class="line">    public Event convert(String source) &#123;</span><br><span class="line">        return new Event(Integer.parseInt(source));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"></span><br><span class="line">WebMvcConfigurer 에서 설정, ConverterRegistry에 등록하여 사용한다.</span><br></pre></td></tr></table></figure>
-<p>@Configuration<br>public class WebConfig implements WebMvcConfigurer {</p>
-<pre><code>@Override
-public void addFormatters(FormatterRegistry registry) {
-    registry.addConverter(new StringToEventConverter());
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">##### Formatter</span><br><span class="line">보다 Web에 특화된 인터페이스</span><br><span class="line">String과 Object 변환, Locale에 따른 i18n 기능.</span><br></pre></td></tr></table></figure>
-<p>@Component<br>public class EventFormatter implements Formatter<Event> {<br>    @Override<br>    public Event parse(String text, Locale locale) throws ParseException {<br>        return new Event(Integer.parseInt(text));<br>    }</p>
-<pre><code>@Override
-public Event print(Event object, Locale locale) {
-    return object.getId().toString();
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">WebMvcConfigurer 에서 설정, FormatterRegistry에 등록하여 사용한다.</span><br></pre></td></tr></table></figure>
-<p>@Configuration<br>public class WebConfig implements WebMvcConfigurer {</p>
-<pre><code>@Override
-public void addFormatters(FormatterRegistry registry) {
-    registry.addFormatter(new EventFormatter());
-}</code></pre><p>}</p>
-<pre><code>
-##### ConversionService
-Converter/Formatter는 DataBinder 대신에 ConversionService에서 쓰레드 세이프하게 실제 변환 작업이 수행된다.  
-스프링 MVC, 빈(value) 설정, SpEL에서 사용한다.  
-DefaultFormattingConversionService
- : ConversionService와 FormatterRegistry를 구현하고 그 외 여러 기본 컨버터와 포매터가 등록되어 있다.  
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class StringToEventConverter implements Converter&lt;String, Event&gt; &#123;</span><br><span class="line">        </span><br><span class="line">    @Override</span><br><span class="line">    public Event convert(String source) &#123;</span><br><span class="line">        return new Event(Integer.parseInt(source));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-conversionService를 toString()으로 확인하면 등록된 모든 Converter, Formatter를 확인할 수 있다.  
+<p>WebMvcConfigurer 에서 설정, ConverterRegistry에 등록하여 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addConverter(new StringToEventConverter());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-참고로 스프링 부트에서는 DefaultFormattingConversionService를 상속받는 WebConversionService가 빈으로 등록되고
-WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으로 등록해준다.  
+<h5 id="Formatter"><a href="#Formatter" class="headerlink" title="Formatter"></a>Formatter</h5><p>보다 Web에 특화된 인터페이스<br>String과 Object 변환, Locale에 따른 i18n 기능.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class EventFormatter implements Formatter&lt;Event&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Event parse(String text, Locale locale) throws ParseException &#123;</span><br><span class="line">        return new Event(Integer.parseInt(text));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    public Event print(Event object, Locale locale) &#123;</span><br><span class="line">        return object.getId().toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</code></pre>
+<p>WebMvcConfigurer 에서 설정, FormatterRegistry에 등록하여 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addFormatter(new EventFormatter());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h5 id="ConversionService"><a href="#ConversionService" class="headerlink" title="ConversionService"></a>ConversionService</h5><p>Converter/Formatter는 DataBinder 대신에 ConversionService에서 쓰레드 세이프하게 실제 변환 작업이 수행된다.<br>스프링 MVC, 빈(value) 설정, SpEL에서 사용한다.<br>DefaultFormattingConversionService<br> : ConversionService와 FormatterRegistry를 구현하고 그 외 여러 기본 컨버터와 포매터가 등록되어 있다.  </p>
+<p>conversionService를 toString()으로 확인하면 등록된 모든 Converter, Formatter를 확인할 수 있다.  </p>
+<p>참고로 스프링 부트에서는 DefaultFormattingConversionService를 상속받는 WebConversionService가 빈으로 등록되고<br>WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으로 등록해준다.  </p>
+
     </div>
 
     
@@ -357,7 +341,7 @@ WebMvcConfigurer 설정 없이 Formatter와 Converter 빈을 찾아서 자동으
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#데이터-바인딩"><span class="nav-number">1.</span> <span class="nav-text">데이터 바인딩</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PropertyEditor"><span class="nav-number">1.0.1.</span> <span class="nav-text">PropertyEditor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Converter와-Formatter"><span class="nav-number">1.0.2.</span> <span class="nav-text">Converter와 Formatter</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Converter"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">Converter</span></a></li></ol></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#데이터-바인딩"><span class="nav-number">1.</span> <span class="nav-text">데이터 바인딩</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PropertyEditor"><span class="nav-number">1.0.1.</span> <span class="nav-text">PropertyEditor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Converter와-Formatter"><span class="nav-number">1.0.2.</span> <span class="nav-text">Converter와 Formatter</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Converter"><span class="nav-number">1.0.2.1.</span> <span class="nav-text">Converter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Formatter"><span class="nav-number">1.0.2.2.</span> <span class="nav-text">Formatter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ConversionService"><span class="nav-number">1.0.2.3.</span> <span class="nav-text">ConversionService</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

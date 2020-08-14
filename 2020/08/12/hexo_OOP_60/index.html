@@ -28,7 +28,7 @@
 <meta property="og:description" content="객체 지향 프로그래밍60. 스트림자료의 대상과 관계없이 동일한 연산을 수행할 수 있는 기능(자료의 추상화)배열, 컬렉션에 동일한 연산이 수행되어 일관성 있는 처리 가능한번 생성하고 사용한 스트림은 재사용할 수 없음스트림 연산은 기존 자료를 변경하지 않음중간 연산과 최종 연산으로 구분 됨최종 연산이 수행되어야 모든 연산이 적용되는 지연 연산    중간 연산f">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-12T12:18:42.000Z">
-<meta property="article:modified_time" content="2020-08-12T12:18:42.893Z">
+<meta property="article:modified_time" content="2020-08-14T15:45:03.758Z">
 <meta property="article:author" content="Jeong In">
 <meta name="twitter:card" content="summary">
 
@@ -209,6 +209,13 @@
 
               <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-15 00:45:03" itemprop="dateModified" datetime="2020-08-15T00:45:03+09:00">2020-08-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -248,33 +255,18 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line"></span><br><span class="line">public class IntArrayTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[] arr &#x3D; &#123;1,2,3,4,5&#125;;</span><br><span class="line"></span><br><span class="line">        int sum &#x3D; Arrays.stream(arr).sum();</span><br><span class="line">        int count &#x3D; (int)Arrays.stream(arr).count(); &#x2F;&#x2F;썼으니 재생성, long이므로 형변환</span><br><span class="line"></span><br><span class="line">        System.out.println(sum);</span><br><span class="line">        System.out.println(count);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>콜렉션 스트림</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line">public class ArrayListStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; sList &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        sList.add(&quot;Tomas&quot;);</span><br><span class="line">        sList.add(&quot;Edward&quot;);</span><br><span class="line">        sList.add(&quot;Jack&quot;);</span><br><span class="line"></span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; sList.stream(); &#x2F;&#x2F;stream 객체 생성</span><br><span class="line">        stream.forEach(s -&gt; System.out.print(s + &quot; &quot;));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().sorted().forEach(s -&gt; System.out.print(s + &quot; &quot;)); &#x2F;&#x2F;sorted 중간 연산 추가</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().map(s -&gt; s.length()).forEach(n -&gt; System.out.print(n + &quot; &quot;)); &#x2F;&#x2F;map(변환) 중간 연산 추가</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#96;&#96;&#96;     </span><br><span class="line">    </span><br><span class="line">* reduce() 연산   </span><br><span class="line">정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용    </span><br><span class="line">최종 연산으로 스트림의 요소를 소모하며 연산 수행     </span><br><span class="line"></span><br><span class="line">배열의 모든 요소의 합을 구하는 reduce() 연산</span><br></pre></td></tr></table></figure>
-<p>Arrays.stream(arr).reduce(0,(a,b)-&gt;a+b));</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>package stream;</p>
-<p>import java.util.Arrays;<br>import java.util.function.BinaryOperator;</p>
-<p>class CompareString implements BinaryOperator<String> {</p>
-<pre><code>@Override
-public String apply(String s1, String s2) {
-    if(s1.getBytes().length &gt;= s2.getBytes().length) {
-        return s1;
-    } else {
-        return s2;
-    }
-}</code></pre><p>}<br>public class ReduceTest {<br>    public static void main(String[] args) {</p>
-<pre><code>    String[] greetings = {&quot;안녕하세요&quot;,&quot;hello&quot;,&quot;Good Morning&quot;,&quot;반갑습니다&quot;};
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import java.util.stream.Stream;</span><br><span class="line"></span><br><span class="line">public class ArrayListStreamTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;String&gt; sList &#x3D; new ArrayList&lt;String&gt;();</span><br><span class="line">        sList.add(&quot;Tomas&quot;);</span><br><span class="line">        sList.add(&quot;Edward&quot;);</span><br><span class="line">        sList.add(&quot;Jack&quot;);</span><br><span class="line"></span><br><span class="line">        Stream&lt;String&gt; stream &#x3D; sList.stream(); &#x2F;&#x2F;stream 객체 생성</span><br><span class="line">        stream.forEach(s -&gt; System.out.print(s + &quot; &quot;));</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().sorted().forEach(s -&gt; System.out.print(s + &quot; &quot;)); &#x2F;&#x2F;sorted 중간 연산 추가</span><br><span class="line">        System.out.println();</span><br><span class="line"></span><br><span class="line">        sList.stream().map(s -&gt; s.length()).forEach(n -&gt; System.out.print(n + &quot; &quot;)); &#x2F;&#x2F;map(변환) 중간 연산 추가</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    System.out.println(Arrays.stream(greetings).reduce(&quot;&quot;,(s1,s2) -&gt; {
-        if(s1.getBytes().length &gt;= s2.getBytes().length) {
-            return s1;
-        } else {
-            return s2;
-        }
-    }));
-    //람다식 대신 BinaryOperator가 구현된 클래스를 사용
-    System.out.println(Arrays.stream(greetings).reduce(new CompareString()).get());
-}</code></pre><p>}</p>
-<pre><code></code></pre>
+<ul>
+<li>reduce() 연산<br>정의된 연산이 아닌 프로그래머가 직접 지정하는 연산을 적용<br>최종 연산으로 스트림의 요소를 소모하며 연산 수행     </li>
+</ul>
+<p>배열의 모든 요소의 합을 구하는 reduce() 연산   </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arrays.stream(arr).reduce(0,(a,b)-&gt;a+b));</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">package stream;</span><br><span class="line"></span><br><span class="line">import java.util.Arrays;</span><br><span class="line">import java.util.function.BinaryOperator;</span><br><span class="line"></span><br><span class="line">class CompareString implements BinaryOperator&lt;String&gt; &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String apply(String s1, String s2) &#123;</span><br><span class="line">        if(s1.getBytes().length &gt;&#x3D; s2.getBytes().length) &#123;</span><br><span class="line">            return s1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return s2;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">public class ReduceTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        String[] greetings &#x3D; &#123;&quot;안녕하세요&quot;,&quot;hello&quot;,&quot;Good Morning&quot;,&quot;반갑습니다&quot;&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(Arrays.stream(greetings).reduce(&quot;&quot;,(s1,s2) -&gt; &#123;</span><br><span class="line">            if(s1.getBytes().length &gt;&#x3D; s2.getBytes().length) &#123;</span><br><span class="line">                return s1;</span><br><span class="line">            &#125; else &#123;</span><br><span class="line">                return s2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;));</span><br><span class="line">        &#x2F;&#x2F;람다식 대신 BinaryOperator가 구현된 클래스를 사용</span><br><span class="line">        System.out.println(Arrays.stream(greetings).reduce(new CompareString()).get());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
     </div>
 
     

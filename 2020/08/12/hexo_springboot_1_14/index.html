@@ -28,7 +28,7 @@
 <meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기14. 가게 추가POST 메서드를 사용하여 &#x2F;restaurants 에 추가할 것임성공하면 HTTP status 201넣을 레스토랑 정보는 Header에 담아 보내게 되는데Header Location에 리소스 주소가 들어가게 된다.    Client에서 보내준 결과를 JSON parser가 수행되도록 할 수 있다">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
-<meta property="article:modified_time" content="2020-08-12T12:22:41.359Z">
+<meta property="article:modified_time" content="2020-08-14T15:46:06.405Z">
 <meta property="article:author" content="Jeong In">
 <meta property="article:tag" content="spring boot">
 <meta name="twitter:card" content="summary">
@@ -210,6 +210,13 @@
 
               <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-15 00:46:06" itemprop="dateModified" datetime="2020-08-15T00:46:06+09:00">2020-08-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,57 +249,28 @@
 
 <p>Controller에 가게를 추가하는 작업을 추가할 것이고,<br>Service에 실제로 기능을 구현할 것이다.   </p>
 <p>1.POST 요청을 처리하기 위한 Controller 생성</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">    @PostMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">    public ResponseEntity&lt;?&gt; create(@RequestBody Restaurant resource) &#x2F;&#x2F;content로 넘겨준 내용을 매개변수로 받기</span><br><span class="line">            throws URISyntaxException &#123;</span><br><span class="line"></span><br><span class="line">        String name&#x3D;resource.getName();</span><br><span class="line">        String address&#x3D;resource.getAddress();</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; new Restaurant(1234L,name,address);</span><br><span class="line">        restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">        URI location &#x3D; new URI(&quot;&#x2F;restaurants&#x2F;&quot;+restaurant.getId());</span><br><span class="line">        return ResponseEntity.created(location).body(&quot;&#123;&#125;&quot;); &#x2F;&#x2F;빈 내용</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;   </span><br><span class="line">Controller Test</span><br></pre></td></tr></table></figure>
-<pre><code>@Test
-public void create() throws Exception {
-    mvc.perform(post(&quot;/restaurants&quot;)
-            .contentType(MediaType.APPLICATION_JSON) //JSON 타입임을 알려준다
-            .content(&quot;{\&quot;name\&quot;:\&quot;BeRyong\&quot;,\&quot;address\&quot;:\&quot;Busan\&quot;}&quot;)) //JSON 타입으로 데이터 전달
-            .andExpect(status().isCreated())
-            .andExpect(header().string(&quot;location&quot;, &quot;/restaurants/1234&quot;))
-            .andExpect(content().string(&quot;{}&quot;)); //비어있는지 확인
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">public ResponseEntity&lt;?&gt; create(@RequestBody Restaurant resource) &#x2F;&#x2F;content로 넘겨준 내용을 매개변수로 받기</span><br><span class="line">        throws URISyntaxException &#123;</span><br><span class="line"></span><br><span class="line">    String name&#x3D;resource.getName();</span><br><span class="line">    String address&#x3D;resource.getAddress();</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D; new Restaurant(1234L,name,address);</span><br><span class="line">    restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">    URI location &#x3D; new URI(&quot;&#x2F;restaurants&#x2F;&quot;+restaurant.getId());</span><br><span class="line">    return ResponseEntity.created(location).body(&quot;&#123;&#125;&quot;); &#x2F;&#x2F;빈 내용</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Controller Test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void create() throws Exception &#123;</span><br><span class="line">    mvc.perform(post(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">            .contentType(MediaType.APPLICATION_JSON) &#x2F;&#x2F;JSON 타입임을 알려준다</span><br><span class="line">            .content(&quot;&#123;\&quot;name\&quot;:\&quot;BeRyong\&quot;,\&quot;address\&quot;:\&quot;Busan\&quot;&#125;&quot;)) &#x2F;&#x2F;JSON 타입으로 데이터 전달</span><br><span class="line">            .andExpect(status().isCreated())</span><br><span class="line">            .andExpect(header().string(&quot;location&quot;, &quot;&#x2F;restaurants&#x2F;1234&quot;))</span><br><span class="line">            .andExpect(content().string(&quot;&#123;&#125;&quot;)); &#x2F;&#x2F;비어있는지 확인</span><br><span class="line"></span><br><span class="line">    verify(restaurantService).addRestaurant(any()); &#x2F;&#x2F;any():뭘 넣든지 작동할 수 있도록, Mockito에서 제공</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    verify(restaurantService).addRestaurant(any()); //any():뭘 넣든지 작동할 수 있도록, Mockito에서 제공
-}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2.Service 및 Repository 추가    </span><br><span class="line">Restaurant Service Test</span><br></pre></td></tr></table></figure>
-<pre><code>@Test
-public void addRestaurant() {
-    Restaurant restaurant = new Restaurant(&quot;BeRyong&quot;, &quot;Busan&quot;);
+<p>2.Service 및 Repository 추가<br>Restaurant Service Test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void addRestaurant() &#123;</span><br><span class="line">    Restaurant restaurant &#x3D; new Restaurant(&quot;BeRyong&quot;, &quot;Busan&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;가짜 saved</span><br><span class="line">    Restaurant saved &#x3D; new Restaurant(1234L,&quot;BeRyong&quot;, &quot;Busan&quot;);</span><br><span class="line">    given(restaurantRepository.save(any())).willReturn(saved);</span><br><span class="line"></span><br><span class="line">    Restaurant created &#x3D; restaurantService.addRestaurant(restaurant);</span><br><span class="line"></span><br><span class="line">    assertThat(created.getId(), is(1234L));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    //가짜 saved
-    Restaurant saved = new Restaurant(1234L,&quot;BeRyong&quot;, &quot;Busan&quot;);
-    given(restaurantRepository.save(any())).willReturn(saved);
+<p>Restaurant Service</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public Restaurant addRestaurant(Restaurant restaurant) &#123;</span><br><span class="line">    return restaurantRepository.save(restaurant);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    Restaurant created = restaurantService.addRestaurant(restaurant);
+<p>Restaurant Repository Test</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class RestaurantRepositoryImplTest &#123;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void save() &#123;</span><br><span class="line">        RestaurantRepository repository &#x3D; new RestaurantRepositoryImpl();</span><br><span class="line"></span><br><span class="line">        int oldCount &#x3D; repository.findAll().size();</span><br><span class="line">        Restaurant restaurant &#x3D; new Restaurant(&quot;BeRyong&quot;,&quot;Busan&quot;);</span><br><span class="line">        repository.save(restaurant);</span><br><span class="line"></span><br><span class="line">        assertThat(restaurant.getId(), is(1234L)); &#x2F;&#x2F;저장된 뒤 id가 생성되었는지 확인    </span><br><span class="line">        int newCount &#x3D; repository.findAll().size();</span><br><span class="line"></span><br><span class="line">        assertThat(newCount-oldCount, is(1)); &#x2F;&#x2F;개수가 늘어났는지 확인</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    assertThat(created.getId(), is(1234L));
-}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Restaurant Service</span><br></pre></td></tr></table></figure>
-<pre><code>public Restaurant addRestaurant(Restaurant restaurant) {
-    return restaurantRepository.save(restaurant);
-}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Restaurant Repository Test</span><br></pre></td></tr></table></figure>
-<p>public class RestaurantRepositoryImplTest {</p>
-<pre><code>@Test
-public void save() {
-    RestaurantRepository repository = new RestaurantRepositoryImpl();
+<p>Restaurant Repository</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Restaurant save(Restaurant restaurant) &#123;</span><br><span class="line">    restaurant.setId(1234L);</span><br><span class="line">    restaurants.add(restaurant);</span><br><span class="line">    return restaurant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    int oldCount = repository.findAll().size();
-    Restaurant restaurant = new Restaurant(&quot;BeRyong&quot;,&quot;Busan&quot;);
-    repository.save(restaurant);
-
-    assertThat(restaurant.getId(), is(1234L)); //저장된 뒤 id가 생성되었는지 확인    
-    int newCount = repository.findAll().size();
-
-    assertThat(newCount-oldCount, is(1)); //개수가 늘어났는지 확인
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Restaurant Repository</span><br></pre></td></tr></table></figure>
-<pre><code>@Override
-public Restaurant save(Restaurant restaurant) {
-    restaurant.setId(1234L);
-    restaurants.add(restaurant);
-    return restaurant;
-}</code></pre><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">POST by HTTPie</span><br><span class="line">&#96;&#96;&#96;shell script</span><br><span class="line">$ http POST localhost:8080&#x2F;restaurants name&#x3D;BeRyong address&#x3D;Busan</span><br></pre></td></tr></table></figure>
+<p>POST by HTTPie</p>
+<figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> http POST localhost:8080/restaurants name=BeRyong address=Busan</span></span><br></pre></td></tr></table></figure>
 
 <p>GET by HTTPie</p>
 <figure class="highlight shell"><figcaption><span>script</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> http GET localhost:8080/restaurants</span></span><br><span class="line"></span><br><span class="line">HTTP/1.1 200 </span><br><span class="line">Connection: keep-alive</span><br><span class="line">Content-Type: application/json;charset=UTF-8</span><br><span class="line">Date: Mon, 01 Jun 2020 21:07:17 GMT</span><br><span class="line">Keep-Alive: timeout=60</span><br><span class="line">Transfer-Encoding: chunked</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        "address": "Seoul",</span><br><span class="line">        "id": 1004,</span><br><span class="line">        "information": "Bob zip in Seoul",</span><br><span class="line">        "menuItems": [],</span><br><span class="line">        "name": "Bob zip"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        "address": "Seoul",</span><br><span class="line">        "id": 2020,</span><br><span class="line">        "information": "Cyber Food in Seoul",</span><br><span class="line">        "menuItems": [],</span><br><span class="line">        "name": "Cyber Food"</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">        "address": "Busan",</span><br><span class="line">        "id": 1234,</span><br><span class="line">        "information": "BeRyong in Busan",</span><br><span class="line">        "menuItems": [],</span><br><span class="line">        "name": "BeRyong"</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
 
 
     </div>

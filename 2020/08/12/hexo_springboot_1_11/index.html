@@ -28,7 +28,7 @@
 <meta property="og:description" content="스프링 부트 프로젝트레스토랑 예약 사이트 만들기11. 레이어 분리UI Layer는 interfaces 패키지로 분리하여 Controller를 저장했다.Domain Layer는 domain 패키지로 분리하여 도메인 모델과 저장소를 저장했다.    Application Layer를 중간에 추가할 것이다.application 패키지 추가 및 MenuItem 도메">
 <meta property="og:locale" content="ko_KR">
 <meta property="article:published_time" content="2020-08-12T12:22:41.000Z">
-<meta property="article:modified_time" content="2020-08-12T12:22:41.338Z">
+<meta property="article:modified_time" content="2020-08-14T15:45:56.663Z">
 <meta property="article:author" content="Jeong In">
 <meta property="article:tag" content="spring boot">
 <meta name="twitter:card" content="summary">
@@ -210,6 +210,13 @@
 
               <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-15 00:45:56" itemprop="dateModified" datetime="2020-08-15T00:45:56+09:00">2020-08-15</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -242,84 +249,17 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class MenuItemRepositoryImpl implements MenuItemRepository&#123;</span><br><span class="line"></span><br><span class="line">    private List&lt;MenuItem&gt; menuitems &#x3D; new ArrayList&lt;MenuItem&gt;();</span><br><span class="line">    </span><br><span class="line">    public MenuItemRepositoryImpl() &#123;</span><br><span class="line">        menuitems.add(new MenuItem(&quot;Kimchi&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public List&lt;MenuItem&gt; findAllByRestaurantId(Long restaurantId) &#123;</span><br><span class="line">        return this.menuitems;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Controller</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">    @Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;) &#x2F;&#x2F;&#123;&#125;로 바뀌는 부분을 매핑가능</span><br><span class="line">    public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) &#123; &#x2F;&#x2F;주소의 파라미터를 활용할 수 있음</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurantRepository.findById(id); &#x2F;&#x2F;저장소에서 기능을 생성하여 사용</span><br><span class="line"></span><br><span class="line">        List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">        restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">        return restaurant;</span><br><span class="line">    &#125;</span><br><span class="line">&#96;&#96;&#96;  </span><br><span class="line">위처럼 Controller가 복잡해진다...</span><br><span class="line">때문에 application layer를 추가해서 기능적인 부분을 분리한다.  </span><br><span class="line">하려고 하는것은 다음과 같다     </span><br><span class="line">application layer 역할을 해줄 RestaurantService 객체 생성    </span><br><span class="line">Service에서 구현된 기능을 Controller에서 사용   </span><br><span class="line">repository에 대한 의존성을 Service로 이관     </span><br><span class="line"></span><br><span class="line">RestaurantService</span><br></pre></td></tr></table></figure>
-<p>@Service //Spring에서 application으로 정의<br>public class RestaurantService {<br>    //의존성 연결을 Service에서 미리<br>    @Autowired<br>    private RestaurantRepository restaurantRepository;</p>
-<pre><code>@Autowired
-private MenuItemRepository menuItemRepository;
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Autowired &#x2F;&#x2F;Spring이 알아서 객체를 생성해서 멤버변수에 넣어준다.</span><br><span class="line">private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">@Autowired</span><br><span class="line">private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">@GetMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;) &#x2F;&#x2F;&#123;&#125;로 바뀌는 부분을 매핑가능</span><br><span class="line">public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) &#123; &#x2F;&#x2F;주소의 파라미터를 활용할 수 있음</span><br><span class="line"></span><br><span class="line">    Restaurant restaurant &#x3D; restaurantRepository.findById(id); &#x2F;&#x2F;저장소에서 기능을 생성하여 사용</span><br><span class="line"></span><br><span class="line">    List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">    restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">    return restaurant;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>위처럼 Controller가 복잡해진다…<br>때문에 application layer를 추가해서 기능적인 부분을 분리한다.<br>하려고 하는것은 다음과 같다<br>application layer 역할을 해줄 RestaurantService 객체 생성<br>Service에서 구현된 기능을 Controller에서 사용<br>repository에 대한 의존성을 Service로 이관     </p>
+<p>RestaurantService</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@Service &#x2F;&#x2F;Spring에서 application으로 정의</span><br><span class="line">public class RestaurantService &#123;</span><br><span class="line">    &#x2F;&#x2F;의존성 연결을 Service에서 미리</span><br><span class="line">    @Autowired </span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line">    </span><br><span class="line">    public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) &#123;</span><br><span class="line">        this.restaurantRepository &#x3D; restaurantRepository;</span><br><span class="line">        this.menuItemRepository &#x3D; menuItemRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;Controller에서 사용될 기능 구현    </span><br><span class="line">    public List&lt;Restaurant&gt; getRestaurants() &#123;</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantRepository.findAll();</span><br><span class="line">        return restaurants;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Restaurant getRestaurant(Long id) &#123;</span><br><span class="line">        &#x2F;&#x2F;가게 정보 </span><br><span class="line">        Restaurant restaurant &#x3D;  restaurantRepository.findById(id);</span><br><span class="line">        &#x2F;&#x2F;메뉴 정보 </span><br><span class="line">        List&lt;MenuItem&gt; menuItems &#x3D; menuItemRepository.findAllByRestaurantId(id);</span><br><span class="line">        restaurant.setMenuItems(menuItems);</span><br><span class="line"></span><br><span class="line">        return restaurant;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public RestaurantService(RestaurantRepository restaurantRepository, MenuItemRepository menuItemRepository) {
-    this.restaurantRepository = restaurantRepository;
-    this.menuItemRepository = menuItemRepository;
-}
+<p>Controller 처럼 Service 또한 Test를 하자<br>Service Test    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public class RestaurantServiceTest &#123;</span><br><span class="line"></span><br><span class="line">    private RestaurantService restaurantService;</span><br><span class="line">    private RestaurantRepository restaurantRepository;</span><br><span class="line">    private MenuItemRepository menuItemRepository;</span><br><span class="line"></span><br><span class="line">    @Before &#x2F;&#x2F;모든 Test가 실행되기 전에 수행 됨</span><br><span class="line">    public void setUp() &#123;</span><br><span class="line">        restaurantRepository &#x3D; new RestaurantRepositoryImpl();</span><br><span class="line">        menuItemRepository &#x3D; new MenuItemRepositoryImpl();</span><br><span class="line">        restaurantService &#x3D; new RestaurantService(restaurantRepository,menuItemRepository);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getRestaurants() &#123;</span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantService.getRestaurants();</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurants.get(0);</span><br><span class="line">        assertThat(restaurant.getId(), is(1004L));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getRestaurant() &#123;</span><br><span class="line">        Restaurant restaurant &#x3D; restaurantService.getRestaurant(1004L);</span><br><span class="line"></span><br><span class="line">        assertThat(restaurant.getId(), is(1004L));</span><br><span class="line"></span><br><span class="line">        MenuItem menuItem &#x3D; restaurant.getMenuItems().get(0);</span><br><span class="line"></span><br><span class="line">        assertThat(menuItem.getName(), is(&quot;Kimchi&quot;));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-//Controller에서 사용될 기능 구현    
-public List&lt;Restaurant&gt; getRestaurants() {
-    List&lt;Restaurant&gt; restaurants = restaurantRepository.findAll();
-    return restaurants;
-}
+<p>Controller가 단순화 된다.     </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">public class RestaurantController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired &#x2F;&#x2F;Service만 의존성 연결</span><br><span class="line">    private RestaurantService restaurantService;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&quot;)</span><br><span class="line">    public List&lt;Restaurant&gt; list() &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;Restaurant&gt; restaurants &#x3D; restaurantService.getRestaurants();</span><br><span class="line">        return restaurants;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;restaurants&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) &#123;</span><br><span class="line"></span><br><span class="line">        Restaurant restaurant &#x3D; restaurantService.getRestaurant(id); &#x2F;&#x2F;기본 정보 + 메뉴 정보를 가져올 새로운 메서드</span><br><span class="line">        &#x2F;&#x2F;repository가 저장소 역할을 했다면, 복잡한 처리들을 저장할 application layer</span><br><span class="line"></span><br><span class="line">        return restaurant;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-public Restaurant getRestaurant(Long id) {
-    //가게 정보 
-    Restaurant restaurant =  restaurantRepository.findById(id);
-    //메뉴 정보 
-    List&lt;MenuItem&gt; menuItems = menuItemRepository.findAllByRestaurantId(id);
-    restaurant.setMenuItems(menuItems);
-
-    return restaurant;
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Controller 처럼 Service 또한 Test를 하자   </span><br><span class="line">Service Test</span><br></pre></td></tr></table></figure>
-<p>public class RestaurantServiceTest {</p>
-<pre><code>private RestaurantService restaurantService;
-private RestaurantRepository restaurantRepository;
-private MenuItemRepository menuItemRepository;
-
-@Before //모든 Test가 실행되기 전에 수행 됨
-public void setUp() {
-    restaurantRepository = new RestaurantRepositoryImpl();
-    menuItemRepository = new MenuItemRepositoryImpl();
-    restaurantService = new RestaurantService(restaurantRepository,menuItemRepository);
-}
-
-@Test
-public void getRestaurants() {
-    List&lt;Restaurant&gt; restaurants = restaurantService.getRestaurants();
-
-    Restaurant restaurant = restaurants.get(0);
-    assertThat(restaurant.getId(), is(1004L));
-}
-
-@Test
-public void getRestaurant() {
-    Restaurant restaurant = restaurantService.getRestaurant(1004L);
-
-    assertThat(restaurant.getId(), is(1004L));
-
-    MenuItem menuItem = restaurant.getMenuItems().get(0);
-
-    assertThat(menuItem.getName(), is(&quot;Kimchi&quot;));
-
-}</code></pre><p>}</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Controller가 단순화 된다.</span><br></pre></td></tr></table></figure>
-<p>@RestController<br>public class RestaurantController {</p>
-<pre><code>@Autowired //Service만 의존성 연결
-private RestaurantService restaurantService;
-
-@GetMapping(&quot;/restaurants&quot;)
-public List&lt;Restaurant&gt; list() {
-
-    List&lt;Restaurant&gt; restaurants = restaurantService.getRestaurants();
-    return restaurants;
-}
-
-@GetMapping(&quot;/restaurants/{id}&quot;)
-public Restaurant detail(@PathVariable(&quot;id&quot;) Long id) {
-
-    Restaurant restaurant = restaurantService.getRestaurant(id); //기본 정보 + 메뉴 정보를 가져올 새로운 메서드
-    //repository가 저장소 역할을 했다면, 복잡한 처리들을 저장할 application layer
-
-    return restaurant;
-}</code></pre><p>}</p>
-<pre><code></code></pre>
     </div>
 
     
