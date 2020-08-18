@@ -179,6 +179,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_31/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_31/" class="post-title-link" itemprop="url">31. 다운캐스팅과 instanceof</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="31-다운캐스팅과-instanceof"><a href="#31-다운캐스팅과-instanceof" class="headerlink" title="31. 다운캐스팅과 instanceof"></a>31. 다운캐스팅과 instanceof</h4><ul>
+<li>다운캐스팅<br>묵시적으로 업캐스팅된 인스턴스가 원래의 자료형(하위 클래스)으로 변환되어야 할 때 사용.<br>다운캐스팅은 명시적으로 이루어진다.    </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Customer vc &#x3D; new VIPCustomer(); &#x2F;&#x2F;업캐스팅 - 묵시적</span><br><span class="line">VIPCustomer vCustomer &#x3D; (VIPCustomer)vc; &#x2F;&#x2F;다운캐스팅 - 명시적</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line">package polymorphism;</span><br><span class="line"></span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">class Animal &#123;</span><br><span class="line"></span><br><span class="line">    public void move() &#123;</span><br><span class="line">        System.out.println(&quot;동물이 움직입니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Human extends Animal &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void move() &#123;</span><br><span class="line">        System.out.println(&quot;사람이 두 발로 걷습니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void readBooks() &#123;</span><br><span class="line">        System.out.println(&quot;사람이 책을 읽습니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Tiger extends Animal &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void move() &#123;</span><br><span class="line">        System.out.println(&quot;호랑이가 네 발로 뜁니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void hunting() &#123;</span><br><span class="line">        System.out.println(&quot;호랑이가 사냥을 합니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Eagle extends Animal &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void move() &#123;</span><br><span class="line">        System.out.println(&quot;독수리가 하늘을 날아갑니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void flying() &#123;</span><br><span class="line">        System.out.println(&quot;독수리가 날개를 쭉 펴고 멀리 날아갑니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class AnimalTest &#123;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        Animal hAnimal &#x3D; new Human();</span><br><span class="line">        Animal tAnimal &#x3D; new Tiger();</span><br><span class="line">        Animal eAnimal &#x3D; new Eagle();</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;Eagle eagle &#x3D; (Eagle)hAnimal; &#x2F;&#x2F;Error발생, Human 인스턴스를 Eagle로 형변환하려고함</span><br><span class="line">                                        &#x2F;&#x2F;다운캐스팅은 새로운 선언type과 캐스팅type만 비교하므로 경고가 없기때문에 이런 문제가 발생할 수 있음.</span><br><span class="line">        &#x2F;*if (hAnimal instanceof Eagle) &#123;    &#x2F;&#x2F;inatanceof는 인스턴스의 타입을 확인하여 true,false 반환</span><br><span class="line">            Eagle eagle &#x3D; (Eagle)hAnimal;  &#x2F;&#x2F;실행되지 않기 때문에 Error 없음.</span><br><span class="line">            eagle.flying();</span><br><span class="line">        &#125; else if (hAnimal instanceof Human) &#123;</span><br><span class="line">            Human human1 &#x3D; (Human)hAnimal;</span><br><span class="line">            human1.readBooks();</span><br><span class="line">        &#125;*&#x2F;</span><br><span class="line"></span><br><span class="line">        ArrayList&lt;Animal&gt; animalList &#x3D; new ArrayList&lt;Animal&gt;();</span><br><span class="line">        animalList.add(hAnimal);</span><br><span class="line">        animalList.add(tAnimal);</span><br><span class="line">        animalList.add(eAnimal);</span><br><span class="line"></span><br><span class="line">        AnimalTest test &#x3D; new AnimalTest();</span><br><span class="line">        test.testDownCasting(animalList);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void testDownCasting(ArrayList&lt;Animal&gt; list) &#123;</span><br><span class="line">        for(int i&#x3D;0; i&lt;list.size(); i++) &#123;  &#x2F;&#x2F;Animal 인스턴스들의 type을 확인한 후 다운캐스팅하는 for문 </span><br><span class="line">           Animal animal &#x3D; list.get(i);</span><br><span class="line"></span><br><span class="line">           if (animal instanceof Human) &#123;</span><br><span class="line">               Human human &#x3D; (Human)animal;</span><br><span class="line">               human.readBooks();</span><br><span class="line">           &#125; else if (animal instanceof Tiger) &#123;</span><br><span class="line">               Tiger tiger &#x3D; (Tiger)animal;</span><br><span class="line">               tiger.hunting();</span><br><span class="line">           &#125; else if (animal instanceof Eagle) &#123;</span><br><span class="line">               Eagle eagle &#x3D; (Eagle)animal;</span><br><span class="line">               eagle.flying();</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               System.out.println(&quot;Error&quot;);</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void moveAnimal(Animal animal) &#123;</span><br><span class="line">        animal.move();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_31/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_33/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -507,86 +590,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_40/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_40/" class="post-title-link" itemprop="url">40. 인터페이스의 요소들</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="40-인터페이스의-요소들"><a href="#40-인터페이스의-요소들" class="headerlink" title="40. 인터페이스의 요소들"></a>40. 인터페이스의 요소들</h4><p>상수 : 선언된 모든 변수는 상수로 처리 됨<br>메서드 : 모든 메서드는 추상 메서드<br>java8<br>디폴트 메서드 : 기본 구현을 가지는 메서드, 클래스에서 재정의 가능<br>정적 메서드 : 인스턴스 생성과 상관없이 인터페이스 타입으로 호출하는 메서드<br>java9<br>private 메서드 : 인터페이스 내에서 사용하기 위한 메서드, 클래스에서 재정의 불가능  </p>
-<p>추상 클래스와 다른점은 하나의 클래스에서 여러 인터페이스를 구현할 수 있다.<br>이떄, 디폴트 메서드의 이름이 중복된다면, 재정의 해야한다.   </p>
-<p>인터페이스 간에 상속할 수도 있다.(type inheritance) 이때 implements 대신 extends를 사용한다.     </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_40/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -656,7 +659,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -667,7 +670,7 @@
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>
