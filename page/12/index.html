@@ -179,6 +179,337 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_15/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_15/" class="post-title-link" itemprop="url">15. static 응용</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="15-static-응용"><a href="#15-static-응용" class="headerlink" title="15. static 응용"></a>15. static 응용</h4><ul>
+<li>singleton pattern<br>단 하나만 존재하는 인스턴스 (ex 학교 객체)<br>생성자는 private로 생성<br>클래스 내에서 static으로 유일한 객체 생성<br>외부에서 유일한 객체를 참조할 수 있는 public static get() 메서드 구현    </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package staticex;</span><br><span class="line"></span><br><span class="line">public class Company &#123;</span><br><span class="line"></span><br><span class="line">    private static Company instance &#x3D; new Company(); &#x2F;&#x2F;내부적으로 인스턴스 생성</span><br><span class="line"></span><br><span class="line">    private Company() &#123; &#x2F;&#x2F;생성자 private로 생성</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static Company getInstance() &#123;  &#x2F;&#x2F;외부에서 인스턴스 생성과 무관하게 사용하기 위해 static으로 생성</span><br><span class="line">        if (instance&#x3D;&#x3D;null) &#123;</span><br><span class="line">            instance &#x3D; new Company();</span><br><span class="line">        &#125;</span><br><span class="line">        return instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">package staticex;</span><br><span class="line"></span><br><span class="line">import java.util.Calendar;</span><br><span class="line"></span><br><span class="line">public class CompanyTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;Company company &#x3D; new Company(); &#x2F;&#x2F;private 생성자 이므로 인스턴스 생성할 수 없음</span><br><span class="line">        Company company1&#x3D;Company.getInstance();</span><br><span class="line">        Company company2&#x3D;Company.getInstance();</span><br><span class="line"></span><br><span class="line">        System.out.println(company1);</span><br><span class="line">        System.out.println(company2); &#x2F;&#x2F;두 인스턴스의 메모리 주소가 동일하다</span><br><span class="line"></span><br><span class="line">        Calendar calendar &#x3D; Calendar.getInstance(); &#x2F;&#x2F;Calendar 클래스는 싱글톤 패턴으로 구현되어 있다.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_15/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_17/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_17/" class="post-title-link" itemprop="url">17. 배열</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="17-배열"><a href="#17-배열" class="headerlink" title="17. 배열"></a>17. 배열</h4><ul>
+<li>배열이란<br>동일한 자료형의 순차적 자료 구조<br>ex) 학생 100명에 대한 학번 변수</li>
+</ul>
+<p>배열 선언</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int[] arr &#x3D; new int[10]; &#x2F;&#x2F;int 10개 &#x3D; 40byte length&#x3D;10, 0~9</span><br><span class="line">int arr[] &#x3D; new int[10];</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_17/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_19/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_19/" class="post-title-link" itemprop="url">19. 객체 배열</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="19-객체-배열"><a href="#19-객체-배열" class="headerlink" title="19. 객체 배열"></a>19. 객체 배열</h4><ul>
+<li>객체 배열 (참조 자료형 배열)     <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Book[] library &#x3D; new Book[5]; &#x2F;&#x2F;null이 초기화됨</span><br><span class="line">                              &#x2F;&#x2F;실제로는 객체의 주소가 들어가게 된다</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>배열로 만 클래스 생성    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package array;</span><br><span class="line"></span><br><span class="line">public class Book &#123;</span><br><span class="line"></span><br><span class="line">    private String title;</span><br><span class="line">    private String author;</span><br><span class="line"></span><br><span class="line">    public Book() &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Book(String title, String author) &#123;</span><br><span class="line">        this.title &#x3D; title;</span><br><span class="line">        this.author &#x3D; author;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getTitle() &#123;</span><br><span class="line">        return title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setTitle(String title) &#123;</span><br><span class="line">        this.title &#x3D; title;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getAuthor() &#123;</span><br><span class="line">        return author;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setAuthor(String author) &#123;</span><br><span class="line">        this.author &#x3D; author;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showBookInfo() &#123;</span><br><span class="line">        System.out.println(title+&quot;,&quot;+author);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_19/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_21/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_21/" class="post-title-link" itemprop="url">21. 다차원 배열</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="21-다차원-배열"><a href="#21-다차원-배열" class="headerlink" title="21. 다차원 배열"></a>21. 다차원 배열</h4><ul>
+<li>다차원 배열<br>2차원 이상의 배열  </li>
+</ul>
+<p>2차원 배열  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int[][] arr &#x3D; new int [2][3]; &#x2F;&#x2F;6개 요소</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_21/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_22/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -258,341 +589,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_25/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_25/" class="post-title-link" itemprop="url">25. 상속이란</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="25-상속이란"><a href="#25-상속이란" class="headerlink" title="25. 상속이란"></a>25. 상속이란</h4><p>클래스에서 상속의 의미 :<br>새로운 클래스를 정의할 때 이미 구현된 클래스를 상속받아서<br>속성이나 기능이 확장되는 클래스를 구현 함.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">class B extends A &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>상속하는 클래스 : 상위 클래스<br>상속받는 클래스 : 하위 클래스   </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_25/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_27/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_27/" class="post-title-link" itemprop="url">27. 상속에서 클래스 생성 과정과 형변환</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="27-상속에서-클래스-생성-과정과-형변환"><a href="#27-상속에서-클래스-생성-과정과-형변환" class="headerlink" title="27. 상속에서 클래스 생성 과정과 형변환"></a>27. 상속에서 클래스 생성 과정과 형변환</h4><p>하위 클래스 생성시 항상 상위 클래스가 먼저 생성되어야 한다.     </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package inheritance;</span><br><span class="line"></span><br><span class="line">public class VIPCustomer extends Customer&#123; &#x2F;&#x2F;상위 클래스(Customer) 지정</span><br><span class="line"></span><br><span class="line">    double salesRatio;</span><br><span class="line">    private int agentID;</span><br><span class="line"></span><br><span class="line">    public VIPCustomer() &#123;</span><br><span class="line">        &#x2F;&#x2F;super(); &#x2F;&#x2F;아무런 상위 클래스 생성자 호출 명령이 없으면 pre-compile 단계에서 이 함수가 들어감</span><br><span class="line">                   &#x2F;&#x2F;super : 상위 클래스의 메모리 위치 함수, super() : 상위 클래스의 기본 생성자 호출</span><br><span class="line">        &#x2F;&#x2F;super(0, null); &#x2F;&#x2F;만약 상위 클래스의 기본 생성자가 없으면, 명시적으로 상위 클래스의 생성자를 호출해야 한다.</span><br><span class="line">        customerGrade &#x3D; &quot;VIP&quot;; &#x2F;&#x2F;만약 상위 클래스에서 private인 경우 사용할 수 없음</span><br><span class="line">        bonusRatio &#x3D; 0.05;</span><br><span class="line">        salesRatio &#x3D; 0.1;</span><br><span class="line"></span><br><span class="line">        System.out.println(&quot;VIPCustomer() 생성자 호출&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;*public VIPCustomer(int customerID, String customerName) &#123;</span><br><span class="line">    &#x2F;&#x2F;만약 상위 클래스의 기본 생성자가 없으면, 명시적으로 상위 클래스의 생성자를 호출해야 한다. 방법2</span><br><span class="line">        super(customerID, customerName);</span><br><span class="line">        customerGrade &#x3D; &quot;VIP&quot;;</span><br><span class="line">        bonusRatio &#x3D; 0.05;</span><br><span class="line">        salesRatio &#x3D; 0.1;</span><br><span class="line">    &#125;*&#x2F;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>상위 클래스로의 묵시적 형변환 (업캐스팅)<br>상속관계에서 모든 하위 클래스는 상위 클래스로 묵시적 형변환이 된다.<br>(하위 클래스는 상위 클래스의 타입을 내포하고 있다.)<br>그 역은 성립하지 않는다.  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Customer Lee &#x3D; new VIPCustomer();</span><br><span class="line">&#x2F;&#x2F;or</span><br><span class="line">VIPCustomer Lee &#x3D; new VIPCustomer();</span><br></pre></td></tr></table></figure>
-둘다 VIPCustomer 인스턴스를 생성하는 코드이지만..<br>위의 코드(업캐스팅 사용한)는 type이 Customer이므로,<br>Customer의 변수/메서드만 접근할 수 있다.<br>다만 VIPCustomer관련 멤버변수 메모리는 힙 영역에 생성되긴 한다.    </li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_27/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_28/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_28/" class="post-title-link" itemprop="url">28. 메서드 오버라이딩</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="28-메서드-오버라이딩"><a href="#28-메서드-오버라이딩" class="headerlink" title="28. 메서드 오버라이딩"></a>28. 메서드 오버라이딩</h4><ul>
-<li>오버라이딩<br>상위 클래스에 정의된 메서드의 구현 내용이 하위 클래스에서 구현할 내용과 맞지 않는 경우 하위 클래스에서 동일한 이름의 메서드를 재정의할 수 있다.  </li>
-</ul>
-<p>상위 클래스 Customer</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public int calcPrice(int price) &#123;</span><br><span class="line">    bonusPoint +&#x3D; price*bonusRatio;</span><br><span class="line">    return price;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_28/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_29/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_29/" class="post-title-link" itemprop="url">28. 다형성</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="28-다형성"><a href="#28-다형성" class="headerlink" title="28. 다형성"></a>28. 다형성</h4><ul>
-<li>다형성 이란<br>하나의 코드가 여러 자료형으로 구현되어 실행되는 것<br>같은 코드에서 여러 실행 결과가 나옴    </li>
-</ul>
-<p>정보은닉, 상속과 더불어 객체지향 프로그래밍의 가장 큰 특징 중 하나이다.<br>OOP의 유연성, 재활용성, 유지보수성에 기본이 되는 특징이다.     </p>
-<ul>
-<li>다형성의 장점<br>유사한 클래스가 추가되는 경우의 유지보수에 용이하고<br>각 자료형 마다 다른 메서드를 호출하지 않으므로 코드에서 많은 if문이 사라진다.   </li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_29/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
+    <a class="extend prev" rel="prev" href="/page/11/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><span class="page-number current">12</span><a class="page-number" href="/page/13/">13</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/13/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
   </nav>
 
 
@@ -658,7 +658,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -669,7 +669,7 @@
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>

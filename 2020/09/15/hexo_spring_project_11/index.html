@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="스프링 부트에서 JSP 사용하기의존성 추가 (maven)jstl, jsp 사용을 위한 의존성 추가가 필요하다.   123456789&lt;dependency&gt;    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;&lt;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="스프링 부트에서 JSP 사용하기">
+<meta property="og:url" content="http://rockintuna.github.io/2020/09/15/hexo_spring_project_11/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트에서 JSP 사용하기의존성 추가 (maven)jstl, jsp 사용을 위한 의존성 추가가 필요하다.   123456789&lt;dependency&gt;    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;&lt;&amp;#">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-09-15T09:34:54.000Z">
+<meta property="article:modified_time" content="2020-09-15T09:36:03.875Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="JSP">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/09/15/hexo_spring_project_11/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ko'
+  };
+</script>
+
+  <title>스프링 부트에서 JSP 사용하기 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/09/15/hexo_spring_project_11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          스프링 부트에서 JSP 사용하기
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-09-15 18:34:54 / Updated at: 18:36:03" itemprop="dateCreated datePublished" datetime="2020-09-15T18:34:54+09:00">2020-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="스프링-부트에서-JSP-사용하기"><a href="#스프링-부트에서-JSP-사용하기" class="headerlink" title="스프링 부트에서 JSP 사용하기"></a>스프링 부트에서 JSP 사용하기</h2><h3 id="의존성-추가-maven"><a href="#의존성-추가-maven" class="headerlink" title="의존성 추가 (maven)"></a>의존성 추가 (maven)</h3><p>jstl, jsp 사용을 위한 의존성 추가가 필요하다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.tomcat.embed&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tomcat-embed-jasper&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="WAR-프로젝트"><a href="#WAR-프로젝트" class="headerlink" title="WAR 프로젝트"></a>WAR 프로젝트</h3><p>스프링 부트 프로젝트에서 jsp를 사용하려면 WAR 패키지 설정으로 생성해야 한다.<br>WAR 패키지 설정의 스프링 부트 프로젝트의 특징은 @SpringBootApplication 클래스 외에<br>WebApplicationInitializer를 구현한 ServletInitializer 클래스가 웹서버 배포를 위해 추가로 생성된다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class ServletInitializer extends SpringBootServletInitializer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) &#123;</span><br><span class="line">        return application.sources(DemoJspApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller-생성"><a href="#Controller-생성" class="headerlink" title="Controller 생성"></a>Controller 생성</h3><p>메서드의 리턴(String)으로 jsp view를 찾을 수 있도록 생성</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class EventController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">    public String getEvents(Model model) &#123;</span><br><span class="line">        Event event1 &#x3D; new Event();</span><br><span class="line">        event1.setName(&quot;study 1&quot;);</span><br><span class="line">        event1.setStart(LocalDate.of(2020,10,10));</span><br><span class="line">        Event event2 &#x3D; new Event();</span><br><span class="line">        event2.setName(&quot;study 2&quot;);</span><br><span class="line">        event2.setStart(LocalDate.of(2020,10,20));</span><br><span class="line"></span><br><span class="line">        List&lt;Event&gt; events &#x3D; List.of(event1,event2);</span><br><span class="line"></span><br><span class="line">        model.addAttribute(&quot;events&quot;,events);</span><br><span class="line">        model.addAttribute(&quot;message&quot;,&quot;Study Harder&quot;);</span><br><span class="line"></span><br><span class="line">        return &quot;events&#x2F;list&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="jsp-view-생성"><a href="#jsp-view-생성" class="headerlink" title="jsp view 생성"></a>jsp view 생성</h3><p>jsp view는 webapp 디렉토리에 있어야하며 스프링 부트가 이 디렉토리를 미리 만들어주지 않기 때문에 직접 생성해야 한다.<br>webapp/WEB-INF/jsp/events/list.jsp<br>태그 선언을 통해 core 라이브러리 사용</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot; language&#x3D;&quot;java&quot; %&gt;</span><br><span class="line">&lt;%@ taglib prefix&#x3D;&quot;c&quot; uri&#x3D;&quot;http:&#x2F;&#x2F;java.sun.com&#x2F;jsp&#x2F;jstl&#x2F;core&quot;%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Events&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;이벤트 목록&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;h2&gt;$&#123;message&#125;&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;이름&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;시작&lt;&#x2F;th&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">        &lt;c:forEach items&#x3D;&quot;$&#123;events&#125;&quot; var&#x3D;&quot;event&quot;&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;$&#123;event.name&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                &lt;td&gt;$&#123;event.start&#125;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;&#x2F;tr&gt;</span><br><span class="line">        &lt;&#x2F;c:forEach&gt;</span><br><span class="line">    &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="application-properties-설정"><a href="#application-properties-설정" class="headerlink" title="application.properties 설정"></a>application.properties 설정</h3><p>viewResolver가 view를 찾을 수 있도록 prefix/suffix 설정</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.mvc.view.prefix&#x3D;&#x2F;WEB-INF&#x2F;jsp&#x2F;</span><br><span class="line">spring.mvc.view.suffix&#x3D;.jsp</span><br></pre></td></tr></table></figure>
+
+<h3 id="패키징"><a href="#패키징" class="headerlink" title="패키징"></a>패키징</h3><p>스프링 부트 애플리케이션은 Maven이 따로 설치되어있지 않더라도 mvnw 명령을 통해<br>Maven으로 빌드할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.&#x2F;mvnw package</span><br></pre></td></tr></table></figure>
+
+<p>빌드가 완료되면 WAR 파일이 생성된다. (target/???-0.0.1-SNAPSHOT.war)</p>
+<h3 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h3><h4 id="java-jar"><a href="#java-jar" class="headerlink" title="java -jar"></a>java -jar</h4><p>WAR파일도 java -jar 를 통해 독립적으로 실행할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar target&#x2F;*-0.0.1-SNAPSHOT.war</span><br></pre></td></tr></table></figure>
+<p>@SpringBootApplication 클래스의 SpringApplication.run 이 사용되며,<br>스프링 부트 애플리케이션의 내장 톰캣이 사용된다.</p>
+<h4 id="서블릿-컨테이너에-배포하는-경우"><a href="#서블릿-컨테이너에-배포하는-경우" class="headerlink" title="서블릿 컨테이너에 배포하는 경우"></a>서블릿 컨테이너에 배포하는 경우</h4><p>ServletInitializer 클래스가 있기 때문에 톰캣 등 웹서버에 배포할 수 있다.<br>SpringBootServletInitializer를 사용하여 실행된다.<br>내장 톰캣을 사용하는게 아니고 별개의 웹서버에 서블릿을 등록하여 실행된다.</p>
+<p>참고로, 스프링 부트는 몇가지 제약 사항때문에 jsp 사용을 피하길 권고한다.</p>
+<ul>
+<li>JAR 프로젝트로 만들 수 없다.</li>
+<li>WAR는 java -jar로 실행할 수는 있지만, “실행가능한 jar 파일”은 지원하지 않는다.</li>
+<li>언더토우 서블릿 컨테이너는 jsp를 지원하지 않는다.</li>
+<li>Whitelabel 에러 페이지를 error.jsp로 오버라이딩할 수 없다.</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/JSP/" rel="tag"># JSP</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/15/hexo_spring_project_10/" rel="prev" title="Spring MVC 설정">
+      <i class="fa fa-chevron-left"></i> Spring MVC 설정
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/15/hexo_spring_project_12/" rel="next" title="도메인 클래스 컨버터 자동 등록">
+      도메인 클래스 컨버터 자동 등록 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#스프링-부트에서-JSP-사용하기"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트에서 JSP 사용하기</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#의존성-추가-maven"><span class="nav-number">1.1.</span> <span class="nav-text">의존성 추가 (maven)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WAR-프로젝트"><span class="nav-number">1.2.</span> <span class="nav-text">WAR 프로젝트</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller-생성"><span class="nav-number">1.3.</span> <span class="nav-text">Controller 생성</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsp-view-생성"><span class="nav-number">1.4.</span> <span class="nav-text">jsp view 생성</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#application-properties-설정"><span class="nav-number">1.5.</span> <span class="nav-text">application.properties 설정</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#패키징"><span class="nav-number">1.6.</span> <span class="nav-text">패키징</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#실행"><span class="nav-number">1.7.</span> <span class="nav-text">실행</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java-jar"><span class="nav-number">1.7.1.</span> <span class="nav-text">java -jar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#서블릿-컨테이너에-배포하는-경우"><span class="nav-number">1.7.2.</span> <span class="nav-text">서블릿 컨테이너에 배포하는 경우</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">태그</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/rockintuna" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;rockintuna" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ljilee419@gmail.com" title="E-Mail → mailto:ljilee419@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

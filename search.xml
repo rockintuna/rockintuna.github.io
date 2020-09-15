@@ -2988,4 +2988,489 @@ public List&lt;Restaurant&gt; list() {
         <tag>Servlet</tag>
       </tags>
   </entry>
+  <entry>
+    <title>스프링 부트에서 JSP 사용하기</title>
+    <url>/2020/09/15/hexo_spring_project_11/</url>
+    <content><![CDATA[<h2 id="스프링-부트에서-JSP-사용하기"><a href="#스프링-부트에서-JSP-사용하기" class="headerlink" title="스프링 부트에서 JSP 사용하기"></a>스프링 부트에서 JSP 사용하기</h2><h3 id="의존성-추가-maven"><a href="#의존성-추가-maven" class="headerlink" title="의존성 추가 (maven)"></a>의존성 추가 (maven)</h3><p>jstl, jsp 사용을 위한 의존성 추가가 필요하다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.servlet&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jstl&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.tomcat.embed&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tomcat-embed-jasper&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;scope&gt;provided&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="WAR-프로젝트"><a href="#WAR-프로젝트" class="headerlink" title="WAR 프로젝트"></a>WAR 프로젝트</h3><p>스프링 부트 프로젝트에서 jsp를 사용하려면 WAR 패키지 설정으로 생성해야 한다.<br>WAR 패키지 설정의 스프링 부트 프로젝트의 특징은 @SpringBootApplication 클래스 외에<br>WebApplicationInitializer를 구현한 ServletInitializer 클래스가 웹서버 배포를 위해 추가로 생성된다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class ServletInitializer extends SpringBootServletInitializer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) &#123;</span><br><span class="line">        return application.sources(DemoJspApplication.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller-생성"><a href="#Controller-생성" class="headerlink" title="Controller 생성"></a>Controller 생성</h3><p>메서드의 리턴(String)으로 jsp view를 찾을 수 있도록 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">public class EventController &#123;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">    public String getEvents(Model model) &#123;</span><br><span class="line">        Event event1 &#x3D; new Event();</span><br><span class="line">        event1.setName(&quot;study 1&quot;);</span><br><span class="line">        event1.setStart(LocalDate.of(2020,10,10));</span><br><span class="line">        Event event2 &#x3D; new Event();</span><br><span class="line">        event2.setName(&quot;study 2&quot;);</span><br><span class="line">        event2.setStart(LocalDate.of(2020,10,20));</span><br><span class="line"></span><br><span class="line">        List&lt;Event&gt; events &#x3D; List.of(event1,event2);</span><br><span class="line"></span><br><span class="line">        model.addAttribute(&quot;events&quot;,events);</span><br><span class="line">        model.addAttribute(&quot;message&quot;,&quot;Study Harder&quot;);</span><br><span class="line"></span><br><span class="line">        return &quot;events&#x2F;list&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="jsp-view-생성"><a href="#jsp-view-생성" class="headerlink" title="jsp view 생성"></a>jsp view 생성</h3><p>jsp view는 webapp 디렉토리에 있어야하며 스프링 부트가 이 디렉토리를 미리 만들어주지 않기 때문에 직접 생성해야 한다.<br>webapp/WEB-INF/jsp/events/list.jsp<br>태그 선언을 통해 core 라이브러리 사용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;%@ page contentType&#x3D;&quot;text&#x2F;html;charset&#x3D;UTF-8&quot; language&#x3D;&quot;java&quot; %&gt;</span><br><span class="line">&lt;%@ taglib prefix&#x3D;&quot;c&quot; uri&#x3D;&quot;http:&#x2F;&#x2F;java.sun.com&#x2F;jsp&#x2F;jstl&#x2F;core&quot;%&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Events&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">    &lt;h1&gt;이벤트 목록&lt;&#x2F;h1&gt;</span><br><span class="line">    &lt;h2&gt;$&#123;message&#125;&lt;&#x2F;h2&gt;</span><br><span class="line">    &lt;table&gt;</span><br><span class="line">        &lt;tr&gt;</span><br><span class="line">            &lt;th&gt;이름&lt;&#x2F;th&gt;</span><br><span class="line">            &lt;th&gt;시작&lt;&#x2F;th&gt;</span><br><span class="line">        &lt;&#x2F;tr&gt;</span><br><span class="line">        &lt;c:forEach items&#x3D;&quot;$&#123;events&#125;&quot; var&#x3D;&quot;event&quot;&gt;</span><br><span class="line">            &lt;tr&gt;</span><br><span class="line">                &lt;td&gt;$&#123;event.name&#125;&lt;&#x2F;td&gt;</span><br><span class="line">                &lt;td&gt;$&#123;event.start&#125;&lt;&#x2F;td&gt;</span><br><span class="line">            &lt;&#x2F;tr&gt;</span><br><span class="line">        &lt;&#x2F;c:forEach&gt;</span><br><span class="line">    &lt;&#x2F;table&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="application-properties-설정"><a href="#application-properties-설정" class="headerlink" title="application.properties 설정"></a>application.properties 설정</h3><p>viewResolver가 view를 찾을 수 있도록 prefix/suffix 설정</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">spring.mvc.view.prefix&#x3D;&#x2F;WEB-INF&#x2F;jsp&#x2F;</span><br><span class="line">spring.mvc.view.suffix&#x3D;.jsp</span><br></pre></td></tr></table></figure>
+
+<h3 id="패키징"><a href="#패키징" class="headerlink" title="패키징"></a>패키징</h3><p>스프링 부트 애플리케이션은 Maven이 따로 설치되어있지 않더라도 mvnw 명령을 통해<br>Maven으로 빌드할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">.&#x2F;mvnw package</span><br></pre></td></tr></table></figure>
+
+<p>빌드가 완료되면 WAR 파일이 생성된다. (target/???-0.0.1-SNAPSHOT.war)</p>
+<h3 id="실행"><a href="#실행" class="headerlink" title="실행"></a>실행</h3><h4 id="java-jar"><a href="#java-jar" class="headerlink" title="java -jar"></a>java -jar</h4><p>WAR파일도 java -jar 를 통해 독립적으로 실행할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">java -jar target&#x2F;*-0.0.1-SNAPSHOT.war</span><br></pre></td></tr></table></figure>
+<p>@SpringBootApplication 클래스의 SpringApplication.run 이 사용되며,<br>스프링 부트 애플리케이션의 내장 톰캣이 사용된다.</p>
+<h4 id="서블릿-컨테이너에-배포하는-경우"><a href="#서블릿-컨테이너에-배포하는-경우" class="headerlink" title="서블릿 컨테이너에 배포하는 경우"></a>서블릿 컨테이너에 배포하는 경우</h4><p>ServletInitializer 클래스가 있기 때문에 톰캣 등 웹서버에 배포할 수 있다.<br>SpringBootServletInitializer를 사용하여 실행된다.<br>내장 톰캣을 사용하는게 아니고 별개의 웹서버에 서블릿을 등록하여 실행된다.</p>
+<p>참고로, 스프링 부트는 몇가지 제약 사항때문에 jsp 사용을 피하길 권고한다.</p>
+<ul>
+<li>JAR 프로젝트로 만들 수 없다.</li>
+<li>WAR는 java -jar로 실행할 수는 있지만, “실행가능한 jar 파일”은 지원하지 않는다.</li>
+<li>언더토우 서블릿 컨테이너는 jsp를 지원하지 않는다.</li>
+<li>Whitelabel 에러 페이지를 error.jsp로 오버라이딩할 수 없다.</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>Spring Boot</tag>
+        <tag>JSP</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>도메인 클래스 컨버터 자동 등록</title>
+    <url>/2020/09/15/hexo_spring_project_12/</url>
+    <content><![CDATA[<h2 id="도메인-클래스-컨버터-자동-등록"><a href="#도메인-클래스-컨버터-자동-등록" class="headerlink" title="도메인 클래스 컨버터 자동 등록"></a>도메인 클래스 컨버터 자동 등록</h2><p>스프링 데이터 JPA는 도메인 클래스 컨버터를 제공한다.  </p>
+<ul>
+<li>도메인 클래스 컨버터<br>: 스프링 데이터 JPA의 Repository를 사용해서 ID에 해당하는 엔티티를 읽어온다.</li>
+</ul>
+<h3 id="스프링-데이터-JPA-및-h2DB-의존성-설정"><a href="#스프링-데이터-JPA-및-h2DB-의존성-설정" class="headerlink" title="스프링 데이터 JPA 및 h2DB 의존성 설정"></a>스프링 데이터 JPA 및 h2DB 의존성 설정</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.h2database&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;h2&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Repository-추가"><a href="#Repository-추가" class="headerlink" title="Repository 추가"></a>Repository 추가</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public interface PersonRepository extends JpaRepository&lt;Person, Long&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="엔티티-맵핑"><a href="#엔티티-맵핑" class="headerlink" title="엔티티 맵핑"></a>엔티티 맵핑</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Entity</span><br><span class="line">public class Person &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue</span><br><span class="line">    private Long id;</span><br><span class="line"></span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public Long getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setId(Long id) &#123;</span><br><span class="line">        this.id &#x3D; id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="도메인-클래스-컨버터"><a href="#도메인-클래스-컨버터" class="headerlink" title="도메인 클래스 컨버터"></a>도메인 클래스 컨버터</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;hello&quot;)</span><br><span class="line">public String hello(@RequestParam(&quot;id&quot;) Person person) &#123;</span><br><span class="line">    return &quot;hello&quot; + person.getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>get 메서드는 ID를 파라미터로 받는데, 받은 파라미터가 문자열이더라도<br>자동으로 등록된 도메인 클래스 컨버터에 의해 Person 객체로 변환될 수 있다.    </p>
+<h4 id="테스트"><a href="#테스트" class="headerlink" title="테스트"></a>테스트</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void hello() throws Exception &#123;</span><br><span class="line">    Person person &#x3D; new Person();</span><br><span class="line">    person.setName(&quot;이정인&quot;);</span><br><span class="line">    Person savedPerson &#x3D; personRepository.save(person);</span><br><span class="line"></span><br><span class="line">    mockMvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;hello&quot;)</span><br><span class="line">            .param(&quot;id&quot;,savedPerson.getId().toString()))</span><br><span class="line">            .andDo(print())</span><br><span class="line">            .andExpect(content().string(&quot;hello이정인&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>DomainClassConverter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>스프링 MVC 핵심 기술</title>
+    <url>/2020/09/15/hexo_spring_project_13/</url>
+    <content><![CDATA[<h2 id="스프링-MVC-핵심-기술"><a href="#스프링-MVC-핵심-기술" class="headerlink" title="스프링 MVC 핵심 기술"></a>스프링 MVC 핵심 기술</h2><h3 id="HTTP-요청-맵핑하기"><a href="#HTTP-요청-맵핑하기" class="headerlink" title="HTTP 요청 맵핑하기"></a>HTTP 요청 맵핑하기</h3><h4 id="HTTP-Method"><a href="#HTTP-Method" class="headerlink" title="HTTP Method"></a>HTTP Method</h4><ul>
+<li><p>GET 요청</p>
+<ul>
+<li>클라이언트가 서버의 리소스를 요청할 떄 사용</li>
+<li>캐싱 가능 (조건적 GET 가능)</li>
+<li>브라우저의 기록에 남고 북마크가 가능</li>
+<li>URL이 다 보이므로 민감한 데이터에는 맞지 않음</li>
+<li>idemponent</li>
+</ul>
+</li>
+<li><p>POST 요청</p>
+<ul>
+<li>클라이언트가 서버의 리소스를 수정하거나 새로만들 떄 사용</li>
+<li>서버에 보내는 데이터를 POST 요청 본문에 담는다</li>
+<li>캐싱 불가능</li>
+<li>브라우저 기록에 남지 않고 북마크가 불가능</li>
+<li>데이터 길이 제한이 없다</li>
+</ul>
+</li>
+<li><p>PUT 요청</p>
+<ul>
+<li>URI에 해당하는 데이터를 새로 만들거나 수정할 떄 사용</li>
+<li>POST와 다른 점은 “URI”에 대한 의미에 있다<ul>
+<li>POST의 URI는 보내는 데이터를 처리할 리소스</li>
+<li>PUT의 URI는 보내는 데이터에 해당하는 리소스</li>
+</ul>
+</li>
+<li>idemponent : 동일한 GET 요청은 항상 동일한 응답을 반환해야 한다.</li>
+</ul>
+</li>
+<li><p>PATCH 요청</p>
+<ul>
+<li>PUT과 비슷하지만, 기존 엔티티와 새 엔티티의 차이점만 보낸다는 차이가 있다.</li>
+<li>idemponent</li>
+</ul>
+</li>
+<li><p>DELETE 요청</p>
+<ul>
+<li>URI에 해당하는 리소스를 삭제할 떄 사용</li>
+<li>idemponent</li>
+</ul>
+</li>
+</ul>
+<h4 id="스프링-웹-MVC에서-HTTP-Method-맵핑하기"><a href="#스프링-웹-MVC에서-HTTP-Method-맵핑하기" class="headerlink" title="스프링 웹 MVC에서 HTTP Method 맵핑하기"></a>스프링 웹 MVC에서 HTTP Method 맵핑하기</h4><p>@RequestMapping : http 요청 맵핑 어노테이션, 메서드 종류를 지정하지 않으면 기본적으로 모든 메서드를 허용하게 된다.<br>즉, 메서드 종류를 지정한다는 것은 허용하는 요청의 종류를 제한하는 것과 같다.<br>@ResponseBody : 리턴을 응답 본문으로 전달하는 어노테이션<br>@GetMapping : @RequestMapping(method=RequestMethod.GET)  </p>
+<h4 id="URI-패턴-맵핑"><a href="#URI-패턴-맵핑" class="headerlink" title="URI 패턴 맵핑"></a>URI 패턴 맵핑</h4><p>@RequestMapping에서 지원하는 패턴  </p>
+<ul>
+<li>? : 한 글자  </li>
+<li>* : 여러 글자  </li>
+<li>** : 여러 패스</li>
+<li>정규표현식 가능 (ex: “/{name: [a-z]+}”)  </li>
+</ul>
+<p>만약 패턴이 중복되는 경우, 가장 구체적으로 맵핑되는 핸들러가 선택됨</p>
+<h4 id="컨텐츠-타입-맵핑"><a href="#컨텐츠-타입-맵핑" class="headerlink" title="컨텐츠 타입 맵핑"></a>컨텐츠 타입 맵핑</h4><ul>
+<li><p>특정 타입의 데이터를 담고있는 요청만 처리하도록 핸들러 설정<br>@RequestMapping(consumes=MediaType.APPLICATION_JSON_UTF8_VALUE)<br>Content-Type 헤더로 필터링</p>
+</li>
+<li><p>특정 타입의 응답을 만드는 핸들러 설정<br>@RequestMapping(produces=MediaType.APPLICATION_JSON_UTF8_VALUE)<br>Accept 헤더로 필터링, 만약 요청 헤더에 accept가 비워진 경우에는 그냥 처리해줌</p>
+</li>
+</ul>
+<p>consumes/produces를 클래스의 @RequestMapping 어노테이션에서도 설정할 수 있는데,<br>이때 메서드(핸들러)의 @RequestMapping의 consumes/produces가 설정되면 클래스의 것은 무시된다.</p>
+<h4 id="헤더와-파라미터-맵핑"><a href="#헤더와-파라미터-맵핑" class="headerlink" title="헤더와 파라미터 맵핑"></a>헤더와 파라미터 맵핑</h4><ul>
+<li>@RequestMapping(headers = “key”) : 특정 헤더가 있는 요청만 처리</li>
+<li>@RequestMapping(headers = “!key”) : 특정 헤더가 없는 요청만 처리</li>
+<li>@RequestMapping(headers = “key=value”) : 특정 헤더/키 쌍이 있는 요청만 처리</li>
+<li>@RequestMapping(params = “a”) : 특정 요청 매개변수 키를 가지고 있는 요청만 처리</li>
+<li>@RequestMapping(params = “!a”) : 특정 요청 매개변수가 없는 요청만 처리</li>
+<li>@RequestMapping(params = “a=b”) : 특정 요청 매개변수 키/값 쌍을 가지고 있는 요청만 처리</li>
+</ul>
+<h4 id="HEAD와-OPTIONS-요청-처리"><a href="#HEAD와-OPTIONS-요청-처리" class="headerlink" title="HEAD와 OPTIONS 요청 처리"></a>HEAD와 OPTIONS 요청 처리</h4><p>HEAD와 OPTIONS http method는 스프링 웹 MVC가 기본으로 제공해주는 기능이다.  </p>
+<ul>
+<li>HEAD : GET 요청과 동일하지만 응답 본문을 받아오지 않고 응답 헤더만 받아온다.</li>
+<li>OPTIONS : 응답 헤더 ALLOW로 사용할 수 있는 HTTP Method 목록을 받아온다.</li>
+</ul>
+<h4 id="커스텀-애노테이션"><a href="#커스텀-애노테이션" class="headerlink" title="커스텀 애노테이션"></a>커스텀 애노테이션</h4><ul>
+<li><p>메타 애노테이션<br>애노테이션에 사용할 수 있는 애노테이션<br>스프링이 제공하는 대부분의 애노테이션은 메타 애노테이션으로 사용할 수 있다</p>
+</li>
+<li><p>조합 애노테이션<br>한개 혹은 여러개의 메타 애노테이션을 조합해서 만든 애노테이션<br>코드를 간결하게 줄일 수 있다<br>보다 구체적인 의미를 부여할 수 있다</p>
+</li>
+<li><p>@Retantion<br>해당 애노테이션 정보를 언제까지 유지할 것인가 결정</p>
+<ul>
+<li>Source : 소스 코드까지만 유지, 컴파일하면 해당 애노테이션 정보는 사라짐</li>
+<li>Class : 컴파일 한 .class 파일에도 유지, 런타임시 클래스를 메모리로 읽어오면 해당 정보는 사라짐 (default)</li>
+<li>Runtime : 클래스를 메모리로 읽어왔을때까지 유지, 코드에서 이 정보를 바탕으로 특정 로직을 실행할 수 있다</li>
+</ul>
+</li>
+<li><p>@Target<br>해당 애노테이션을 어디에 사용할 수 있는지 결정</p>
+</li>
+<li><p>@Documented<br>해당 애노테이션을 사용한 코드의 문서에 그 애노테이션에 대한 정보를 표기할 지 결정</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RequestMapping(method &#x3D; RequestMethod.GET, value &#x3D; &quot;&#x2F;hello&quot;)</span><br><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">public @interface GetHelloMapping &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="핸들러-메소드"><a href="#핸들러-메소드" class="headerlink" title="핸들러 메소드"></a>핸들러 메소드</h3><h4 id="핸들러-메소드-아규먼트와-리턴-타입"><a href="#핸들러-메소드-아규먼트와-리턴-타입" class="headerlink" title="핸들러 메소드 아규먼트와 리턴 타입"></a>핸들러 메소드 아규먼트와 리턴 타입</h4><ul>
+<li>핸들러 메소드 아규먼트<br>: 주로 요청 그 자체 또는 요청에 들어있는 정보를 받아오는데 사용</li>
+</ul>
+<p>WebRequest, NativeWebRequest, ServletRequest, HttpServletRequest : 요청 또는 응답 자체에 접근 가능한 API</p>
+<p>InputStream, Reader, OutputStream, Writer : 요청 본문을 읽어오거나, 응답 본문을 쓸 때 사용할 수 있는 API</p>
+<p>PushBuilder : HTTP/2 리소스 푸쉬에 사용 (스프링 5)</p>
+<p>HttpMethod : 요청의 Http 메서드에 대한 정보</p>
+<p>Locale, TimeZone, ZoneId : LocaleResolver가 분석한 요청의 Locale 정보</p>
+<p>@PathVariable : URL 템플릿 변수 읽을 때 사용</p>
+<p>@MatrixVariable : URL 경로 중에 키/값 쌍을 읽어올 때 사용</p>
+<p>@RequestParam : 서블릿 요청 매게변수 값을 선언한 메소드 아규먼트 타입으로 변환, 단순 타입에서는 생략 가능</p>
+<p>@RequestHeader : 요청 해더 값을 선언한 메소드 아규먼트 타입으로 변환 </p>
+<p>@RequestBody : 요청 본문을 HttpMessageConverter를 사용해 특정 타입으로 변환</p>
+<ul>
+<li>핸들러 메소드 리턴<br>: 주로 응답 또는 모델을 렌더링할 뷰에 대한 정보를 제공하는데 사용</li>
+</ul>
+<p>@ResponseBody : 리턴 값을 HttpMessageConverter를 사용해 응답 본문으로 사용한다.</p>
+<p>HttpEntity, ResponseEntity : 응답 본문 뿐 아니라 헤더 정보까지 전체 응답을 만들 때 사용한다.</p>
+<p>String : ViewResolver를 사용해서 뷰를 찾을 떄 사용할 뷰 이름</p>
+<p>View : 암묵적인 모델 정보를 랜더링할 뷰 인스턴스</p>
+<p>Map, Model : 암묵적으로 판단한 뷰를 랜더링할 때 사용할 모델 정보</p>
+<p>@ModelAttribute : 암묵적으로 판단한 뷰를 랜더링할 때 사용할 모델 정보에 추가한다.</p>
+<h4 id="URI-패턴을-아규먼트로"><a href="#URI-패턴을-아규먼트로" class="headerlink" title="URI 패턴을 아규먼트로"></a>URI 패턴을 아규먼트로</h4><ul>
+<li><p>@PathVariable<br>요청 URL 패턴의 일부를 핸들러 메소드 아규먼트로 받는 방법<br>타입 변환 지원<br>값이 반드시 있어야 한다.<br>Optional 지원  </p>
+</li>
+<li><p>@MatrixVariable<br>@PathVariable과 유사하나 아규먼트로 키/값쌍을 받는다.<br>별도의 활성화가 필요하다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void configurePathMatch(PathMatchConfigurer configurer) &#123;</span><br><span class="line">        UrlPathHelper urlPathHelper &#x3D; new UrlPathHelper();</span><br><span class="line">        &#x2F;&#x2F;세미콜론을 제거하지 않도록 설정</span><br><span class="line">        urlPathHelper.setRemoveSemicolonContent(false);</span><br><span class="line">        </span><br><span class="line">        configurer.setUrlPathHelper(urlPathHelper);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event getEvent(@PathVariable(&quot;id&quot;) Long id, @MatrixVariable String name) &#123;</span><br><span class="line">    &#x2F;&#x2F;key &#x3D; &quot;name&quot;, value &#x3D; ?  </span><br><span class="line">    Event event &#x3D; new Event();</span><br><span class="line">    event.setId(id);</span><br><span class="line">    event.setName(name);</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="요청-매개변수를-아규먼트로"><a href="#요청-매개변수를-아규먼트로" class="headerlink" title="요청 매개변수를 아규먼트로"></a>요청 매개변수를 아규먼트로</h4><ul>
+<li>@RequestParam<br>요청 매개변수에 있는 단순 타입 데이터를 메서드 아규먼트로 받을 수 있다. (“/events?id=20” 또는 폼 데이터)<br>값이 반드시 있어야 한다. (또는 required=false, Optional 사용하여 기본값 설정 등)<br>String이 아닌 값들은 타입 변환을 지원한다.<br>Map을 사용하여 모든 매개변수를 받아올 수 있다.  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event getEvent(@RequestParam(&quot;id&quot;) Long id) &#123;</span><br><span class="line">    Event event &#x3D; new Event();</span><br><span class="line">    event.setId(id);</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ModelAttribute"><a href="#ModelAttribute" class="headerlink" title="@ModelAttribute"></a>@ModelAttribute</h4><p>여러 곳에 있는 단순 타입 데이터를 복합 타입 객체로 받아오거나 해당 객채를 새로 만들 때 사용  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event getEvents(@ModelAttribute Event event) &#123;</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>복합 타입 객체의 각 데이터를 바인딩 하는 방법은 URL, 요청 매개변수, 세션 등이 있다.</p>
+<p>값을 바인딩할 수 없는 경우 400 에러가 발생하는데,<br>이 에러를 직접 다루고 싶은 경우 BindingResult 타입의 아규먼트를 추가한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event getEvents(@ModelAttribute Event event, BindingResult bindingResult) &#123;</span><br><span class="line">    if(bindingResult.hasErrors()) &#123;</span><br><span class="line">        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line">        bindingResult.getAllErrors().forEach(c -&gt; &#123;</span><br><span class="line">            System.out.println(c);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>에러 발생 없이 에러정보는 BindingResult에 들어가고, 바인딩 되지 않은 값은 null이 된다.</p>
+<p>만약 바인딩 이후에 추가적인 검증작업이 필요한 경우 @Valid 또는 @Validated 애노테이션 사용<br>(ex) Event 객체의 limit 속성은 항상 1이상이어야 한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Min(1)</span><br><span class="line">private Integer limit;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event getEvents(@Valid @ModelAttribute Event event, BindingResult bindingResult) &#123;</span><br><span class="line">    if(bindingResult.hasErrors()) &#123;</span><br><span class="line">        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line">        bindingResult.getAllErrors().forEach(c -&gt; &#123;</span><br><span class="line">            System.out.println(c);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이때 @Valid 검증에 의해 bindingResult에 에러가 들어감에도 불구하고<br>해당 값은 바인딩 됨에 유의.</p>
+<h4 id="Validated"><a href="#Validated" class="headerlink" title="@Validated"></a>@Validated</h4><p>@Valid와는 다르게 validation group이라는 힌트를 사용하여 그룹 클래스를 지정할 수 있다.<br>그룹을 지정하지 않은 경우 @Valid와 동일하게 동작한다.</p>
+<p>두개의 validation group 생성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">interface ValidateLimit &#123;&#125;</span><br><span class="line">interface ValidateName &#123;&#125;</span><br><span class="line"></span><br><span class="line">private Long id;</span><br><span class="line"></span><br><span class="line">@NotBlank(groups &#x3D; ValidateName.class)</span><br><span class="line">private String name;</span><br><span class="line"></span><br><span class="line">@Min(value &#x3D; 1,groups &#x3D; ValidateLimit.class)</span><br><span class="line">private Integer limit;</span><br></pre></td></tr></table></figure>
+
+<p>특정 그룹만 검증하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event getEvents(@Validated(Event.ValidateName.class) @ModelAttribute Event event, BindingResult bindingResult) &#123;</span><br><span class="line">    if(bindingResult.hasErrors()) &#123;</span><br><span class="line">        System.out.println(&quot;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&quot;);</span><br><span class="line">        bindingResult.getAllErrors().forEach(c -&gt; &#123;</span><br><span class="line">            System.out.println(c.toString());</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="SessionAttributes"><a href="#SessionAttributes" class="headerlink" title="@SessionAttributes"></a>@SessionAttributes</h4><p>모델 정보를 HTTP 세션에 저장해주는 애노테이션<br>HttpSession을 직접 사용할 수도 있지만 @SessionAttributes를 사용하면<br>설정한 이름에 해당하는 모델 정보를 자동으로 세션에 저장해준다.<br>여러 화면 또는 요청에서 사용되는 객체를 공유할 때 사용한다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@SessionAttributes(&quot;event&quot;)</span><br><span class="line">public class EventController &#123;</span><br></pre></td></tr></table></figure>
+
+<p>SessionStatus를 사용해서 특정 폼 처리 완료 후에 세션 데이터를 비우도록 할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;events&quot;)</span><br><span class="line">public String createEvent(@Validated @ModelAttribute Event event,</span><br><span class="line">                          BindingResult bindingResult,</span><br><span class="line">                          SessionStatus sessionStatus) &#123;</span><br><span class="line">    if(bindingResult.hasErrors()) &#123;</span><br><span class="line">       return &quot;&#x2F;events&#x2F;form&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;todo save</span><br><span class="line">    sessionStatus.setComplete();</span><br><span class="line">    return &quot;redirect:&#x2F;events&#x2F;list&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="SessionAttribute"><a href="#SessionAttribute" class="headerlink" title="@SessionAttribute"></a>@SessionAttribute</h4><p>HTTP 세션에 들어있는 데이터를 참조할 떄 사용한다.<br>타입 컨버전을 지원, 데이터 수정을 위해서는 HttpSession 사용  </p>
+<p>@SessionAttributes는 해당 컨트롤러 내에서만 특정 모델 객체를 공유할때 사용하는 한편,<br>@SessionAttribute는 컨트롤러 밖(인터셉터 또는 필터 등)에서 만들어준 세션 데이터에 접근할 때 사용한다.  </p>
+<p>접속 시간을 기록하여 Session에 저장하는 인터셉트를 생성하고 (등록 필요)<br>핸들러 메서드에서 사용하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class VisitTimeInterceptor implements HandlerInterceptor &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        HttpSession session &#x3D; request.getSession();</span><br><span class="line">        if (session.getAttribute(&quot;visitTime&quot;) &#x3D;&#x3D; null) &#123;</span><br><span class="line">            session.setAttribute(&quot;visitTime&quot;, LocalDateTime.now());</span><br><span class="line">        &#125;</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">    registry.addInterceptor(new VisitTimeInterceptor());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&#x2F;list&quot;)</span><br><span class="line">public String getEvents(@ModelAttribute Event event,</span><br><span class="line">                        Model model,</span><br><span class="line">                        SessionStatus sessionStatus,</span><br><span class="line">                        @SessionAttribute LocalDateTime visitTime) &#123;</span><br><span class="line">    System.out.println(visitTime);</span><br><span class="line">    List&lt;Event&gt; eventList &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    eventList.add(event);</span><br><span class="line"></span><br><span class="line">    model.addAttribute(&quot;eventList&quot;,eventList);</span><br><span class="line">    sessionStatus.setComplete();</span><br><span class="line">    return &quot;&#x2F;events&#x2F;list&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RedirectAttributes"><a href="#RedirectAttributes" class="headerlink" title="RedirectAttributes"></a>RedirectAttributes</h4><p>리다이렉트 할 때는 Model에 들어있는 primitive type 데이터가 URI 쿼리 매개변수에 추가된다.<br>(ex localhost:8080/events/list?name=mvc&amp;limit=50)    </p>
+<p>스프링부트에서 기능 활성화를 위해서는 Ignore-default-model-on-redirect 프로퍼티를 사용해야 한다.  </p>
+<p>application.properties</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">spring.mvc.ignore-default-model-on-redirect&#x3D;false</span><br></pre></td></tr></table></figure>
+
+<p>리다이렉트할 때 원하는 데이터만 전달하고 싶을 때는 RedirectAttributes에 명시적으로 추가하여 사용할 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;events&#x2F;form&#x2F;limit&quot;)</span><br><span class="line">public String eventsFormLimitSubmit(@Validated @ModelAttribute Event event,</span><br><span class="line">                                    BindingResult bindingResult,</span><br><span class="line">                                    SessionStatus sessionStatus,</span><br><span class="line">                                    RedirectAttributes attributes) &#123;</span><br><span class="line">    if(bindingResult.hasErrors()) &#123;</span><br><span class="line">        return &quot;&#x2F;events&#x2F;form-limit&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;todo save</span><br><span class="line">    attributes.addAttribute(&quot;name&quot;, event.getName());</span><br><span class="line">    attributes.addAttribute(&quot;limit&quot;, event.getLimit());</span><br><span class="line">    sessionStatus.setComplete();</span><br><span class="line">    return &quot;redirect:&#x2F;events&#x2F;list&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>리다이렉트 요청을 처리하는 곳에서 쿼리 매개변수를 @RequestParam 또는 @ModelAttribute로 받을 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&#x2F;list&quot;)</span><br><span class="line">public String getEvents(@ModelAttribute(&quot;newEvent&quot;) Event event,</span><br><span class="line">                        Model model,</span><br><span class="line">                        @SessionAttribute LocalDateTime visitTime) &#123;</span><br><span class="line">    System.out.println(visitTime);</span><br><span class="line"></span><br><span class="line">    List&lt;Event&gt; eventList &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    eventList.add(event);</span><br><span class="line"></span><br><span class="line">    model.addAttribute(&quot;eventList&quot;,eventList);</span><br><span class="line">    return &quot;&#x2F;events&#x2F;list&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>요청 매개변수를 복합객체로 받기 위해 @ModelAttribute를 사용할 때,<br>@SessionAttributes에서 세션에 저장한 이름과 동일하게 받는다면<br>우선적으로 객체를 세션에서 찾게 되기 때문에 에러가 발생할 수 있다.<br>그러므로 SessionAttributes와는 다른 이름으로 받아야 요청 매개변수를 통해 객체로 바인딩할 수 있다.  </p>
+<h4 id="Flash-Attributes"><a href="#Flash-Attributes" class="headerlink" title="Flash Attributes"></a>Flash Attributes</h4><p>주로 리다이렉트 중에 데이터를 전달하는 목적으로 사용한다.<br>데이터가 URI에 노출되지 않고 임의의 객체를 사용할 수 있다.  </p>
+<p>RedirectAttributes의 addFlashAttribute 메서드를 사용하여 객체를 HTTP 세션에 저장하여 넘겨준다.<br>리다이렉트 요청을 처리 한 다음 세션에서 제거된다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostMapping(&quot;&#x2F;events&#x2F;form&#x2F;limit&quot;)</span><br><span class="line">public String eventsFormLimitSubmit(@Validated @ModelAttribute Event event,</span><br><span class="line">                                    BindingResult bindingResult,</span><br><span class="line">                                    SessionStatus sessionStatus,</span><br><span class="line">                                    RedirectAttributes attributes) &#123;</span><br><span class="line">    if(bindingResult.hasErrors()) &#123;</span><br><span class="line">        return &quot;&#x2F;events&#x2F;form-limit&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    &#x2F;&#x2F;todo save</span><br><span class="line">    attributes.addFlashAttribute(&quot;newEvent&quot;,event);</span><br><span class="line">    sessionStatus.setComplete();</span><br><span class="line">    return &quot;redirect:&#x2F;events&#x2F;list&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>넘겨받은 객체는 Model에 자동으로 들어가기 때문에<br>리다이렉트 요청을 처리하는 곳에서는 @ModelAttribute로 선언하여 객체를 받을 필요 없이<br>Model에서 꺼내어 쓰면 된다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&#x2F;list&quot;)</span><br><span class="line">public String getEvents(Model model,</span><br><span class="line">                        @SessionAttribute LocalDateTime visitTime) &#123;</span><br><span class="line">    System.out.println(visitTime);</span><br><span class="line"></span><br><span class="line">    List&lt;Event&gt; eventList &#x3D; new ArrayList&lt;&gt;();</span><br><span class="line">    eventList.add((Event) model.asMap().get(&quot;newEvent&quot;));</span><br><span class="line"></span><br><span class="line">    model.addAttribute(&quot;eventList&quot;,eventList);</span><br><span class="line">    return &quot;&#x2F;events&#x2F;list&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="MultipartFile"><a href="#MultipartFile" class="headerlink" title="MultipartFile"></a>MultipartFile</h4><p>파일 업로드에 사용하는 메소드 아규먼트<br>MultipartResolver 빈이 설정되어 있어야 사용할 수 있다.<br>(스프링부트에서는 MultipartAutoConfiguration에 의해 자동으로 설정된다.)<br>POST mulripart/form-data 요청이 들어있는 파일을 참조할 수 있다.<br>List<MultipartFile> 아규먼트로 여러 파일을 참조할 수 있다.  </p>
+<p>파일 업로드 폼 예시</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div th:if&#x3D;&quot;$&#123;message&#125;&quot;&gt;</span><br><span class="line">    &lt;h2 th:text&#x3D;&quot;$&#123;message&#125;&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;div&gt;</span><br><span class="line"></span><br><span class="line">&lt;form method&#x3D;&quot;POST&quot; enctype&#x3D;&quot;multipart&#x2F;form-data&quot; action&#x3D;&quot;#&quot; th:action&#x3D;&quot;@&#123;&#x2F;file&#125;&quot;&gt;</span><br><span class="line">    File : &lt;input type&#x3D;&quot;file&quot; name&#x3D;&quot;file&quot;&#x2F;&gt;</span><br><span class="line">    &lt;input type&#x3D;&quot;submit&quot; name&#x3D;&quot;Upload&quot;&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;form&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;file&quot;)</span><br><span class="line">public String fileUploadForm(Model model) &#123;</span><br><span class="line">    return &quot;files&#x2F;index&quot;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@PostMapping(&quot;&#x2F;file&quot;)</span><br><span class="line">public String fileUpload(@RequestParam MultipartFile file,</span><br><span class="line">                         RedirectAttributes attributes) &#123;</span><br><span class="line">    &#x2F;&#x2F;todo file storage service</span><br><span class="line">    String message &#x3D; file.getOriginalFilename() + &quot; is uploaded.&quot;;</span><br><span class="line"></span><br><span class="line">    attributes.addFlashAttribute(&quot;message&quot;,message);</span><br><span class="line">    return &quot;redirect:&#x2F;file&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="File-Download"><a href="#File-Download" class="headerlink" title="File Download"></a>File Download</h4><p>스프링 ResourceLoader 사용  </p>
+<ul>
+<li>ResouceLoader<br>: 리소스를 읽어오는 기능을 제공하는 인터페이스<br>Resource getResource(String location);</li>
+</ul>
+<p>파일 다운로드 응답 헤더에 설정 할 내용</p>
+<ul>
+<li>CONTENT_DISPOSITION : 사용자가 파일을 받을 때 사용할 파일 이름</li>
+<li>CONTENT_TYPE : 파일의 미디어 타입</li>
+<li>CONTENT_LENGTH : 파일의 크기</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">private ResourceLoader resourceLoader;    </span><br><span class="line"></span><br><span class="line">@GetMapping(&quot;&#x2F;file&#x2F;&#123;filename&#125;&quot;)</span><br><span class="line">public ResponseEntity&lt;Resource&gt; fileDownload(@PathVariable String fileName) throws IOException &#123;</span><br><span class="line">    Resource resource &#x3D; resourceLoader.getResource(&quot;classpath:&quot;+fileName);</span><br><span class="line"></span><br><span class="line">    File file &#x3D; resource.getFile();</span><br><span class="line"></span><br><span class="line">    Tika tika &#x3D; new Tika();</span><br><span class="line">    String mediaType &#x3D; tika.detect(file);</span><br><span class="line"></span><br><span class="line">    return ResponseEntity.ok()</span><br><span class="line">            .header(HttpHeaders.CONTENT_DISPOSITION, &quot;attachment; filename&#x3D;\&quot;&quot;+resource.getFilename()+&quot;\&quot;&quot;)</span><br><span class="line">            .header(HttpHeaders.CONTENT_TYPE, mediaType)</span><br><span class="line">            .header(HttpHeaders.CONTENT_LENGTH, file.length()+&quot;&quot;)</span><br><span class="line">            .body(resource);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>리턴 타입 ResponseEntity : 응답 본문, 응답 헤더, 응답 상태 코드를 설정할 수 있는 리턴 타입이다. &lt;&gt;에는 응답 본문의 타입을 넣어준다.  </li>
+<li>Tika : File의 미디어 타입을 알아낼 수 있다.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.apache.tika&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;tika-core&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.20&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="RequestBody-amp-HttpEntity"><a href="#RequestBody-amp-HttpEntity" class="headerlink" title="@RequestBody &amp; HttpEntity"></a>@RequestBody &amp; HttpEntity</h4><ul>
+<li>@RequestBody<br>요청 본문에 들어있는 데이터를 HttpMessageConverter를 통해 변환한 객체로 받을 수 있다.<br>@Valid 또는 @Validated와 같이 사용하여 검증을 진행할 수 있다.<br>BindingResult 아규먼트를 사용해 코드로 바인딩 또는 검증 에러를 확인할 수 있다.  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;&#x2F;api&#x2F;events&quot;)</span><br><span class="line">public class EventApi &#123;</span><br><span class="line"></span><br><span class="line">    @PostMapping</span><br><span class="line">    public Event createEvent(@RequestBody Event event) &#123;</span><br><span class="line">        return event;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>HttpEntity<br>@RequestBody와 비슷하지만 추가적으로 요청 헤더 정보를 사용할 수 있다.  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@RequestMapping(&quot;&#x2F;api&#x2F;events&quot;)</span><br><span class="line">public class EventApi &#123;</span><br><span class="line"></span><br><span class="line">    @PostMapping</span><br><span class="line">    public Event createEvent(HttpEntity&lt;Event&gt; request) &#123;</span><br><span class="line">        System.out.println(request.getHeaders().getContentType());</span><br><span class="line">        return request.getBody();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ResponseBody-amp-ResponseEntity"><a href="#ResponseBody-amp-ResponseEntity" class="headerlink" title="@ResponseBody &amp; ResponseEntity"></a>@ResponseBody &amp; ResponseEntity</h4><ul>
+<li>@ResponseBody<br>핸들러 메서드의 리턴 데이터를 HttpMessageConverter를 통해 변환 후에 응답 본문 메시지로 보낼때 사용<br>@RestController를 사용하면 모든 핸들러 메서드에 적용된다.  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostMapping</span><br><span class="line">@ResponseBody</span><br><span class="line">public Event createEvent(@RequestBody @Valid Event event) &#123;</span><br><span class="line">    return event;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ResponseEntity<br>응답 헤더 상태 코드 본문을 직접 다루고 싶은 경우에 사용한다.  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PostMapping</span><br><span class="line">public ResponseEntity&lt;Event&gt; createEvent(@RequestBody @Valid Event event,</span><br><span class="line">                                         BindingResult bindingResult) &#123;</span><br><span class="line">    if (bindingResult.hasErrors()) &#123;</span><br><span class="line">        return ResponseEntity.badRequest().build();</span><br><span class="line">    &#125;</span><br><span class="line">    return ResponseEntity.ok(event);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller-설정"><a href="#Controller-설정" class="headerlink" title="Controller 설정"></a>Controller 설정</h3><h4 id="ModelAttribute의-다른-사용법"><a href="#ModelAttribute의-다른-사용법" class="headerlink" title="@ModelAttribute의 다른 사용법"></a>@ModelAttribute의 다른 사용법</h4><ul>
+<li>해당 컨트롤러의 모든 요청에서 공통적으로 사용하는 모델 초기화하기  </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ModelAttribute</span><br><span class="line">public void categories(Model model) &#123;</span><br><span class="line">    model.addAttribute(&quot;categories&quot;,List.of(&quot;study&quot;, &quot;seminar&quot;, &quot;hobby&quot;, &quot;social&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>메서드에 붙이면 리턴하는 객체를 모델에 넣어준다.<br>이 때는 RequestToViewNameTranslator에 의해 URL 이름으로 view 선택</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;events&#x2F;form-name&quot;)</span><br><span class="line">@ModelAttribute</span><br><span class="line">public Event newEvent() &#123;</span><br><span class="line">    return new Event();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="DataBinder-InitBinder"><a href="#DataBinder-InitBinder" class="headerlink" title="DataBinder : @InitBinder"></a>DataBinder : @InitBinder</h4><p>특정 컨트롤러에서 바인딩 또는 검증 설정을 변경하고 싶을 때 사용  </p>
+<p>바인딩 설정<br>webDataBinder.setDisallowedFields();</p>
+<p>포매터 설정<br>webDataBinder.addCustomFormatter();</p>
+<p>Validator 설정<br>webDataBinder.addValidators();</p>
+<p>또는 특정 이름의 모델 객체에만 바인딩 또는 검증 설정 적용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@InitBinder(&quot;event&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>이벤트에 대한 데이터를 바인딩할때 id를 바인딩하지 않도록 설정</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@InitBinder(&quot;event&quot;)</span><br><span class="line">public void initEventBinder(WebDataBinder webDataBinder) &#123;</span><br><span class="line">    webDataBinder.setDisallowedFields(&quot;id&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="예외-처리-핸들러-ExceptionHandler"><a href="#예외-처리-핸들러-ExceptionHandler" class="headerlink" title="예외 처리 핸들러 : @ExceptionHandler"></a>예외 처리 핸들러 : @ExceptionHandler</h4><p>특정 예외가 발생한 요청을 처리하는 핸들러를 정의한다.<br>일반적인 핸들러 메서드와 비슷하게 작성할 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ExceptionHandler</span><br><span class="line">public String eventErrorHandler(EventException exception, Model model) &#123;</span><br><span class="line">    model.addAttribute(&quot;message&quot;, &quot;event error&quot;);</span><br><span class="line">    return &quot;error&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Rest API의 경우 보통 ResponseEntity를 사용하여 예외에 대한 정보를 응답 본문으로 전달한다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ExceptionHandler</span><br><span class="line">public ResponseEntity errorHandler(EventException exception) &#123;</span><br><span class="line">    return ResponseEntity.badRequest().body(&quot;can&#39;t create event.&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="전역-컨트롤러-ControllerAdvice"><a href="#전역-컨트롤러-ControllerAdvice" class="headerlink" title="전역 컨트롤러 : @ControllerAdvice"></a>전역 컨트롤러 : @ControllerAdvice</h4><p>@InitBinder, @ExceptionHandler, @ModelAttribute 를 모든 컨트롤러에서 사용하고 싶을 때 사용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ControllerAdvice</span><br><span class="line">public class GlobalController &#123;</span><br><span class="line">    @ExceptionHandler</span><br><span class="line">    public String eventErrorHandler(EventException exception, Model model) &#123;</span><br><span class="line">        model.addAttribute(&quot;message&quot;, &quot;event error&quot;);</span><br><span class="line">        return &quot;error&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @InitBinder</span><br><span class="line">    public void initEventBinder(WebDataBinder webDataBinder) &#123;</span><br><span class="line">        webDataBinder.setDisallowedFields(&quot;id&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @ModelAttribute</span><br><span class="line">    public void categories(Model model) &#123;</span><br><span class="line">        model.addAttribute(&quot;categories&quot;, List.of(&quot;study&quot;, &quot;seminar&quot;, &quot;hobby&quot;, &quot;social&quot;));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>적용할 범위를 지정할 수 있다.  </p>
+<ul>
+<li>특정 애노테이션이 걸려있는 컨트롤러에만 적용<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ControllerAdvice(annotations &#x3D; RestController.class)</span><br></pre></td></tr></table></figure></li>
+<li>특정 패키지 이하의 컨트롤러에만 적용<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ControllerAdvice(&quot;me.rockintuna.demowebmvc&quot;)</span><br></pre></td></tr></table></figure></li>
+<li>특정 클래스 타입에만 적용 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@ControllerAdvice(assignableTypes &#x3D; &#123;EventController.class, EventApi.class&#125;)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>Spring MVC</tag>
+        <tag>HTTP Method</tag>
+        <tag>Handler Method</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring MVC 설정</title>
+    <url>/2020/09/15/hexo_spring_project_10/</url>
+    <content><![CDATA[<h2 id="Spring-MVC-설정"><a href="#Spring-MVC-설정" class="headerlink" title="Spring MVC 설정"></a>Spring MVC 설정</h2><h3 id="Spring-MVC-Bean-설정"><a href="#Spring-MVC-Bean-설정" class="headerlink" title="Spring MVC Bean 설정"></a>Spring MVC Bean 설정</h3><p>DispatcherServlet의 기본 전략에만 의존하기에는 확장성이 저하될 수 있기 때문에 추가적으로 설정할 수 있어야 한다.  </p>
+<p>@Configuration을 사용한 자바 파일에 스프링 MVC 구성요소를 직접 빈으로 등록할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ViewResolver viewResolver() &#123;</span><br><span class="line">        InternalResourceViewResolver viewResolver &#x3D; new InternalResourceViewResolver();</span><br><span class="line">        viewResolver.setPrefix(&quot;&#x2F;WEB-INF&#x2F;&quot;);</span><br><span class="line">        viewResolver.setSuffix(&quot;.jsp&quot;);</span><br><span class="line">        return viewResolver;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="EnableWebMvc"><a href="#EnableWebMvc" class="headerlink" title="@EnableWebMvc"></a>@EnableWebMvc</h3><p>애노테이션 기반 스프링 MVC를 사용할 때 편리한 웹 MVC 기본 설정<br>@EnableWebMvc를 사용하면 DelegatingWebMvcConfiguration.class를 import하여<br>애노테이션 기반 스프링 MVC 환경에 적합한 여러가지 설정 및 전략들을 추가하고 변경한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebMvc</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@EnableWebMvc를 사용할 때는 ApplicationContext에 Servlet Context가 등록되어야 한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class WebApplication implements WebApplicationInitializer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void onStartup(ServletContext servletContext) throws ServletException &#123;</span><br><span class="line">        AnnotationConfigWebApplicationContext context &#x3D; new AnnotationConfigWebApplicationContext();</span><br><span class="line">        context.setServletContext(servletContext);</span><br><span class="line">        context.register(WebConfig.class);</span><br><span class="line">        context.refresh();</span><br><span class="line"></span><br><span class="line">        DispatcherServlet dispatcherServlet &#x3D; new DispatcherServlet(context);</span><br><span class="line">        ServletRegistration.Dynamic app &#x3D; servletContext.addServlet(&quot;app&quot;, dispatcherServlet);</span><br><span class="line">        app.addMapping(&quot;&#x2F;app&#x2F;*&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="WebMvcConfigurer-설정"><a href="#WebMvcConfigurer-설정" class="headerlink" title="WebMvcConfigurer 설정"></a>WebMvcConfigurer 설정</h3><p>특히, DelegatingWebMvcConfiguration을 사용하면 Formatter나 Interceptor를 추가하는 등 추가적인 설정이 더 쉬워진다는 장점도 있다.<br>WebMvcConfigurer는 @EnableWebMvc가 제공하는 빈을 커스터마이징할 수 있는 기능을 제공하는 인터페이스이다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebMvc</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void configureViewResolvers(ViewResolverRegistry registry) &#123;</span><br><span class="line">        registry.jsp(&quot;&#x2F;WEB-INF&quot;,&quot;.jsp&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>새로운 빈을 추가할 필요 없이 @EnableWebMvc가 제공하는 빈에 추가 설정을 한다는 장점이 있다.  </p>
+<h4 id="포매터-설정"><a href="#포매터-설정" class="headerlink" title="포매터 설정"></a>포매터 설정</h4><p>Formatter를 통해 문자열을 객체로 또는 객체를 문자열로 변환할 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;hello&#x2F;&#123;name&#125;&quot;)</span><br><span class="line">public String hello(@PathVariable(&quot;name&quot;) Person person) &#123;</span><br><span class="line">    return &quot;hello&quot; + person.getName();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>예를들어 위와 같은 get 메서드에서 url의 name 문자열을 Person이라는 객체로 받고 싶을 때 포매터를 사용한다.  </p>
+<p>Formatter 인터페이스는 사실 Printer 인터페이스와 Parser 인터페이스를 합친것이다.<br>Printer : 객체를 문자열로 어떻게 보여줄 것인가<br>Parser : 문자열을 객체로 어떻게 변환할 것인가<br>각각에 해당하는 메서드를 구현해주면 된다. (print(), parse())</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class PersonFormatter implements Formatter&lt;Person&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Person parse(String s, Locale locale) throws ParseException &#123;</span><br><span class="line">        Person person &#x3D; new Person();</span><br><span class="line">        person.setName(s);</span><br><span class="line">        return person;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String print(Person person, Locale locale) &#123;</span><br><span class="line">        return person.toString();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>포매터를 등록하는 방법</p>
+<ul>
+<li><p>WebMvcConfigurer의 addFormatters 메서드 정의</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void addFormatters(FormatterRegistry registry) &#123;</span><br><span class="line">        registry.addFormatter(new PersonFormatter());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>포매터를 빈으로 등록(스프링 부트에서만 가능) </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class PersonFormatter implements Formatter&lt;Person&gt; &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Person parse(String s, Locale locale) throws ParseException &#123;</span><br><span class="line">        Person person &#x3D; new Person();</span><br><span class="line">        person.setName(s);</span><br><span class="line">        return person;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public String print(Person person, Locale locale) &#123;</span><br><span class="line">        return person.getName();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="핸들러-인터셉터"><a href="#핸들러-인터셉터" class="headerlink" title="핸들러 인터셉터"></a>핸들러 인터셉터</h4><p>HandlerInterceptor<br> : 핸들러 맵핑에 설정할 수 있는 인터셉터<br> 핸들러 실행 전후와 완료(랜더링까지)시점에 부가 작업을 하고싶은 경우 사용하거나<br> 여러 핸들러에서 반복적으로 사용되는 코드를 줄이고 싶을 때 사용한다.</p>
+<p>순서 </p>
+<ul>
+<li>preHandle(request, response, handler)<br>: 핸들러가 실행되기 전에 호출 됨, 핸들러에 대한 정보를 사용할 수 있기 때문에 서블릿 필터보다 더 세밀한 로직을 구현할 수 있다.<br>boolean을 return하는데, 다음 인터셉터나 핸들러로 전달할지 아니면 끝인지를 알린다.  </li>
+<li>요청 처리</li>
+<li>postHandle(request, response, modelAndView)<br>: 핸들러 실행이 끝나고 아직 뷰를 랜더링 하기 전에 호출 됨, 뷰에 전달할 추가적이거나 여러 핸들러에 공통적인 모델 정보를 담는데 사용할 수 있다.<br>여러 핸들러 인터셉터들이 있으면 역순으로 호출된다.<br>비동기적인 요청 처리 시에는 호출되지 않는다.</li>
+<li>뷰 랜더링</li>
+<li>afterCompletion(request, response, handler, ex)<br>: preHandle에서 true를 리턴 한 경우, 요청 처리가 완전히 끝난 뒤(뷰 랜더링 이후) 호출됨<br>여러 핸들러 인터셉터들이 있으면 역순으로 호출된다.<br>비동기적인 요청 처리 시에는 호출되지 않는다.</li>
+</ul>
+<p>핸들러 인터셉터 구현하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class GreetingInterceptor implements HandlerInterceptor &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;preHandle 1&quot;);</span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;postHandle 1&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception &#123;</span><br><span class="line">        System.out.println(&quot;afterCompletion 1&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>핸들러 인터셉터 등록하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void addInterceptors(InterceptorRegistry registry) &#123;</span><br><span class="line">        registry.addInterceptor(new GreetingInterceptor());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="리소스-핸들러"><a href="#리소스-핸들러" class="headerlink" title="리소스 핸들러"></a>리소스 핸들러</h4><p>이미지, 자바스크립트, css, html 등 정적인 리소스를 처리하는 핸들러 등록 방법</p>
+<p>디폴트(Default) 서블릿<br> : 서블릿 컨테이너가 기본으로 제공하는 서블릿으로 정적인 리소스 처리에 사용  </p>
+<p>스프링 MVC 리소스 핸들러를 맵핑 등록 할때<br> : 가장 낮은 우선순위로 등록, DefaultServletHandlerConfigurer </p>
+<p>리소스 핸들러 설정</p>
+<ul>
+<li>어떤 요청 패턴을 지원할 것인가</li>
+<li>어디서 리소스를 찾을 것인가</li>
+<li>캐싱</li>
+<li>ResourceResolver : 요청에 해당하는 리소스를 찾는 전략.<br>캐싱, 인코딩, WebJar, …</li>
+<li>ResourceTransformer : 응답으로 보낼 리소스를 수정하는 전략.<br>캐싱, CSS 링크, HTML 5 AppCache, …<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">    registry.addResourceHandler(&quot;&#x2F;mobile&#x2F;**&quot;)</span><br><span class="line">            .addResourceLocations(&quot;classpath:&#x2F;mobile&#x2F;&quot;)</span><br><span class="line">            .setCacheControl(CacheControl.maxAge(10, TimeUnit.MINUTES));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+스프링 부트에서는 기본적으로 정적 리소스 핸들러와 캐싱을 제공한다.(resources/static)  </li>
+</ul>
+<h4 id="HTTP-메시지-컨버터"><a href="#HTTP-메시지-컨버터" class="headerlink" title="HTTP 메시지 컨버터"></a>HTTP 메시지 컨버터</h4><p>요청 본문에서 메시지를 읽어들이거나(@RequestBody), 응답 본문에 메시지를 작성(@ResponseBody)할 때 사용한다.  </p>
+<p>HTTP 메서드에서 @RequestBody 어노테이션을 통해 json 등 contentType을 특정 타입이나 객체로 받을 수 있게 해준다.  </p>
+<p>메시지 컨버터 설정 방법  </p>
+<ul>
+<li><p>configureMessageConverters 메서드 사용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void configureMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이렇게 컨버터를 추가하면 기본으로 제공되는 메시지 컨버터들이 무시된다.</p>
+</li>
+<li><p>extendMessageConverters 메서드 사용</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void extendMessageConverters(List&lt;HttpMessageConverter&lt;?&gt;&gt; converters) &#123;</span><br><span class="line">            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>기본으로 제공되는 메시지 컨버터들에 더해 새로운 컨버터가 추가된다.  </p>
+</li>
+<li><p>의존성 추가로 컨버터 등록<br>메이븐 또는 그래들 설정에서 의존성을 추가하면 WebMvcConfigurationSupport 클래스에 의해 그에 맞는 컨버터가 자동으로 등록된다.</p>
+</li>
+</ul>
+<p>메시지 컨버터 등록하기</p>
+<ul>
+<li><p>Json 용 메시지컨버터</p>
+<ul>
+<li>스프링 부트를 사용하지 않는 경우<br>사용하고 싶은 Json 라이브러리를 의존성으로 추가</li>
+<li>스프링 부트를 사용하는 경우<br>기본적으로 Jackson2JSON이 의존성에 들어있다.<br>즉, Json 용 HTTP 메시지 컨버터가 기본으로 등록되어 있다.  </li>
+</ul>
+</li>
+<li><p>XML 용 메시지컨버터<br> OXM 라이브러리 중 스프링이 지원하는 의존성 추가(JacksonXML, JAXB)<br> 스프링 부트를 사용하더라도 기본적으로 XML 의존성을 추가해주지 않는다.  </p>
+</li>
+</ul>
+<p>JAXB 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;javax.xml.bind&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jaxb-api&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.glassfish.jaxb&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jaxb-runtime&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-oxm&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;spring-framework.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Marshaller 빈 추가<br>XmlRootElement를 스캔할 수 있도록 setPackagesToScan 설정 필요</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public Jaxb2Marshaller jaxb2Marshaller() &#123;</span><br><span class="line">    Jaxb2Marshaller jaxb2Marshaller &#x3D; new Jaxb2Marshaller();</span><br><span class="line">    jaxb2Marshaller.setPackagesToScan(Person.class.getPackageName());</span><br><span class="line">    return jaxb2Marshaller;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>객체를 Json String으로 만들기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">ObjectMapper objectmapper;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void jsonString() throws JsonProcessingException &#123;</span><br><span class="line">    Person person &#x3D; new Person();</span><br><span class="line">    person.setId(99L);</span><br><span class="line">    person.setName(&quot;이정인&quot;);</span><br><span class="line"></span><br><span class="line">    String jsonString &#x3D; objectMapper.writeValueAsString(person);</span><br><span class="line"></span><br><span class="line">    ~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>객체를 XML String으로 만들기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Autowired</span><br><span class="line">Marshaller marshaller;</span><br><span class="line"></span><br><span class="line">@Test</span><br><span class="line">public void xmlString() throws JAXBException &#123;</span><br><span class="line">    Person person &#x3D; new Person();</span><br><span class="line">    person.setId(99L);</span><br><span class="line">    person.setName(&quot;이정인&quot;);</span><br><span class="line"></span><br><span class="line">    StringWriter stringWriter &#x3D; new StringWriter();</span><br><span class="line">    Result result &#x3D; new StreamResult(stringWriter);</span><br><span class="line">    marshaller.marshal(person, result);</span><br><span class="line">    String xmlString &#x3D; stringWriter.toString();</span><br><span class="line">   </span><br><span class="line">    ~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>테스트에서는 jsonPath 또는 xPath로 응답 본문을 체크할 수 있다.</p>
+<h4 id="기타-설정"><a href="#기타-설정" class="headerlink" title="기타 설정"></a>기타 설정</h4><ul>
+<li>기본 제공 외의 ReturnValueHandler 추가 </li>
+<li>기본 제공 외의 ArgumentResolver 추가</li>
+<li>뷰 컨트롤러 설정, 단순하게 요청 URL을 특정 뷰로 연결하고 싶을 때 사용</li>
+<li>비동기 설정, 비동기 요청 처리에 사용할 타임아웃이나 TaskExecutor 설정</li>
+<li>Content Negotiation 설정, 요청 본문 또는 응답 본문을 어떤 타입으로 보내야 하는지의 전략 설정</li>
+<li>CORS 설정, Cross Origin 요청 처리 설정, 같은 도메인에서 온 요청이 아니더라도 처리를 허용하고 싶을 때</li>
+<li>뷰 리졸버 설정, 핸들러에서 리턴하는 뷰 이름에 해당하는 문자열을 View 인스턴스로 바꿔줄 뷰 리졸버 설정 </li>
+</ul>
+<h3 id="스프링-부트의-스프링-MVC-설정"><a href="#스프링-부트의-스프링-MVC-설정" class="headerlink" title="스프링 부트의 스프링 MVC 설정"></a>스프링 부트의 스프링 MVC 설정</h3><p>추가적인 전략이 자동으로 DispatcherServlet에 추가된다.  </p>
+<ul>
+<li><p>handlerMapping  </p>
+<ul>
+<li>resourceHandlerMapping(SimpleUrlHandlerMapping) 추가, 정적 resource 지원, 캐싱관련 정보가 응답 헤더에 추가됨</li>
+<li>welcomePageHandlerMapping(WelcomePageHandlerMapping) 추가, 인덱스 페이지 지원  </li>
+</ul>
+</li>
+<li><p>viewResolver  </p>
+<ul>
+<li>ContentNegotiatingViewResolver, 다른 viewResolver에 작업 위임하는 역할  </li>
+</ul>
+</li>
+</ul>
+<p>스프링 부트에서는 spring-boot-autoconfigure jar의 META-INF/spring-factories 파일에서 다양한 자동 설정을 확인할 수 있고<br>그 중 DispatcherServletAutoConfiguration은 DispatcherServlet을 자동으로 만드는 코드,<br>WebMvcAutoConfiguration은 Spring MVC를 자동으로 설정하는 코드이다.  </p>
+<h4 id="스프링-부트의-프로퍼티-변경"><a href="#스프링-부트의-프로퍼티-변경" class="headerlink" title="스프링 부트의 프로퍼티 변경"></a>스프링 부트의 프로퍼티 변경</h4><p>application.properties</p>
+<h4 id="스프링-부트가-지원하는-스프링-MVC-설정을-사용하면서-추가-설정을-원하는-경우"><a href="#스프링-부트가-지원하는-스프링-MVC-설정을-사용하면서-추가-설정을-원하는-경우" class="headerlink" title="스프링 부트가 지원하는 스프링 MVC 설정을 사용하면서 추가 설정을 원하는 경우"></a>스프링 부트가 지원하는 스프링 MVC 설정을 사용하면서 추가 설정을 원하는 경우</h4><p>@Configuration + implements WebMvcConfigurer</p>
+<h4 id="스프링-부트가-지원하는-스프링-MVC-설정을-사용하고-싶지-않은-경우"><a href="#스프링-부트가-지원하는-스프링-MVC-설정을-사용하고-싶지-않은-경우" class="headerlink" title="스프링 부트가 지원하는 스프링 MVC 설정을 사용하고 싶지 않은 경우"></a>스프링 부트가 지원하는 스프링 MVC 설정을 사용하고 싶지 않은 경우</h4><p>@Configuration + @EnableWebMvc  </p>
+<p>@EnableWebMvc에서 사용하는 DelegatingWebMvcConfiguration.class는 WebMvcConfigurationSupport.class를 상속받는데,<br>스프링 부트는 WebMvcConfigurationSupport.class 타입의 빈이 있으면 스프링 MVC 자동 설정을 스킵하기 때문이다.<br>(추가로 커스터마이징까지 하려면 @Configuration + implements WebMvcConfigurer + @EnableWebMvc)</p>
+<p>참고로 스프링 부트에서는 Formatter나 Converter를 추가할 때 빈으로만 등록하면 알아서 추가해준다.  </p>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>Spring MVC</tag>
+      </tags>
+  </entry>
 </search>

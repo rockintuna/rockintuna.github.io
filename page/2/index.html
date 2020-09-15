@@ -179,6 +179,337 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/15/hexo_spring_project_1/" class="post-title-link" itemprop="url">maven / logback</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:35:13" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="maven-logback"><a href="#maven-logback" class="headerlink" title="maven / logback"></a>maven / logback</h2><ul>
+<li>maven  </li>
+</ul>
+<p>build를 담당하는 maven &amp; gradle<br>mvc compile을 통해 필요한 library들을 검토하고 자동으로 다운로드 해준다.<br>다운받은 jar파일들은 User Home 디렉토리의 .m2/repository에 보관된다.<br>설정 파일<br>maven : pom.xml<br>gradle : build.gradle<br>컴파일하면 target으로 실행가능하도록 생성됨  </p>
+<ul>
+<li>logback (slf4j) </li>
+</ul>
+<p>level이 내려갈수록 log 범위가 작아짐<br>logging을 담당하는 logback<br>.trace<br>.debug<br>.info<br>.warn<br>.error  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/15/hexo_spring_project_1/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/15/hexo_spring_project_2/" class="post-title-link" itemprop="url">IoC (Inversion of Control)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:45:24" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="IoC-Inversion-of-Control"><a href="#IoC-Inversion-of-Control" class="headerlink" title="IoC (Inversion of Control)"></a>IoC (Inversion of Control)</h2><p>Spring의 대표적인 특징 중 하나.</p>
+<p>어떤 객체가 사용하는 의존 객체를 직접 만들어서 사용하는게 아니라, 주입(DI)받아서 사용하는 것.  </p>
+<p>Spring IoC Container<br> : 애플리케이션 컴포넌트의 중앙 저장소.</p>
+<p>ApplicationContext<br> : IoC 컨테이너의 핵심적인 인터페이스.<br> IoC 컨테이너의 최상위 인터페이스인 BeanFactory를 상속받아 여러 기능이 추가됨.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/15/hexo_spring_project_2/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/15/hexo_spring_project_3/" class="post-title-link" itemprop="url">AOP (Aspect Oriented Programming)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:31:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="AOP-Aspect-Oriented-Programming"><a href="#AOP-Aspect-Oriented-Programming" class="headerlink" title="AOP (Aspect Oriented Programming)"></a>AOP (Aspect Oriented Programming)</h2><p>흩어진 Concern을 Aspect로 모듈화 할 수 있는 프로그래밍 기법이다.<br>AOP의 핵심은 흩어진 코드(여러 곳에서 반복되는 코드)를 한 곳으로 모으는 것.<br>AOP의 구현체로 AspectJ와 스프링 AOP가 있다.  </p>
+<p>Concern(여러 경로에 흩어져 있는 비슷한 코드)의 변경이 있을때<br>Concern들을 Aspect로 모아서 Aspect만 변경함으로서<br>모든 경로에서 각각 따로 변경해줘야 하는 번거로움을 방지해준다.  </p>
+<h4 id="AOP-주요-개념"><a href="#AOP-주요-개념" class="headerlink" title="AOP 주요 개념"></a>AOP 주요 개념</h4><p>Aspect : 모아진 코드와 정보 집합 모듈<br>Advice : 구현될 기능<br>PointCut : 어디에 적용되는지의 정보<br>Target : 적용이 되는 대상<br>Join Point : 생성자 호출 직전/직후, 메서드 호출시 등등 적용 가능한 시점</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/15/hexo_spring_project_3/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/15/hexo_spring_project_4/" class="post-title-link" itemprop="url">PSA (Portable Service Abstraction)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:35:21" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="PSA-Portable-Service-Abstraction"><a href="#PSA-Portable-Service-Abstraction" class="headerlink" title="PSA (Portable Service Abstraction)"></a>PSA (Portable Service Abstraction)</h2><p>이미 잘 만들어진 인터페이스를 사용하는 것.<br>확장성이 좋지 못한 코드 또는 기술에 특화되어 있는 코드에 사용하면 좋다.</p>
+<p>Spring Framework이 제공하는 API는 대부분이 추상화되어있다.  </p>
+<hr>
+<h4 id="추상화-예제"><a href="#추상화-예제" class="headerlink" title="추상화 예제"></a>추상화 예제</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/15/hexo_spring_project_4/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -256,338 +587,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/15/hexo_spring_project_6/" class="post-title-link" itemprop="url">데이터 바인딩</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-              
-
-              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:43:04" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="데이터-바인딩"><a href="#데이터-바인딩" class="headerlink" title="데이터 바인딩"></a>데이터 바인딩</h2><p>프로퍼티 값을 타겟 객체에 설정하는 기능.<br>즉, 사용자 입력값(문자열)을 객체가 가지고 있는 int, Date, Boolean 또는 도메인 타입 등으로 변환해 넣어주는 기능이다.  </p>
-<h4 id="PropertyEditor"><a href="#PropertyEditor" class="headerlink" title="PropertyEditor"></a>PropertyEditor</h4><p>DataBinder가 변환 작업에 사용하는 인터페이스.  </p>
-<p>문자열을 객체로 변환하는 Editor 만들기</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/15/hexo_spring_project_6/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/15/hexo_spring_project_7/" class="post-title-link" itemprop="url">SpEL (스프링 Expression Language)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-              
-
-              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:45:34" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="SpEL-스프링-Expression-Language"><a href="#SpEL-스프링-Expression-Language" class="headerlink" title="SpEL (스프링 Expression Language)"></a>SpEL (스프링 Expression Language)</h2><h4 id="스프링-EL이란-upto-spring3-0"><a href="#스프링-EL이란-upto-spring3-0" class="headerlink" title="스프링 EL이란? (upto spring3.0)"></a>스프링 EL이란? (upto spring3.0)</h4><ol>
-<li>객체 그래프를 조회하고 조작하는 기능 제공</li>
-<li>Unified EL과 비슷하지만, 메소드 호출이나 문자열 템플릿 기능을 지원한다.</li>
-<li>OGNL, MVEL, JBoss EL 등 여러 EL이 있지만 SpEL은 모든 스프링 프로젝트 전반에 걸쳐 사용하도록 만들어져있다.</li>
-</ol>
-<h4 id="문법"><a href="#문법" class="headerlink" title="문법"></a>문법</h4><p>#{“표현식”}  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/15/hexo_spring_project_7/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/15/hexo_spring_project_8/" class="post-title-link" itemprop="url">Null-safety</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-              
-
-              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:37:34" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Null-safety"><a href="#Null-safety" class="headerlink" title="Null-safety"></a>Null-safety</h2><p>Spring 5부터 추가된 Null 관련 어노테이션.<br>org.springframework.lang</p>
-<p>컴파일 시점에 최대한 NullPointerException을 방지할 수 있다.  </p>
-<p>@NonNull : IntelliJ에서 null이면 미리 경고받을 수 있다.  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@NonNull &#x2F;&#x2F;return이 Null인지 확인</span><br><span class="line">public String greeting(@NonNull String name) &#123; &#x2F;&#x2F;매개변수가 Null인지 확인</span><br><span class="line">    return &quot;Hi! &quot;+name;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/15/hexo_spring_project_8/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_2_05/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_2_05/" class="post-title-link" itemprop="url">05.HelloWorld</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:26:57" itemprop="dateCreated datePublished" datetime="2020-08-12T21:26:57+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="05-HelloWorld"><a href="#05-HelloWorld" class="headerlink" title="05.HelloWorld"></a>05.HelloWorld</h4><ul>
-<li>Junit5, MockMvc  </li>
-</ul>
-<p>@RestController 에는 @Controller와 @ResponseBody가 포함되어 있다.</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_2_05/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
   </nav>
 
 
@@ -653,7 +656,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -664,7 +667,7 @@
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>

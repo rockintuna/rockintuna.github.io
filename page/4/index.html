@@ -179,6 +179,329 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_2_13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_springboot_2_13/" class="post-title-link" itemprop="url">13. JPA Query Method</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:26:57" itemprop="dateCreated datePublished" datetime="2020-08-12T21:26:57+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="13-JPA-Query-Method"><a href="#13-JPA-Query-Method" class="headerlink" title="13. JPA Query Method"></a>13. JPA Query Method</h4><p>일반적으로 우리가 테스트에서 자주 사용하는 JPA의 findall()은 실제 운영에서는 사용하지 않는다.<br>그 대신 where절이 걸려있는 sql을 원하게 되는데 이때 JPA Query Method를 사용하여 쿼리를 만들어 쓸 수 있다.<br>find : select<br>By : where<br>And : and<br>Or : or<br>Between : between A and B<br>LessThan : tab.col &lt; val<br>LessThanEqual : tab.col &lt;= val<br>GreaterThan : tab.col &gt; val<br>GreaterThanEqual : tab.col &gt;= val<br>After : tab.date &gt; val(date)<br>Before : tab.date &lt; val(date)<br>IsNull : is null, = null<br>(Is)NotNull : not null, != null<br>Like : like %val%<br>NotLike : not like %val%<br>StartingWith : like val%<br>EndingWith : like %val<br>Containing : like %val%<br>OrderBy : order by<br>Not : &lt;&gt;<br>In : in ()<br>NotIn : not in ()<br>True : = true<br>False : = false<br>IgnoreCase : UPPER(tab.col) / UPPER(val)</p>
+<p>ex)<br>만약 무조건 1 row만 리턴하는 쿼리라면 리턴타입을 Person으로 해도 되지만 2 rows 이상 리턴할 때 에러가 발생한다.  </p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_2_13/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_2_16/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_springboot_2_16/" class="post-title-link" itemprop="url">16. Controller HTTP Method</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:26:57" itemprop="dateCreated datePublished" datetime="2020-08-12T21:26:57+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="16-Controller-HTTP-Method"><a href="#16-Controller-HTTP-Method" class="headerlink" title="16. Controller HTTP Method"></a>16. Controller HTTP Method</h4><p>Controller에 각 HTTP 메서드를 이용한 기능 생성  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">@RestController</span><br><span class="line">@Slf4j</span><br><span class="line">@RequestMapping(value &#x3D; &quot;&#x2F;api&#x2F;person&quot;)</span><br><span class="line">public class PersonController &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private PersonService personService;</span><br><span class="line">    @Autowired</span><br><span class="line">    private PersonRepository personRepository;</span><br><span class="line"></span><br><span class="line">    @GetMapping(&quot;&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public Person getPerson(@PathVariable Long id) &#123;</span><br><span class="line">        return personService.getPerson(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;회원 정보 변경에서 받을 용도로 PersonDto Class를 만들었다.  </span><br><span class="line">    @PostMapping</span><br><span class="line">    public ResponseEntity&lt;?&gt; postPerson(@RequestBody Person resource) throws URISyntaxException &#123;</span><br><span class="line">        Person person &#x3D; personService.put(resource);</span><br><span class="line"></span><br><span class="line">        log.info(&quot;person -&gt; &#123;&#125;&quot;,personRepository.findAll());</span><br><span class="line"></span><br><span class="line">        String url &#x3D; &quot;&#x2F;api&#x2F;person&#x2F;&quot;+person.getId();</span><br><span class="line">        return ResponseEntity.created(new URI(url)).body(&quot;&#123;&#125;&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @PutMapping(&quot;&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public void modifyPerson(@PathVariable Long id,@RequestBody PersonDto personDto) &#123;</span><br><span class="line">        personService.modify(id, personDto);</span><br><span class="line"></span><br><span class="line">        log.info(&quot;person -&gt; &#123;&#125;&quot;,personRepository.findAll());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @PatchMapping(&quot;&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public void modifyPerson(@PathVariable Long id,String name) &#123;</span><br><span class="line">        personService.modify(id, name);</span><br><span class="line"></span><br><span class="line">        log.info(&quot;person -&gt; &#123;&#125;&quot;,personRepository.findAll());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @DeleteMapping(&quot;&#x2F;&#123;id&#125;&quot;)</span><br><span class="line">    public void deletePerson(@PathVariable Long id) &#123;</span><br><span class="line">        personService.delete(id);</span><br><span class="line"></span><br><span class="line">        log.info(&quot;person -&gt; &#123;&#125;&quot;,personRepository.findAll());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_2_16/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_2_20/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_springboot_2_20/" class="post-title-link" itemprop="url">20. 리팩토링 도메인코드</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:26:57" itemprop="dateCreated datePublished" datetime="2020-08-12T21:26:57+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="20-리팩토링-도메인코드"><a href="#20-리팩토링-도메인코드" class="headerlink" title="20. 리팩토링 도메인코드"></a>20. 리팩토링 도메인코드</h4><p>bloodType 속성 제거<br>block 속성 제거<br>age 속성은 제거하고 birthday를 통해 나이를 계산하는 getAge 메서드 추가<br>오늘이 생일인지 확인하는 기능 추가 (isBirthdayToday)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@Setter</span><br><span class="line">@Getter</span><br><span class="line">@ToString</span><br><span class="line">@NoArgsConstructor</span><br><span class="line">@EqualsAndHashCode</span><br><span class="line">@RequiredArgsConstructor</span><br><span class="line">@AllArgsConstructor</span><br><span class="line">@Where(clause &#x3D; &quot;deleted &#x3D; false&quot;)</span><br><span class="line">public class Person &#123;</span><br><span class="line"></span><br><span class="line">    @Id</span><br><span class="line">    @GeneratedValue(strategy &#x3D; GenerationType.IDENTITY)</span><br><span class="line">    private long id;</span><br><span class="line"></span><br><span class="line">    @NonNull</span><br><span class="line">    @NotEmpty</span><br><span class="line">    @Column(nullable &#x3D; false)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    private String hobby;</span><br><span class="line"></span><br><span class="line">    private String address;</span><br><span class="line"></span><br><span class="line">    @Valid</span><br><span class="line">    @Embedded</span><br><span class="line">    private Birthday birthday;</span><br><span class="line"></span><br><span class="line">    private String job;</span><br><span class="line"></span><br><span class="line">    private String phoneNumber;</span><br><span class="line"></span><br><span class="line">    @ColumnDefault(&quot;0&quot;)</span><br><span class="line">    private boolean deleted;</span><br><span class="line"></span><br><span class="line">    public Integer getAge() &#123;</span><br><span class="line">        if (this.birthday !&#x3D; null) &#123;</span><br><span class="line">            return LocalDate.now().getYear() - this.birthday.getYearOfBirthday() + 1;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return null;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public boolean isBirthdayToday() &#123;</span><br><span class="line">        return LocalDate.now().equals(LocalDate.of(</span><br><span class="line">                this.birthday.getYearOfBirthday(),this.birthday.getMonthOfBirthday(),this.birthday.getDayOfBirthday()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void set(PersonDto personDto) &#123;</span><br><span class="line">        if (!StringUtils.isEmpty(personDto.getAddress())) &#123;</span><br><span class="line">            this.setAddress(personDto.getAddress());</span><br><span class="line">        &#125;</span><br><span class="line">        if (!StringUtils.isEmpty(personDto.getHobby())) &#123;</span><br><span class="line">            this.setHobby(personDto.getHobby());</span><br><span class="line">        &#125;</span><br><span class="line">        if (!StringUtils.isEmpty(personDto.getJob())) &#123;</span><br><span class="line">            this.setJob(personDto.getJob());</span><br><span class="line">        &#125;</span><br><span class="line">        if (!StringUtils.isEmpty(personDto.getPhoneNumber())) &#123;</span><br><span class="line">            this.setPhoneNumber(personDto.getPhoneNumber());</span><br><span class="line">        &#125;</span><br><span class="line">        if (personDto.getBirthday() !&#x3D; null) &#123;</span><br><span class="line">            this.setBirthday(Birthday.of(personDto.getBirthday()));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_2_20/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_2_30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_springboot_2_30/" class="post-title-link" itemprop="url">30. Exception Handling</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:26:57" itemprop="dateCreated datePublished" datetime="2020-08-12T21:26:57+09:00">2020-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Updated at: 2020-08-15 00:46:37" itemprop="dateModified" datetime="2020-08-15T00:46:37+09:00">2020-08-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="지인-정보-관리-시스템-만들기"><a href="#지인-정보-관리-시스템-만들기" class="headerlink" title="지인 정보 관리 시스템 만들기"></a>지인 정보 관리 시스템 만들기</h3><h4 id="30-Exception-Handling"><a href="#30-Exception-Handling" class="headerlink" title="30. Exception Handling"></a>30. Exception Handling</h4><p>Custom Exception 활용하기<br>프로젝트 내에서 의도적으로 발생시키는 예외는 별도의 Custom Exception으로 처리하는것이 좋다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">public class PersonNotFoundException extends RuntimeException&#123;</span><br><span class="line"></span><br><span class="line">    private static final String MESSAGE &#x3D; &quot;Person Entity가 존재하지 않습니다.&quot;;</span><br><span class="line">    public PersonNotFoundException() &#123;</span><br><span class="line">        super(MESSAGE);</span><br><span class="line">        log.error(MESSAGE);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_2_30/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_2_34/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -254,361 +577,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_01/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_1_01/" class="post-title-link" itemprop="url">01. What, How, Hello world</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="01-What-How-Hello-world"><a href="#01-What-How-Hello-world" class="headerlink" title="01. What, How, Hello world"></a>01. What, How, Hello world</h4><ul>
-<li><p>무엇을 만들 것인가<br>프로그래밍은 프로그램을 만드는 것이며, 이는 문제를 해결하는 것이다.<br>무엇을 만들 것인가의 시작은 무엇이 문제인가로부터 시작된다.   </p>
-</li>
-<li><p>사용자 스토리<br>사용자 입장에서 프로그램의 기능을 서술한 것<br>(사용자)는 (가치)를 위해 (기능)을 할 수 있다.<br>ex) &lt;고객&gt;은 &lt;뭘 먹고 싶은지 발견&gt;할 수 있도록 &lt;가게 목록을 볼&gt; 수 있다.</p>
-</li>
-<li><p>계획을 세워야 한다<br>사용자 스토리 기반에서 어떤 순서로 개발할 것인지 세운다.<br>계획을 세워두면 변경이 있을 떄 얼마나 기간이 늘어날 지, 또는 어떤 것을 포기할지 선택하는 기준이 된다.      </p>
-</li>
-<li><p>어떻게 만들 것인가<br>도메인 모델링 : 해결하려는 문제에서 쓰이는 개념들을 정의하고 필요한 것을 알아보는것<br>모델 : 가게, 메뉴 정보, 사용자, 즐겨찾기 정보, 리뷰 정보, 예약 정보<br>시스템 아키텍쳐 : 시스템의 구성, 제약 조건을 알아야 한다.<br>제약 조건 : 홈페이지를 통해 서비스(Web), 모바일(Mobile App)<br>3-tier Architecture : 가장 흔하게 쓰이는 시스템 아키텍쳐<br>Presentation : 사용자와 소통하는 부분 (Front-end|HTML,CSS,JS)<br>Business : 소통의 결과, 사용자 요청 처리 등 (Back-end|Rest API)<br>Data source : 처리된 데이터가 저장되는 곳 (Database|DBMS)    </p>
-</li>
-<li><p>Back-end를 어떻게 만들 것인가<br>Layered Architecture (4개의 층으로 구성됨)  </p>
-<blockquote>
-<p>UI Layer    </p>
-<blockquote>
-<p>Application Layer   </p>
-<blockquote>
-<p>Domain Layer    </p>
-<blockquote>
-<p>Infrastructure Layer</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-<p>  각 레이어는 아래의 레이어에 의존하고 위의 레이어를 사용하지 않는다.    </p>
-</li>
-<li><p>기술 선택<br>JAVA, Spring Boot, Rest API     </p>
-</li>
-<li><p>프로젝트 생성<br>스프링 부트 프로젝트 생성 (Spring Initailizer 이용)<br><a href="https://spring.io/" target="_blank" rel="noopener">Spring Home page</a> &gt; Projects &gt; Spring Boot &gt; Quickstart &gt; 여러 선택 후 GENERATE &gt; IDEA에서 open</p>
-</li>
-</ul>
-<p>UI 레이어를 위한 interfaces 패키지 추가 및 Welcome 컨트롤러 생성    </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_01/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_05/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_1_05/" class="post-title-link" itemprop="url">05. Test Driven Development(TDD)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="05-Test-Driven-Development-TDD"><a href="#05-Test-Driven-Development-TDD" class="headerlink" title="05. Test Driven Development(TDD)"></a>05. Test Driven Development(TDD)</h4><p>테스트 주도 개발<br>목표 주도 개발<br>사용자 중심 개발<br>인터페이스 중심 개발     </p>
-<p>TDD를 하는 이유는 올바르게 작동하는 깔끔한 코드 작성을 위함<br>Refactoring : 작동은 그대로 둔 상태로 코드만 바꾸는 것<br>Refactoring을 위해서는 올바르게 작동한다는 것을 보장해 줄 Test 코드가 필요하다.<br>TDD의 핵심은 Test 코드를 먼저 작성하는 것이다.  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_05/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_06/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_1_06/" class="post-title-link" itemprop="url">06. REST API</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="06-REST-API"><a href="#06-REST-API" class="headerlink" title="06. REST API"></a>06. REST API</h4><p>다양한 환경(Web, Mobile)을 지원하려면,<br>서로 다른 Front-end로 구성되어야 한다.<br>대신 공통으로 사용하는 기능들은 하나의 Back-end를 통해 제공한다.    </p>
-<p>이때 Back-end를 만드는 기술이 Rest API.  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_06/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_10/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_springboot_1_10/" class="post-title-link" itemprop="url">10. 의존성 주입 (DI)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Updated at: 2020-08-15 00:45:48" itemprop="dateModified" datetime="2020-08-15T00:45:48+09:00">2020-08-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="10-의존성-주입-DI"><a href="#10-의존성-주입-DI" class="headerlink" title="10. 의존성 주입 (DI)"></a>10. 의존성 주입 (DI)</h4><p>의존성 주입 (Dependency injection)   </p>
-<p>의존성 : 의존 관계, 둘 이상의 객체가 서로 협력하는 방법에 대한 것<br>ex1) A는 B에 의존 =&gt; A가 B를 사용한다 =&gt; B의 변화가 A에 영향을 끼친다 =&gt; 효과적인 관리가 필요하다<br>ex2) RestaurantController는 RestaurantRepository에 의존한다.  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_springboot_1_10/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="이전 페이지"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="다음 페이지"></i></a>
   </nav>
 
 
@@ -674,7 +646,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-count">103</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -685,7 +657,7 @@
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>
