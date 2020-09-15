@@ -3068,7 +3068,7 @@ public List&lt;Restaurant&gt; list() {
 <li>캐싱 가능 (조건적 GET 가능)</li>
 <li>브라우저의 기록에 남고 북마크가 가능</li>
 <li>URL이 다 보이므로 민감한 데이터에는 맞지 않음</li>
-<li>idemponent</li>
+<li>idempotent</li>
 </ul>
 </li>
 <li><p>POST 요청</p>
@@ -3088,19 +3088,19 @@ public List&lt;Restaurant&gt; list() {
 <li>PUT의 URI는 보내는 데이터에 해당하는 리소스</li>
 </ul>
 </li>
-<li>idemponent : 동일한 GET 요청은 항상 동일한 응답을 반환해야 한다.</li>
+<li>idempotent</li>
 </ul>
 </li>
 <li><p>PATCH 요청</p>
 <ul>
 <li>PUT과 비슷하지만, 기존 엔티티와 새 엔티티의 차이점만 보낸다는 차이가 있다.</li>
-<li>idemponent</li>
+<li>idempotent</li>
 </ul>
 </li>
 <li><p>DELETE 요청</p>
 <ul>
 <li>URI에 해당하는 리소스를 삭제할 떄 사용</li>
-<li>idemponent</li>
+<li>idempotent</li>
 </ul>
 </li>
 </ul>
