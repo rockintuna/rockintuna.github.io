@@ -179,6 +179,88 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/09/22/hexo_springboot_project_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/22/hexo_springboot_project_01/" class="post-title-link" itemprop="url">스프링 부트의 원리</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-09-22 14:35:54 / Updated at: 14:37:26" itemprop="dateCreated datePublished" datetime="2020-09-22T14:35:54+09:00">2020-09-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="스프링-부트의-원리"><a href="#스프링-부트의-원리" class="headerlink" title="스프링 부트의 원리"></a>스프링 부트의 원리</h2><h3 id="의존성-관리"><a href="#의존성-관리" class="headerlink" title="의존성 관리"></a>의존성 관리</h3><p>spring-boot-parent POM의 부모인 spring-boot-dependencies에는<br>dependencyManagement로 여러 의존성에 대한 버전을 정해주고 있다.<br>이를 통해서 의존성을 추가할 때 버전에 정보를 직접 기입하지 않더라도<br>사용하는 spring boot의 버전에 맞는 의존성 버전이 선택된다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.apache.activemq&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;activemq-amqp&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;$&#123;activemq.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">...</span><br><span class="line">&lt;&#x2F;dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="의존성-관리-응용-Maven"><a href="#의존성-관리-응용-Maven" class="headerlink" title="의존성 관리 응용 (Maven)"></a>의존성 관리 응용 (Maven)</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/22/hexo_springboot_project_01/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/09/15/hexo_spring_project_13/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -543,87 +625,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/27/hexo_spring_project_9/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/27/hexo_spring_project_9/" class="post-title-link" itemprop="url">Spring MVC 동작 원리</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-              
-
-              <time title="Post created: 2020-08-27 19:31:55 / Updated at: 20:53:07" itemprop="dateCreated datePublished" datetime="2020-08-27T19:31:55+09:00">2020-08-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/img/Spring-MVC.png" class="img_class" width="430" height="270" title="spring-mvc">
-<h2 id="Spring-MVC-동작-원리"><a href="#Spring-MVC-동작-원리" class="headerlink" title="Spring MVC 동작 원리"></a>Spring MVC 동작 원리</h2><h3 id="Spring-웹-MVC"><a href="#Spring-웹-MVC" class="headerlink" title="Spring 웹 MVC"></a>Spring 웹 MVC</h3><p>서블릿 기반의 웹 애플리케이션에서 MVC 패턴을 사용하기 쉽게끔 도와주는 프레임워크  </p>
-<p>M : 모델, 평범한 자바 POJO 객체(도메인 객체 또는 DTO), 전달하거나 전달받을 데이터를 담은 객체<br>V : 뷰, 데이터를 보여주는 역할, HTML, JSP, 타임리프, …<br>C : 컨트롤러, 사용자의 입력을 받아 모델의 데이터를 변경하거나 뷰에 전달하는 역할  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/27/hexo_spring_project_9/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -693,18 +694,18 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">103</span>
+          <span class="site-state-item-count">104</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="스프링 부트의 원리의존성 관리spring-boot-parent POM의 부모인 spring-boot-dependencies에는dependencyManagement로 여러 의존성에 대한 버전을 정해주고 있다.이를 통해서 의존성을 추가할 때 버전에 정보를 직접 기입하지 않더라도사용하는 spring boot의 버전에 맞는 의존성 버전이 선택된다.   123456">
+<meta property="og:type" content="article">
+<meta property="og:title" content="스프링 부트의 원리">
+<meta property="og:url" content="http://rockintuna.github.io/2020/09/22/hexo_springboot_project_01/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트의 원리의존성 관리spring-boot-parent POM의 부모인 spring-boot-dependencies에는dependencyManagement로 여러 의존성에 대한 버전을 정해주고 있다.이를 통해서 의존성을 추가할 때 버전에 정보를 직접 기입하지 않더라도사용하는 spring boot의 버전에 맞는 의존성 버전이 선택된다.   123456">
+<meta property="og:locale" content="ko_KR">
+<meta property="article:published_time" content="2020-09-22T05:35:54.000Z">
+<meta property="article:modified_time" content="2020-09-22T05:37:26.989Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Dependency">
+<meta property="article:tag" content="EnableAutoConfiguration">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/09/22/hexo_springboot_project_01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ko'
+  };
+</script>
+
+  <title>스프링 부트의 원리 | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/09/22/hexo_springboot_project_01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          스프링 부트의 원리
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-09-22 14:35:54 / Updated at: 14:37:26" itemprop="dateCreated datePublished" datetime="2020-09-22T14:35:54+09:00">2020-09-22</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="스프링-부트의-원리"><a href="#스프링-부트의-원리" class="headerlink" title="스프링 부트의 원리"></a>스프링 부트의 원리</h2><h3 id="의존성-관리"><a href="#의존성-관리" class="headerlink" title="의존성 관리"></a>의존성 관리</h3><p>spring-boot-parent POM의 부모인 spring-boot-dependencies에는<br>dependencyManagement로 여러 의존성에 대한 버전을 정해주고 있다.<br>이를 통해서 의존성을 추가할 때 버전에 정보를 직접 기입하지 않더라도<br>사용하는 spring boot의 버전에 맞는 의존성 버전이 선택된다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">  &lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">      &lt;groupId&gt;org.apache.activemq&lt;&#x2F;groupId&gt;</span><br><span class="line">      &lt;artifactId&gt;activemq-amqp&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;version&gt;$&#123;activemq.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">...</span><br><span class="line">&lt;&#x2F;dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="의존성-관리-응용-Maven"><a href="#의존성-관리-응용-Maven" class="headerlink" title="의존성 관리 응용 (Maven)"></a>의존성 관리 응용 (Maven)</h3><p>spring-boot-data-jpa 의존성 추가하기<br>버전을 명시하지 않아도 된다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>만약 버전을 명시하면 spring-boot-dependencies POM의 버전 정보를 무시하고<br>명시된 버전으로 의존성이 추가된다.<br>당연히 spring boot가 관리해주는 의존성이 아닌경우에는<br>버전까지 명시를 해주는 것이 좋다.  </p>
+<p>만약 spring boot가 관리해주는 기본 의존성 버전을 바꾸고 싶은 경우 프로퍼티를 추가할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">    &lt;spring-framework.version&gt;5.2.6.RELEASE&lt;&#x2F;spring-framework.version&gt;</span><br><span class="line">&lt;&#x2F;properties&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="자동-설정의-이해"><a href="#자동-설정의-이해" class="headerlink" title="자동 설정의 이해"></a>자동 설정의 이해</h3><p>@SpringBootApplication 애노테이션은 크게 3가지 역할을 한다.</p>
+<ul>
+<li>@SpringBootConfiguration(@Configuration 역할)</li>
+<li>@ComponentScan</li>
+<li>@EnableAutoConfiguration</li>
+</ul>
+<p>@EnableAutoConfiguration은 @ComponentScan으로 찾아진 빈이 등록된 뒤에<br>여러가지 필요한 빈들을 추가로 등록한다.  </p>
+<p>@EnableAutoConfiguration 애노테이션이 있는<br>spring-boot-autoconfigure 프로젝트의 META 데이터에는<br>spring.factories라는 파일이 존재하는데,<br>이 파일을 통해 @EnableAutoConfiguration를 사용했을 때 어떤 @Configuraton 들이 적용될 지 알 수 있다.    </p>
+<h3 id="자동-설정-만들기"><a href="#자동-설정-만들기" class="headerlink" title="자동 설정 만들기"></a>자동 설정 만들기</h3><p>자동 설정을 제공할 패키지를 포함시킬 프로젝트를 생성한다.  </p>
+<ul>
+<li>Xxx-Spring-Boot-AutoConfigure<br>자동 설정을 등록할 모듈</li>
+<li>Xxx-Spring-Boot-Starter<br>의존성 정의용 모듈 (자동 설정 등록을 여기에해서 하나만 만들수 도 있다.)</li>
+</ul>
+<p>의존성 추가 및 버전 정보를 가져오기 위해 dependencyManagement 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-autoconfigure&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-autoconfigure-processor&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;optional&gt;true&lt;&#x2F;optional&gt;</span><br><span class="line">    &lt;&#x2F;dependency&gt;</span><br><span class="line">&lt;&#x2F;dependencies&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependencyManagement&gt;</span><br><span class="line">    &lt;dependencies&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-dependencies&lt;&#x2F;artifactId&gt;</span><br><span class="line">            &lt;version&gt;2.3.3.RELEASE&lt;&#x2F;version&gt;</span><br><span class="line">            &lt;type&gt;pom&lt;&#x2F;type&gt;</span><br><span class="line">            &lt;scope&gt;import&lt;&#x2F;scope&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br><span class="line">    &lt;&#x2F;dependencies&gt;</span><br><span class="line">&lt;&#x2F;dependencyManagement&gt;</span><br></pre></td></tr></table></figure>
+
+<p>다른 프로젝트에서 사용될 Java 설정 파일을 이 프로젝트에서 작성한다.  </p>
+<p>classpath:/META-INF/spring.factories 파일을 만들고 설정 파일을 명시해준다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration&#x3D;\</span><br><span class="line">  com.rockintuna.FishConfiguration</span><br></pre></td></tr></table></figure>
+
+<p>다른 프로젝트에서 사용할 수 있도록 로컬 메이븐 저장소에 설치</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvc install</span><br></pre></td></tr></table></figure>
+
+<p>자동 설정을 사용할 프로젝트에서 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.rockintuna&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;rockintuna-spring-boot-starter&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.0-SNAPSHOT&lt;&#x2F;version&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>만약 자동 설정을 사용하는 프로젝트에서 설정을 재정의할 필요가 있을 때는,<br>설정 파일을 만들 때 Condition으로 조건을 주어야 한다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class FishConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public Fish fish() &#123;</span><br><span class="line">        Fish fish &#x3D; new Fish();</span><br><span class="line">        fish.setName(&quot;tuna&quot;);</span><br><span class="line">        return fish;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>여기서는 @ConditionalOnMissingBean을 적용하지 않으면 다른 프로젝트에서 이 빈을 재정의 할 수 없는데,<br>빈 등록 순서가 ComponentScan -&gt; @EnableAutoConfiguration인 것 처럼,<br>재정의(ComponentScan)를 마친 후에 @EnableAutoConfiguration에 의해 재정의된 설정이 덮어씌여지기 때문이다.  </p>
+<p>빈을 등록하여 설정을 재정의하는 방법이 있지만, 좀더 편하게 재정의할 수 있도록 프로퍼티를 사용할 수 있다.  </p>
+<p>자동 설정 프로젝트에 프로퍼티 클래스 추가<br>@ConfigurationProperties(“{prefix}”)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@ConfigurationProperties(&quot;fish&quot;)</span><br><span class="line">public class FishProperties &#123;</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name &#x3D; name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>설정에서 해당 프로퍼티를 사용하도록 등록</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableConfigurationProperties(FishProperties.class)</span><br><span class="line">public class FishConfiguration &#123;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    @ConditionalOnMissingBean</span><br><span class="line">    public Fish fish(FishProperties properties) &#123;</span><br><span class="line">        Fish fish &#x3D; new Fish();</span><br><span class="line">        fish.setName(properties.getName());</span><br><span class="line">        return fish;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>설정을 사용하는 프로젝트에서는 application.properties를 통해 쉽게 재정의할 수 있다.<br>{prefix}.{property}={value}</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fish.name&#x3D;참치</span><br></pre></td></tr></table></figure>
+
+<h3 id="내장-웹-서버-이해"><a href="#내장-웹-서버-이해" class="headerlink" title="내장 웹 서버 이해"></a>내장 웹 서버 이해</h3><p>스프링부트 자동 설정을 사용하지 않으면 서블릿 웹 서버 사용을 위한 작업이 필요하다.<br>(톰캣 객체 생성, 컨택스트와 서블릿 추가 및 맵핑, 등등..)<br>스프링부트는 내장 웹 서버를 사용하며 서블릿 컨테이너와 관련된 일련의 설정들이 자동으로 이루어진다.  </p>
+<ul>
+<li><p>ServletWebServerFactoryAutoConfiguration<br>서블릿 웹 서버 생성 자동 설정</p>
+<ul>
+<li>ServletWebServerFactoryCustomizer<br>웹 서버 커스터마이징</li>
+</ul>
+</li>
+<li><p>DispatcherServletAutoConfiguration<br>DispatcherServlet 생성 및 서블릿 컨테이너에 등록 자동 설정 </p>
+</li>
+</ul>
+<h3 id="내장-웹-서버-응용"><a href="#내장-웹-서버-응용" class="headerlink" title="내장 웹 서버 응용"></a>내장 웹 서버 응용</h3><h4 id="다른-서블릿-컨테이너로-변경하기"><a href="#다른-서블릿-컨테이너로-변경하기" class="headerlink" title="다른 서블릿 컨테이너로 변경하기"></a>다른 서블릿 컨테이너로 변경하기</h4><p>스프링부트의 기본 서블릿 컨테이너 tomcat 대신 jetty 사용하기</p>
+<p>tomcat 의존성 제외하고 jetty 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-web&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-boot-starter-tomcat&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;exclusion&gt;</span><br><span class="line">    &lt;&#x2F;exclusions&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot &lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-jetty&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="웹-서버-사용하지-않기"><a href="#웹-서버-사용하지-않기" class="headerlink" title="웹 서버 사용하지 않기"></a>웹 서버 사용하지 않기</h4><p>웹 어플리케이션 설정 변경</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">&#x2F;&#x2F;        SpringApplication.run(SpringBootStartApplication.class, args);</span><br><span class="line">        SpringApplication application &#x3D; new SpringApplication(SpringBootStartApplication.class);</span><br><span class="line">        application.setWebApplicationType(WebApplicationType.NONE);</span><br><span class="line">        application.run(args);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>또는 프로퍼티를 사용하여 변경</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.main.web-application-type&#x3D;none</span><br></pre></td></tr></table></figure>
+
+<h4 id="포트-변경하기"><a href="#포트-변경하기" class="headerlink" title="포트 변경하기"></a>포트 변경하기</h4><p>프로퍼티를 사용하여 변경</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.port&#x3D;8090</span><br></pre></td></tr></table></figure>
+<p>랜덤 포트 사용하기</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.port&#x3D;0</span><br></pre></td></tr></table></figure>
+
+<h3 id="내장-웹-서버에-HTTPS-또는-HTTP2-적용"><a href="#내장-웹-서버에-HTTPS-또는-HTTP2-적용" class="headerlink" title="내장 웹 서버에 HTTPS 또는 HTTP2 적용"></a>내장 웹 서버에 HTTPS 또는 HTTP2 적용</h3><h4 id="HTTPS-설정"><a href="#HTTPS-설정" class="headerlink" title="HTTPS 설정"></a>HTTPS 설정</h4><p>keytool 명령을 이용한 키스토어 생성<br><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html#CHDBGFHE" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/keytool.html#CHDBGFHE</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">keytool -genkey -alias tomcat -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 4000</span><br></pre></td></tr></table></figure>
+
+<p>프로퍼티 설정</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">server.ssl.key-store&#x3D;keystore.p12</span><br><span class="line">server.ssl.key-store-password&#x3D;123456</span><br><span class="line">server.ssl.key-store-type&#x3D;PKCS12</span><br><span class="line">server.ssl.key-alias&#x3D;tomcat</span><br></pre></td></tr></table></figure>
+
+<p>HTTP용 커넥터를 추가하여 HTTP와 같이 사용할 수도 있다.</p>
+<h4 id="HTTP2-설정"><a href="#HTTP2-설정" class="headerlink" title="HTTP2 설정"></a>HTTP2 설정</h4><p>프로퍼티 설정</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.http2.enabled&#x3D;true</span><br></pre></td></tr></table></figure>
+
+<p>톰캣 8.5.x 에서는 추가적인 설정이 필요하지만<br>9.0.x / JDK9 에서는 추가 설정이 필요없다.<br><a href="https://docs.spring.io/spring-boot/docs/2.0.0.M6/reference/html/howto-embedded-web-servers.html" target="_blank" rel="noopener">https://docs.spring.io/spring-boot/docs/2.0.0.M6/reference/html/howto-embedded-web-servers.html</a></p>
+<h3 id="독립적으로-실행-가능한-JAR"><a href="#독립적으로-실행-가능한-JAR" class="headerlink" title="독립적으로 실행 가능한 JAR"></a>독립적으로 실행 가능한 JAR</h3><p>기본적으로 Java에는 Jar에 있는 내장 Jar를 로딩할 수 있는 표준이 없다.<br>때문에 과거에는 모든 Jar를 하나로 만드는 Uber Jar를 사용했었는데,<br>어떤 라이브러리를 쓰는 것인지 불분명해지고 동일한 이름의 파일이 있을 때의 문제가 있었다.  </p>
+<p>스프링부트에서는 애플리케이션 클래스와 라이브러리가 구분되어 있으며<br>패키징 후에 내장 Jar 읽고 실행하는 역할을 하는 클래스가 추가된다.<br>spring-boot-maven-plugin이 패키징을 담당한다.<br>org.springframework.boot.loader.jar.JarFile (읽기)<br>org.springframework.boot.loader.Launcher (실행)  </p>
+<p>mvc package 명령어를 통해 실행 가능한 JAR 파일 하나가 생성된다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mvc package</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar spring-boot-start-0.0.1-SNAPSHOT.jar</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/Dependency/" rel="tag"># Dependency</a>
+              <a href="/tags/EnableAutoConfiguration/" rel="tag"># EnableAutoConfiguration</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/15/hexo_spring_project_13/" rel="prev" title="스프링 MVC 핵심 기술">
+      <i class="fa fa-chevron-left"></i> 스프링 MVC 핵심 기술
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#스프링-부트의-원리"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트의 원리</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#의존성-관리"><span class="nav-number">1.1.</span> <span class="nav-text">의존성 관리</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#의존성-관리-응용-Maven"><span class="nav-number">1.2.</span> <span class="nav-text">의존성 관리 응용 (Maven)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#자동-설정의-이해"><span class="nav-number">1.3.</span> <span class="nav-text">자동 설정의 이해</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#자동-설정-만들기"><span class="nav-number">1.4.</span> <span class="nav-text">자동 설정 만들기</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#내장-웹-서버-이해"><span class="nav-number">1.5.</span> <span class="nav-text">내장 웹 서버 이해</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#내장-웹-서버-응용"><span class="nav-number">1.6.</span> <span class="nav-text">내장 웹 서버 응용</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#다른-서블릿-컨테이너로-변경하기"><span class="nav-number">1.6.1.</span> <span class="nav-text">다른 서블릿 컨테이너로 변경하기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#웹-서버-사용하지-않기"><span class="nav-number">1.6.2.</span> <span class="nav-text">웹 서버 사용하지 않기</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#포트-변경하기"><span class="nav-number">1.6.3.</span> <span class="nav-text">포트 변경하기</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#내장-웹-서버에-HTTPS-또는-HTTP2-적용"><span class="nav-number">1.7.</span> <span class="nav-text">내장 웹 서버에 HTTPS 또는 HTTP2 적용</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTPS-설정"><span class="nav-number">1.7.1.</span> <span class="nav-text">HTTPS 설정</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTTP2-설정"><span class="nav-number">1.7.2.</span> <span class="nav-text">HTTP2 설정</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#독립적으로-실행-가능한-JAR"><span class="nav-number">1.8.</span> <span class="nav-text">독립적으로 실행 가능한 JAR</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">태그</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/rockintuna" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;rockintuna" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ljilee419@gmail.com" title="E-Mail → mailto:ljilee419@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
