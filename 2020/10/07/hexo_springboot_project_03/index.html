@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rockintuna.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"manual","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="스프링 부트 활용 (기술 연동)스프링 웹 MVC스프링 부트 MVC는 자동 설정(WebMvcAutoConfiguration)을 통해 여러 기본 기능을 제공한다.   스프링 MVC 기능 확장하기">
+<meta property="og:type" content="article">
+<meta property="og:title" content="스프링 부트 활용 (기술 연동)">
+<meta property="og:url" content="http://rockintuna.github.io/2020/10/07/hexo_springboot_project_03/index.html">
+<meta property="og:site_name" content="소문난">
+<meta property="og:description" content="스프링 부트 활용 (기술 연동)스프링 웹 MVC스프링 부트 MVC는 자동 설정(WebMvcAutoConfiguration)을 통해 여러 기본 기능을 제공한다.   스프링 MVC 기능 확장하기">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:image" content="http://rockintuna.github.io/img/springboot.png">
+<meta property="article:published_time" content="2020-10-07T04:36:02.000Z">
+<meta property="article:modified_time" content="2020-10-07T04:36:02.291Z">
+<meta property="article:author" content="Jeong In">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Spring Data JPA">
+<meta property="article:tag" content="Spring Security">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://rockintuna.github.io/img/springboot.png">
+
+<link rel="canonical" href="http://rockintuna.github.io/2020/10/07/hexo_springboot_project_03/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'ko'
+  };
+</script>
+
+  <title>스프링 부트 활용 (기술 연동) | 소문난</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">소문난</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>홈</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>태그</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>카테고리</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>아카이브</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>검색
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/10/07/hexo_springboot_project_03/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          스프링 부트 활용 (기술 연동)
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-10-07 13:36:02" itemprop="dateCreated datePublished" datetime="2020-10-07T13:36:02+09:00">2020-10-07</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot/" itemprop="url" rel="index"><span itemprop="name">Spring Boot</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="/img/springboot.png" class="img_class" width="430" height="270" title="spring-boot">
+<h2 id="스프링-부트-활용-기술-연동"><a href="#스프링-부트-활용-기술-연동" class="headerlink" title="스프링 부트 활용 (기술 연동)"></a>스프링 부트 활용 (기술 연동)</h2><h3 id="스프링-웹-MVC"><a href="#스프링-웹-MVC" class="headerlink" title="스프링 웹 MVC"></a>스프링 웹 MVC</h3><p>스프링 부트 MVC는 자동 설정(WebMvcAutoConfiguration)을 통해 여러 기본 기능을 제공한다.  </p>
+<p>스프링 MVC 기능 확장하기</p>
+<ul>
+<li>@Configuration + WebMvcConfigurer</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>스프링 MVC 기능 재정의하기</p>
+<ul>
+<li>@Configuration + @EnableWebMvc</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebMvc</span><br><span class="line">public class WebConfig implements WebMvcConfigurer &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="HttpMessageConverters"><a href="#HttpMessageConverters" class="headerlink" title="HttpMessageConverters"></a>HttpMessageConverters</h4><p>Http 요청 본문을 객체로 변경하거나, 객체를 Http 응답 본문으로 변경할 때 사용한다.<br>@RequestBody, @ResponseBody</p>
+<p>관련 스프링 부트 자동 설정, HttpMessageConvertersAutoConfiguration에 의해<br>여러가지 응답 타입과 객체 간의 변환을 담당하는 메시지 컨버터가 자동으로 설정 되어있다.</p>
+<h4 id="ViewResolver"><a href="#ViewResolver" class="headerlink" title="ViewResolver"></a>ViewResolver</h4><p>스프링 부트의 ContentNegotiatingViewResolver는<br>요청 header의 accept에 해당하는 타입에 따라 서로 다른 응답을 제공하며<br>ViewResolver에 작업을 위임한다.</p>
+<h4 id="정적-리소스-지원"><a href="#정적-리소스-지원" class="headerlink" title="정적 리소스 지원"></a>정적 리소스 지원</h4><p>스프링 부트는 정적 리소스를 맵핑해주는 리소스 핸들러를 기본적으로 제공한다.<br>(ResourceHttpRequestHandler)</p>
+<p>프로퍼티를 통해 추가 설정<br>spring.mvc.static-path-pattern : 맵핑 패턴 변경<br>spring.mvc.static-locations : 리소스를 찾는 기본 위치 변경</p>
+<p>WebMvcConfigurer의 addResourceHandlers로 커스터마이징</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void addResourceHandlers(ResourceHandlerRegistry registry) &#123;</span><br><span class="line">    registry.addResourceHandler(&quot;&#x2F;s&#x2F;**&quot;)</span><br><span class="line">            .addResourceLocations(&quot;classpath:&#x2F;s&#x2F;&quot;)</span><br><span class="line">            .setCachePeriod(20);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>정적 리소스의 변경 여부에 따라 이미 캐싱되어있는 리소스를 사용하면 http code 304를 리턴한다.</p>
+<h4 id="웹-Jar"><a href="#웹-Jar" class="headerlink" title="웹 Jar"></a>웹 Jar</h4><p>기본적으로 웹 Jar에 대한 기본 리소스 리졸버를 제공하여<br>“/webjars/**” 맵핑. </p>
+<p>webjars-locator-core 의존성을 추가하여 버전을 생략할 수도 있다.</p>
+<h4 id="index-페이지와-파비콘"><a href="#index-페이지와-파비콘" class="headerlink" title="index 페이지와 파비콘"></a>index 페이지와 파비콘</h4><p>웰컴 페이지 :<br>기본 리소스 위치에서 index.html/index.템플릿 을 찾아서 사용</p>
+<p>파비콘 : 브라우저에서 사용되는 아이콘<br>favicon.ico 파일을 리소스 위치에 생성(favicon.io에서 만들 수 있다.)  </p>
+<h4 id="템플릿-엔진"><a href="#템플릿-엔진" class="headerlink" title="템플릿 엔진"></a>템플릿 엔진</h4><p>스프링 부트가 템플릿 엔진의 자동 설정을 지원<br>(FreeMarker, Groovy, Thymeleaf, Mustache)<br>특히, 서블릿 엔진과 독립적으로 동작하기 때문에 테스트 할 때 좋다.  </p>
+<p>JSP는 권장하지 않는다. (JAR 패키징 불가 및 Undertow 미지원 등등)</p>
+<p>Thymeleaf 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Thymeleaf view 작성  </p>
+<p>name space 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;html lang&#x3D;&quot;en&quot; xmlns:th&#x3D;&quot;http:&#x2F;&#x2F;www.thymeleaf.org&quot;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Model Attribute 랜더링 방법</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$&#123;...&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot; xmlns:th&#x3D;&quot;http:&#x2F;&#x2F;www.thymeleaf.org&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset&#x3D;&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Hello&lt;&#x2F;title&gt;</span><br><span class="line">&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;h1 th:text&#x3D;&quot;$&#123;name&#125;&quot;&gt;Name&lt;h1&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;body&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="ExceptionHandler"><a href="#ExceptionHandler" class="headerlink" title="ExceptionHandler"></a>ExceptionHandler</h4><p>스프링 부트는 기본적인 예외 처리기를 지원한다.  </p>
+<ul>
+<li>BasicErrorController : HTML과 Json 응답 지원, ErrorController를 구현하여 커스터마이징 할 수 있다.</li>
+</ul>
+<p>커스텀 에러 페이지<br>classpath:/static|templetes/error 에 {code}.html 생성</p>
+<p>404.html : 404 error 발생 시 이 뷰로 처리<br>4xx.html : 400번대 error 발생 시 이 뷰로 처리<br>ErrorViewResolver를 구현하면 좀더 구체적으로 커스터마이징 할 수 있다.  </p>
+<h4 id="Spring-HATEOAS"><a href="#Spring-HATEOAS" class="headerlink" title="Spring HATEOAS"></a>Spring HATEOAS</h4><p>Hypermedia As The Engine Of Application Status</p>
+<ul>
+<li>서버 : 현재 리소스와 연관된 링크 정보를 클라이언트에 제공한다.</li>
+<li>클라이언트 : 연관된 링크 정보를 바탕으로 리소스에 접근한다.</li>
+<li>연관된 링크 정보 : Relation, Hypertext Reference</li>
+</ul>
+<p>스프링 부트는 HATEOAS에 대한 자동 설정을 지원한다.</p>
+<p>의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-hateoas&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>리소스에 링크 추가하기</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(&quot;&#x2F;hello&quot;)</span><br><span class="line">public EntityModel&lt;Sample&gt; hello() &#123;</span><br><span class="line">    Sample sample &#x3D; new Sample();</span><br><span class="line">    sample.setName(&quot;jilee&quot;);</span><br><span class="line">    sample.setPrefix(&quot;Hi&quot;);</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F;hateoas.EntityModel을 이용한 링크 정보 (rel:self) 추가</span><br><span class="line">    EntityModel&lt;Sample&gt; sampleEntityModel &#x3D; new EntityModel&lt;&gt;(sample);</span><br><span class="line">    sampleEntityModel.add(linkTo(methodOn(SampleController.class).hello()).withSelfRel());</span><br><span class="line"></span><br><span class="line">    return sampleEntityModel;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="CORS"><a href="#CORS" class="headerlink" title="CORS"></a>CORS</h4><p>Cross-Origin Resource Sharing :<br>서로 다른 Origin 사이에서 Resource를 공유하기위한 표준 기술 (&lt;-&gt; SOP(기본))</p>
+<p>Origin ? </p>
+<ul>
+<li>URL 스키마 (http, https)</li>
+<li>hostname</li>
+<li>포트</li>
+</ul>
+<p>스프링 부트에서 제공하는 @CrossOrigin 애노테이션을 이용할 수 있다.<br>@Controller 또는 @RequestMapping에 추가하여 사용하거나,<br>WebMvcConfigurer에서 글로벌 설정한다.  </p>
+<p>모든 컨트롤러에 대한 CORS 설정</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void addCorsMappings(CorsRegistry registry) &#123;</span><br><span class="line">    registry.addMapping(&quot;&#x2F;**&quot;)</span><br><span class="line">            .allowedOrigins(&quot;http:&#x2F;&#x2F;localhost:18080&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="스프링-데이터"><a href="#스프링-데이터" class="headerlink" title="스프링 데이터"></a>스프링 데이터</h3><h4 id="Spring-JDBC"><a href="#Spring-JDBC" class="headerlink" title="Spring JDBC"></a>Spring JDBC</h4><p>스프링 부트는 Spring JDBC가 classpath에 있으면 자동 설정에 의하여 빈을 설정한다.<br>DataSource, JdbcTemplete</p>
+<p>의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-jdbc&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>DataSource는 DB에 access하거나 DB의 메타데이터를 확인할 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class DataTestRunner implements ApplicationRunner &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void run(ApplicationArguments args) throws Exception &#123;</span><br><span class="line">        try(Connection connection &#x3D; dataSource.getConnection()) &#123;</span><br><span class="line">            System.out.println(connection.getMetaData().getURL());</span><br><span class="line">            System.out.println(connection.getMetaData().getUserName());</span><br><span class="line"></span><br><span class="line">            String sql &#x3D; &quot;create table test (id int, name varchar(30));&quot;;</span><br><span class="line">            Statement statement &#x3D; connection.createStatement();</span><br><span class="line">            statement.executeUpdate(sql);</span><br><span class="line">        &#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JdbcTemplete는 SQL을 작성할 때 좀더 간결하고 안전하게 할 수 있다.  </p>
+<p>인메모리 지원 DB(H2, HSQL, Derby)가 의존성에 존재하고 별도의 DataSource 설정을 하지 않았을 때,<br>스프링 부트는 자동 설정에 의해 embeded 인메모리 DB를 사용한다.</p>
+<h4 id="DBCP"><a href="#DBCP" class="headerlink" title="DBCP"></a>DBCP</h4><p>DataBase Connection Pool</p>
+<p>스프링 부트는 기본적으로 HikariCP DBCP를 지원한다.<br>DBCP는 Connection에 대한 여러가지 설정을 할 수 있다. (autoCommit, connectionTimeout, maximumPoolSize, …)<br>spring.datasource.hikari.*</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.hikari.maximum-pool-size&#x3D;4</span><br></pre></td></tr></table></figure>
+
+<h4 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h4><p>MySQL Connector 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;mysql&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;mysql-connector-java&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;scope&gt;runtime&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>MySQL Datasource 설정 (application.properties)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">spring.datasource.url&#x3D;jdbc:mysql:&#x2F;&#x2F;localhost:3306&#x2F;test?serverTimezone&#x3D;UTC</span><br><span class="line">spring.datasource.username&#x3D;todolist</span><br><span class="line">spring.datasource.password&#x3D;password</span><br></pre></td></tr></table></figure>
+<p>MySQL은 기본적으로 3306 port를 사용한다.  </p>
+<h4 id="Spring-Data-JPA"><a href="#Spring-Data-JPA" class="headerlink" title="Spring-Data-JPA"></a>Spring-Data-JPA</h4><p>의존성을 추가하면 스프링 부트는 JPA와 관련된 자동 설정을 한다.  </p>
+<p>ORM(Object-Relation Mapping) : 객체와 릴레이션을 맵핑할 때 발생하는 개념적 불일치를 해결하는 프레임워크<br>JPA(Java Persistence API) : ORM을 위한 Java EE 표준<br>Hibernate : 대표적인 JPA 구현체</p>
+<p>Spring Data JPA : JPA 표준 스팩을 아주 쉽게 사용할 수 있게끔 추상화 함.  </p>
+<ul>
+<li>Repository 빈 자동 생성</li>
+<li>쿼리 메서드 자동 구현</li>
+<li>@EnableJpaRepository (스프링 부트는 자동으로 설정됨)</li>
+</ul>
+<p>Spring Data JPA -&gt; JPA -&gt; Hibernate -&gt; Datasource(JDBC)</p>
+<p>JPA 의존성 추가</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-jpa&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Repository 만들기 (extends JpaRepository&lt;”Entity type”,”ID type”&gt;)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">public interface UserRepository extends JpaRepository&lt;User,Long&gt; &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>@DataJpaTest : JPA 관련 슬라이싱 테스트, embedded DB만 지원한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">@DataJpaTest</span><br><span class="line">class UserRepositoryTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    DataSource dataSource;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    JdbcTemplate jdbcTemplate;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    UserRepository userRepository;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void getMetaInfo() &#123;</span><br><span class="line">        User user &#x3D; new User();</span><br><span class="line">        user.setName(&quot;tester&quot;);</span><br><span class="line">        user.setEmail(&quot;tester@email.com&quot;);</span><br><span class="line">        user.setPassword(&quot;password&quot;);</span><br><span class="line"></span><br><span class="line">        User savedUser &#x3D; userRepository.save(user);</span><br><span class="line">        assertThat(savedUser.getName()).isEqualTo(&quot;tester&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="데이터베이스-초기화"><a href="#데이터베이스-초기화" class="headerlink" title="데이터베이스 초기화"></a>데이터베이스 초기화</h4><p>JPA를 이용한 DB 초기화 관련 프로퍼티<br>spring.jpa.hibernate.ddl-auto</p>
+<ul>
+<li>update : 변경된 스키마(alter table)나 추가된 스키마(create table)만 새로 생성, 기존 데이터 유지</li>
+<li>create : App 실행시 기존 스키마를 지우고 새로 생성</li>
+<li>create-drop : App 종료시 스키마 제거</li>
+<li>none : ddl 핸들링 끄기 (아무런 작업도 하지 않음)</li>
+<li>validate : Entity와 DB의 테이블 사이의 맵핑을 검증 (운영에서 사용)</li>
+</ul>
+<p>spring.jpa.generate-ddl</p>
+<ul>
+<li>false : 초기화 설정 종료</li>
+<li>true : App 실행시 @Entity에 근거하여 DDL문을 생성하고 실행한다.<br>true로 설정해야 ddl-auto 설정이 동작한다.</li>
+</ul>
+<p>spring.jpa.show-sql=true : SQL 출력</p>
+<p>SQL 스크립트를 사용한 DB 초기화</p>
+<ul>
+<li>schema.sql 또는 schema-${platform}.sql : App 실행시 스키마 작업</li>
+<li>data.sql 또는 data-${platform}.sql : App 실행시 데이터 작업</li>
+<li>${platform} 값은 spring.datasource.platform 으로 설정 가능</li>
+</ul>
+<h3 id="스프링-시큐리티"><a href="#스프링-시큐리티" class="headerlink" title="스프링 시큐리티"></a>스프링 시큐리티</h3><h4 id="스프링-부트-시큐리티-자동-설정"><a href="#스프링-부트-시큐리티-자동-설정" class="headerlink" title="스프링 부트 시큐리티 자동 설정"></a>스프링 부트 시큐리티 자동 설정</h4><p>dependency</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-security&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>스프링 시큐리티 관련 자동 설정</p>
+<ul>
+<li>SecurityAutoConfiguration (스프링 시큐리티 자동 설정)</li>
+<li>UserDetailsServiceAutoConfiguration (기본 사용자 생성)</li>
+<li>DefaultAuthenticationEventPublisher 빈 등록, 다양한 인증 에러 핸들러 등록 가능</li>
+</ul>
+<p>의존성을 추가하면 자동 설정에 의해 모든 요청이 인증(Authorization)을 요구하게 된다.<br>(사실은 부트의 자동 설정이 WebSecurityConfigurerAdapter(스프링 시큐리티의 기본 설정 클리스)의<br>설정을 그대로 사용하기 때문이다.)<br>또한 인증 가능한 정보(user/generated security password)와 login 페이지를 제공한다.<br>또는 프로퍼티로 수정한다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">spring.security.user.name</span><br><span class="line">spring.security.user.password</span><br></pre></td></tr></table></figure>
+
+<p>기본적으로 Basic 인증과 폼 인증이 둘 다 적용되는데, 요청의 accept 헤더에 따라 응답이 달라진다.<br>(ex) text/html -&gt; 폼 인증 (“redirect:/login”)</p>
+<h4 id="스프링-시큐리티-테스트"><a href="#스프링-시큐리티-테스트" class="headerlink" title="스프링 시큐리티 테스트"></a>스프링 시큐리티 테스트</h4><p>spring security test dependency</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.security&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-security-test&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;spring-security.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>@WithMockUser : 테스트 시 인증된 Mock User를 생성하여 테스트할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">@WithMockUser</span><br><span class="line">public void hello() throws Exception &#123;</span><br><span class="line">    mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;hello&quot;))</span><br><span class="line">            .andDo(print())</span><br><span class="line">            .andExpect(status().isOk())</span><br><span class="line">            .andExpect(view().name(&quot;hello&quot;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="스프링-시큐리티-커스터마이징"><a href="#스프링-시큐리티-커스터마이징" class="headerlink" title="스프링 시큐리티 커스터마이징"></a>스프링 시큐리티 커스터마이징</h4><p>WebSecurityConfigurerAdapter 타입의 빈을 등록하면 부트의 스프링 시큐리티 자동 설정은 사용되지 않는다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebSecurityConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http.authorizeRequests()</span><br><span class="line">                &#x2F;&#x2F; &quot;&#x2F;&quot;,&quot;&#x2F;hello&quot; 는 인증 없이 허가</span><br><span class="line">                .antMatchers(&quot;&#x2F;&quot;,&quot;hello&quot;).permitAll()</span><br><span class="line">                &#x2F;&#x2F; 그 외 다른 요청은 인증 필요 </span><br><span class="line">                .anyRequest().authenticated()</span><br><span class="line">                .and()</span><br><span class="line">                &#x2F;&#x2F;폼 로그인 사용 (accept html)</span><br><span class="line">                .formLogin()</span><br><span class="line">                .and()</span><br><span class="line">                &#x2F;&#x2F;httpBasic 사용 (not html)</span><br><span class="line">                .httpBasic();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>UserDetailsService 타입의 빈을 등록하면 부트의 기본 사용자 생성을 사용하지 않는다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class AccountService implements UserDetailsService &#123;</span><br><span class="line"></span><br><span class="line">    private AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    public AccountService(AccountRepository accountRepository) &#123;</span><br><span class="line">        this.accountRepository &#x3D; accountRepository;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Account createUser(AccountDto accountDto) &#123;</span><br><span class="line">        if (accountRepository.findByEmail(accountDto.getEmail()) &#x3D;&#x3D; null) &#123;</span><br><span class="line">            Account account &#x3D; new Account(accountDto);</span><br><span class="line">            return accountRepository.save(account);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            throw new EmailExistException(&quot;이미 사용중인 Email 입니다.&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException &#123;</span><br><span class="line">        Optional&lt;Account&gt; byName &#x3D; accountRepository.findByName(name);</span><br><span class="line">        Account account &#x3D; byName.orElseThrow(() -&gt; new UsernameNotFoundException(name));</span><br><span class="line">        return new User(account.getName(), account.getPassword(), authorities());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Collection&lt;? extends GrantedAuthority&gt; authorities() &#123;</span><br><span class="line">        return Arrays.asList(new SimpleGrantedAuthority(&quot;ROLE_USER&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Password Encoding을 사용해야 한다.  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public PasswordEncoder passwordEncoder() &#123;</span><br><span class="line">    return PasswordEncoderFactories.createDelegatingPasswordEncoder();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="스프링-REST-클라이언트"><a href="#스프링-REST-클라이언트" class="headerlink" title="스프링 REST 클라이언트"></a>스프링 REST 클라이언트</h3><h4 id="RestTemplate"><a href="#RestTemplate" class="headerlink" title="RestTemplate"></a>RestTemplate</h4><p>Blocking I/O 기반의 Synchronous API<br>부트는 RestTemplateAutoConfiguration에 의해 spring-web 모듈이 있다면<br>RestTemplateBuilder를 빈으로 등록해준다.<br>기본적으로 java.net.HttpURLConnection을 사용한다.<br>RestTemplateCustomizer를 빈으로 등록하여 전역적으로 커스터마이징 할 수 있다.</p>
+<h4 id="WebClient"><a href="#WebClient" class="headerlink" title="WebClient"></a>WebClient</h4><p>non-Blocking I/O 기반의 Asynchronous API<br>부트는 WebClientAutoConfiguration 의해 spring-webflux 모듈이 있다면<br>WebClient.Builder를 빈으로 등록해준다.<br>기본적으로 Reactor Netty의 HTTP 클라이언트를 사용한다.<br>WebClientCustomizer를 빈으로 등록하여 전역적으로 커스터마이징 할 수 있다.</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
+              <a href="/tags/Spring-Data-JPA/" rel="tag"># Spring Data JPA</a>
+              <a href="/tags/Spring-Security/" rel="tag"># Spring Security</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/22/hexo_springboot_project_01/" rel="prev" title="스프링 부트의 원리">
+      <i class="fa fa-chevron-left"></i> 스프링 부트의 원리
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          목차
+        </li>
+        <li class="sidebar-nav-overview">
+          흝어보기
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#스프링-부트-활용-기술-연동"><span class="nav-number">1.</span> <span class="nav-text">스프링 부트 활용 (기술 연동)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#스프링-웹-MVC"><span class="nav-number">1.1.</span> <span class="nav-text">스프링 웹 MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#HttpMessageConverters"><span class="nav-number">1.1.1.</span> <span class="nav-text">HttpMessageConverters</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewResolver"><span class="nav-number">1.1.2.</span> <span class="nav-text">ViewResolver</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#정적-리소스-지원"><span class="nav-number">1.1.3.</span> <span class="nav-text">정적 리소스 지원</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#웹-Jar"><span class="nav-number">1.1.4.</span> <span class="nav-text">웹 Jar</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#index-페이지와-파비콘"><span class="nav-number">1.1.5.</span> <span class="nav-text">index 페이지와 파비콘</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#템플릿-엔진"><span class="nav-number">1.1.6.</span> <span class="nav-text">템플릿 엔진</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ExceptionHandler"><span class="nav-number">1.1.7.</span> <span class="nav-text">ExceptionHandler</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-HATEOAS"><span class="nav-number">1.1.8.</span> <span class="nav-text">Spring HATEOAS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CORS"><span class="nav-number">1.1.9.</span> <span class="nav-text">CORS</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#스프링-데이터"><span class="nav-number">1.2.</span> <span class="nav-text">스프링 데이터</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-JDBC"><span class="nav-number">1.2.1.</span> <span class="nav-text">Spring JDBC</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DBCP"><span class="nav-number">1.2.2.</span> <span class="nav-text">DBCP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MySQL"><span class="nav-number">1.2.3.</span> <span class="nav-text">MySQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spring-Data-JPA"><span class="nav-number">1.2.4.</span> <span class="nav-text">Spring-Data-JPA</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#데이터베이스-초기화"><span class="nav-number">1.2.5.</span> <span class="nav-text">데이터베이스 초기화</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#스프링-시큐리티"><span class="nav-number">1.3.</span> <span class="nav-text">스프링 시큐리티</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#스프링-부트-시큐리티-자동-설정"><span class="nav-number">1.3.1.</span> <span class="nav-text">스프링 부트 시큐리티 자동 설정</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#스프링-시큐리티-테스트"><span class="nav-number">1.3.2.</span> <span class="nav-text">스프링 시큐리티 테스트</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#스프링-시큐리티-커스터마이징"><span class="nav-number">1.3.3.</span> <span class="nav-text">스프링 시큐리티 커스터마이징</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#스프링-REST-클라이언트"><span class="nav-number">1.4.</span> <span class="nav-text">스프링 REST 클라이언트</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#RestTemplate"><span class="nav-number">1.4.1.</span> <span class="nav-text">RestTemplate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WebClient"><span class="nav-number">1.4.2.</span> <span class="nav-text">WebClient</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Jeong In</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">105</span>
+          <span class="site-state-item-name">포스트</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">카테고리</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">태그</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/rockintuna" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;rockintuna" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:ljilee419@gmail.com" title="E-Mail → mailto:ljilee419@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Jeong In</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

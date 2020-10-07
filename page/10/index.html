@@ -179,6 +179,85 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_56/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_springboot_1_56/" class="post-title-link" itemprop="url">56. 로그인 API 분리</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:22:41" itemprop="dateCreated datePublished" datetime="2020-08-12T21:22:41+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Boot-Project/" itemprop="url" rel="index"><span itemprop="name">Spring Boot Project</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="스프링-부트-프로젝트"><a href="#스프링-부트-프로젝트" class="headerlink" title="스프링 부트 프로젝트"></a>스프링 부트 프로젝트</h1><h3 id="레스토랑-예약-사이트-만들기"><a href="#레스토랑-예약-사이트-만들기" class="headerlink" title="레스토랑 예약 사이트 만들기"></a>레스토랑 예약 사이트 만들기</h3><h4 id="56-로그인-API-분리"><a href="#56-로그인-API-분리" class="headerlink" title="56. 로그인 API 분리"></a>56. 로그인 API 분리</h4><p>eatgo-login-api를 새로 만들어 로그인 처리를 할것이다.<br>이게 가능한 이유는 Stateless이기 때문인데<br>사용자의 로그인 등 활동에 대해서는 관리하지 않지만 JWT의 accessToken을 활용할 수 있다.  </p>
+<p>eatgo-login-api<br>UserService에서 인증 부분만 login API로 옮겼다.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_springboot_1_56/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_springboot_1_59/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -506,88 +585,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_05/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_05/" class="post-title-link" itemprop="url">05. 인스턴스, 힙메모리</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="05-인스턴스-힙메모리"><a href="#05-인스턴스-힙메모리" class="headerlink" title="05. 인스턴스, 힙메모리"></a>05. 인스턴스, 힙메모리</h4><ul>
-<li>인스턴스<br>클래스로부터 생성된 객체<br>힙 메모리에 멤버 변수의 크기에 따라 메모리가 생성<br>new 키워드를 이용하여 여러 개의 인스턴스를 생성<br>가비지 콜렉터 스레드에 의해 반환됨(프로그래머가 직접 free하지 않아도 된다.)<br>참조 변수 : 생성된 인스턴스를 가리키는 변수<br>참조 값 : 생성된 인스턴스의 메모리 주소 값</li>
-</ul>
-<p>멤버변수 사용 : 참조변수.멤버변수<br>메서드 사용 : 참조변수.메서드();    </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">package classpart;</span><br><span class="line"></span><br><span class="line">public class StudentTest &#123; &#x2F;&#x2F;객체를 사용하는 건 다른 클래스인 경우가 대부분이다.</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        Student studentLee &#x3D; new Student(); &#x2F;&#x2F;인스턴스 생성</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F;참조 변수 사용 studentLee</span><br><span class="line">        studentLee.studentName &#x3D; &quot;이순신&quot;;  &#x2F;&#x2F;생성된 인스턴스(객체)의 멤버 변수를 사용할 수 있다.</span><br><span class="line">        studentLee.address &#x3D; &quot;서울&quot;;</span><br><span class="line"></span><br><span class="line">        studentLee.showStudentInfo(); &#x2F;&#x2F;생성된 인스턴스(객체)의 메서드를 사용할 수 있다.</span><br><span class="line"></span><br><span class="line">        Student studentKim &#x3D; new Student(); &#x2F;&#x2F;new 키워드를 통해 인스턴스 생성</span><br><span class="line">                                            &#x2F;&#x2F;생성 될 때 Student class의 멤버 변수 만큼 Heap 메모리 생성</span><br><span class="line">        studentKim.studentName&#x3D;&quot;김유신&quot;;</span><br><span class="line">        studentKim.address&#x3D;&quot;경주&quot;;</span><br><span class="line"></span><br><span class="line">        studentKim.showStudentInfo();</span><br><span class="line"></span><br><span class="line">        System.out.println(studentLee); &#x2F;&#x2F;참조 변수 출력&gt;참조 값 classpart.Student@60f82f98 package.class@heap memory address</span><br><span class="line">        System.out.println(studentKim);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_05/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -657,7 +654,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">104</span>
+          <span class="site-state-item-count">105</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -668,7 +665,7 @@
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">14</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>
