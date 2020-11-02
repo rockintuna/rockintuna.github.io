@@ -4284,4 +4284,203 @@ public List&lt;Restaurant&gt; list() {
         <tag>Mapping</tag>
       </tags>
   </entry>
+  <entry>
+    <title>객체지향 쿼리 언어 (JPQL)</title>
+    <url>/2020/11/02/hexo_jpa_04/</url>
+    <content><![CDATA[<img src="/img/jpa.png" class="img_class" width="340" height="160" title="jpa">
+<h2 id="객체지향-쿼리-언어-JPQL"><a href="#객체지향-쿼리-언어-JPQL" class="headerlink" title="객체지향 쿼리 언어 (JPQL)"></a>객체지향 쿼리 언어 (JPQL)</h2><p>JPA는 다양한 쿼리 방법을 지원한다.<br>(JPQL, JPA Criteria, QueryDSL, 네이티브 SQL, JDBC API 직접 사용)  </p>
+<p>JPA를 사용하면 엔티티 객체를 중심으로 개발하게 된다.<br>검색을 할 때도 테이블이 아닌 객체를 대상으로 검색을 할 필요가 있다.<br>이때, 모든 DB를 객체로 변환하는 것은 사실상 불가능하기 때문에<br>애플리케이션에서 필요로 하는 데이터만 객체로 변환하기 위해 결국 검색 조건이 포함된 SQL이 필요하게 된다. </p>
+<p>JPQL :<br>SQL을 추상화한 객체 지향 쿼리 언어이다.<br>JPQL을 통해서 객체를 대상으로 SQL과 유사한 문법으로 쿼리할 수 있다.<br>SQL을 추상화했기 때문에 특정 데이터베이스 SQL에 의존하지 않는다.</p>
+<p>JPA Criteria :<br>문자가 아닌 자바 코드로 JPQL을 작성할 수 있다.<br>동적 쿼리에 용이하지만 너무 복잡하고 실용성이 없다는 단점이 있다.</p>
+<p>QueryDSL :<br>문자가 아닌 자바 코드로 JPQL을 작성할 수 있다.<br>동적 쿼리 작성이 편리하고 컴파일 시점에 문법 오류를 찾을 수 있다.<br>단순하고 쉬워서 실무 사용에 권장된다.  </p>
+<p>네이티브 SQL :<br>SQL을 직접 사용하는 기능.<br>JPQL로 해결할 수 없는 특정 데이터베이스에 의존적인 기능이나 문법을 요구할 때 사용한다.</p>
+<h3 id="기본-문법"><a href="#기본-문법" class="headerlink" title="기본 문법"></a>기본 문법</h3><h4 id="기본-문법과-쿼리-API"><a href="#기본-문법과-쿼리-API" class="headerlink" title="기본 문법과 쿼리 API"></a>기본 문법과 쿼리 API</h4><p>“select m from Member as m where m.age &gt; 18”  </p>
+<ul>
+<li>엔티티와 속성은 대소문자를 구분한다. (Member, age)  </li>
+<li>JPQL 키워드는 대소문자를 구분하지 않는다. (SELECT, FROM)  </li>
+<li>테이블이 아닌 엔티티 이름을 사용한다. (Member)  </li>
+<li>별칭이 필수이다.(m)</li>
+</ul>
+<p>쿼리의 타입<br>TypedQuery : 반환 타입이 명확할 때 사용  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TypedQuery&lt;Movie&gt; query &#x3D; em.createQuery(&quot;select m from Movie m&quot;, Movie.class);</span><br></pre></td></tr></table></figure>
+<p>Query : 반환 타입이 명확하지 않을 때 사용  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Query query &#x3D; em.createQuery(&quot;select m.name, m.age from Movie m&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>결과 조회 API<br>query.getResultList() : 결과가 하나 이상일 때, 리스트를 반환, 결과가 없으면 빈 리스트를 반환한다.<br>query.getSingleResult() : 결과가 정확히 하나일 때, 단일 객체를 반환, 결과가 없거나 두 개 이상이면 예외 발생</p>
+<p>파라미터 바인딩</p>
+<ul>
+<li>이름 기준  <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TypedQuery query &#x3D; em.createQuery(&quot;SELECT m FROM Member m where m.username &#x3D; :username&quot;, Member.class);</span><br><span class="line">query.setParameter(&quot;username&quot;, usernameParam);</span><br></pre></td></tr></table></figure></li>
+<li>위치 기준<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TypedQuery query &#x3D; em.createQuery(&quot;SELECT m FROM Member m where m.username &#x3D; ?1&quot;, Member.class);</span><br><span class="line">query.setParameter(1, usernameParam);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="프로젝션"><a href="#프로젝션" class="headerlink" title="프로젝션"></a>프로젝션</h4><p>SELECT 절에 조회할 대상(엔티티, 임베디드 타입, 스칼라 타입)을 지정하는 것.<br>이 대상들은 영속성 컨텍스트에서 관리되게 된다.</p>
+<p>SELECT m FROM Member m : 엔티티 프로젝션<br>SELECT m.team FROM Member m : 엔티티 프로젝션<br>SELECT m.address FROM Member m : 임베디드 타입 프로젝션<br>SELECT m.username, m.age FROM Member m : 스칼라 타입 프로젝션</p>
+<p>여러 값을 프로젝션으로 가지는 쿼리 결과 조회하는 방법</p>
+<ul>
+<li><p>Query 타입으로 조회</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Query query &#x3D; em.createQuery(&quot;select m.name, m.age from Movie m&quot;);</span><br><span class="line">List resultList &#x3D; query.getResultList();</span><br><span class="line"></span><br><span class="line">Object o &#x3D; resultList.get(0);</span><br><span class="line">Object[] result &#x3D; (Object[]) o;</span><br><span class="line">System.out.println(&quot;name &#x3D; &quot;+result[0]);</span><br><span class="line">System.out.println(&quot;age &#x3D; &quot;+result[1]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Object[] 타입으로 조회</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">TypedQuery&lt;Object[]&gt; query &#x3D; em.createQuery(&quot;select m.name, m.age from Movie m&quot;);</span><br><span class="line">List&lt;Object[]&gt; resultList &#x3D; query.getResultList();</span><br><span class="line"></span><br><span class="line">Object[] result &#x3D; resultList.get(0);</span><br><span class="line">System.out.println(&quot;name &#x3D; &quot;+result[0]);</span><br><span class="line">System.out.println(&quot;age &#x3D; &quot;+result[1]);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>new 명령어로 조회<br>단순값을 DTO로 바로 조회할 수 있다.<br>패키지명을 포함한 전체 클래스명을 입력해야 하고 순서와 타입이 일치하는 생성자가 필요하다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">List&lt;MemberDTO&gt; result &#x3D; em.createQuery(&quot;select new mypack.MemberDTO(m.name, m.age) from Member m&quot;, MemberDto.class)</span><br><span class="line">        .getResultList();</span><br><span class="line"></span><br><span class="line">MemberDTO memberDTO &#x3D; result.get(0);</span><br><span class="line">System.out.println(&quot;name &#x3D; &quot;+memberDTO.getName());</span><br><span class="line">System.out.println(&quot;age &#x3D; &quot;+memberDTO.getAge());</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="페이징"><a href="#페이징" class="headerlink" title="페이징"></a>페이징</h4><p>JPA는 페이징을 다음 두 API로 추상화하였다.  </p>
+<ul>
+<li>setFirstResult(int startPosition) : 조회 시작 위치(0 부터)</li>
+<li>setMaxResult(int maxResult) : 조회 할 데이터 수<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;select m from Member m order by m.age desc&quot;, Member.class);</span><br><span class="line">    .setFirstResult(0)</span><br><span class="line">    .setMaxResult(10)</span><br><span class="line">    .getResultList();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="조인"><a href="#조인" class="headerlink" title="조인"></a>조인</h4><p>JOIN 절에도 테이블이 아닌 엔티티가 와야한다. (ex) m.team t</p>
+<p>JOIN : 내부 조인<br>LEFT JOIN : 외부 조인  </p>
+<p>세타 조인도 가능은 하다. (FROM에 두 엔티티)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;SELECT m,t FROM Member m, Team t WHERE m.username &#x3D; t.name&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>ON 절 : 조인 대상에서 필터링 할 때 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;SELECT m,t FROM Member m LEFT JOIN m.team t ON t.name &#x3D; &#39;A&#39;&quot;);</span><br></pre></td></tr></table></figure>
+<p>또는 연관관계 없는 엔티티와의 외부 조인에서 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;SELECT m,t FROM Member m LEFT JOIN m.team t ON m.username &#x3D; t.name&quot;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="서브-쿼리"><a href="#서브-쿼리" class="headerlink" title="서브 쿼리"></a>서브 쿼리</h4><p>쿼리 내부에 또 한번 쿼리를 작성하여 그 결과를 변수처럼 사용하는 방법.</p>
+<ul>
+<li>평균 나이보다 많은 회원<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;SELECT m FROM Member m where m.age &gt; (SELECT avg(m2.age) FROM Member m2)&quot;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>서브 쿼리 지원 합수<br>EXISTS (sub query): 서브쿼리에 결과가 존재하면 참 (&lt;&gt; NOT EXISTS)</p>
+<p>ALL|ANY|SOME (sub query)<br>ALL : 조건이 모두 만족하면 참<br>ANY : 조건이 하나라도 만족하면 참 (== SOME)</p>
+<p>IN (sub query) : 서브 쿼리의 결과 중 하나라도 같은 것이 있다면 참 (&lt;&gt; NOT IN)</p>
+<p>JPA 서브 쿼리 한계  </p>
+<ul>
+<li>JPA는 WHERE, HAVING 절에서만 서브 쿼리를 사용할 수 있다.(하이버네이트에서는 SELECT 절에서도 사용가능하다.)</li>
+<li>JPQL은 FROM 절에서 서브 쿼리가 불가능하다.</li>
+</ul>
+<h4 id="JPQL-타입-표현"><a href="#JPQL-타입-표현" class="headerlink" title="JPQL 타입 표현"></a>JPQL 타입 표현</h4><p>문자 : ‘Hello’, ‘She’’s’<br>숫자 : 10L, 10D, 10F<br>Boolean : TRUE, FALSE<br>ENUM : example.MemberType.ADMIN (패키지명을 포함해야한다, 길기 때문에 보통은 파라미터 바운딩 사용)<br>엔티티 타입 : TYPE(i) = Book (상속 관계에서 사용, SQL에서는 DTYPE으로 필터링)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;select i from Item i where type(i) &#x3D; Book&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="CASE-식"><a href="#CASE-식" class="headerlink" title="CASE 식"></a>CASE 식</h4><p>SELECT 절에 조건을 추가하여 결과를 조건에 따라 다르게 받을 수 있다.</p>
+<ul>
+<li><p>기본 CASE 식</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    CASE WHEN m.age &lt;&#x3D; 10 THEN &#39;학생요금&#39;</span><br><span class="line">         WHEN m.age &gt;&#x3D; 60 THEN &#39;경로요금&#39;</span><br><span class="line">         ELSE &#39;일반요금&#39;</span><br><span class="line">    END</span><br><span class="line">FROM Member m</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>단순 CASE 식</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT </span><br><span class="line">    CASE t.name</span><br><span class="line">         WHEN &#39;A&#39; THEN &#39;100명&#39;</span><br><span class="line">         WHEN &#39;B&#39; THEN &#39;200명&#39;</span><br><span class="line">         ELSE &#39;인원제한없음&#39;</span><br><span class="line">    END</span><br><span class="line">FROM Team t</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>COALESCE : 첫번째 값이 null이 아니면 두번째 주어진 값을 반환</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT COALESCE(m.username, &#39;이름 없는 회원&#39;) FROM Member m</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>NULLIF : 두 값이 같으면 null을 반환, 다르면 첫번째 값 반환 </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">SELECT NULLIF(m.username, &#39;관리자&#39;) FROM Member m</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="JPQL-사용자-정의-함수"><a href="#JPQL-사용자-정의-함수" class="headerlink" title="JPQL 사용자 정의 함수"></a>JPQL 사용자 정의 함수</h4><p>사용하기 전에 방언 설정에서 먼저 추가해야 한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public class MyH2Dialect extends H2Dialect &#123;</span><br><span class="line">    public MyH2Dialect() &#123;</span><br><span class="line">        registerFunction(&quot;group_concat&quot;, new StandardSQLFunction(&quot;group_concat&quot;,StandardBasicTypes.STRING));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>hibernate.dialect 변경</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;property name&#x3D;&quot;hibernate.dialect&quot; value&#x3D;&quot;dialect.MyH2Dialect&quot;&#x2F;&gt;</span><br></pre></td></tr></table></figure>
+
+<p>사용 방법</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;select function(&#39;group_concat&#39;,m.username) from Member m&quot;, String.class);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">em.createQuery(&quot;select group_concat(m.username) from Member m&quot;, String.class);</span><br></pre></td></tr></table></figure>
+
+<h3 id="중급-문법"><a href="#중급-문법" class="headerlink" title="중급 문법"></a>중급 문법</h3><h4 id="경로-표현식"><a href="#경로-표현식" class="headerlink" title="경로 표현식"></a>경로 표현식</h4><p>.(점)을 찍어서 객체 그래프를 탐색하는 것</p>
+<p>경로 표현식 용어 정리</p>
+<ul>
+<li>상태 필드 : 단순히 값을 저장하기 위한 필드</li>
+<li>연관 필드 : 연관 관계를 위한 필드<ul>
+<li>단일 값 연관 필드 : @ManyToOne, @OneToOne, 대상이 엔티티</li>
+<li>컬렉션 값 연관 필드 : @OneToMany, @ManyToMany, 대상이 컬렉션</li>
+</ul>
+</li>
+</ul>
+<p>경로 표현식의 특징</p>
+<ul>
+<li>상태 필드 : 경로 탐색의 끝이며 더 이상 탐색할 수 없다.</li>
+<li>단일 값 연관 필드 : 묵시적 내부 조인 발생, 추가적으로 탐색할 수 있다.</li>
+<li>컬렉션 값 연관 필드 : 묵시적 내부 조인 발생, 더 이상 탐색할 수 없다. </li>
+</ul>
+<p>묵시적 조인의 주의사항</p>
+<ul>
+<li>항상 내부 조인</li>
+<li>컬렉션은 경로 탐색의 끝이며 추가 탐색을 하려면 명시적 조인을 통해 별칭을 얻어야 한다.</li>
+<li>경로 탐색은 주로 SELECT, WHERE 절에서 사용하지만 묵시적 조인으로 인해 SQL의 FROM절에 영향을 준다.</li>
+</ul>
+<p>=&gt; 가급적 묵시적 조인 대신 명시적 조인 사용.</p>
+<h4 id="페치-조인-fetch-join"><a href="#페치-조인-fetch-join" class="headerlink" title="페치 조인 (fetch join)"></a>페치 조인 (fetch join)</h4><p>SQL의 조인 종류가 아니고 JPQL에서 성능 최적화를 위해 제공하는 기능이다.<br>연관된 엔티티나 컬렉션을 SQL 한 번에 함께 조회(즉시 로딩)하는 기능이다.<br>일반 조인과 다른 점은 연관된 엔티티를 함께 조회하느냐 마느냐의 차이이다.  </p>
+<p>JPQL</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;select m from Member m join fetch m.team&quot;</span><br></pre></td></tr></table></figure>
+<p>SQL </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select M.*, T.* from MEMBER M inner join TEAM T on M.TEAM_ID &#x3D; T.ID;</span><br></pre></td></tr></table></figure>
+<p>JPQL에서는 select절에 Member만 있지만 SQL에서는 TEAM 까지 같이 조회한다.<br>이것은 지연로딩으로 설정하더라도 프록시로 조회하지 않고 실제 데이터를 조회하는데,<br>엔티티에 직접 적용하는 글로벌 로딩 전략보다 페치 조인이 우선하기 때문이다.</p>
+<p>한편, 컬렉션 페치 조인에서는 중복된 결과가 나오게 될 수도 있다.<br>ex) TEAM A에 MEMBER가 2명인 경우  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">List&lt;Team&gt; resultList &#x3D; em.createQuery(&quot;select t from Team t join fetch t.members&quot;, Team.class)</span><br><span class="line">        .getResultList();</span><br><span class="line"></span><br><span class="line">for (Team team : resultList) &#123;</span><br><span class="line">    System.out.println(&quot;teamname &#x3D; &quot;+team.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과)<br>teamname = A<br>teamname = A  </p>
+<p>이때, 중복 제거를 위해서 DISTINCT를 사용할 수 있다.<br>JPQL의 DISTINCT는 SQL에 DISTINCT를 추가하는 기능 외에<br>애플리케이션에서 엔티티 중복을 제거하는 기능도 가지고 있다.(같은 식별자를 가진 엔티티 제거)</p>
+<p>ex)   </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">List&lt;Team&gt; resultList &#x3D; em.createQuery(&quot;select distinct t from Team t join fetch t.members&quot;, Team.class)</span><br><span class="line">        .getResultList();</span><br><span class="line"></span><br><span class="line">for (Team team : resultList) &#123;</span><br><span class="line">    System.out.println(&quot;teamname &#x3D; &quot;+team.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과)<br>teamname = A  </p>
+<p>페치 조인의 특징과 한계</p>
+<ul>
+<li>페치 조인 대상에는 별칭을 사용할 수 없다. (Hibernate에서는 가능하지만 가급적 사용하지 않는다.)</li>
+<li>둘 이상의 컬렉션은 페치 조인할 수 없다.</li>
+<li>컬렉션을 페치 조인하면 페이징 API를 사용할 수 없다. (Hibernate는 경고 후 메모리에서 페이징하지만 위험하다.)</li>
+</ul>
+<p>페이징 API를 써야한다면…<br> =&gt; 컬렉션 페치 조인 대신 단일 값 연관 필드를 페치 조인 한다.<br> 또는 @BatchSize(size) 애노테이션을 이용하여 페치 조인 대신 N+1 문제를 해결한다.</p>
+<h4 id="다형성-쿼리"><a href="#다형성-쿼리" class="headerlink" title="다형성 쿼리"></a>다형성 쿼리</h4><p>TYPE<br>조회 대상을 특정 자식으로 한정할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;select i from Item i where type(i) in (Book, Movie)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>TREAT<br>부모 타입을 특정 자식 타입으로 다룰때 사용한다.(자바 다운 캐스팅과 유사하다.)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;select i from Item i where treat(i as Book).auther &#x3D; &#39;kim&#39;&quot;</span><br></pre></td></tr></table></figure>
+
+<h4 id="엔티티-직접-사용"><a href="#엔티티-직접-사용" class="headerlink" title="엔티티 직접 사용"></a>엔티티 직접 사용</h4><p>JPQL에서 엔티티를 사용하면 엔티티의 기본 값(PK)이 사용된다.<br>이것은 파라미터로 전달하거나 식별자를 직접 전달해도 동일하다.<br>ex)<br>JPQL</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;select count(m) from Member m&quot;</span><br></pre></td></tr></table></figure>
+<p>SQL</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">select count(m.id) from MEMBER m;</span><br></pre></td></tr></table></figure>
+
+<p>또는 연관된 엔티티를 사용하면 엔티티의 외래 키 값(FK)이 사용된다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">List&lt;Member&gt; resultList &#x3D; em.createQuery(&quot;select m from Member m where m.team &#x3D; :team&quot;, Member.class)</span><br><span class="line">    .setParameter(&quot;team&quot;,team1).getResultList();</span><br><span class="line"></span><br><span class="line">for (Member member : resultList) &#123;</span><br><span class="line">    System.out.println(&quot;member &#x3D; &quot; + member.getName());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SQL</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Hibernate: </span><br><span class="line">    &#x2F;* select</span><br><span class="line">        m </span><br><span class="line">    from</span><br><span class="line">        Member m </span><br><span class="line">    where</span><br><span class="line">        m.team &#x3D; :team *&#x2F; select</span><br><span class="line">            member0_.MEMBER_ID as member_i1_4_,</span><br><span class="line">            member0_.createdDate as createdd2_4_,</span><br><span class="line">            member0_.lastModifiedDate as lastmodi3_4_,</span><br><span class="line">            member0_.city as city4_4_,</span><br><span class="line">            member0_.street as street5_4_,</span><br><span class="line">            member0_.zipcode as zipcode6_4_,</span><br><span class="line">            member0_.name as name7_4_,</span><br><span class="line">            member0_.TEAM_ID as team_id8_4_ </span><br><span class="line">        from</span><br><span class="line">            Member member0_ </span><br><span class="line">        where</span><br><span class="line">            member0_.TEAM_ID&#x3D;?</span><br></pre></td></tr></table></figure>
+<p>JPQL에서는 where 조건에 Team을 주었는데, SQL에서는 FK(TEAM_ID)로 변환되어 실행 됨.</p>
+<h4 id="Named-쿼리"><a href="#Named-쿼리" class="headerlink" title="Named 쿼리"></a>Named 쿼리</h4><p>미리 정의해서 이름을 부여해두고 사용하는 JPQL이다.  </p>
+<ul>
+<li>정적 쿼리만 가능하다.  </li>
+<li>어노테이션이나 XML에 정의하여 사용한다.</li>
+<li>애플리케이션 로딩 시점에 초기화 후 재사용된다.</li>
+<li>애플리케이션 로딩 시점에 쿼리를 검증한다.(중요)</li>
+</ul>
+<p>정의하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Entity</span><br><span class="line">@NamedQuery(</span><br><span class="line">        name &#x3D; &quot;Member.findByUsername&quot;,</span><br><span class="line">        query &#x3D; &quot;select m from Member m where m.name &#x3D; :name&quot;</span><br><span class="line">)</span><br><span class="line">public class Member &#123;</span><br><span class="line">    ~</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>사용하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">List&lt;Member&gt; resultList &#x3D; em.createNamedQuery(&quot;Member.findByUsername&quot;, Member.class)</span><br><span class="line">    .setParameter(&quot;name&quot;, &quot;member1&quot;)</span><br><span class="line">    .getResultList();</span><br></pre></td></tr></table></figure>
+
+<h4 id="벌크-연산"><a href="#벌크-연산" class="headerlink" title="벌크 연산"></a>벌크 연산</h4><p>쿼리 한번으로 여러 로우(엔티티)를 변경할 수 있다.</p>
+<ul>
+<li>UPDATE, DELETE 지원</li>
+<li>excuteUpdate()의 결과는 영향받은 엔티티의 수를 반환한다.</li>
+<li>INSERT 지원 (insert into .. select, Hibernate)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int resultCount &#x3D; em.createQuery(&quot;update Member m set m.createdDate &#x3D; :createdDate&quot;)</span><br><span class="line">    .setParameter(&quot;createdDate&quot;, LocalDateTime.now())</span><br><span class="line">    .executeUpdate();</span><br></pre></td></tr></table></figure>
+
+<p>벌크 연산은 영속성 컨텍스트를 무시하고 DB에 직접 쿼리한다.<br>=&gt; 꼬임 방지를 위해 영속성 컨텍스트 작업보다 먼저 벌크 연산을 수행 하거나,<br> 벌크 연산 후 영속성 컨텍스트를 초기화하자.</p>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>JPA</category>
+      </categories>
+      <tags>
+        <tag>Spring Data JPA</tag>
+        <tag>JPA</tag>
+        <tag>ORM</tag>
+        <tag>Mapping</tag>
+        <tag>JPQL</tag>
+      </tags>
+  </entry>
 </search>
