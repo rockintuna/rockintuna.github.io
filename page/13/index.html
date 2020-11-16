@@ -179,6 +179,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/08/12/hexo_OOP_12/" class="post-title-link" itemprop="url">12. 객체 간 협력</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+
+              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="12-객체-간-협력"><a href="#12-객체-간-협력" class="headerlink" title="12. 객체 간 협력"></a>12. 객체 간 협력</h4><p>객체 지향 프로그램은 객체를 정의 하고 객체 간의 ‘협력’을 구현한 프로그램     </p>
+<p>학생, 버스, 지하철 객체 간 협력 프로그램</p>
+<ul>
+<li><p>학생</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">package cooperation;</span><br><span class="line"></span><br><span class="line">public class Student &#123;</span><br><span class="line"></span><br><span class="line">    String studentName;</span><br><span class="line">    int grade;</span><br><span class="line">    int money;</span><br><span class="line"></span><br><span class="line">    public Student(String studentName,int money) &#123;</span><br><span class="line"></span><br><span class="line">        this.studentName &#x3D; studentName;</span><br><span class="line">        this.money &#x3D; money;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void takeBus(Bus bus) &#123;  &#x2F;&#x2F;버스 객체와의 협업</span><br><span class="line">        bus.take(1000);</span><br><span class="line">        this.money -&#x3D; 1000;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void takeSubway(Subway subway) &#123;  &#x2F;&#x2F;지하철 객체와의 협업</span><br><span class="line">        subway.take(1200);</span><br><span class="line">        this.money -&#x3D; 1200;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showInfo() &#123;</span><br><span class="line"></span><br><span class="line">        System.out.println(studentName+&quot;님의 남은 돈은 &quot;+money+&quot;원 입니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>버스</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">package cooperation;</span><br><span class="line"></span><br><span class="line">public class Bus &#123;</span><br><span class="line"></span><br><span class="line">    int busNumber;</span><br><span class="line">    int passengerCount;</span><br><span class="line">    int money;</span><br><span class="line"></span><br><span class="line">    public Bus(int busNumber) &#123;</span><br><span class="line">        this.busNumber &#x3D; busNumber;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void take(int money) &#123; &#x2F;&#x2F;승차 메서드</span><br><span class="line">        this.money +&#x3D; money;</span><br><span class="line">        this.passengerCount++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showBusInfo() &#123;</span><br><span class="line">        System.out.println(busNumber+&quot;번 버스의 승객은 &quot;+passengerCount+&quot;명 이고, 수입은 &quot;+money+&quot;원 입니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>지하철</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package cooperation;</span><br><span class="line"></span><br><span class="line">public class Subway &#123;</span><br><span class="line"></span><br><span class="line">    int lineNumber;</span><br><span class="line">    int passengerCount;</span><br><span class="line">    int money;</span><br><span class="line"></span><br><span class="line">    public Subway(int lineNumber) &#123;</span><br><span class="line">        this.lineNumber &#x3D; lineNumber;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void take(int money) &#123;</span><br><span class="line">        this.money +&#x3D; money;</span><br><span class="line">        this.passengerCount++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void showBusInfo() &#123;</span><br><span class="line">        System.out.println(lineNumber+&quot;번 버스의 승객은 &quot;+passengerCount+&quot;명 이고, 수입은 &quot;+money+&quot;원 입니다.&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/12/hexo_OOP_12/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_14/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -512,88 +603,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/12/hexo_OOP_21/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/12/hexo_OOP_21/" class="post-title-link" itemprop="url">21. 다차원 배열</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-
-              <time title="Post created: 2020-08-12 21:18:42" itemprop="dateCreated datePublished" datetime="2020-08-12T21:18:42+09:00">2020-08-12</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/JAVA-OOP/" itemprop="url" rel="index"><span itemprop="name">JAVA OOP</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="객체-지향-프로그래밍"><a href="#객체-지향-프로그래밍" class="headerlink" title="객체 지향 프로그래밍"></a>객체 지향 프로그래밍</h1><h4 id="21-다차원-배열"><a href="#21-다차원-배열" class="headerlink" title="21. 다차원 배열"></a>21. 다차원 배열</h4><ul>
-<li>다차원 배열<br>2차원 이상의 배열  </li>
-</ul>
-<p>2차원 배열  </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int[][] arr &#x3D; new int [2][3]; &#x2F;&#x2F;6개 요소</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/12/hexo_OOP_21/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -663,7 +672,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>

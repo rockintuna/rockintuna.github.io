@@ -179,6 +179,87 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
+    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/09/15/hexo_spring_project_10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Jeong In">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="소문난">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/09/15/hexo_spring_project_10/" class="post-title-link" itemprop="url">Spring MVC 설정</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">작성일</span>
+              
+
+              <time title="Post created: 2020-09-15 18:34:52 / Updated at: 18:35:34" itemprop="dateCreated datePublished" datetime="2020-09-15T18:34:52+09:00">2020-09-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
+                </span>
+                  , 
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Spring-MVC-설정"><a href="#Spring-MVC-설정" class="headerlink" title="Spring MVC 설정"></a>Spring MVC 설정</h2><h3 id="Spring-MVC-Bean-설정"><a href="#Spring-MVC-Bean-설정" class="headerlink" title="Spring MVC Bean 설정"></a>Spring MVC Bean 설정</h3><p>DispatcherServlet의 기본 전략에만 의존하기에는 확장성이 저하될 수 있기 때문에 추가적으로 설정할 수 있어야 한다.  </p>
+<p>@Configuration을 사용한 자바 파일에 스프링 MVC 구성요소를 직접 빈으로 등록할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public class WebConfig &#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public ViewResolver viewResolver() &#123;</span><br><span class="line">        InternalResourceViewResolver viewResolver &#x3D; new InternalResourceViewResolver();</span><br><span class="line">        viewResolver.setPrefix(&quot;&#x2F;WEB-INF&#x2F;&quot;);</span><br><span class="line">        viewResolver.setSuffix(&quot;.jsp&quot;);</span><br><span class="line">        return viewResolver;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/15/hexo_spring_project_10/#more" rel="contents">
+                더 읽어보기 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
     <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/27/hexo_spring_project_9/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -505,88 +586,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="ko">
-    <link itemprop="mainEntityOfPage" href="http://rockintuna.github.io/2020/08/15/hexo_spring_project_4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Jeong In">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="소문난">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/08/15/hexo_spring_project_4/" class="post-title-link" itemprop="url">PSA (Portable Service Abstraction)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">작성일</span>
-              
-
-              <time title="Post created: 2020-08-15 00:13:04 / Updated at: 00:35:21" itemprop="dateCreated datePublished" datetime="2020-08-15T00:13:04+09:00">2020-08-15</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">Study</span></a>
-                </span>
-                  , 
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Study/Spring-Framework/" itemprop="url" rel="index"><span itemprop="name">Spring Framework</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="PSA-Portable-Service-Abstraction"><a href="#PSA-Portable-Service-Abstraction" class="headerlink" title="PSA (Portable Service Abstraction)"></a>PSA (Portable Service Abstraction)</h2><p>이미 잘 만들어진 인터페이스를 사용하는 것.<br>확장성이 좋지 못한 코드 또는 기술에 특화되어 있는 코드에 사용하면 좋다.</p>
-<p>Spring Framework이 제공하는 API는 대부분이 추상화되어있다.  </p>
-<hr>
-<h4 id="추상화-예제"><a href="#추상화-예제" class="headerlink" title="추상화 예제"></a>추상화 예제</h4>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/08/15/hexo_spring_project_4/#more" rel="contents">
-                더 읽어보기 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -656,7 +655,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">109</span>
+          <span class="site-state-item-count">110</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
