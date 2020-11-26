@@ -29,7 +29,7 @@
 <meta property="og:locale" content="ko_KR">
 <meta property="og:image" content="http://rockintuna.github.io/img/springdatajpa.png">
 <meta property="article:published_time" content="2020-11-16T13:59:52.000Z">
-<meta property="article:modified_time" content="2020-11-16T13:59:52.102Z">
+<meta property="article:modified_time" content="2020-11-16T14:03:44.464Z">
 <meta property="article:author" content="Jeong In">
 <meta property="article:tag" content="Spring Data JPA">
 <meta property="article:tag" content="JPA">
@@ -211,8 +211,9 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">작성일</span>
+              
 
-              <time title="Post created: 2020-11-16 22:59:52" itemprop="dateCreated datePublished" datetime="2020-11-16T22:59:52+09:00">2020-11-16</time>
+              <time title="Post created: 2020-11-16 22:59:52 / Updated at: 23:03:44" itemprop="dateCreated datePublished" datetime="2020-11-16T22:59:52+09:00">2020-11-16</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -570,7 +571,7 @@
 <p>Auditing 대신 @PrePersist와 @PreUpdate등 JPA 라이프 사이클 이벤트를 활용할 수도 있다. </p>
 <p>엔티티 클래스에서 콜백 정의</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@PrePersist</span><br><span class="line">public void prePersist() &#123;</span><br><span class="line">    System.out.println(&quot;Pre Persist is called&quot;);</span><br><span class="line">    &#x2F;&#x2F;엔티티가 영속화 되기 전 실행 될 로직을 추가하여 사용</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이</p>
+
 
     </div>
 
@@ -594,7 +595,10 @@
     <a href="/2020/11/02/hexo_jpa_04/" rel="prev" title="객체지향 쿼리 언어 (JPQL)">
       <i class="fa fa-chevron-left"></i> 객체지향 쿼리 언어 (JPQL)
     </a></div>
-      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/26/hexo_spring_security_01/" rel="next" title="Spring Security">
+      Spring Security <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
       </footer>
     
@@ -667,7 +671,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">110</span>
+          <span class="site-state-item-count">111</span>
           <span class="site-state-item-name">포스트</span>
         </a>
       </div>
@@ -678,7 +682,7 @@
         <span class="site-state-item-name">카테고리</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">태그</span>
       </div>
   </nav>

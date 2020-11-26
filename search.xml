@@ -4817,7 +4817,7 @@ public List&lt;Restaurant&gt; list() {
 <p>Auditing 대신 @PrePersist와 @PreUpdate등 JPA 라이프 사이클 이벤트를 활용할 수도 있다. </p>
 <p>엔티티 클래스에서 콜백 정의</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@PrePersist</span><br><span class="line">public void prePersist() &#123;</span><br><span class="line">    System.out.println(&quot;Pre Persist is called&quot;);</span><br><span class="line">    &#x2F;&#x2F;엔티티가 영속화 되기 전 실행 될 로직을 추가하여 사용</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>이</p>
+
 ]]></content>
       <categories>
         <category>Study</category>
@@ -4827,6 +4827,282 @@ public List&lt;Restaurant&gt; list() {
         <tag>Spring Data JPA</tag>
         <tag>JPA</tag>
         <tag>JPQL</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring Security</title>
+    <url>/2020/11/26/hexo_spring_security_01/</url>
+    <content><![CDATA[<h2 id="Spring-Security"><a href="#Spring-Security" class="headerlink" title="Spring Security"></a>Spring Security</h2><h3 id="폼-인증"><a href="#폼-인증" class="headerlink" title="폼 인증"></a>폼 인증</h3><h4 id="스프링-시큐리티-연동"><a href="#스프링-시큐리티-연동" class="headerlink" title="스프링 시큐리티 연동"></a>스프링 시큐리티 연동</h4><p>의존성 (부트의 버전 생략 기 사용)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-security&lt;&#x2F;artifactId&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>스프링 부트의 시큐리티 자동 설정에 의하여…<br>모든 요청에서 인증이 필요하고,<br>기본 계정이 생성된다. (애플리케이션 실행마다 패스워드 바뀜)</p>
+<h4 id="스프링-시큐리티-설정"><a href="#스프링-시큐리티-설정" class="headerlink" title="스프링 시큐리티 설정"></a>스프링 시큐리티 설정</h4><p>설정 파일 추가<br>@EnableWebSecurity 애노테이션(부트에서 생략가능), WebSecurityConfigurerAdapter 상속</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">public class WebConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>WebSecurityConfigurerAdapter를 오버라이딩하여 설정한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">    http.authorizeRequests()</span><br><span class="line">            .mvcMatchers(&quot;&#x2F;&quot;,&quot;&#x2F;info&quot;).permitAll()</span><br><span class="line">            .mvcMatchers(&quot;&#x2F;admin&quot;).hasRole(&quot;ADMIN&quot;)</span><br><span class="line">            .anyRequest().authenticated()</span><br><span class="line">            .and().formLogin()</span><br><span class="line">            .and().httpBasic();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>기본 계정 정보를 application.properties에서 변경할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">spring.security.user.name&#x3D;demo</span><br><span class="line">spring.security.user.password&#x3D;password</span><br><span class="line">spring.security.user.roles&#x3D;ADMIN</span><br></pre></td></tr></table></figure>
+
+<h4 id="인메모리-계정"><a href="#인메모리-계정" class="headerlink" title="인메모리 계정"></a>인메모리 계정</h4><p>인메모리로 계정을 추가할 수 있다.<br>여기서 password의 prefix(“{}”) 부분은 인코딩 알고리즘을 정의하는데,<br>{noop}은 인코딩을 하지 않겠다는것을 의미한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</span><br><span class="line">    auth.inMemoryAuthentication()</span><br><span class="line">            .withUser(&quot;jilee&quot;).password(&quot;&#123;noop&#125;123&quot;).roles(&quot;USER&quot;).and()</span><br><span class="line">            .withUser(&quot;admin&quot;).password(&quot;&#123;noop&#125;admin&quot;).roles(&quot;ADMIN&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="DAO-계정"><a href="#DAO-계정" class="headerlink" title="DAO 계정"></a>DAO 계정</h4><p>DAO를 이용해서 인증하고 싶을 때는 UserDetailsService를 사용한다.<br>이때, 특정 문자열(이름 등)을 통해서 UserDetails 객체를 반환하도록 구현해야한다.<br>UserDetails는 스프링 시큐리티가 제공하는 User.builder()를 통해서 쉽게 만들 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class AccountService implements UserDetailsService &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private AccountRepository accountRepository;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException &#123;</span><br><span class="line">        Optional&lt;Account&gt; account &#x3D; accountRepository.findByUsername(username);</span><br><span class="line">        if (account.isEmpty()) &#123;</span><br><span class="line">            throw new UsernameNotFoundException(username);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return User.builder()</span><br><span class="line">                    .username(account.get().getUsername())</span><br><span class="line">                    .password(account.get().getPassword())</span><br><span class="line">                    .roles(account.get().getRole())</span><br><span class="line">                    .build();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Account registerAccount(Account account) &#123;</span><br><span class="line">        account.encodePassword();</span><br><span class="line">        return accountRepository.save(account);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>이때, User.builder()에서 사용되는 password 도 마찬가지로 {noop} 같은 인코딩 알고리즘의 정의가 필요하다.<br>일단 인코딩 없이 처리하기 위해 임시로 encodePassword()를 만들었지만<br>사실 패스워드를 암호화할 수 있는 인코딩 기능을 스프링 시큐리티에서 제공하고있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void encodePassword() &#123;</span><br><span class="line">    this.password &#x3D; &quot;&#123;noop&#125;&quot; + this.password;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>시큐리티 설정에서 사용될 UserDetailsService 구현체를 지정해야하지만,<br>만약 작성한 UserDetailsService 구현체가 빈으로 등록되어 있다면 이 과정을 생략해도 자동으로 사용한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void configure(AuthenticationManagerBuilder auth) throws Exception &#123;</span><br><span class="line">    auth.userDetailsService(accountService);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Password-Encoder-사용하기"><a href="#Password-Encoder-사용하기" class="headerlink" title="Password Encoder 사용하기"></a>Password Encoder 사용하기</h4><p>스프링 시큐리티는 패스워드 암호화를 위한 PasswordEncoder를 제공한다.   </p>
+<p>Noop 인코더 사용하기 (Deprecated 되었음)<br>인코딩을 안하기 때문에 비밀번호가 평문 그대로 저장됨 (비추)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public PasswordEncoder passwordEncoder() &#123;</span><br><span class="line">    return NoOpPasswordEncoder.getInstance();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>스프링 시큐리티 5버전 부터 PasswordEncoder는 특정한 포맷으로 동작하게 된다.<br>({id}encodedPassword, id는 해싱 알고리즘 명칭)<br>포맷 기반으로 동작하여 다양한 해싱 전략의 패스워드를 지원할 수 있다는 장점이 있다.<br>DelegatingPasswordEncoder로 이런 포맷을 작성하게 되는데, 기본적으로는 bcrypt 알고리즘을 사용하게 된다.</p>
+<p>PasswordEncoder를 빈으로 등록</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Bean</span><br><span class="line">public PasswordEncoder passwordEncoder() &#123;</span><br><span class="line">    return PasswordEncoderFactories.createDelegatingPasswordEncoder();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>{noop}을 붙이기 위해 임시로 만들었던 encodePassword()를 PasswordEncoder를 사용하도록 변경.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void encodePassword(PasswordEncoder passwordEncoder) &#123;</span><br><span class="line">    this.password &#x3D; passwordEncoder.encode(this.getPassword());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="스프링-시큐리티-테스트"><a href="#스프링-시큐리티-테스트" class="headerlink" title="스프링 시큐리티 테스트"></a>스프링 시큐리티 테스트</h4><p>스프링 시큐리티 테스트는 시큐리티 관련 테스트에서 편리한 기능을 제공한다.</p>
+<p>의존성</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.security&lt;&#x2F;groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-security-test&lt;&#x2F;artifactId&gt;</span><br><span class="line">    &lt;version&gt;$&#123;spring-security.version&#125;&lt;&#x2F;version&gt;</span><br><span class="line">    &lt;scope&gt;test&lt;&#x2F;scope&gt;</span><br><span class="line">&lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<p>스프링 시큐리티 테스트의 user() 메소드를 이용해서 가상의 사용자를 인증하여 테스트 할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void dashboard_user() throws Exception &#123;</span><br><span class="line">    mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;dashboard&quot;)</span><br><span class="line">            .with(user(&quot;jilee&quot;).roles(&quot;USER&quot;)))</span><br><span class="line">            .andDo(print())</span><br><span class="line">            .andExpect(status().isOk());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>또는 anonymous() 메소드를 이용해서 익명의 사용자로 테스트 할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void dashboard_anonymous() throws Exception &#123;</span><br><span class="line">    mvc.perform(MockMvcRequestBuilders.get(&quot;&#x2F;dashboard&quot;)</span><br><span class="line">            .with(anonymous()))</span><br><span class="line">            .andDo(print())</span><br><span class="line">            .andExpect(status().isUnauthorized());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>user()나 anonymous() 메소드 대신 애노테이션을 테스트 메소드에 붙여서 테스트 할 수도 있다.</p>
+<ul>
+<li>@WithMockUser(username = “jilee”, roles = “USER”)</li>
+<li>@WithAnonymousUser</li>
+</ul>
+<p>또는 Mock 사용자 애노테이션을 만들어서 활용할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="line">@WithMockUser(username &#x3D; &quot;jilee&quot;, roles &#x3D; &quot;USER&quot;)</span><br><span class="line">public @interface WithUser &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>스프링 시큐리티 테스트의 formLogin() 메소드를 통해 폼 로그인 기능을 테스트 할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">@Transactional</span><br><span class="line">public void login() throws Exception &#123;</span><br><span class="line">    Account account &#x3D; new Account();</span><br><span class="line">    account.setUsername(&quot;jilee&quot;);</span><br><span class="line">    account.setPassword(&quot;123&quot;);</span><br><span class="line">    account.setRole(&quot;USER&quot;);</span><br><span class="line">    accountService.registerAccount(account);</span><br><span class="line"></span><br><span class="line">    mvc.perform(formLogin().user(&quot;jilee&quot;).password(&quot;123&quot;))</span><br><span class="line">             .andExpect(authenticated());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>결과를 authenticated() 또는 unauthenticated() 메소드로 확인할 수 있다.</p>
+<h3 id="스프링-시큐리티-아키텍처"><a href="#스프링-시큐리티-아키텍처" class="headerlink" title="스프링 시큐리티 아키텍처"></a>스프링 시큐리티 아키텍처</h3><h4 id="SecurityContextHolder-와-Authentication"><a href="#SecurityContextHolder-와-Authentication" class="headerlink" title="SecurityContextHolder 와 Authentication"></a>SecurityContextHolder 와 Authentication</h4><ul>
+<li><p>SecurityContextHolder : SecurityContext 제공, 기본적으로 ThreadLocal을 사용하여 제공한다. 인증이 된 정보만 가지고 있는다. </p>
+</li>
+<li><p>SecurityContext : Authentication 제공</p>
+</li>
+<li><p>Authentication :  Principal과 GrantAuthority 제공</p>
+</li>
+<li><p>Principal : 인증된 사용자가 누구인지에 대한 정보 (UserDetailsService를 사용하면, 반환된 UserDetails 객체가 Principal이 된다.)</p>
+</li>
+<li><p>GrantAuthority : “ROLE_USER”, “ROLE_ADMIN” 등 Principal이 가지고 있는 권한을 나타내며,<br>인가 및 권한을 확인할 때 참조된다.</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">public void dashboard() &#123;</span><br><span class="line">    SecurityContext securityContext &#x3D; SecurityContextHolder.getContext();</span><br><span class="line"></span><br><span class="line">    Authentication authentication &#x3D; securityContext.getAuthentication();</span><br><span class="line"></span><br><span class="line">    Object principal &#x3D; authentication.getPrincipal();</span><br><span class="line">    Collection&lt;? extends GrantedAuthority&gt; authorities &#x3D; authentication.getAuthorities();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>SecurityContextHolder를 통해 애플리케이션 어디서나 Authentication 객체에 접근할 수 있다.<br>(기본적으로 개별 쓰레드 한정, 여러 쓰레드에서 공유하려면 ThreadLocal 외에 다른 전략을 사용해야 한다.)</p>
+<ul>
+<li><p>UserDetails : 애플리케이션이 가지고 있는 유저 정보와 스프링 시큐리티가 사용하는 Authentication 객체 사이의 어댑터.  </p>
+</li>
+<li><p>UserDetailService : 유저 정보를 UserDetails 타입으로 가져오는 DAO 인터페이스.<br>인증을 하는 것이 아니고 어떤 저장소로부터의 데이터를 통해 UserDetails를 스프링 시큐리티로 전달하는 역할을 한다.</p>
+</li>
+</ul>
+<h4 id="AuthenticationManager-와-Authentication"><a href="#AuthenticationManager-와-Authentication" class="headerlink" title="AuthenticationManager 와 Authentication"></a>AuthenticationManager 와 Authentication</h4><p>AuthenticationManager : Authentication를 만들고 인증을 처리하는 인터페이스.<br>Authentication를 인자로 받아(사용자가 입력한 인증에 필요한 정보) 유효한지 확인하고 유효하다면 Authentication를 리턴.<br>인증과정에서는 비활성 계정, 잘못된 비번, 잠긴 계정등의 에러를 던질 수 있다.</p>
+<p>인증된 Authentication는 SecurityContextHolder에 들어가게 된다.</p>
+<p>ProviderManager : AuthenticationManager의 기본 구현체, 여러 Provider로 인증 작업을 인계한다.<br>그중 DaoAuthenticationProvider가 UserDetailsService로 UserDetails를 참조하여<br>인자로 받았던 Authentication와 비교하여 인증하고, 참조했던 UserDetails(Principal)를 Authentication에 담아 리턴한다. </p>
+<h4 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h4><p>Java.lang 패키지에서 제공하는 쓰레드 범위 변수, 쓰레드 수준의 데이터 저장소.</p>
+<ul>
+<li>같은 쓰레드 내에서만 공유</li>
+<li>같은 쓰레드라면 해당 데이터를 메소드 매개변수로 넘겨줄 필요가 없음</li>
+<li>SecurityContextHolder의 기본 전략</li>
+</ul>
+<h4 id="Authentication-와-SecurityContextHolder"><a href="#Authentication-와-SecurityContextHolder" class="headerlink" title="Authentication 와 SecurityContextHolder"></a>Authentication 와 SecurityContextHolder</h4><p>두가지 필터에 의하여<br>AuthenticationManager의 인증기능 호출과<br>리턴된 Authentication을 SecurityContextHolder에 입력하는 작업이 처리된다.</p>
+<p>UsernamePasswordAuthenticationFilter</p>
+<ul>
+<li>폼인증을 처리(AuthenticationManager의 authenticate()함수 호출)하는 시큐리티 필터</li>
+<li>인증된 Authentication 객체를 SecurityContextHolder에 넣어준다.</li>
+</ul>
+<p>SecurityContextPersistenceFilter</p>
+<ul>
+<li>SecurityContext를 HTTP session에 캐시(기본 전략)하여 여러 요청에서 Authentication를 공유할 수 있게 해주는 필터</li>
+<li>SecurityContextRepository에 SecurityContext를 저장하거나 불러오는 기능을 한다.</li>
+<li>기본 전략에 의한 저장소는 HttpSessionSecurityContextRepository </li>
+<li>SecurityContextRepository를 교체하여 세션을 HTTP session이 아닌 다른 곳에 저장할 수도 있다.</li>
+</ul>
+<h4 id="스프링-시큐리티-필터와-FilterChainProxy"><a href="#스프링-시큐리티-필터와-FilterChainProxy" class="headerlink" title="스프링 시큐리티 필터와 FilterChainProxy"></a>스프링 시큐리티 필터와 FilterChainProxy</h4><p>FilterChainProxy가 여러가지 필터 목록을 순차적으로 호출한다.<br>요청과 매칭되는 FilterChain을 선택하여 필터 목록이 구성되는데,<br>FilterChain은 시큐리티 설정 파일(extends WebSecurityConfigurerAdapter)으로 생성된다.<br>설정 파일 하나가 하나의 FilterChain이 되며 사용한 설정에 따라 사용될 Filter들이 선택된다.<br>여러개의 FilterChain을 사용하려면 우선순위(@Order)를 정하거나 매칭될 URI(http.antMatcher(url))를 정의해야 한다.</p>
+<h4 id="DelegatingFilterProxy와-FilterChainProxy"><a href="#DelegatingFilterProxy와-FilterChainProxy" class="headerlink" title="DelegatingFilterProxy와 FilterChainProxy"></a>DelegatingFilterProxy와 FilterChainProxy</h4><p>DelegatingFilterProxy</p>
+<ul>
+<li>일반적인 서블릿 필터</li>
+<li>서블릿 필터 처리를 스프링에 들어있는 빈으로 위임하고 싶을 때 사용</li>
+<li>타겟 빈 이름을 설정한다.</li>
+<li>부트가 아니면 AbstractSecurityWebApplicationInitalizer를  사용해서 등록</li>
+<li>부트에서는 자동으로 등록 (SecurityFilterAutoConfiguration)</li>
+</ul>
+<p>요청을 기본적으로 FilterChainProxy(기본 빈 이름 : springSecurityFilterChain)로 넘긴다.</p>
+<h4 id="AccessDecisionManager"><a href="#AccessDecisionManager" class="headerlink" title="AccessDecisionManager"></a>AccessDecisionManager</h4><p>AccessDecisionManager :<br>Access Control(Authorization, 인가) 결정을 내리는 인터페이스, 기본적으로 세 가지 구현체를 제공한다.</p>
+<ul>
+<li>AffirmativeBased : 여러 Voter 중 하나라도 허용하면 허용, 기본 전략</li>
+<li>ConsensusBased : 다수결</li>
+<li>UnanimousBased : 만장일치</li>
+</ul>
+<p>AccessDecisionVoter :<br>해당 Authentication이 특정한 Object에 접근할 때 필요한 ConfigAttributes를 만족하는지 확인한다.</p>
+<ul>
+<li>WebExpressionVoter : 웹 시큐리티에서 사용하는 기본 구현체, ROLE_Xxxx 매칭 확인.</li>
+<li>RoleHierarchyVoter : 계층형 ROLE 지원. (ex ADMIN &gt; MANAGER &gt; USER)</li>
+<li>…</li>
+</ul>
+<p>ConfigAttributes : hasRole(ROLE), permitAll() 같은 접근 제한</p>
+<p>ROLE의 계층구조를 위해 Voter를 RoleHierarchyVoter로 변경하기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSecurity</span><br><span class="line">public class WebConfig extends WebSecurityConfigurerAdapter &#123;</span><br><span class="line"></span><br><span class="line">    public AccessDecisionManager accessDecisionManager() &#123;</span><br><span class="line">        RoleHierarchyImpl roleHierarchy &#x3D; new RoleHierarchyImpl();</span><br><span class="line">        &#x2F;&#x2F;상위 권한 ADMIN, 하위 권한 USER</span><br><span class="line">        roleHierarchy.setHierarchy(&quot;ROLE_ADMIN &gt; ROLE_USER&quot;);</span><br><span class="line"></span><br><span class="line">        DefaultWebSecurityExpressionHandler defaultWebSecurityExpressionHandler &#x3D;</span><br><span class="line">                new DefaultWebSecurityExpressionHandler();</span><br><span class="line">        defaultWebSecurityExpressionHandler.setRoleHierarchy(roleHierarchy);</span><br><span class="line"></span><br><span class="line">        WebExpressionVoter webExpressionVoter &#x3D; new WebExpressionVoter();</span><br><span class="line">        webExpressionVoter.setExpressionHandler(defaultWebSecurityExpressionHandler);</span><br><span class="line"></span><br><span class="line">        List&lt;AccessDecisionVoter&lt;? extends Object&gt;&gt; voters &#x3D; Arrays.asList(webExpressionVoter);</span><br><span class="line">        return new AffirmativeBased(voters);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    @Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        http.authorizeRequests()</span><br><span class="line">                .mvcMatchers(&quot;&#x2F;&quot;,&quot;&#x2F;info&quot;,&quot;&#x2F;account&#x2F;**&quot;).permitAll()</span><br><span class="line">                .mvcMatchers(&quot;&#x2F;admin&quot;).hasRole(&quot;ADMIN&quot;)</span><br><span class="line">                .anyRequest().authenticated()</span><br><span class="line">                &#x2F;&#x2F;커스터마이징한 AccessDecisionManager 사용  </span><br><span class="line">                .accessDecisionManager(accessDecisionManager())</span><br><span class="line">                .and().formLogin()</span><br><span class="line">                .and().httpBasic();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="FilterSecurityInterceptor"><a href="#FilterSecurityInterceptor" class="headerlink" title="FilterSecurityInterceptor"></a>FilterSecurityInterceptor</h4><p>FilterSecurityInterceptor : AccessDecisionManager를 사용하여 Access Control 또는 예외 처리 하는 필터.<br>대부분의 경우 FilterChainProxy의 제일 마지막 필터로 들어있다.</p>
+<p>AccessDecisionManager의 decide() 메소드를 호출하여 인가를 진행한다.</p>
+<h4 id="ExceptionTranslationFilter"><a href="#ExceptionTranslationFilter" class="headerlink" title="ExceptionTranslationFilter"></a>ExceptionTranslationFilter</h4><p>ExceptionTranslationFilter :<br>FilterChain에서 발생하는 AccessDeniedException과 AuthenticationException을 처리하는 필터.<br>AbstractSecurityInterceptor의 하위 클래스(ex FilterSecurityInterceptor)에서 발생하는 예외만 처리한다.</p>
+<p>AuthenticationException(인증 관련 예외) 발생 시 </p>
+<ul>
+<li>AuthenticationEntryPoint 실행</li>
+<li>UsernamePasswordAuthenticationFilter 사용시 발생하는 AuthenticationException는<br>ExceptionTranslationFilter가 아닌 UsernamePasswordAuthenticationFilter 자체에서 처리된다.</li>
+</ul>
+<p>AccessDeniedException(인가 관련 예외) 발생 시</p>
+<ul>
+<li>익명 사용자라면 AuthenticationEntryPoint 실행</li>
+<li>익명 사용자가 아니면 AccessDeniedHandler에게 위임</li>
+</ul>
+<p>AuthenticationEntryPoint : 인증 처리기 (formLogin인 경우 로그인 페이지 호출)</p>
+<h3 id="웹-애플리케이션-시큐리티"><a href="#웹-애플리케이션-시큐리티" class="headerlink" title="웹 애플리케이션 시큐리티"></a>웹 애플리케이션 시큐리티</h3><h4 id="스프링-시큐리티-ignoring"><a href="#스프링-시큐리티-ignoring" class="headerlink" title="스프링 시큐리티 ignoring()"></a>스프링 시큐리티 ignoring()</h4><p>WebSecurity의 ignoring()을 사용해서 시큐리티 필터 적용을 제외할 요청을 설정할 수 있다.</p>
+<p>favicon.ico 요청을 시큐리티 설정에서 배제시키기</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void configure(WebSecurity web) throws Exception &#123;</span><br><span class="line">    web.ignoring().mvcMatchers(&quot;&#x2F;favicon.ico&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>그러나 static resource를 매번 따로 적어주어야 하는 불편함이 있다.<br> =&gt; 부트에서는 static resource의 위치로 제외할 수 있다.  </p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">public void configure(WebSecurity web) throws Exception &#123;</span><br><span class="line">    web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="WebAsyncManagerIntegrationFilter"><a href="#WebAsyncManagerIntegrationFilter" class="headerlink" title="WebAsyncManagerIntegrationFilter"></a>WebAsyncManagerIntegrationFilter</h4><p>Async 웹 MVC를 지원하는 필터, 별다른 설정 없이도 동작한다.</p>
+<p>스프링 시큐리티의 SecurityContextHolder는 기본적으로 ThreadLocal 기반으로 SecurityContext를 제공하게 된다.<br>WebAsyncManagerIntegrationFilter는 스프링 MVC Async 기능(핸들러에서 Callable 리턴)에 의해 비동기적으로 다중 쓰레드를 사용했을 때,<br>서로 다른 쓰레드일지라도 동일한 SecurityContext를 공유할 수 있도록 해준다.</p>
+<ul>
+<li>PreProcess : SecurityContext를 설정한다.</li>
+<li>Callable : 비록 다른 쓰레드이지만 그 안에서는 동일한 SecurityContext를 참조할 수 있다.</li>
+<li>PostProcess : SecurityContext를 정리(clean up)한다.</li>
+</ul>
+<h4 id="스프링-시큐리티와-Async"><a href="#스프링-시큐리티와-Async" class="headerlink" title="스프링 시큐리티와 @Async"></a>스프링 시큐리티와 @Async</h4><p>Callable 리턴과는 다르게 @Async의 서로 다른 쓰레드에서는 기본적인 ThreadLocal 전략에서 SecurityContext를 공유받을 수 없다.<br>이를 해결하려면 SecurityContextHolder의 전략을 변경해야 한다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">    protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">        ~</span><br><span class="line"></span><br><span class="line">        SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>MODE_INHERITABLETHREADLOCAL 전략은 현재 쓰레드의 하위 쓰레드에 SecurityContext를 공유한다.</p>
+<h4 id="SecurityContextPersistenceFilter"><a href="#SecurityContextPersistenceFilter" class="headerlink" title="SecurityContextPersistenceFilter"></a>SecurityContextPersistenceFilter</h4><p>SecurityContextRepository를 사용해서 기존의 SecurityContext를 읽어오거나 초기화 한다.</p>
+<ul>
+<li>기본적인 전략으로 HTTP Session 사용 (HttpSessionSecurityContextRepository)</li>
+<li>Spring-Session과 연동하여 세션 클러스터를 구현할 수 있다.</li>
+</ul>
+<h4 id="HeaderWriterFilter"><a href="#HeaderWriterFilter" class="headerlink" title="HeaderWriterFilter"></a>HeaderWriterFilter</h4><p>응답 헤더에 시큐리티 관련 헤더를 추가해주는 필터, 주로 보안 관련 여러가지 HeaderWriter를 포함하고 있다.</p>
+<ul>
+<li>XContentTypeOptionsHeaderWriter : 마임 타입 스니핑 방어</li>
+<li>XXssProtectionHeaderWriter : 브라우저에 내장된 XSS 필터 적용</li>
+<li>CacheControlHeaderWriter : 캐시 히스토리 취약점 방어</li>
+<li>HstsHeaderWriter : HTTPS로만 소통하도록 강제</li>
+<li>XFrameOptionsHeaderWriter : clickjacking 방어</li>
+</ul>
+<h4 id="CsrfFilter"><a href="#CsrfFilter" class="headerlink" title="CsrfFilter"></a>CsrfFilter</h4><p>CSRF 토큰을 사용하여 CSRF 어택을 방지하는 필터</p>
+<ul>
+<li>CSRF 어택 : 인증된 유저의 계정을 사용해 악의적인 변경 요청을 만들어 보내는 기법</li>
+<li>CORS를 사용할 때 특히 주의 해야 한다.(다른 도메인에서 보내오는 요청을 허용하기 때문에)</li>
+</ul>
+<p>변경 요청을 보내주길 기대하는 곳에 먼저 CSRF 토큰을 보내주고 요청을 받을 때 헤더에 동일한 토큰 값을 받아서 확인하는 방식이다.<br>의도되지 않은 변경 요청인 경우에는 CSRF 토큰이 없거나 다른 값일 것이기 때문에 요청을 거부하고 예외 처리한다.<br>테스트할 때는 with(csrf())로 적절한 CSRF 토큰을 보낼 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void processSignUp() throws Exception &#123;</span><br><span class="line">    mvc.perform(post(&quot;&#x2F;signup&quot;)</span><br><span class="line">    .param(&quot;username&quot;,&quot;jilee&quot;)</span><br><span class="line">    .param(&quot;password&quot;,&quot;123&quot;)</span><br><span class="line">    .with(csrf()))</span><br><span class="line">            .andExpect(status().is3xxRedirection());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="LogoutFilter"><a href="#LogoutFilter" class="headerlink" title="LogoutFilter"></a>LogoutFilter</h4><p>로그아웃을 처리하는 필터</p>
+<p>LogoutHandler : 로그아웃을 처리하는 핸들러, 여러 로그아웃 핸들러를 포함하는 CompositeLogoutHandler,<br>임의로 핸들러를 추가할 수 있으며 기본적으로 CsrfLogoutHandler, SecurityContextLogoutHandler를 사용한다.</p>
+<ul>
+<li>CsrfLogoutHandler</li>
+<li>SecurityContextLogoutHandler</li>
+</ul>
+<p>LogoutSuccessHandler : 로그아웃 성공 후 처리</p>
+<p>LogoutFilter 관련 설정</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@Override</span><br><span class="line">protected void configure(HttpSecurity http) throws Exception &#123;</span><br><span class="line">    ~</span><br><span class="line"></span><br><span class="line">    http.logout()</span><br><span class="line">            .logoutUrl(&quot;&#x2F;logout&quot;)           &#x2F;&#x2F;로그아웃을 처리할 URL (default &quot;&#x2F;logout&quot;)</span><br><span class="line">            .logoutSuccessUrl(&quot;&#x2F;&quot;)          &#x2F;&#x2F;로그아웃 성공 후 Redirection URL</span><br><span class="line">            .addLogoutHandler()             &#x2F;&#x2F;로그아웃 핸들러 추가 가능</span><br><span class="line">            .logoutSuccessHandler()         &#x2F;&#x2F;로그아웃 성공 핸들러 커스텀 가능</span><br><span class="line">            .invalidateHttpSession(true)    &#x2F;&#x2F;로그아웃 후 http session invalid 처리 (default true)</span><br><span class="line">            .deleteCookies()                &#x2F;&#x2F;로그아웃 후 특정 쿠키 삭제</span><br></pre></td></tr></table></figure>
+
+<h4 id="UsernamePasswordAuthenticationFilter"><a href="#UsernamePasswordAuthenticationFilter" class="headerlink" title="UsernamePasswordAuthenticationFilter"></a>UsernamePasswordAuthenticationFilter</h4><p>폼 로그인 인증을 처리하는 인증 필터</p>
+<ul>
+<li>사용자가 폼에 입력한 username과 password로 Authentication을 만들고 AuthenticationManager를 통해 인증 시도</li>
+<li>AuthenticationManager(ProviderManager)는 여러 AuthenticationProvider를 사용하여 인증을 시도한다.</li>
+<li>그 중에서 DaoAuthenticationProvider는 UserDetailsService를 사용하여 UserDetails 정보를 가져와 사용자가 입력한 password와 비교한다.</li>
+</ul>
+<h4 id="DefaultLoginPageGeneratingFilter"><a href="#DefaultLoginPageGeneratingFilter" class="headerlink" title="DefaultLoginPageGeneratingFilter"></a>DefaultLoginPageGeneratingFilter</h4><p>기본 로그인 폼 페이지를 생성해주는 필터</p>
+<ul>
+<li>GET /login 요청을 처리</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http.formLogin()</span><br><span class="line">    .loginPage(&quot;&#x2F;login&quot;)</span><br></pre></td></tr></table></figure>
+<p>설정하면 DefaultLoginPageGeneratingFilter, DefaultLogoutPageGeneratingFilter<br>필터가 사용되지 않고, 커스텀 로그인 페이지를 사용할 수 있다.</p>
+<p>DefaultLogoutPageGeneratingFilter<br>기본 로그아웃 폼 페이지를 생성해주는 필터</p>
+<ul>
+<li>GET /login 요청을 처리</li>
+</ul>
+<h4 id="BasicAuthenticationFilter"><a href="#BasicAuthenticationFilter" class="headerlink" title="BasicAuthenticationFilter"></a>BasicAuthenticationFilter</h4><p>Basic 인증이란?</p>
+<ul>
+<li>요청 헤더에 username과 password를 실어 보내면 브라우저 또는 서버가 그 값을 읽어서 인증하는 방식.</li>
+<li>보통, 브라우저 기반 요청이 클라이언트의 요청을 처리할 때 자주 사용.</li>
+<li>보안에 취약하기 때문에 HTTPS 사용 권장.</li>
+<li>UserPasswordAuthenticationFilter와 유사하지만 인증 정보를 헤더로 가져온다는 것과 캐싱 기능이 없다는 것이 다르다.</li>
+</ul>
+<h4 id="RequestCacheAwareFilter"><a href="#RequestCacheAwareFilter" class="headerlink" title="RequestCacheAwareFilter"></a>RequestCacheAwareFilter</h4><p>현재 요청과 관련있는 캐시된 요청이 있는지 찾아 적용하는 요청 캐시 필터</p>
+<ul>
+<li>캐시된 요청이 없다면, 현재 요청 처리.</li>
+<li>캐시된 요청이 있다면, 해당 캐시된 요청 처리.</li>
+</ul>
+<p>로그인 전에 가려고 있던 페이지 요청 등…</p>
+<h4 id="SecurityContextHolderAwareRequestFilter"><a href="#SecurityContextHolderAwareRequestFilter" class="headerlink" title="SecurityContextHolderAwareRequestFilter"></a>SecurityContextHolderAwareRequestFilter</h4><p>시큐리티 관련 서블릿 API를 구현해주는 필터</p>
+<ul>
+<li>HttpsServletRequest#authenticate(HttpServletResponse)</li>
+<li>HttpsServletRequest#login(String, String)</li>
+<li>HttpsServletRequest#logout()</li>
+<li>AsyncContext#start(Runnable)</li>
+</ul>
+<h4 id="AnonymousAuthenticationFilter"><a href="#AnonymousAuthenticationFilter" class="headerlink" title="AnonymousAuthenticationFilter"></a>AnonymousAuthenticationFilter</h4><p>현재 SecurityContext에 Authentication이 null이면 “익명 Authentication”을 만들어 넣어주고,<br>null이 아니면 아무일도 하지 않는다.</p>
+<p>기본으로 만들어서 사용되는 “익명 Authentication” 객체를 설정할 수 있다.</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http.anonymous()</span><br><span class="line">    .principal()</span><br><span class="line">    .authorities()</span><br><span class="line">    .key()</span><br></pre></td></tr></table></figure>
+
+<h4 id="SessionManagementFilter"><a href="#SessionManagementFilter" class="headerlink" title="SessionManagementFilter"></a>SessionManagementFilter</h4><ul>
+<li><p>세션 변조 방지 전략 설정 : sessionFixation() (default changeSessionId)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">http.sessionManagement()</span><br><span class="line">        .sessionFixation().changeSessionId();</span><br></pre></td></tr></table></figure></li>
+<li><p>유효하지 않은 세션을 리다이렉트 시킬 URL 설정 (로그아웃 등)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">        http.sessionManagement().invalidSessionUrl(&quot;&#x2F;login&quot;);</span><br><span class="line">&#96;&#96;&#96; </span><br><span class="line"> - 동시성 제어 : maximumSession(), 최대 로그인 허용량</span><br><span class="line">    - maxSessionsPreventsLogin : 추가 로그인을 막을지 여부 (dafault false)</span><br></pre></td></tr></table></figure>
+<pre><code>http.sessionManagement()
+        .maximumSessions(1)
+        .maxSessionsPreventsLogin(false);</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">- 세션 생성 전략 : sessionCreationPolicy</span><br><span class="line">   - IF_REQUIRED : 필요시 생성 (default)</span><br><span class="line">   - NEVER : 스프링 시큐리티에서는 만들지 않지만 세션이 있다면 사용한다.</span><br><span class="line">   - STATELESS : 세션을 사용하지 않는다.</span><br><span class="line">   - ALWAYS : 항상</span><br></pre></td></tr></table></figure>
+<pre><code>http.sessionManagement()
+        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### ExceptionTranslationFilter</span><br><span class="line">FilterSecurityInterceptor에서 발생한 예외를 처리한다.</span><br><span class="line"></span><br><span class="line">AuthenticationException인 경우,</span><br><span class="line">AuthenticationEntryPoint(인증이 가능한 페이지로 보내기)를 사용해서 처리한다.</span><br><span class="line"></span><br><span class="line">AccessDeniedException인 경우,</span><br><span class="line">AccessDeniedHandler(기본적으로는 403 Forbidden 에러메시지)를 사용해서 처리한다.  </span><br><span class="line"></span><br><span class="line">커스터마이징 가능</span><br></pre></td></tr></table></figure>
+<pre><code>http.exceptionHandling()
+        .accessDeniedHandler(&quot;/access-denied&quot;);</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### FilterSecurityInterceptor</span><br><span class="line">HTTP 리소스 시큐리티 처리를 담당하는 필터.  </span><br><span class="line">AccessDecisionManager를 사용해서 인가를 처리한다.</span><br><span class="line"></span><br><span class="line">HTTP 리소스 시큐리티 설정</span><br></pre></td></tr></table></figure>
+<pre><code>http.authorizeRequests()
+        .mvcMatchers(&quot;/&quot;,&quot;/info&quot;,&quot;/signup&quot;,&quot;/account/**&quot;).permitAll()
+        .mvcMatchers(&quot;/admin&quot;).hasRole(&quot;ADMIN&quot;)
+        .anyRequest().authenticated()
+        .accessDecisionManager(accessDecisionManager())
+        .and().formLogin().loginPage(&quot;/login&quot;).permitAll()
+        .and().httpBasic();</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### RememberMeAuthenticationFilter</span><br><span class="line">세션이 사라지거나 만료가 되더라도 쿠키 또는 DB를 사용하여 저장된 토큰 기반으로 인증을 지원하는 필터.</span><br><span class="line">파라미터로 &quot;remember-me&quot;(default)를 받아 사용한다.</span><br><span class="line">  </span><br><span class="line">RememberMe 설정</span><br></pre></td></tr></table></figure>
+<pre><code>http.rememberMe()
+        .rememberMeParameter(&quot;remember-me&quot;)
+        .userDetailsService(accountService)
+        .key(&quot;remember-me-sample&quot;);</code></pre><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">#### 커스텀 필터 추가하기</span><br><span class="line">필터 만들기, 일반적인 서블릿 필터처럼 만들 수 있다.</span><br></pre></td></tr></table></figure>
+<p>public class LoggingFilter extends GenericFilterBean {</p>
+<p> private Logger logger = LoggerFactory.getLogger(this.getClass());</p>
+<p> @Override<br> public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {</p>
+<pre><code>StopWatch stopWatch = new StopWatch();
+stopWatch.start();
+filterChain.doFilter(servletRequest, servletResponse);
+stopWatch.stop();
+logger.info(stopWatch.prettyPrint());</code></pre><p> }<br>}</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">필터 집어넣기, 특정 필터 전후에 커스텀 필터를 집어넣을 수 있다.</span><br></pre></td></tr></table></figure>
+<p> http.addFilterBefore(new LoggingFilter(), WebAsyncManagerIntegrationFilter.class);</p>
+<pre><code></code></pre></li>
+</ul>
+]]></content>
+      <categories>
+        <category>Study</category>
+        <category>Spring Framework</category>
+      </categories>
+      <tags>
+        <tag>Spring Security</tag>
+        <tag>Security</tag>
       </tags>
   </entry>
 </search>
